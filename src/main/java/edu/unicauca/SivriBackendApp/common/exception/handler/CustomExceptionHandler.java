@@ -2,7 +2,7 @@ package edu.unicauca.SivriBackendApp.common.exception.handler;
 
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
-import edu.unicauca.SivriBackendApp.common.response.handler.ResponseHandler;
+import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -36,7 +36,7 @@ public class CustomExceptionHandler{
             errors.put(fieldName,errorMessage);
         });
 
-        return new ResponseEntity<>(new ResponseHandler<>(400, ERROR, ERROR, errors).getRespuesta(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, ERROR, errors).getRespuesta(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ReglaDeNegocioException.class)
@@ -46,6 +46,6 @@ public class CustomExceptionHandler{
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
 
-        return new ResponseEntity<>(new ResponseHandler<>(400, ERROR, ERROR, error).getRespuesta(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, ERROR, error).getRespuesta(), HttpStatus.BAD_REQUEST);
     }
 }

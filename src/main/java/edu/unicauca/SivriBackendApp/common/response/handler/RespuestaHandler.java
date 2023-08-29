@@ -4,10 +4,10 @@ import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import lombok.Getter;
 
 @Getter
-public class ResponseHandler<T> {
+public class RespuestaHandler<T> {
     private final Respuesta<T> respuesta;
 
-    public ResponseHandler(int status, String userMessage, String developerMessage, T data) {
+    public RespuestaHandler(int status, String userMessage, String developerMessage, T data) {
         respuesta = new Respuesta<>();
 
         respuesta.setStatus(status);
