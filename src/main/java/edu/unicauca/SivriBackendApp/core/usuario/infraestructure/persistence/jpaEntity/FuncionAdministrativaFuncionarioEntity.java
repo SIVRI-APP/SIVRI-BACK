@@ -14,12 +14,6 @@ public class FuncionAdministrativaFuncionarioEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "RolAdministrativoId")
-    private Integer rolAdministrativoId;
-
-    @Column(name = "AdministrativoTipoUsuarioId")
-    private Integer administrativoTipoUsuarioId;
-
     @Column(name = "estado")
     private String estado;
 
@@ -27,5 +21,13 @@ public class FuncionAdministrativaFuncionarioEntity {
     private LocalDate fechaInicio;
 
     @Column(name = "fechaFin")
-    private LocalDate fechaFinASDASD;
+    private LocalDate fechaFin;
+
+    @ManyToOne
+    @JoinColumn(name = "funcionAdministrativaId")
+    private FuncionAdministrativaEntity funcionAdministrativa;
+
+    @ManyToOne
+    @JoinColumn(name = "rolFuncionarioId")
+    private RolFuncionarioEntity rolFuncionarioId;
 }
