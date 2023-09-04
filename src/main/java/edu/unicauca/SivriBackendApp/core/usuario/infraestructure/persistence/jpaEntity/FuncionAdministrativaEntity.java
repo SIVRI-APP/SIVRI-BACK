@@ -3,9 +3,9 @@ package edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jp
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "roladministrativo")
+@Table(name = "funcion_administrativa")
 
-public class RolAdministrativo {
+public class FuncionAdministrativaEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

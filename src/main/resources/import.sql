@@ -1,8 +1,4 @@
--- USUARIO
-INSERT INTO usuario (numeroDocumento, tipoDocumento, sexo, nombres, apellidos, telefono, correo) VALUES ('10611', 'cc', 'masculino', 'Miguel', 'Mosquera', '3225864404', 'miguelmonje@unicauca.edu.co');
-
--- ROL ACADEMICO
-INSERT INTO rolacademico (id, usuarioNumeroDocumento, estado, fechaInicio) VALUES (1, '10611', 'activo', '2023-08-30');
+-- |***** ACADEMICA *****|
 
 -- FACULTAD
 INSERT INTO facultad (id, nombre) VALUES (1, 'Ingeniería Electronica y Telecomunicaciones');
@@ -13,23 +9,39 @@ INSERT INTO departamento (id, nombre, facultadId) VALUES (1, 'Sistemas', 1);
 -- PROGRAMAS
 INSERT INTO programa (id, nombre, departamentoId) VALUES (1, 'Ingeniería de Sistemas', 1);
 
--- Usuario POSGRADO
-INSERT INTO posgrado (rolAcademicoId, programaId) VALUES (1,1);
 
--- Usuario PREGRADO
-INSERT INTO pregrado (rolAcademicoId, programaId) VALUES (1,1);
 
--- Usuario EGRESADO
-INSERT INTO egresado (rolAcademicoId) VALUES (1);
 
--- Usuario INVESTIGADOR EXTERNO
-INSERT INTO investigadorexterno (rolAcademicoId) VALUES (1);
+-- |***** USUARIO *****|
 
--- Usuario DOCENTE
-INSERT INTO docente (rolAcademicoId, CvLAC, departamentoId) VALUES (1, 'www.cvlac.com', 1);
+-- USUARIO
+INSERT INTO usuario (numeroDocumento, tipoDocumento, sexo, nombres, apellidos, telefono, correo) VALUES ('10611', 'cc', 'masculino', 'Miguel', 'Mosquera', '3225864404', 'miguelmonje@unicauca.edu.co');
 
--- Usuario FUNCIONARIO
-INSERT INTO funcionario (rolAcademicoId) VALUES (1);
+-- ROL USUARIO
+INSERT INTO rol_usuario (id, usuarioNumeroDocumento, estado, fechaInicio) VALUES (1, '10611', 'activo', '2023-08-30');
+
+-- ROL POSGRADO
+INSERT INTO rol_posgrado (rolUsuarioId, programaId) VALUES (1,1);
+
+-- ROL PREGRADO
+INSERT INTO rol_pregrado (rolUsuarioId, programaId) VALUES (1,1);
+
+-- ROL EGRESADO
+INSERT INTO rol_egresado (rolUsuarioId) VALUES (1);
+
+-- ROL INVESTIGADOR EXTERNO
+INSERT INTO rol_investigador_externo (rolUsuarioId) VALUES (1);
+
+-- ROL DOCENTE
+INSERT INTO rol_docente (rolUsuarioId, CvLAC, departamentoId) VALUES (1, 'www.cvlac.com', 1);
+
+-- ROL FUNCIONARIO
+INSERT INTO rol_funcionario (rolUsuarioId) VALUES (1);
+
+
+
+
+-- |***** PROYECTO *****|
 
 -- DOCUMENTACION
 INSERT INTO documentacion (id, nombre) VALUES (1, 'PagaFor-24');

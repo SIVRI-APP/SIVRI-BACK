@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity;
 
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.DocenteEntity;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.RolDocenteEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,5 +32,5 @@ public class DepartamentoEntity {
     private List<ProgramaEntity> programas;
 
     @OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)
-    private List<DocenteEntity> usuariosDocente;
+    private List<RolDocenteEntity> usuariosDocente;
 }

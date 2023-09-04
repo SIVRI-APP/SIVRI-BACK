@@ -7,10 +7,10 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "rolacademico")
+@Table(name = "rol_usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public abstract class RolAcademicoEntity {
+public abstract class RolUsuarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

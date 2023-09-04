@@ -39,7 +39,7 @@ public class UsuarioEntity {
     private String contraseña;
 
     @OneToMany(mappedBy="usuarioNumeroDocumento", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<RolAcademicoEntity> rolesAcademicos;
+    private List<RolUsuarioEntity> rolesAcademicos;
 
     @OneToMany(mappedBy="usuario", cascade = CascadeType.REMOVE)
     private List<IntegranteProyectoEntity> participacionProyectos;
