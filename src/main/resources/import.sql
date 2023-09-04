@@ -1,6 +1,6 @@
 -- |***** ACADEMICA *****|
 
--- FACULTAD
+-- FACULADT
 INSERT INTO facultad (id, nombre) VALUES (1, 'Ingeniería Electronica y Telecomunicaciones');
 
 -- DEPARTAMENTO
@@ -41,7 +41,7 @@ INSERT INTO rol_funcionario (rolUsuarioId) VALUES (1);
 
 
 
--- |***** PROYECTO *****|
+-- |***** CONVOCATORIA *****|
 
 -- DOCUMENTACION
 INSERT INTO documentacion (id, nombre) VALUES (1, 'PagaFor-24');
@@ -55,6 +55,11 @@ INSERT INTO checklist (id, tipoFinanciacionId, documentacionId) VALUES (1, 1, 1)
 -- CONVOCATORIA
 INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin, estado, recurrente, tipoFinanciacionId) VALUES (1, 'Internos 2023', 'Ayudar a la investigacion de la U', 'Universidad del Cauca', '2023-08-30', '2024-08-30', 'activa', true, 1);
 
+
+
+
+-- |***** PROYECTO *****|
+
 -- PROYECTO
 INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, convocatoriaId) VALUES (1, 'Proyecto super Elegante', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', '', '', '', '', '', '', '', 1);
 
@@ -62,4 +67,10 @@ INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, 
 INSERT INTO rolproyecto (id, nombre) VALUES (1, 'Director de Proyecto');
 
 -- INTEGRANTE PROYECTO
-INSERT INTO integranteProyecto (id, fechaInicio, fechaFin, estado, proyectoId, usuarioId, rolId) VALUES (1, '2024-08-30', '2024-08-30', 'activo', 1, '10611', 1);
+INSERT INTO integrante_proyecto (id, fechaInicio, fechaFin, estado, proyectoId, usuarioId, rolId) VALUES (1, '2024-08-30', '2024-08-30', 'activo', 1, '10611', 1);
+
+-- ENFOQUE DIFERENCIAL
+INSERT INTO enfoque_diferencial (id, nombre) VALUES (1, 'Comunidad LGBTIQ+');
+
+-- ENFOQUE DIFERENCIAL PROYECTO
+INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (1, 1, 1);

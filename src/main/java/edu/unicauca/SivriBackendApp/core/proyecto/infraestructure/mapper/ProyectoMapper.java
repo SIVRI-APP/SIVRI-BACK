@@ -7,4 +7,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface ProyectoMapper {
     Proyecto obtenerModelo(final ProyectoEntity proyectoEntity);
+
+    ProyectoEntity obtenerEntity(final Proyecto proyecto);
+
 }
