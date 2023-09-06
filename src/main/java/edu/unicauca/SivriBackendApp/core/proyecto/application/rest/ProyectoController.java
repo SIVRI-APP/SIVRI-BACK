@@ -1,10 +1,12 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.application.rest;
 
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
+import edu.unicauca.SivriBackendApp.core.proyecto.application.dto.request.ActualizarProyectoInfoGeneralDTO;
 import edu.unicauca.SivriBackendApp.core.proyecto.application.dto.request.CrearProyectoDTO;
 import edu.unicauca.SivriBackendApp.core.proyecto.application.dto.response.ObtenerProyectosDataTableDTO;
 import edu.unicauca.SivriBackendApp.core.proyecto.application.mapper.ProyectoDtoMapper;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.Proyecto;
+import edu.unicauca.SivriBackendApp.core.proyecto.domain.port.in.ActualizarProyectoCU;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.port.in.CrearProyectoCU;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.port.in.ObtenerProyectosCU;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +22,13 @@ public class ProyectoController {
 
     private final ObtenerProyectosCU obtenerProyectosCU;
     private final CrearProyectoCU crearProyectoCU;
-
+    private final ActualizarProyectoCU actualizarProyectoCU;
     private final ProyectoDtoMapper proyectoDtoMapper;
 
-    public ProyectoController(ObtenerProyectosCU obtenerProyectosCU, CrearProyectoCU crearProyectoCU, ProyectoDtoMapper proyectoDtoMapper) {
+    public ProyectoController(ObtenerProyectosCU obtenerProyectosCU, CrearProyectoCU crearProyectoCU, ActualizarProyectoCU actualizarProyectoCU, ProyectoDtoMapper proyectoDtoMapper) {
         this.obtenerProyectosCU = obtenerProyectosCU;
         this.crearProyectoCU = crearProyectoCU;
+        this.actualizarProyectoCU = actualizarProyectoCU;
         this.proyectoDtoMapper = proyectoDtoMapper;
     }
 
@@ -57,5 +60,13 @@ public class ProyectoController {
 
         return ResponseEntity.ok().body(respuesta);
     }
+
+    @PatchMapping("")
+    public ResponseEntity<Respuesta> actualizarProyectoInfoGeneral(@RequestBody ActualizarProyectoInfoGeneralDTO proyecto) {
+        Respuesta<Boolean> respuesta = actualizarProyectoCU.actualizarProyecto(proyectoDtoMapper.actualizarProyectoInfoGeneral(proyecto));
+
+        return ResponseEntity.ok().body(respuesta);
+    }
+
 
 }

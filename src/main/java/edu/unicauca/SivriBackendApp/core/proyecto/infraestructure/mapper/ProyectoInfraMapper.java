@@ -5,7 +5,7 @@ import edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jp
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface ProyectoMapper {
+public interface ProyectoInfraMapper {
     Proyecto obtenerModelo(final ProyectoEntity proyectoEntity);
 
     ProyectoEntity obtenerEntity(final Proyecto proyecto);

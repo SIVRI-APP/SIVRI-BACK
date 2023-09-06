@@ -1,17 +1,15 @@
-package edu.unicauca.SivriBackendApp.core.proyecto.domain.model;
+package edu.unicauca.SivriBackendApp.core.proyecto.application.dto.request;
 
 import lombok.*;
 
 import java.time.LocalDate;
 
 @Data
-public class Proyecto {
+public class ActualizarProyectoInfoGeneralDTO {
 
     private Integer id;
 
     private String nombre;
-
-    private EstadoProyecto estado;
 
     private LocalDate fechaInicio;
 
@@ -37,10 +35,4 @@ public class Proyecto {
 
     private String consideraciones;
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "convocatoriaId")
-//    private ConvocatoriaEntity convocatoria;
-//
-//    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-//    private List<IntegranteProyectoEntity> integrantes;
 }
