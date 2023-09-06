@@ -1,6 +1,6 @@
 -- |***** ACADEMICA *****|
 
--- FACULADT
+-- FACULTAD
 INSERT INTO facultad (id, nombre) VALUES (1, 'Ingeniería Electronica y Telecomunicaciones');
 
 -- DEPARTAMENTO

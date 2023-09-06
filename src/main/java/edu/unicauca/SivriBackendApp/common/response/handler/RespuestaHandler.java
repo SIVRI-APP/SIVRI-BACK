@@ -5,10 +5,11 @@ import lombok.Getter;
 
 @Getter
 public class RespuestaHandler<T> {
+
     private final Respuesta<T> respuesta;
 
     public RespuestaHandler(int status, String userMessage, String developerMessage, T data) {
-        respuesta = new Respuesta<>();
+        this.respuesta = new Respuesta<>();
 
         respuesta.setStatus(status);
         respuesta.setUserMessage(userMessage);

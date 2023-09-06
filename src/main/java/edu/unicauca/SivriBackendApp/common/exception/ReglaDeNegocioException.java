@@ -1,5 +1,7 @@
 package edu.unicauca.SivriBackendApp.common.exception;
 
+import java.util.List;
+
 public class ReglaDeNegocioException extends BaseException{
 
     /**
@@ -9,5 +11,9 @@ public class ReglaDeNegocioException extends BaseException{
      */
     public ReglaDeNegocioException(String key) {
         super(key);
+    }
+
+    public ReglaDeNegocioException(String key, List args) {
+        super(key, args);
     }
 }

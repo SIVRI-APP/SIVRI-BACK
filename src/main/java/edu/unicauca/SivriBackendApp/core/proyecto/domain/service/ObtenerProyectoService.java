@@ -21,8 +21,9 @@ public class ObtenerProyectoService implements ObtenerProyectosCU {
     @Override
     public Respuesta<Proyecto> obtenerProyectoPorId(int id) {
         Optional<Proyecto> respuestaBd = obtenerProyectosREPO.obtenerProyectoPorId(id);
+
         if (respuestaBd.isEmpty()){
-            throw new ReglaDeNegocioException("El id "+id+" no existe");
+            throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("ID", String.valueOf(id)));
         }
 
         return new RespuestaHandler<>(200, "Exitoso", "Exitoso", respuestaBd.get()).getRespuesta();
@@ -33,7 +34,7 @@ public class ObtenerProyectoService implements ObtenerProyectosCU {
         List<Proyecto> respuestaBd = obtenerProyectosREPO.obtenerProyectos();
 
         if (respuestaBd.isEmpty()){
-            throw new ReglaDeNegocioException("No hay proyectos");
+            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros");
         }
 
         return new RespuestaHandler<>(200, "Exitoso", "Exitoso", respuestaBd).getRespuesta();

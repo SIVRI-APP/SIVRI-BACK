@@ -7,9 +7,9 @@ import edu.unicauca.SivriBackendApp.core.proyecto.application.mapper.ProyectoDto
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.port.in.CrearProyectoCU;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.port.in.ObtenerProyectosCU;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -33,29 +33,26 @@ public class ProyectoController {
     public ResponseEntity<Respuesta> obtenerPorId(@PathVariable(value = "id") int id) {
         Respuesta respuesta = obtenerProyectosCU.obtenerProyectoPorId(id);
 
-        respuesta.setData(proyectoDtoMapper.dtoObtenerProyecto((Proyecto) respuesta.getData()));
+        respuesta.setData(proyectoDtoMapper.obtenerProyectoDetallado((Proyecto) respuesta.getData()));
         return ResponseEntity.ok().body(respuesta);
     }
 
     @GetMapping("")
-    public ResponseEntity<Respuesta> obtenerProyectos() {
-        Respuesta<List<Proyecto>> respuestaCU = obtenerProyectosCU.obtenerProyectos();
-        Respuesta<List<ObtenerProyectosDataTableDTO>> respuesta = new Respuesta<>();
+    public ResponseEntity<Respuesta<List<ObtenerProyectosDataTableDTO>>> obtenerProyectosDataTable() {
+        Respuesta respuesta = obtenerProyectosCU.obtenerProyectos();
 
-        respuesta.setData(respuestaCU.getData().stream()
-                .map(proyectoDtoMapper::dtoObtenerProyecto)
-                .toList());
-
-        respuesta.setStatus(respuestaCU.getStatus());
-        respuesta.setUserMessage(respuestaCU.getUserMessage());
-        respuesta.setDeveloperMessage(respuestaCU.getDeveloperMessage());
+        List<Proyecto> proyectos = (List<Proyecto>) respuesta.getData();
+        respuesta.setData(
+                proyectos.stream()
+                        .map(proyectoDtoMapper::obtenerProyectosDataTable)
+                        .toList()
+        );
 
         return ResponseEntity.ok().body(respuesta);
     }
 
     @PostMapping("")
     public ResponseEntity<Respuesta> crearProyecto(@RequestBody CrearProyectoDTO crearProyectoDTO) {
-
         Respuesta<Boolean> respuesta = crearProyectoCU.crearProyecto(proyectoDtoMapper.crearProyectoMapper(crearProyectoDTO));
 
         return ResponseEntity.ok().body(respuesta);

@@ -2,12 +2,10 @@ package edu.unicauca.SivriBackendApp.common.exception;
 
 import org.springframework.context.i18n.LocaleContextHolder;
 
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class BaseException extends RuntimeException {
-
-    // ~ Constants
-    // ====================================================================
 
     /**
      * The exceptions resource bundle.
@@ -27,6 +25,10 @@ public class BaseException extends RuntimeException {
         super(getMessage(key));
     }
 
+    BaseException(String key, List args) {
+        super(formatMessage(messages.getString(key), args));
+    }
+
     // ~ Methods
     // ====================================================================
 
@@ -41,14 +43,31 @@ public class BaseException extends RuntimeException {
     }
 
     /**
-     * Formats the message and fills the missing part using the argument.
+     * Formats the message and fills multiple missing parts using the argument list.
      *
      * @param message the message to format
-     * @param arg     the argument
+     * @param args list the arguments
      * @return the formatted and filled message
      */
-    private static String formatMessage(String message, String arg) {
-        return message.replace("{}", arg);
+    private static String formatMessage(String message, List<String> args) {
+        int argIndex = 0; // Inicializamos un índice para recorrer la lista de argumentos
+        StringBuilder result = new StringBuilder(); // Usamos un StringBuilder para construir el resultado
+
+        for (int i = 0; i < message.length(); i++) {
+            if (message.charAt(i) == '{' && i + 1 < message.length() && message.charAt(i + 1) == '}') {
+                // Si encontramos "{}", reemplazamos con el siguiente argumento de la lista
+                if (argIndex < args.size()) {
+                    result.append(args.get(argIndex));
+                    argIndex++;
+                }
+                i++; // Saltamos el segundo carácter "}" para evitar reemplazos duplicados
+            } else {
+                // Si no encontramos "{}", copiamos el carácter original al resultado
+                result.append(message.charAt(i));
+            }
+        }
+
+        return result.toString();
     }
 
 }
