@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.domain.model;
 
+import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persistence.jpaEntity.ConvocatoriaEntity;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -36,6 +37,8 @@ public class Proyecto {
     private String impactosResultadosEsperados;
 
     private String consideraciones;
+
+    private ConvocatoriaEntity convocatoria;
 
 //    @ManyToOne(optional = false)
 //    @JoinColumn(name = "convocatoriaId")

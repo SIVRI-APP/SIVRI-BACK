@@ -25,7 +25,6 @@ public class ObtenerProyectosAdapter implements ObtenerProyectosREPO {
         Optional<ProyectoEntity> respuestaJpa = proyectoRepository.findById(id);
 
         if (respuestaJpa.isPresent()) {
-            System.out.println(respuestaJpa.get());
             return Optional.of(proyectoInfraMapper.obtenerModelo(respuestaJpa.get()));
         }
         return Optional.empty();

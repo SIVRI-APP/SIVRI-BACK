@@ -36,6 +36,6 @@ public class ActualizarProyectoService implements ActualizarProyectoCU {
         proyectoViejo.setImpactosResultadosEsperados(proyecto.getImpactosResultadosEsperados());
         proyectoViejo.setConsideraciones(proyecto.getConsideraciones());
 
-        return new RespuestaHandler<>(200, "success.actualizacion.exitosa", "", actualizarProyectoREPO.actualizarProyecto(proyectoViejo)).getRespuesta();
+        return new RespuestaHandler<>(200, "Actualización exitosa", "", actualizarProyectoREPO.actualizarProyecto(proyectoViejo)).getRespuesta();
     }
 }

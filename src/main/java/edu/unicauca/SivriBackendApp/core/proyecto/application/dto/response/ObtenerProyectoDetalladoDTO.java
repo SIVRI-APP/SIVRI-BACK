@@ -1,8 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.application.dto.response;
 
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.EstadoProyecto;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -39,4 +37,6 @@ public class ObtenerProyectoDetalladoDTO {
     private String impactosResultadosEsperados;
 
     private String consideraciones;
+
+    private Integer convocatoriaId;
 }

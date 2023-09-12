@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.proyecto.application.rest;
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.core.proyecto.application.dto.request.ActualizarProyectoInfoGeneralDTO;
 import edu.unicauca.SivriBackendApp.core.proyecto.application.dto.request.CrearProyectoDTO;
+import edu.unicauca.SivriBackendApp.core.proyecto.application.dto.response.ObtenerProyectoDetalladoDTO;
 import edu.unicauca.SivriBackendApp.core.proyecto.application.dto.response.ObtenerProyectosDataTableDTO;
 import edu.unicauca.SivriBackendApp.core.proyecto.application.mapper.ProyectoDtoMapper;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.Proyecto;
@@ -37,6 +38,7 @@ public class ProyectoController {
         Respuesta respuesta = obtenerProyectosCU.obtenerProyectoPorId(id);
 
         respuesta.setData(proyectoDtoMapper.obtenerProyectoDetallado((Proyecto) respuesta.getData()));
+
         return ResponseEntity.ok().body(respuesta);
     }
 

@@ -3,20 +3,14 @@ package edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.j
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "integrante_proyecto")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class IntegranteProyectoEntity {
+@Data
+public class  IntegranteProyectoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

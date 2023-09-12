@@ -12,11 +12,11 @@ public class EnfoqueDiferencialProyectoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enfoqueDiferencialId")
     private EnfoqueDiferencialEntity enfoqueDiferencial;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "proyectoId")
     private ProyectoEntity proyecto;
 }
