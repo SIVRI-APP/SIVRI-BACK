@@ -11,6 +11,6 @@ public interface TipoFinanciacionDtoMapper {
 
     @Named("fullInfoConvocatoria")
     @Mapping(target = "checklist", qualifiedByName = "fullInfoConvocatoria")
-    TipoFinanciacionDTO obtenerDto(final TipoFinanciacion objetoModelo);
+    TipoFinanciacionDTO fullInfoConvocatoria(final TipoFinanciacion objetoModelo);
 
 }

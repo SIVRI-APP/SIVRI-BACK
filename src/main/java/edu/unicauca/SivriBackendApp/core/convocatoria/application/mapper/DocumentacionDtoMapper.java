@@ -9,6 +9,6 @@ import org.mapstruct.Named;
 public interface DocumentacionDtoMapper {
 
     @Named("fullInfoConvocatoria")
-    DocumentacionDTO obtenerDto(final Documentacion objetoModelo);
+    DocumentacionDTO fullInfoConvocatoria(final Documentacion objetoModelo);
 
 }

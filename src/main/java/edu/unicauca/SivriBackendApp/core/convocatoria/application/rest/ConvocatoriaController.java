@@ -39,7 +39,7 @@ public class ConvocatoriaController {
     public ResponseEntity<Respuesta> obtenerPorId(@PathVariable(value = "id") long id) {
         Respuesta respuesta = convocatoriaObtenerCU.obtenerPorId(id);
 
-        respuesta.setData(convocatoriaDtoMapper.obtenerDto((Convocatoria) respuesta.getData()));
+        respuesta.setData(convocatoriaDtoMapper.fullInfoConvocatoria((Convocatoria) respuesta.getData()));
 
         return ResponseEntity.ok().body(respuesta);
     }
@@ -53,7 +53,7 @@ public class ConvocatoriaController {
         respuesta.setData(
                 ((List<Convocatoria>) respuesta.getData())
                         .stream()
-                        .map(convocatoriaDtoMapper::obtenerDto)
+                        .map(convocatoriaDtoMapper::fullInfoConvocatoria)
                         .toList()
         );
 
