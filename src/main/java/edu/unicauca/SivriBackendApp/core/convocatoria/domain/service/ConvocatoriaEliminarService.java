@@ -35,7 +35,7 @@ public class ConvocatoriaEliminarService implements ConvocatoriaEliminarCU {
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.eliminacion.objeto", List.of("Convocatoria", "Id", String.valueOf(id)));
         }
-        System.out.println("Sali al service");
-        return new RespuestaHandler<>(200, "Eliminación exitosa", "Eliminación Lógica", true).getRespuesta();
+
+        return new RespuestaHandler<>(200, "success.eliminacion.objeto", List.of("Convocatoria"), "Eliminación Lógica", true).getRespuesta();
     }
 }

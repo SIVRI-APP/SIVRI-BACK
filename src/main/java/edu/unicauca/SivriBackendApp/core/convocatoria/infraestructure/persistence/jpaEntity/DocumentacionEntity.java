@@ -17,7 +17,7 @@ public class DocumentacionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 90, nullable = false)
     private String nombre;
 
     @OneToMany(mappedBy = "documentacion", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)

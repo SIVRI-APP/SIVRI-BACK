@@ -11,6 +11,7 @@ import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.Convocatori
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ConvocatoriaObtenerCU;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.Proyecto;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,14 +62,14 @@ public class ConvocatoriaController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Respuesta> crear(@RequestBody ConvocatoriaCrearDTO nuevosDatos) {
+    public ResponseEntity<Respuesta> crear(@Valid @RequestBody ConvocatoriaCrearDTO nuevosDatos) {
         Respuesta respuesta = convocatoriaCrearCU.crear(convocatoriaDtoMapper.crear(nuevosDatos));
 
         return ResponseEntity.ok().body(respuesta);
     }
 
     @PatchMapping("")
-    public ResponseEntity<Respuesta> actualizar(@RequestBody ConvocatoriaActualizarDTO nuevosDatos) {
+    public ResponseEntity<Respuesta> actualizar(@Valid @RequestBody ConvocatoriaActualizarDTO nuevosDatos) {
         Respuesta respuesta = convocatoriaActualizarCU.actualizar(convocatoriaDtoMapper.actualizar(nuevosDatos));
 
         return ResponseEntity.ok().body(respuesta);

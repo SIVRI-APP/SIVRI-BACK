@@ -32,6 +32,6 @@ public class ConvocatoriaCrearService implements ConvocatoriaCrearCU {
             throw new ReglaDeNegocioException("bad.error.creacion.objeto", List.of("Convocatoria", "Id", String.valueOf(nuevosDatos.getId())));
         }
 
-        return new RespuestaHandler<>(201, "Convocatoria creada Exitosamente", "", true).getRespuesta();
+        return new RespuestaHandler<>(201, "success.creacion.objeto", List.of("Convocatoria"), "", true).getRespuesta();
     }
 }

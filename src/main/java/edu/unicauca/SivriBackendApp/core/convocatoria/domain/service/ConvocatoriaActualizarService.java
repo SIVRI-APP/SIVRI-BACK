@@ -47,6 +47,6 @@ public class ConvocatoriaActualizarService implements ConvocatoriaActualizarCU {
             throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Convocatoria", "Id", String.valueOf(nuevosDatos.getId())));
         }
 
-        return new RespuestaHandler<>(200, "Actualización exitosa", "", true).getRespuesta();
+        return new RespuestaHandler<>(200, "success.actualizacion.objeto", List.of("Convocatoria"), "", true).getRespuesta();
     }
 }

@@ -28,7 +28,7 @@ public class ConvocatoriaObtenerService implements ConvocatoriaObtenerCU {
             throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("Convocatoria", "Id", String.valueOf(id)));
         }
 
-        return new RespuestaHandler<>(200, "Exitoso", "Exitoso",true).getRespuesta();
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta();
     }
 
     @Override
@@ -36,10 +36,11 @@ public class ConvocatoriaObtenerService implements ConvocatoriaObtenerCU {
         Optional<Convocatoria> respuestaBd = convocatoriaObtenerREPO.obtenerPorId(id);
 
         if (respuestaBd.isEmpty()){
-            throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("Convocatoria", "Id", String.valueOf(id)));
+//            throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("Convocatoria", "Id", String.valueOf(id)));
+            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros");
         }
 
-        return new RespuestaHandler<>(200, "Exitoso", "Exitoso", respuestaBd.get()).getRespuesta();
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd.get()).getRespuesta();
     }
 
     @Override
@@ -50,6 +51,6 @@ public class ConvocatoriaObtenerService implements ConvocatoriaObtenerCU {
             throw new ReglaDeNegocioException("bad.no.se.encontraron.registros");
         }
 
-        return new RespuestaHandler<>(200, "Exitoso", "Exitoso", respuestaBd).getRespuesta();
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
     }
 }

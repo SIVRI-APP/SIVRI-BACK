@@ -2,7 +2,6 @@ package edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persisten
 
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.model.ConvocatoriaEstado;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -18,13 +17,13 @@ public class ConvocatoriaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 240, nullable = false)
+    @Column(length = 250    , nullable = false)
     private String nombre;
 
     @Column(length = 250, nullable = false)
     private String objetivos;
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 90, nullable = false)
     private String oferente;
 
     private LocalDate fechaInicio;
