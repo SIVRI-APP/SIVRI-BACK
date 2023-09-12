@@ -19,6 +19,8 @@ public class RolGrupoEntity {
     @Column(length = 45)
     private String rolGrupo;
 
+    public RolGrupoEntity(){
+    }
     //relacion 1a* con entidad integrantegrupo
     @OneToMany(mappedBy = "rolGrupoId",fetch = FetchType.LAZY)
     private List<IntegranteGrupoEntity> integrantesGrupo;

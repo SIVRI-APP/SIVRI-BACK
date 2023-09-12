@@ -16,3 +16,4 @@ public class Area {
     private String area;
 
 }
+

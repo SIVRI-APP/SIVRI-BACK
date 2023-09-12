@@ -39,4 +39,7 @@ public class IntegranteGrupoEntity {
     @OneToOne
     @JoinColumn(name = "usuarioNumeroDocumento")
     private UsuarioEntity usuario;
+
+    public IntegranteGrupoEntity() {
+    }
 }

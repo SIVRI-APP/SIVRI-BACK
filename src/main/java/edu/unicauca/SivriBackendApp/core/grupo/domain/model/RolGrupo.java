@@ -1,7 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.grupo.domain.model;
 
-import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity.AreaEntity;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,13 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubArea {
+public class RolGrupo {
 
-    private Integer idSubArea;
+    private Integer id;
 
-    private String subArea;
-
-    private AreaEntity idArea;
-
+    private String rolGrupo;
 }
-

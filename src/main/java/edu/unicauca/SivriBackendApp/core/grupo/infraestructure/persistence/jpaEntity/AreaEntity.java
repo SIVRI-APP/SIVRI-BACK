@@ -23,6 +23,6 @@ public class AreaEntity {
     }
 
     //relacion 1a* con entidad subarea
-    //@OneToMany(mappedBy = "",fetch = FetchType.LAZY)
-   // private List<SubAreaEntity> subareas;
+    @OneToMany(mappedBy = "idArea",fetch = FetchType.LAZY)
+    private List<SubAreaEntity> subareas;
 }

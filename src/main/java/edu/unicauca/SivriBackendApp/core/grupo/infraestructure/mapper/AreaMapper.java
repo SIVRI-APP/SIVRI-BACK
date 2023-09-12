@@ -8,4 +8,5 @@ import org.mapstruct.Mapper;
 public interface AreaMapper {
     Area obtenerModelo(final AreaEntity areaEntity);
     AreaEntity obtenerEntity(final Area area);
+
 }

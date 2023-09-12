@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaE
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @Setter
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class SubAreaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,5 +29,6 @@ public class SubAreaEntity {
     //relacion 1a* con entidad disciplina
     @OneToMany(mappedBy = "subArea",fetch = FetchType.LAZY)
     private List<DisciplinaEntity> disciplinas;
+
 
 }
