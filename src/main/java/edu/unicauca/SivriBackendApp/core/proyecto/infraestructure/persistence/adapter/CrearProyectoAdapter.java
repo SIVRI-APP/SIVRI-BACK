@@ -2,27 +2,25 @@ package edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.a
 
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.port.out.CrearProyectoREPO;
-import edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.mapper.ProyectoMapper;
+import edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.mapper.ProyectoInfraMapper;
 import edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jpaEntity.ProyectoEntity;
 import edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jpaRepository.IProyectoRepository;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 public class CrearProyectoAdapter implements CrearProyectoREPO {
 
     private IProyectoRepository proyectoRepository;
-    private ProyectoMapper proyectoMapper;
+    private ProyectoInfraMapper proyectoInfraMapper;
 
-    public CrearProyectoAdapter(IProyectoRepository proyectoRepository, ProyectoMapper proyectoMapper) {
+    public CrearProyectoAdapter(IProyectoRepository proyectoRepository, ProyectoInfraMapper proyectoInfraMapper) {
         this.proyectoRepository = proyectoRepository;
-        this.proyectoMapper = proyectoMapper;
+        this.proyectoInfraMapper = proyectoInfraMapper;
     }
 
     @Override
     public Boolean crearProyecto(Proyecto proyecto) {
-        ProyectoEntity nuevoProyecto = proyectoRepository.save(proyectoMapper.obtenerEntity(proyecto));
+        ProyectoEntity nuevoProyecto = proyectoRepository.save(proyectoInfraMapper.obtenerEntity(proyecto));
 
         return proyectoRepository.existsById(nuevoProyecto.getId());
     }

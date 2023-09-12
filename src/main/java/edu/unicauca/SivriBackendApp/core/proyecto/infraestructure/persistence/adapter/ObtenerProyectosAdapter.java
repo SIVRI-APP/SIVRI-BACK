@@ -2,11 +2,10 @@ package edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.a
 
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.port.out.ObtenerProyectosREPO;
-import edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.mapper.ProyectoMapper;
+import edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.mapper.ProyectoInfraMapper;
 import edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jpaEntity.ProyectoEntity;
 import edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jpaRepository.IProyectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,14 +18,14 @@ public class ObtenerProyectosAdapter implements ObtenerProyectosREPO {
     IProyectoRepository proyectoRepository;
 
     @Autowired
-    ProyectoMapper proyectoMapper;
+    ProyectoInfraMapper proyectoInfraMapper;
 
     @Override
     public Optional<Proyecto> obtenerProyectoPorId(int id) {
         Optional<ProyectoEntity> respuestaJpa = proyectoRepository.findById(id);
 
         if (respuestaJpa.isPresent()) {
-            return Optional.of(proyectoMapper.obtenerModelo(respuestaJpa.get()));
+            return Optional.of(proyectoInfraMapper.obtenerModelo(respuestaJpa.get()));
         }
         return Optional.empty();
     }
@@ -34,7 +33,7 @@ public class ObtenerProyectosAdapter implements ObtenerProyectosREPO {
     @Override
     public List<Proyecto> obtenerProyectos() {
         return this.proyectoRepository.findAll().stream().map(proyectoEntity -> {
-            Proyecto proyecto = proyectoMapper.obtenerModelo(proyectoEntity);
+            Proyecto proyecto = proyectoInfraMapper.obtenerModelo(proyectoEntity);
             return proyecto;
         }).collect(Collectors.toList());
     }

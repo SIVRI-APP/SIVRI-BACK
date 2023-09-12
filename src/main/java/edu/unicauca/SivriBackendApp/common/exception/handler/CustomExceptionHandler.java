@@ -22,9 +22,8 @@ import java.util.ResourceBundle;
 
 @RestControllerAdvice
 public class CustomExceptionHandler{
-    private static final ResourceBundle bundle =
-            ResourceBundle.getBundle("exceptions", LocaleContextHolder.getLocale());
-    private static String ERROR = bundle.getString("bad.generic.request");
+
+    private static String ERROR = "bad.generic.request";
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -36,7 +35,7 @@ public class CustomExceptionHandler{
             errors.put(fieldName,errorMessage);
         });
 
-        return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, ERROR, errors).getRespuesta(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, "", errors).getRespuesta(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ReglaDeNegocioException.class)
@@ -46,6 +45,6 @@ public class CustomExceptionHandler{
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
 
-        return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, ERROR, error).getRespuesta(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, "", error).getRespuesta(), HttpStatus.BAD_REQUEST);
     }
 }

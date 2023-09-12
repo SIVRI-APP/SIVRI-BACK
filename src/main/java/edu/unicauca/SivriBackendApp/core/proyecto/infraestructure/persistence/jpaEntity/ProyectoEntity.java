@@ -63,9 +63,9 @@ public class ProyectoEntity {
     @JoinColumn(name = "convocatoriaId")
     private ConvocatoriaEntity convocatoria;
 
-    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private List<IntegranteProyectoEntity> integrantes;
+//    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+//    private List<IntegranteProyectoEntity> integrantes;
 
-    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private List<EnfoqueDiferencialProyectoEntity> enfoquesDiferenciales;
+//    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+//    private List<EnfoqueDiferencialProyectoEntity> enfoquesDiferenciales;
 }

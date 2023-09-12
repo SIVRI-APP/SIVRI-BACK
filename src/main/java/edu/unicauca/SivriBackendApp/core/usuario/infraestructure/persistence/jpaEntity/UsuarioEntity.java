@@ -8,10 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "usuario")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class UsuarioEntity {
     @Id
     @Column(name = "numeroDocumento", length = 45)

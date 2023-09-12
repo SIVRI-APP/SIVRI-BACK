@@ -1,16 +1,11 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persistence.jpaEntity.ConvocatoriaEntity;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Proyecto {
 
     private Integer id;
@@ -42,6 +37,8 @@ public class Proyecto {
     private String impactosResultadosEsperados;
 
     private String consideraciones;
+
+    private ConvocatoriaEntity convocatoria;
 
 //    @ManyToOne(optional = false)
 //    @JoinColumn(name = "convocatoriaId")
