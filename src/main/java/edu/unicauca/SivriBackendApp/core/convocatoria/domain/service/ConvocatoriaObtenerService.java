@@ -4,28 +4,28 @@ import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.model.Convocatoria;
-import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ObtenerConvocatoriaCU;
-import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.out.ObtenerConvocatoriaREPO;
+import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ConvocatoriaObtenerCU;
+import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.out.ConvocatoriaObtenerREPO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ObtenerConvocatoriaService implements ObtenerConvocatoriaCU {
+public class ConvocatoriaObtenerService implements ConvocatoriaObtenerCU {
 
-    private final ObtenerConvocatoriaREPO obtenerConvocatoriaREPO;
+    private final ConvocatoriaObtenerREPO convocatoriaObtenerREPO;
 
-    public ObtenerConvocatoriaService(ObtenerConvocatoriaREPO obtenerConvocatoriaREPO) {
-        this.obtenerConvocatoriaREPO = obtenerConvocatoriaREPO;
+    public ConvocatoriaObtenerService(ConvocatoriaObtenerREPO convocatoriaObtenerREPO) {
+        this.convocatoriaObtenerREPO = convocatoriaObtenerREPO;
     }
 
     @Override
     public Respuesta<Boolean> existePorId(long id) {
-        Boolean respuesta = obtenerConvocatoriaREPO.existePorId(id);
+        Boolean respuesta = convocatoriaObtenerREPO.existePorId(id);
 
         if (!respuesta){
-            throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("ID", String.valueOf(id)));
+            throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("Convocatoria", "Id", String.valueOf(id)));
         }
 
         return new RespuestaHandler<>(200, "Exitoso", "Exitoso",true).getRespuesta();
@@ -33,18 +33,18 @@ public class ObtenerConvocatoriaService implements ObtenerConvocatoriaCU {
 
     @Override
     public Respuesta<Convocatoria> obtenerPorId(long id) {
-        Optional<Convocatoria> respuestaBd = obtenerConvocatoriaREPO.obtenerPorId(id);
+        Optional<Convocatoria> respuestaBd = convocatoriaObtenerREPO.obtenerPorId(id);
 
         if (respuestaBd.isEmpty()){
-            throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("ID", String.valueOf(id)));
+            throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("Convocatoria", "Id", String.valueOf(id)));
         }
-        System.out.println(respuestaBd.get());
+
         return new RespuestaHandler<>(200, "Exitoso", "Exitoso", respuestaBd.get()).getRespuesta();
     }
 
     @Override
     public Respuesta<List<Convocatoria>> obtenerListado() {
-        List<Convocatoria> respuestaBd = obtenerConvocatoriaREPO.obtenerListado();
+        List<Convocatoria> respuestaBd = convocatoriaObtenerREPO.obtenerListado();
 
         if (respuestaBd.isEmpty()){
             throw new ReglaDeNegocioException("bad.no.se.encontraron.registros");

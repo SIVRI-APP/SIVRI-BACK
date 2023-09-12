@@ -23,7 +23,7 @@ public class ObtenerProyectoService implements ObtenerProyectosCU {
         Optional<Proyecto> respuestaBd = obtenerProyectosREPO.obtenerProyectoPorId(id);
 
         if (respuestaBd.isEmpty()){
-            throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("ID", String.valueOf(id)));
+            throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("Convocatoria", "Id", String.valueOf(id)));
         }
 
         return new RespuestaHandler<>(200, "Exitoso", "Exitoso", respuestaBd.get()).getRespuesta();

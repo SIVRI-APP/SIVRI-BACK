@@ -1,7 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persistence.adapter;
 
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.model.Convocatoria;
-import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.out.ObtenerConvocatoriaREPO;
+import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.out.ConvocatoriaObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.mapper.ConvocatoriaInfraMapper;
 import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persistence.jpaEntity.ConvocatoriaEntity;
 import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persistence.jpaRepository.IConvocatoriaRepository;
@@ -13,13 +13,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
-public class ObtenerConvocatoriaAdapter implements ObtenerConvocatoriaREPO {
+public class ConvocatoriaObtenerAdapter implements ConvocatoriaObtenerREPO {
 
     private final IConvocatoriaRepository convocatoriaRepository;
 
     private final ConvocatoriaInfraMapper convocatoriaInfraMapper;
 
-    public ObtenerConvocatoriaAdapter(IConvocatoriaRepository convocatoriaRepository, ConvocatoriaInfraMapper convocatoriaInfraMapper) {
+    public ConvocatoriaObtenerAdapter(IConvocatoriaRepository convocatoriaRepository, ConvocatoriaInfraMapper convocatoriaInfraMapper) {
         this.convocatoriaRepository = convocatoriaRepository;
         this.convocatoriaInfraMapper = convocatoriaInfraMapper;
     }

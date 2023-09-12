@@ -27,10 +27,8 @@ public class ConvocatoriaEntity {
     @Column(length = 45, nullable = false)
     private String oferente;
 
-    @FutureOrPresent
     private LocalDate fechaInicio;
 
-    @FutureOrPresent
     private LocalDate fechaFin;
 
     @Column(nullable = false)

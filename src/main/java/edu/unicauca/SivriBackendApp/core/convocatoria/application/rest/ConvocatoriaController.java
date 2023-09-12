@@ -5,10 +5,10 @@ import edu.unicauca.SivriBackendApp.core.convocatoria.application.dto.request.Co
 import edu.unicauca.SivriBackendApp.core.convocatoria.application.dto.request.ConvocatoriaCrearDTO;
 import edu.unicauca.SivriBackendApp.core.convocatoria.application.mapper.ConvocatoriaDtoMapper;
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.model.Convocatoria;
-import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ActualizarConvocatoriaCU;
-import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.CrearConvocatoriaCU;
-import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.EliminarConvocatoriaCU;
-import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ObtenerConvocatoriaCU;
+import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ConvocatoriaActualizarCU;
+import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ConvocatoriaCrearCU;
+import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ConvocatoriaEliminarCU;
+import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ConvocatoriaObtenerCU;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.Proyecto;
 
 import org.springframework.http.ResponseEntity;
@@ -21,23 +21,23 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ConvocatoriaController {
 
-    private final ObtenerConvocatoriaCU obtenerConvocatoriaCU;
-    private final CrearConvocatoriaCU crearConvocatoriaCU;
-    private final ActualizarConvocatoriaCU actualizarConvocatoriaCU;
-    private final EliminarConvocatoriaCU eliminarConvocatoriaCU;
+    private final ConvocatoriaObtenerCU convocatoriaObtenerCU;
+    private final ConvocatoriaCrearCU convocatoriaCrearCU;
+    private final ConvocatoriaActualizarCU convocatoriaActualizarCU;
+    private final ConvocatoriaEliminarCU convocatoriaEliminarCU;
     private final ConvocatoriaDtoMapper convocatoriaDtoMapper;
 
-    public ConvocatoriaController(ObtenerConvocatoriaCU obtenerConvocatoriaCU, CrearConvocatoriaCU crearConvocatoriaCU, ActualizarConvocatoriaCU actualizarConvocatoriaCU, EliminarConvocatoriaCU eliminarConvocatoriaCU, ConvocatoriaDtoMapper convocatoriaDtoMapper) {
-        this.obtenerConvocatoriaCU = obtenerConvocatoriaCU;
-        this.crearConvocatoriaCU = crearConvocatoriaCU;
-        this.actualizarConvocatoriaCU = actualizarConvocatoriaCU;
-        this.eliminarConvocatoriaCU = eliminarConvocatoriaCU;
+    public ConvocatoriaController(ConvocatoriaObtenerCU convocatoriaObtenerCU, ConvocatoriaCrearCU convocatoriaCrearCU, ConvocatoriaActualizarCU convocatoriaActualizarCU, ConvocatoriaEliminarCU convocatoriaEliminarCU, ConvocatoriaDtoMapper convocatoriaDtoMapper) {
+        this.convocatoriaObtenerCU = convocatoriaObtenerCU;
+        this.convocatoriaCrearCU = convocatoriaCrearCU;
+        this.convocatoriaActualizarCU = convocatoriaActualizarCU;
+        this.convocatoriaEliminarCU = convocatoriaEliminarCU;
         this.convocatoriaDtoMapper = convocatoriaDtoMapper;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Respuesta> obtenerPorId(@PathVariable(value = "id") long id) {
-        Respuesta respuesta = obtenerConvocatoriaCU.obtenerPorId(id);
+        Respuesta respuesta = convocatoriaObtenerCU.obtenerPorId(id);
 
         respuesta.setData(convocatoriaDtoMapper.obtenerDto((Convocatoria) respuesta.getData()));
 
@@ -46,7 +46,7 @@ public class ConvocatoriaController {
 
     @GetMapping("")
     public ResponseEntity<Respuesta> obtenerListado() {
-        Respuesta respuesta = obtenerConvocatoriaCU.obtenerListado();
+        Respuesta respuesta = convocatoriaObtenerCU.obtenerListado();
 
         List<Proyecto> proyectos = (List<Proyecto>) respuesta.getData();
 
@@ -62,21 +62,21 @@ public class ConvocatoriaController {
 
     @PostMapping("")
     public ResponseEntity<Respuesta> crear(@RequestBody ConvocatoriaCrearDTO nuevosDatos) {
-        Respuesta respuesta = crearConvocatoriaCU.crear(convocatoriaDtoMapper.crear(nuevosDatos));
+        Respuesta respuesta = convocatoriaCrearCU.crear(convocatoriaDtoMapper.crear(nuevosDatos));
 
         return ResponseEntity.ok().body(respuesta);
     }
 
     @PatchMapping("")
     public ResponseEntity<Respuesta> actualizar(@RequestBody ConvocatoriaActualizarDTO nuevosDatos) {
-        Respuesta respuesta = actualizarConvocatoriaCU.actualizar(convocatoriaDtoMapper.actualizar(nuevosDatos));
+        Respuesta respuesta = convocatoriaActualizarCU.actualizar(convocatoriaDtoMapper.actualizar(nuevosDatos));
 
         return ResponseEntity.ok().body(respuesta);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Respuesta> eliminadoLogicoPorId(@PathVariable(value = "id") long id) {
-        Respuesta respuesta = eliminarConvocatoriaCU.eliminadoLogico(id);
+        Respuesta respuesta = convocatoriaEliminarCU.eliminadoLogico(id);
 
         return ResponseEntity.ok().body(respuesta);
     }
