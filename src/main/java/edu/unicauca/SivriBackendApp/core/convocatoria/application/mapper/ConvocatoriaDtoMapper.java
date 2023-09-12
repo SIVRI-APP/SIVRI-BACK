@@ -16,7 +16,9 @@ public interface ConvocatoriaDtoMapper {
     @Mapping(source = "tipoFinanciacion", target = "tipoFinanciacion.id")
     Convocatoria actualizar(final ConvocatoriaActualizarDTO nuevosDatos);
 
+
     @Mapping(source = "tipoFinanciacion", target = "tipoFinanciacion", qualifiedByName = "fullInfoConvocatoria")
+    @Mapping(target = "eliminadoLogico", ignore = true)
     ConvocatoriaDTO obtenerDto(final Convocatoria objetoModelo);
 
 }

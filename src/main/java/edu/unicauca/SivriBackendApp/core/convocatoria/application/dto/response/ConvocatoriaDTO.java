@@ -1,11 +1,13 @@
 package edu.unicauca.SivriBackendApp.core.convocatoria.application.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.model.ConvocatoriaEstado;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ConvocatoriaDTO {
 
     private Long id;
@@ -20,7 +22,9 @@ public class ConvocatoriaDTO {
 
     private LocalDate fechaFin;
 
-    private boolean recurrente;
+    private Boolean recurrente;
+
+    private Boolean eliminadoLogico;
 
     private ConvocatoriaEstado estado;
 
