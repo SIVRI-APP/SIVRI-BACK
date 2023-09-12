@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class ConvocatoriaCrearDTO {
 
     @NotNull(message = "El nombre de la Convocatoria no puede ser Nulo")
-    @Size(min = 2, max = 250)
+    @Size(min = 2, max = 250, message = "El nombre de la Convocatoria debe estar entre 2 y 250 caracteres")
     private String nombre;
 
     private String objetivos;
