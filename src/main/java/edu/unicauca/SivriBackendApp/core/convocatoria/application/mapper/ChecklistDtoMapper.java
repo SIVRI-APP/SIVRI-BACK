@@ -11,7 +11,6 @@ public interface ChecklistDtoMapper {
 
     @Named("fullInfoConvocatoria")
     @Mapping(target = "documentacion", qualifiedByName = "fullInfoConvocatoria")
-    @Mapping(target = "tipoFinanciacion", ignore = true)
     ChecklistDTO fullInfoConvocatoria(final Checklist objetoModelo);
 
 }
