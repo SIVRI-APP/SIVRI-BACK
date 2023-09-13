@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class IntegranteGrupoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +42,5 @@ public class IntegranteGrupoEntity {
     @JoinColumn(name = "usuarioNumeroDocumento")
     private UsuarioEntity usuario;
 
-    public IntegranteGrupoEntity() {
-    }
+
 }

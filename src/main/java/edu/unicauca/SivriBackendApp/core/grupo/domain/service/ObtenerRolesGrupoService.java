@@ -24,7 +24,7 @@ public class ObtenerRolesGrupoService implements ObtenerRolesGrupoCU {
             throw new ReglaDeNegocioException("el id "+id+" no existe.");
         }
 
-        return new RespuestaHandler<>(200,"Exitoso","Exitoso",respuestaBd.get()).getRespuesta();
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd.get()).getRespuesta();
     }
 
     @Override
@@ -34,6 +34,6 @@ public class ObtenerRolesGrupoService implements ObtenerRolesGrupoCU {
             throw new ReglaDeNegocioException("No hay roles en el grupo");
         }
 
-        return new RespuestaHandler<>(200,"Exitoso","Exitoso",respuestaBd).getRespuesta();
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
     }
 }

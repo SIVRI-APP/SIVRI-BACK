@@ -3,10 +3,7 @@ package edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaE
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.RolFuncionarioEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PastOrPresent;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -15,6 +12,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class ObservacionGrupoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

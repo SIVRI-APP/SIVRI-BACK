@@ -25,7 +25,7 @@ public class ObtenerAreasService implements ObtenerAreasCU {
             throw new ReglaDeNegocioException("el id "+id+" no existe.");
         }
 
-        return new RespuestaHandler<>(200,"Exitoso","Exitoso",respuestaBd.get()).getRespuesta();
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd.get()).getRespuesta();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ObtenerAreasService implements ObtenerAreasCU {
             throw new ReglaDeNegocioException("No hay areas");
         }
 
-        return new RespuestaHandler<>(200,"Exitoso","Exitoso",respuestaBd).getRespuesta();
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
     }
 
     @Override
@@ -45,6 +45,6 @@ public class ObtenerAreasService implements ObtenerAreasCU {
         if (respuestaBd.isEmpty()) {
             throw new ReglaDeNegocioException("areas.SubaAreas.NoEncontrada");
         }
-        return new RespuestaHandler<>(200,"Exitoso","Exitoso",respuestaBd).getRespuesta();
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
     }
 }

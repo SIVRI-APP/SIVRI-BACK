@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaE
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class RolGrupoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +21,6 @@ public class RolGrupoEntity {
     @Column(length = 45)
     private String rolGrupo;
 
-    public RolGrupoEntity(){
-    }
     //relacion 1a* con entidad integrantegrupo
     @OneToMany(mappedBy = "rolGrupoId",fetch = FetchType.LAZY)
     private List<IntegranteGrupoEntity> integrantesGrupo;

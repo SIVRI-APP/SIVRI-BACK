@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class GrupoEntity extends OrganismoDeInvestigacionEntity {
     @Column(length = 95)
     private String direccion;
@@ -66,8 +68,6 @@ public class GrupoEntity extends OrganismoDeInvestigacionEntity {
     @OneToMany(mappedBy = "idGrupo",fetch = FetchType.LAZY)
     private List<SemilleroEntity> semilleros;
 
-    public GrupoEntity(){
-    }
     public GrupoEntity(Integer id, String nombre,LocalDate fechaCreacion, String estado, String objetivo,
                        String mision, String vision,  String direccion, String telefono, @Email String email, String sitioWeb,
                        String escalafonColciencias, String direccionGrupLac, String codigoColciencias,
