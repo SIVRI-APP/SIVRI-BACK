@@ -6,6 +6,8 @@ import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.mapper.Con
 import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persistence.jpaEntity.ConvocatoriaEntity;
 import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persistence.jpaRepository.IConvocatoriaRepository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -39,5 +41,10 @@ public class ConvocatoriaObtenerAdapter implements ConvocatoriaObtenerREPO {
     @Override
     public List<Convocatoria> obtenerListado() {
         return convocatoriaRepository.findAll().stream().map(convocatoriaInfraMapper::obtenerModelo).collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<Convocatoria> obtenerListadoPaginado(PageRequest pageRequest) {
+        return convocatoriaRepository.findAll(pageRequest).map(convocatoriaInfraMapper::obtenerModelo);
     }
 }

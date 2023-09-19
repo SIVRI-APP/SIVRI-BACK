@@ -9,18 +9,20 @@ import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.Convocatori
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ConvocatoriaCrearCU;
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ConvocatoriaEliminarCU;
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ConvocatoriaObtenerCU;
-import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.Proyecto;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("convocatoria")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class ConvocatoriaController {
+public class ConvocatoriaController<T> {
 
     private final ConvocatoriaObtenerCU convocatoriaObtenerCU;
     private final ConvocatoriaCrearCU convocatoriaCrearCU;
@@ -37,7 +39,7 @@ public class ConvocatoriaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Respuesta> obtenerPorId(@PathVariable(value = "id") long id) {
+    public ResponseEntity<Respuesta> obtenerFullDetallePorId(@PathVariable(value = "id") long id) {
         Respuesta respuesta = convocatoriaObtenerCU.obtenerPorId(id);
 
         respuesta.setData(convocatoriaDtoMapper.fullInfoConvocatoria((Convocatoria) respuesta.getData()));
@@ -46,10 +48,8 @@ public class ConvocatoriaController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Respuesta> obtenerListado() {
+    public ResponseEntity<Respuesta> obtenerListadoFullDetalle() {
         Respuesta respuesta = convocatoriaObtenerCU.obtenerListado();
-
-        List<Proyecto> proyectos = (List<Proyecto>) respuesta.getData();
 
         respuesta.setData(
                 ((List<Convocatoria>) respuesta.getData())
@@ -57,6 +57,25 @@ public class ConvocatoriaController {
                         .map(convocatoriaDtoMapper::fullInfoConvocatoria)
                         .toList()
         );
+
+        return ResponseEntity.ok().body(respuesta);
+    }
+
+    @GetMapping("paginado")
+    public ResponseEntity<Respuesta> obtenerListadoFullDetallePaginado(
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
+    ) {
+        Respuesta respuesta = convocatoriaObtenerCU.obtenerListadoPaginado(pageNo, pageSize);
+
+        Page<Convocatoria> dataService = (Page<Convocatoria>) respuesta.getData();
+        List dataRespuesta = dataService
+                        .stream()
+                        .map(convocatoriaDtoMapper::fullInfoConvocatoria)
+                        .collect(Collectors.toList());
+
+
+        respuesta.setData(new PageImpl<>(dataRespuesta, dataService.getPageable(), dataService.getTotalElements()));
 
         return ResponseEntity.ok().body(respuesta);
     }
