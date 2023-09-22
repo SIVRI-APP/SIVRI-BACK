@@ -9,15 +9,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class SubArea {
-
     private Integer idSubArea;
-
     private String subArea;
 
     private AreaEntity idArea;
+
+
 
 }
 

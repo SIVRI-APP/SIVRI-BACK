@@ -1,10 +1,9 @@
 package edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,6 +13,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class SubAreaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +24,20 @@ public class SubAreaEntity {
     //relacion *a1 con entidad Area opcional = false indica que la relacion es obligatoria
     @ManyToOne(optional = false)
     @JoinColumn(name = "idArea")
+    @JsonManagedReference
     private AreaEntity idArea;
 
     //relacion 1a* con entidad disciplina
     @OneToMany(mappedBy = "subArea",fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<DisciplinaEntity> disciplinas;
 
-
+    @Override
+    public String toString() {
+        return "SubAreaEntity{" +
+                "idSubArea=" + idSubArea +
+                ", subArea='" + subArea + '\'' +
+                ", idArea=" + idArea +
+                '}';
+    }
 }

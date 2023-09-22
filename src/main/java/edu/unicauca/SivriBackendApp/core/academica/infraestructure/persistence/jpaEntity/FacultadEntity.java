@@ -16,7 +16,7 @@ public class FacultadEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idFacultad;
 
     @Column(name = "nombre", length = 80, nullable = false)
     private String nombre;

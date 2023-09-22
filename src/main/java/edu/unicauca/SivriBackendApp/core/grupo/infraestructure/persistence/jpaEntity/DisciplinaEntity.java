@@ -1,10 +1,8 @@
 package edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "disciplina")
@@ -12,6 +10,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class DisciplinaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +21,7 @@ public class DisciplinaEntity {
     // relacion *a1 con entidad subarea
     @ManyToOne(optional = false)
     @JoinColumn(name = "idSubArea")
+    @JsonManagedReference
     private SubAreaEntity subArea;
 
     // relacion *a* con entidad grupo ESTA relacion esta en la entidad grupo

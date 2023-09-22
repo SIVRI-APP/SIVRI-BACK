@@ -15,11 +15,14 @@ import java.util.List;
 @Table(name = "semillero")
 @Getter
 @Setter
-
+@NoArgsConstructor
 @AllArgsConstructor
 //relacion de herencia
 @PrimaryKeyJoinColumn(name = "semilleroId")
 public class SemilleroEntity extends OrganismoDeInvestigacionEntity{
+    @Column(nullable = false,length = 10)
+    private String estado;
+
     @Column(length = 25)
     private String sede;
 
@@ -48,9 +51,11 @@ public class SemilleroEntity extends OrganismoDeInvestigacionEntity{
     //constructor para crear semillero
     public SemilleroEntity(Integer id, String nombre, LocalDate fechaCreacion, String estado, String objetivo,
                            String mision, String vision, String sede, GrupoEntity grupo) {
-        super(id, nombre, fechaCreacion, estado, objetivo, mision, vision);
+        super(id, nombre, fechaCreacion, objetivo, mision, vision);
+        this.estado=estado;
         this.sede = sede;
         this.idGrupo = grupo;
     }
+
 
 }

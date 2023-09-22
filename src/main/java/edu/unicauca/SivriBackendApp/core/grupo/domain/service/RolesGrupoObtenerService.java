@@ -4,18 +4,18 @@ import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.RolGrupo;
-import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.ObtenerRolesGrupoCU;
-import edu.unicauca.SivriBackendApp.core.grupo.domain.port.out.ObtenerRolesGrupoREPO;
+import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.RolesGrupoObtenerCU;
+import edu.unicauca.SivriBackendApp.core.grupo.domain.port.out.RolesGrupoObtenerREPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 @Component
-public class ObtenerRolesGrupoService implements ObtenerRolesGrupoCU {
+public class RolesGrupoObtenerService implements RolesGrupoObtenerCU {
 
     @Autowired
-    private ObtenerRolesGrupoREPO obtenerRolesGrupoREPO;
+    private RolesGrupoObtenerREPO obtenerRolesGrupoREPO;
 
     @Override
     public Respuesta<RolGrupo> obtenerRolGrupoPorId(int id) {

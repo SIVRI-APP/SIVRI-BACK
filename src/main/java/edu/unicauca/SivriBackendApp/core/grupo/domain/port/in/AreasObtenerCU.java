@@ -6,7 +6,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.domain.model.SubArea;
 
 import java.util.List;
 
-public interface ObtenerAreasCU {
+public interface AreasObtenerCU {
     Respuesta<Area> obtenerAreaPorId(int id);
     Respuesta<List<Area>> obtenerAreas();
 

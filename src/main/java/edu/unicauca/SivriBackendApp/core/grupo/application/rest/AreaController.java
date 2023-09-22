@@ -6,7 +6,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.application.dto.response.ObtenerA
 import edu.unicauca.SivriBackendApp.core.grupo.application.mapper.AreaDtoMapper;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.Area;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.SubArea;
-import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.ObtenerAreasCU;
+import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.AreasObtenerCU;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +17,11 @@ import java.util.List;
 @CrossOrigin(origins = "#",allowedHeaders = "#")
 public class AreaController {
 
-    private final ObtenerAreasCU obtenerAreaCU;
+    private final AreasObtenerCU obtenerAreaCU;
 
     private final AreaDtoMapper areaDtoMapper;
 
-    public AreaController(ObtenerAreasCU obtenerAreaCU, AreaDtoMapper areaDtoMapper) {
+    public AreaController(AreasObtenerCU obtenerAreaCU, AreaDtoMapper areaDtoMapper) {
         this.obtenerAreaCU = obtenerAreaCU;
         this.areaDtoMapper = areaDtoMapper;
     }

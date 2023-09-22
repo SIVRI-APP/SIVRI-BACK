@@ -5,7 +5,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.domain.model.RolGrupo;
 
 import java.util.List;
 
-public interface ObtenerRolesGrupoCU {
+public interface RolesGrupoObtenerCU {
     Respuesta<RolGrupo> obtenerRolGrupoPorId(int id);
     Respuesta<List<RolGrupo>> obtenerRolesGrupo();
 }

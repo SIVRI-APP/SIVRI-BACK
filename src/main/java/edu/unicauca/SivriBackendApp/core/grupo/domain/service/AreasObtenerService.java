@@ -5,8 +5,8 @@ import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.Area;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.SubArea;
-import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.ObtenerAreasCU;
-import edu.unicauca.SivriBackendApp.core.grupo.domain.port.out.ObtenerAreasREPO;
+import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.AreasObtenerCU;
+import edu.unicauca.SivriBackendApp.core.grupo.domain.port.out.AreasObtenerREPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ObtenerAreasService implements ObtenerAreasCU {
+public class AreasObtenerService implements AreasObtenerCU {
     @Autowired
-    private ObtenerAreasREPO obtenerAreasREPO;
+    private AreasObtenerREPO obtenerAreasREPO;
 
     @Override
     public Respuesta<Area> obtenerAreaPorId(int id) {

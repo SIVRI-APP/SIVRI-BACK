@@ -23,8 +23,7 @@ public abstract class OrganismoDeInvestigacionEntity {
     @PastOrPresent
     @Column(nullable = false)
     private LocalDate fechaCreacion;
-    @Column(nullable = false,length = 9)
-    private String estado;
+
     @Column(length = 1325)
     private String objetivo;
     @Column(length = 1163)

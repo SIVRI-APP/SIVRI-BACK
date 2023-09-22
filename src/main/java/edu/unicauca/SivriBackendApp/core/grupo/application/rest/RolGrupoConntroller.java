@@ -5,7 +5,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.application.dto.response.ObtenerR
 import edu.unicauca.SivriBackendApp.core.grupo.application.mapper.RolGrupoDtoMapper;
 
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.RolGrupo;
-import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.ObtenerRolesGrupoCU;
+import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.RolesGrupoObtenerCU;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +16,11 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RolGrupoConntroller {
 
-    private final ObtenerRolesGrupoCU obtenerRolesGrupoCU;
+    private final RolesGrupoObtenerCU obtenerRolesGrupoCU;
 
     private final RolGrupoDtoMapper rolGrupoDtoMapper;
 
-    public RolGrupoConntroller(ObtenerRolesGrupoCU obtenerRolesGrupoCU, RolGrupoDtoMapper rolGrupoDtoMapper) {
+    public RolGrupoConntroller(RolesGrupoObtenerCU obtenerRolesGrupoCU, RolGrupoDtoMapper rolGrupoDtoMapper) {
         this.obtenerRolesGrupoCU = obtenerRolesGrupoCU;
         this.rolGrupoDtoMapper = rolGrupoDtoMapper;
     }
