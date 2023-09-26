@@ -1,14 +1,15 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.domain.model;
 
-import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persistence.jpaEntity.ConvocatoriaEntity;
-import lombok.*;
+import edu.unicauca.SivriBackendApp.core.convocatoria.domain.model.Convocatoria;
+import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class Proyecto {
 
-    private Integer id;
+    private Long id;
 
     private String nombre;
 
@@ -38,12 +39,13 @@ public class Proyecto {
 
     private String consideraciones;
 
-    private ConvocatoriaEntity convocatoria;
+    private boolean eliminadoLogico;
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "convocatoriaId")
-//    private ConvocatoriaEntity convocatoria;
-//
-//    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-//    private List<IntegranteProyectoEntity> integrantes;
+    private List<LineaDeInvestigacionProyecto> lineasDeInvestigacion;
+
+    private List<IntegranteProyecto> integrantes;
+
+    private List<EnfoqueDiferencialProyecto> enfoquesDiferenciales;
+
+    private Convocatoria convocatoria;
 }

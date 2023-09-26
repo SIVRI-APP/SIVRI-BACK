@@ -31,6 +31,7 @@ public class ConvocatoriaCrearDTO {
     @NotNull(message = "Se debe especificar si la Convocatoria es recurrente o no")
     private boolean recurrente;
 
+    @NotNull(message = "Se debe especificar el Estado de la Convocatoria")
     private ConvocatoriaEstado estado;
 
     @NotNull(message = "La convocatoria debe estar asociada a un tipo de Financiación")

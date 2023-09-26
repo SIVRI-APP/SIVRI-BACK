@@ -11,6 +11,8 @@ import org.mapstruct.Mapping;
 public interface ConvocatoriaDtoMapper {
 
     @Mapping(source = "tipoFinanciacion", target = "tipoFinanciacion.id")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "eliminadoLogico", ignore = true)
     Convocatoria crear(final ConvocatoriaCrearDTO nuevosDatos);
 
     @Mapping(source = "tipoFinanciacion", target = "tipoFinanciacion.id")

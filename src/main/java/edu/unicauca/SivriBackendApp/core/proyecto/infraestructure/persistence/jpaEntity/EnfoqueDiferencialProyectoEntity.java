@@ -1,5 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jpaEntity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,9 +16,11 @@ public class EnfoqueDiferencialProyectoEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enfoqueDiferencialId")
+    @JsonManagedReference
     private EnfoqueDiferencialEntity enfoqueDiferencial;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "proyectoId")
+    @JsonBackReference
     private ProyectoEntity proyecto;
 }

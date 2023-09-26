@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity;
 
-import edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jpaEntity.IntegranteProyectoEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -38,6 +37,6 @@ public class UsuarioEntity {
     @OneToMany(mappedBy="usuarioNumeroDocumento", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<RolUsuarioEntity> rolesAcademicos;
 
-    @OneToMany(mappedBy="usuario", cascade = CascadeType.REMOVE)
-    private List<IntegranteProyectoEntity> participacionProyectos;
+//    @OneToMany(mappedBy="usuario", cascade = CascadeType.REMOVE)
+//    private List<IntegranteProyectoEntity> participacionProyectos;
 }

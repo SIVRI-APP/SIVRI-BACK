@@ -1,7 +1,8 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jpaEntity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
 import java.util.List;
 
@@ -17,5 +18,6 @@ public class RolProyectoEntity {
     private String nombre;
 
     @OneToMany(mappedBy="rolProyecto", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<IntegranteProyectoEntity> integrantesProyectos;
 }

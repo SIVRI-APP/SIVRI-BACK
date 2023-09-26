@@ -35,16 +35,16 @@ public class ConvocatoriaObtenerAdapter implements ConvocatoriaObtenerREPO {
     public Optional<Convocatoria> obtenerPorId(long id) {
         Optional<ConvocatoriaEntity> respuestaJpa = convocatoriaRepository.findById(id);
 
-        return respuestaJpa.map(convocatoriaInfraMapper::obtenerModelo);
+        return respuestaJpa.map(convocatoriaInfraMapper::fullInfoConvocatoria);
     }
 
     @Override
     public List<Convocatoria> obtenerListado() {
-        return convocatoriaRepository.findAll().stream().map(convocatoriaInfraMapper::obtenerModelo).collect(Collectors.toList());
+        return convocatoriaRepository.findAll().stream().map(convocatoriaInfraMapper::fullInfoConvocatoria).collect(Collectors.toList());
     }
 
     @Override
     public Page<Convocatoria> obtenerListadoPaginado(PageRequest pageRequest) {
-        return convocatoriaRepository.findAll(pageRequest).map(convocatoriaInfraMapper::obtenerModelo);
+        return convocatoriaRepository.findAll(pageRequest).map(convocatoriaInfraMapper::fullInfoConvocatoria);
     }
 }

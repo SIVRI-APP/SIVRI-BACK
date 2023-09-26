@@ -23,8 +23,5 @@ public class TipoFinanciacionEntity {
     @OneToMany(mappedBy = "tipoFinanciacion", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<ChecklistEntity> checklist;
-
-//    @OneToMany(mappedBy = "tipoFinanciacion", fetch = FetchType.LAZY)
-//    private List<ConvocatoriaEntity> convocatorias;
 }
 

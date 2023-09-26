@@ -1,14 +1,18 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.application.dto.response;
 
+import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.EnfoqueDiferencialProyecto;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.EstadoProyecto;
+import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.IntegranteProyecto;
+import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.LineaDeInvestigacionProyecto;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
-public class ObtenerProyectoDetalladoDTO {
+public class ProyectoDTO {
 
-    private Integer id;
+    private Long id;
 
     private String nombre;
 
@@ -38,5 +42,15 @@ public class ObtenerProyectoDetalladoDTO {
 
     private String consideraciones;
 
-    private Integer convocatoriaId;
+    private boolean eliminadoLogico;
+
+    private List<LineaDeInvestigacionProyecto> lineasDeInvestigacion;
+
+//    @ManyToOne()
+//    @JoinColumn(name = "convocatoriaId")
+//    private ConvocatoriaEntity convocatoria;
+
+    private List<IntegranteProyecto> integrantes;
+
+    private List<EnfoqueDiferencialProyecto> enfoquesDiferenciales;
 }

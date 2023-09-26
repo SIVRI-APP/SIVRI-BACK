@@ -13,7 +13,5 @@ public class TipoFinanciacion {
     private String tipo;
 
     private List<Checklist> checklist;
-
-    private List<Convocatoria> convocatorias;
 }
 

@@ -1,10 +1,11 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jpaEntity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persistence.jpaEntity.ConvocatoriaEntity;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.EstadoProyecto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
-import lombok.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,9 +16,9 @@ import java.util.List;
 public class ProyectoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Column(length = 245, nullable = false)
+    @Column(length = 256, nullable = false)
     private String nombre;
 
     @Enumerated(EnumType.STRING)
@@ -59,13 +60,22 @@ public class ProyectoEntity {
     @Column(length = 256)
     private String consideraciones;
 
+    private boolean eliminadoLogico;
+
+    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<LineaDeInvestigacionProyectoEntity> lineasDeInvestigacion;
+
+    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<IntegranteProyectoEntity> integrantes;
+
+    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<EnfoqueDiferencialProyectoEntity> enfoquesDiferenciales;
+
     @ManyToOne()
     @JoinColumn(name = "convocatoriaId")
+    @JsonManagedReference
     private ConvocatoriaEntity convocatoria;
-
-//    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-//    private List<IntegranteProyectoEntity> integrantes;
-
-//    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-//    private List<EnfoqueDiferencialProyectoEntity> enfoquesDiferenciales;
 }

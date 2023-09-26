@@ -27,6 +27,11 @@ INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin
 
 
 
+-- |***** PROYECTO *****|
+
+-- PROYECTO
+INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, eliminadoLogico, convocatoriaId) VALUES (1, 'Proyecto super Elegante', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 0, 1);
+
 
 -- |***** ACADEMICA *****|
 --
@@ -74,11 +79,7 @@ INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin
 --
 --
 --
--- -- |***** PROYECTO *****|
---
--- -- PROYECTO
--- INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, convocatoriaId) VALUES (1, 'Proyecto super Elegante', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', '', '', '', '', '', '', '', 1);
---
+
 -- -- -- ROL PROYECTO
 -- -- INSERT INTO rolproyecto (id, nombre) VALUES (1, 'Director de Proyecto');
 -- --

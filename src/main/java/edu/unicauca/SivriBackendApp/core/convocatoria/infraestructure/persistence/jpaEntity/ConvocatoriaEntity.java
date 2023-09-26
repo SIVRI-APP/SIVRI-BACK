@@ -1,10 +1,13 @@
 package edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persistence.jpaEntity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.model.ConvocatoriaEstado;
+import edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jpaEntity.ProyectoEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "convocatoria")
@@ -43,6 +46,7 @@ public class ConvocatoriaEntity {
     @JoinColumn(name = "tipoFinanciacionId")
     private TipoFinanciacionEntity tipoFinanciacion;
 
-//    @OneToMany(mappedBy = "convocatoria", fetch = FetchType.LAZY)
-//    private List<ProyectoEntity> proyectos;
+    @OneToMany(mappedBy = "convocatoria", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<ProyectoEntity> proyectos;
 }

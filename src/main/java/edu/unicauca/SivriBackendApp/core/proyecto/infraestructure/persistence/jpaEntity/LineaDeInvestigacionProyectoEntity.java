@@ -4,21 +4,18 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
-
 @Entity
-@Table(name = "enfoque_diferencial")
+@Table(name = "linea_de_investigacion_proyecto")
 @Data
-public class EnfoqueDiferencialEntity {
-
+public class LineaDeInvestigacionProyectoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 45, nullable = false)
+    @Column(length = 250, nullable = false)
     private String nombre;
 
-    @OneToMany(mappedBy = "enfoqueDiferencial", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JsonBackReference
-    private List<EnfoqueDiferencialProyectoEntity> enfoquesDiferenciales;
+    private ProyectoEntity proyecto;
 }

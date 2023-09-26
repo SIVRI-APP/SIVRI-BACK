@@ -1,9 +1,10 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jpaEntity;
 
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
-import lombok.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 
@@ -27,13 +28,15 @@ public class  IntegranteProyectoEntity {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "proyectoId", nullable = false)
+    @JsonBackReference
     private ProyectoEntity proyecto;
-
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "usuarioId", nullable = false)
-    private UsuarioEntity usuario;
-
+//
+//    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "usuarioId", nullable = false)
+//    private UsuarioEntity usuario;
+//
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "rolId", nullable = false)
+    @JsonManagedReference
     private RolProyectoEntity rolProyecto;
 }
