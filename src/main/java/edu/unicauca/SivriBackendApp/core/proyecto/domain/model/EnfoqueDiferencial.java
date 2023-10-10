@@ -11,5 +11,5 @@ public class EnfoqueDiferencial {
 
     private String nombre;
 
-    private List<EnfoqueDiferencialProyecto> enfoquesDiferenciales;
+    private List<EnfoqueDiferencialProyecto> proyectosDeEnfoque;
 }

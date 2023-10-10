@@ -20,5 +20,5 @@ public class EnfoqueDiferencialEntity {
 
     @OneToMany(mappedBy = "enfoqueDiferencial", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonBackReference
-    private List<EnfoqueDiferencialProyectoEntity> enfoquesDiferenciales;
+    private List<EnfoqueDiferencialProyectoEntity> proyectosDeEnfoque;
 }

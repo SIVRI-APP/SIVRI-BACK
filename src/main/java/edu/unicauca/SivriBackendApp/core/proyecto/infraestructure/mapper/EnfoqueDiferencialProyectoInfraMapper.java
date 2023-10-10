@@ -11,6 +11,7 @@ public interface EnfoqueDiferencialProyectoInfraMapper {
 
     @Named("EnfoqueDiferencialProyectoFullInfoProyecto")
     @Mapping(source = "enfoqueDiferencial", target = "enfoqueDiferencial", qualifiedByName = "EnfoqueDiferencialFullInfoProyecto")
+    @Mapping(target = "proyecto", ignore = true)
     EnfoqueDiferencialProyecto fullInfoProyecto(final EnfoqueDiferencialProyectoEntity entity);
 
     EnfoqueDiferencialProyectoEntity obtenerEntity(final EnfoqueDiferencialProyecto model);
