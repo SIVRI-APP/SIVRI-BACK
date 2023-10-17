@@ -1,33 +1,38 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity;
 
+
+import com.fasterxml.jackson.annotation.*;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity.ProgramaEntity;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity.GrupoEntity;
+import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructure.persistence.jpaEntity.PlanTrabajoEntity;
+import edu.unicauca.SivriBackendApp.core.semillero.domain.model.SemilleroEstado;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.time.LocalDate;
 import java.util.List;
-
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "semilleroId")
 @Entity
 @Table(name = "semillero")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 //relacion de herencia
 @PrimaryKeyJoinColumn(name = "semilleroId")
 public class SemilleroEntity extends OrganismoDeInvestigacionEntity{
     @Column(nullable = false,length = 10)
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    private SemilleroEstado estado;
 
     @Column(length = 25)
     private String sede;
 
+    //relacion ce 1a* con integranteSemillero
+    @JsonBackReference
+    //@JsonIgnore
+    @OneToMany(mappedBy = "semillero",fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    private List<IntegranteSemilleroEntity> integrantes;
     //relacion 1a* con entidad semilleroDocumentacion
-    @OneToMany(mappedBy = "idSemillero", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "semillero", fetch = FetchType.LAZY)
     private List<SemilleroDocumentacionEntity> documentosSemillero;
 
     //relacion *a* con entidad programa
@@ -39,23 +44,18 @@ public class SemilleroEntity extends OrganismoDeInvestigacionEntity{
     private List<ProgramaEntity> programas;
 
     //relacion 1a* con entidad lineadeInvestiacion
-    @OneToMany(mappedBy = "idSemillero",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "semillero",fetch = FetchType.LAZY)
     private List<LineaInvestigacionEntity> lineasInvestigacion;
 
     //relacion de *a1 con entidad grupo
+    @JsonManagedReference
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "grupoId")
-    private GrupoEntity idGrupo;
+    private GrupoEntity grupo;
 
-
-    //constructor para crear semillero
-    public SemilleroEntity(Integer id, String nombre, LocalDate fechaCreacion, String estado, String objetivo,
-                           String mision, String vision, String sede, GrupoEntity grupo) {
-        super(id, nombre, fechaCreacion, objetivo, mision, vision);
-        this.estado=estado;
-        this.sede = sede;
-        this.idGrupo = grupo;
-    }
-
+    //relacion de 1a* con plan de trabajo
+    @JsonBackReference
+    @OneToMany(mappedBy = "semillero",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<PlanTrabajoEntity> planesTrabajo;
 
 }

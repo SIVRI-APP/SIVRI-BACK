@@ -22,7 +22,7 @@ public class FacultadEntity {
     private String nombre;
 
     //relacion 1a* con entidad grupo
-    @OneToMany(mappedBy = "idFacultad", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "facultad", fetch = FetchType.LAZY)
     private List<GrupoEntity> grupos;
 
     @OneToMany(mappedBy = "facultad", cascade = CascadeType.REMOVE)

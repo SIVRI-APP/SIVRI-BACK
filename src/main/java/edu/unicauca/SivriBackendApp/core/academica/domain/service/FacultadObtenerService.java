@@ -21,6 +21,15 @@ public class FacultadObtenerService implements FacultadObtenerCU {
     }
 
     @Override
+    public Respuesta<Boolean> existePorId(Integer id) {
+        Boolean respuesta=facultadObtenerREPO.existePorId(id);
+        if (!respuesta){
+            throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("Facultad", "Id", String.valueOf(id)));
+        }
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta();
+    }
+
+    @Override
     public Respuesta<Facultad> obtenerPorId(Integer id) {
         Optional<Facultad> respuestaBd= facultadObtenerREPO.obtenerPorId(id);
         if (respuestaBd.isEmpty()){

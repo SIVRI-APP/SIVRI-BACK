@@ -18,7 +18,7 @@ public abstract class OrganismoDeInvestigacionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 200)
+    @Column(nullable=false, length = 200)
     private String nombre;
     @PastOrPresent
     @Column(nullable = false)

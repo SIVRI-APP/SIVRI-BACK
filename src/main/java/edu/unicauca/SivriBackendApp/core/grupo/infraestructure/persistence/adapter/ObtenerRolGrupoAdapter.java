@@ -32,6 +32,11 @@ public class ObtenerRolGrupoAdapter implements RolesGrupoObtenerREPO {
          }
 
     @Override
+    public Boolean existePorId(int id) {
+        return rolGrupoRepository.existsById(id);
+    }
+
+    @Override
     public List<RolGrupo> obtenerRolesGrupo() {
 
         return this.rolGrupoRepository.findAll().stream().map(rolGrupoEntity ->

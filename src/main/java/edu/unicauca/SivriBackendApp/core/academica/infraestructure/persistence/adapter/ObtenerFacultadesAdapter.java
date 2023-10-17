@@ -24,6 +24,11 @@ public class ObtenerFacultadesAdapter implements FacultadObtenerREPO {
     }
 
     @Override
+    public Boolean existePorId(int id) {
+        return facultadRepository.existsById(id);
+    }
+
+    @Override
     public Optional<Facultad> obtenerPorId(int id) {
         Optional<FacultadEntity> respuestaJpa= facultadRepository.findById(id);
         if (respuestaJpa.isPresent()) {

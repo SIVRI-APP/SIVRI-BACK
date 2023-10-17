@@ -16,4 +16,5 @@ public class ReglaDeNegocioException extends BaseException{
     public ReglaDeNegocioException(String key, List args) {
         super(key, args);
     }
+
 }

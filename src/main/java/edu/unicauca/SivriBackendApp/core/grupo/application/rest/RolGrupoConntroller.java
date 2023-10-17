@@ -34,7 +34,7 @@ public class RolGrupoConntroller {
     }
     @GetMapping("")
     public ResponseEntity<Respuesta> obtenerRolesGrupo(){
-        System.out.println("entro a obtener los roles de un grupo");
+
         Respuesta<List<RolGrupo>> respuestaCU= obtenerRolesGrupoCU.obtenerRolesGrupo();
 
         Respuesta<List<ObtenerRolesGrupoDTO>> respuesta = new Respuesta<>();

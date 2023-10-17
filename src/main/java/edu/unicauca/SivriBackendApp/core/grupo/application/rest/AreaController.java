@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("area")
+@RequestMapping("areas")
 @CrossOrigin(origins = "#",allowedHeaders = "#")
 public class AreaController {
 

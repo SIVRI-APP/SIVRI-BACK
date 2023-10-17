@@ -1,4 +1,4 @@
-package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity;
+package edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructure.persistence.jpaEntity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+
 public class CompromisoSemilleroEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +21,6 @@ public class CompromisoSemilleroEntity {
     private String nombre;
 
     //relacion 1a* con entidad actividadPlanTrabajo
-    @OneToMany(mappedBy = "idCompromiso", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "compromiso", fetch = FetchType.LAZY)
     private List<ActividadPlanTrabajoEntity> actividades;
 }

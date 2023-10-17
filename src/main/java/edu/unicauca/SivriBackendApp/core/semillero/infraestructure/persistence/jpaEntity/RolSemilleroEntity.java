@@ -1,17 +1,17 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "rol_semillero")
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
+
 public class RolSemilleroEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +19,7 @@ public class RolSemilleroEntity {
     @Column(length = 45)
     private String rolSemillero;
     //relacion 1a* integranteSemillero
-    @OneToMany(mappedBy = "idRol",fetch = FetchType.LAZY)
-    private List<IntegranteSemilleroEntity> integrantes;
+    //@OneToMany(mappedBy = "rolSemillero",fetch = FetchType.LAZY)
+    //@JsonBackReference
+    //private List<IntegranteSemilleroEntity> integrantes;
 }

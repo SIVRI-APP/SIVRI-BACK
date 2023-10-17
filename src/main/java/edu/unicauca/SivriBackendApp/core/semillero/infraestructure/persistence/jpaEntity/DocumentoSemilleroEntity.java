@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class DocumentoSemilleroEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +28,6 @@ public class DocumentoSemilleroEntity {
     private String estado;
 
     //relacion 1a* con entidad semilleroDOcumentacion
-    @OneToMany(mappedBy = "idDocumento", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "documentoSemillero", fetch = FetchType.LAZY)
     private List<SemilleroDocumentacionEntity> documentos;
 }

@@ -1,6 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,7 +26,7 @@ public class SubAreaEntity {
     @ManyToOne(optional = false)
     @JoinColumn(name = "idArea")
     @JsonManagedReference
-    private AreaEntity idArea;
+    private AreaEntity area;
 
     //relacion 1a* con entidad disciplina
     @OneToMany(mappedBy = "subArea",fetch = FetchType.LAZY)
@@ -37,7 +38,7 @@ public class SubAreaEntity {
         return "SubAreaEntity{" +
                 "idSubArea=" + idSubArea +
                 ", subArea='" + subArea + '\'' +
-                ", idArea=" + idArea +
+                ", idArea=" + area +
                 '}';
     }
 }

@@ -24,6 +24,7 @@ public class ConvocatoriaCrearService implements ConvocatoriaCrearCU {
 
     @Override
     public Respuesta<Boolean> crear(Convocatoria nuevosDatos) {
+
         tipoFinanciacionObtenerCU.existePorId(nuevosDatos.getTipoFinanciacion().getId());
 
         Boolean respuesta = convocatoriaCrearREPO.crear(nuevosDatos);

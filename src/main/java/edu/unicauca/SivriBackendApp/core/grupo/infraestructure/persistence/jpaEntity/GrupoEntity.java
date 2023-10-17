@@ -1,14 +1,15 @@
 package edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity.FacultadEntity;
+import edu.unicauca.SivriBackendApp.core.grupo.domain.model.GrupoEstado;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity.OrganismoDeInvestigacionEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity.SemilleroEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,12 +22,17 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class GrupoEntity extends OrganismoDeInvestigacionEntity {
+
+    @Column(nullable = false,length = 10)
+    @Enumerated(EnumType.STRING)
+    private GrupoEstado estado;
     @Column(length = 95)
     private String direccion;
     @Column(length = 45)
     private String telefono;
-    @Column(length = 50,nullable = false)
+    @Column(length = 50)
     @Email
     private String email;
     @Column(length = 100)
@@ -47,7 +53,7 @@ public class GrupoEntity extends OrganismoDeInvestigacionEntity {
     //relacion *a1 con entidad facultad
     @ManyToOne
     @JoinColumn(name = "facultadId")
-    private FacultadEntity idFacultad;
+    private FacultadEntity facultad;
 
     // relacion *a* con entidad Disciplina
     @ManyToMany(fetch = FetchType.LAZY)
@@ -57,36 +63,17 @@ public class GrupoEntity extends OrganismoDeInvestigacionEntity {
     private List<DisciplinaEntity> disciplinas;
 
     // relacion 1a* con entidad integranteGrupo
-    @OneToMany(mappedBy = "grupos", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "grupo", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<IntegranteGrupoEntity> integrantesGrupo;
 
     // relacion 1a* con entidad observacionGrupo
     @OneToMany(mappedBy = "grupo", fetch = FetchType.LAZY)
-    private List<ObservacionGrupoEntity> observacionId;
+    private List<ObservacionGrupoEntity> observacionesGrupo;
 
     // relacion 1a* con entidad semillero
-    @OneToMany(mappedBy = "idGrupo",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "grupo",fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<SemilleroEntity> semilleros;
-
-    public GrupoEntity(Integer id, String nombre,LocalDate fechaCreacion, String estado, String objetivo,
-                       String mision, String vision,  String direccion, String telefono, @Email String email, String sitioWeb,
-                       String escalafonColciencias, String direccionGrupLac, String codigoColciencias,
-                       String centroInvestigaciones, String realizaciones, String perspectivas, FacultadEntity idFacultad
-                       ){
-        super(id,nombre,fechaCreacion,estado,objetivo,mision,vision);
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.email = email;
-        this.sitioWeb = sitioWeb;
-        this.escalafonColciencias = escalafonColciencias;
-        this.direccionGrupLac = direccionGrupLac;
-        this.codigoColciencias = codigoColciencias;
-        this.centroInvestigaciones = centroInvestigaciones;
-        this.realizaciones = realizaciones;
-        this.perspectivas = perspectivas;
-        this.idFacultad = idFacultad;
-
-
-    }
 
 }

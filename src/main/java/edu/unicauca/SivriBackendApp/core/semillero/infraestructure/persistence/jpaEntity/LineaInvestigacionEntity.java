@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -10,6 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class LineaInvestigacionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +22,5 @@ public class LineaInvestigacionEntity {
     //relacion *a1 con entidad semillero
     @ManyToOne(optional = false)
     @JoinColumn(name = "semilleroId")
-    private SemilleroEntity idSemillero;
+    private SemilleroEntity semillero;
 }

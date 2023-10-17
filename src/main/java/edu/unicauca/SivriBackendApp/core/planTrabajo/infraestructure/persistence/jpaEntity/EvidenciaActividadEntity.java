@@ -1,6 +1,7 @@
-package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity;
+package edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructure.persistence.jpaEntity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +9,8 @@ import lombok.Setter;
 @Table(name = "evidencia_actividad")
 @Getter
 @Setter
+@AllArgsConstructor
+
 public class EvidenciaActividadEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +19,6 @@ public class EvidenciaActividadEntity {
     private String evidencia;
 
     //relacion 1a1 con entidad ActividadPlanTrabajo
-    @OneToOne(mappedBy ="idEvidencia")
-    private ActividadPlanTrabajoEntity idEvidencia;
+    @OneToOne(mappedBy ="evidenciaActividad")
+    private ActividadPlanTrabajoEntity evidenciaActividad;
 }

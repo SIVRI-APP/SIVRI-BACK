@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
+
 public class ObservacionSemilleroEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,9 +27,9 @@ public class ObservacionSemilleroEntity {
     //relacion *a1 semillero
     @ManyToOne
     @JoinColumn(name = "semilleroId")
-    private SemilleroEntity idSemillero;
+    private SemilleroEntity semillero;
     //relacion *a1 funcionario
     @ManyToOne
     @JoinColumn(name = "RolFuncionarioId")
-    private RolFuncionarioEntity idFuncionarioSemillero;
+    private RolFuncionarioEntity rolFuncionarioSemillero;
 }

@@ -1,10 +1,11 @@
-package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity;
+package edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructure.persistence.jpaEntity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -13,7 +14,8 @@ import java.time.LocalDate;
 @Table(name="actividad_plan_trabajo")
 @Getter
 @Setter
-@NoArgsConstructor
+@AllArgsConstructor
+
 public class ActividadPlanTrabajoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,18 +30,19 @@ public class ActividadPlanTrabajoEntity {
     private LocalDate fechaFin;
     //relacion *a1 plantrabajo
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "planTrabajoId")
-    private PlanTrabajoEntity idPlanTrabajo;
+    private PlanTrabajoEntity planTrabajo;
     //relacion 1a1 evidenciaActividad
     @OneToOne
-    @JoinColumn(name = "idEvidencia")
-    private EvidenciaActividadEntity idEvidencia;
+    @JoinColumn(name = "evidenciaActividad")
+    private EvidenciaActividadEntity evidenciaActividad;
     //relacion *a1 compromisoSemillero
     @ManyToOne
     @JoinColumn(name = "compromisoSemilleroId")
-    private CompromisoSemilleroEntity idCompromiso;
+    private CompromisoSemilleroEntity compromiso;
     //relacion *a1 usuario
     @ManyToOne(optional = false)
     @JoinColumn(name = "responsable")
-    private UsuarioEntity idResponsable;
+    private UsuarioEntity responsableUsuario;
 }

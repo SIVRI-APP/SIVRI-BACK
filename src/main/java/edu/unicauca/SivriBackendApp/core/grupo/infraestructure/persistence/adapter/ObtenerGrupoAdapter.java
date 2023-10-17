@@ -21,12 +21,18 @@ public class ObtenerGrupoAdapter implements GrupoObtenerREPO {
     }
 
     @Override
+    public Boolean existePorId(int id) {
+        return grupoRepository.existsById(id);
+    }
+
+    @Override
     public Optional<Grupo> obtenerGrupoPorId(int id) {
+        System.out.println("ENTRA A OBTENER GRUPO POR ID DEL ADAPTER ");
         Optional<GrupoEntity> respuestaJpa=grupoRepository.findById(id);
-        //System.out.println("obtener grupo antes del mapeo para mi cielo. idgrupo "+respuestaJpa.get().getId()+" demas datos propios de grupo "+respuestaJpa.get());
+        //System.out.println("obtener grupo antes del mapeo. idgrupo "+respuestaJpa.get().getId()+" demas datos propios de grupo "+respuestaJpa.get());
         if (respuestaJpa.isPresent()) {
             Optional<Grupo> resp=Optional.of(grupoMapper.obtenerModelo(respuestaJpa.get()));
-            //System.out.println("datos de grupo despues del mapeo "+resp.get());
+            System.out.println("datos de grupo despues del mapeo "+resp.get());
             return resp;
         }
         return Optional.empty();

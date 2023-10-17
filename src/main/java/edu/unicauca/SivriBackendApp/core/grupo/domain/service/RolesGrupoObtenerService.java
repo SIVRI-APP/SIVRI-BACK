@@ -18,6 +18,17 @@ public class RolesGrupoObtenerService implements RolesGrupoObtenerCU {
     private RolesGrupoObtenerREPO obtenerRolesGrupoREPO;
 
     @Override
+    public Respuesta<Boolean> existePorId(int id) {
+
+        Boolean respuesta=obtenerRolesGrupoREPO.existePorId(id);
+        if (!respuesta){
+            throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("Roles Grupo", "Id", String.valueOf(id)));
+        }
+
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta();
+    }
+
+    @Override
     public Respuesta<RolGrupo> obtenerRolGrupoPorId(int id) {
         Optional<RolGrupo> respuestaBd= obtenerRolesGrupoREPO.obtenerRolGrupoPorId(id);
         if (respuestaBd.isEmpty()){
