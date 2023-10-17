@@ -8,7 +8,7 @@ import jakarta.validation.Valid;
 public interface SemilleroActualizarCU {
 
     Respuesta<Boolean> actualizarPorApoyo(Semillero nuevoSemillero);
-    Respuesta<Boolean> actualizarEstadoSemillero(SemilleroActualizarEstadoDTO nuevoEstadoSemillero);
+
 
     Respuesta<Boolean> actualizarPorMentor(Semillero nuevoSemillero);
 }

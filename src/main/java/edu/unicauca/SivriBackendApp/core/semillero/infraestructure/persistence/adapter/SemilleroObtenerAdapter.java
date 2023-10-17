@@ -49,16 +49,16 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
         return semilleros;
     }
 
-    @Override
+    /*@Override
     public List<Semillero> obtenerSemillerosPorIdMentor(String idMentor) {
-       /* List<Semillero> semilleros=semilleroRepository.findByusuarioNumeroDocumento(idMentor).stream().map(semilleroEntity -> {
+       *//* List<Semillero> semilleros=semilleroRepository.findByusuarioNumeroDocumento(idMentor).stream().map(semilleroEntity -> {
             Semillero semillero= semilleroMapper.obtenerModelo(semilleroEntity);
             return semillero;
         }).collect(Collectors.toList());
         return semilleros;
-   */
+   *//*
     return null;
-    }
+    }*/
 
     @Override
     public List<Semillero> obtenerSemilleros() {

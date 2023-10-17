@@ -38,7 +38,7 @@ public class GrupoCrearAdapter implements GrupoCrearREPO {
         Usuario usuario=new Usuario(nuevoGrupo.getNumeroDocumento());
         RolGrupo idRolGrupo=new RolGrupo(1);
         Grupo grupoIntegrante=new Grupo();
-        objIntegranteGrupo.setUsuario(usuario);
+      //  objIntegranteGrupo.setUsuario(usuario);
         objIntegranteGrupo.setRolGrupo(idRolGrupo);
         //objIntegranteGrupo.setRolGrupoId(idRolGrupo);
         objIntegranteGrupo.setEstado(EstadoIntegranteGrupo.ACTIVO);
@@ -47,8 +47,9 @@ public class GrupoCrearAdapter implements GrupoCrearREPO {
         GrupoEntity grupo= grupoRepository.save(grupoMapper.obtenerEntity(nuevoGrupo));
         grupoIntegrante.setGrupoId(grupo.getId());
         //objIntegranteGrupo.setGrupoId(grupoIntegrante);
-        objIntegranteGrupo.setGrupo(grupoIntegrante);
-        integranteGrupoRepository.save(integranteGrupoMapper.obtenerEntity(objIntegranteGrupo));
+     //TODO guardar al integrante asociado al grupo
+       // objIntegranteGrupo.setGrupo(grupoIntegrante);
+        //integranteGrupoRepository.save(integranteGrupoMapper.obtenerEntity(objIntegranteGrupo));
         //System.out.println("OBJ INTEGRANTE "+objIntegranteGrupo);
         //System.out.println("id del grupo que se creo "+grupo.getId());
 

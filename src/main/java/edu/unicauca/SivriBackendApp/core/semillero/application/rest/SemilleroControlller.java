@@ -49,7 +49,7 @@ public class SemilleroControlller {
         return ResponseEntity.ok().body(respuesta);
 
     }
-    @GetMapping("/semillerosPorMentorId/{id}")
+    /*@GetMapping("/semillerosPorMentorId/{id}")
     public ResponseEntity<Respuesta> obtenerSemillerosPorIdMentor(@PathVariable(value = "id")String idMentor){
         Respuesta<List<Semillero>> respuestaCU=semilleroObtenerCU.obtenerSemillerosPorIdMentor(idMentor);
         Respuesta<List<SemilleroObtenerDTO>> respuesta=new Respuesta<>();
@@ -59,11 +59,7 @@ public class SemilleroControlller {
         respuesta.setDeveloperMessage(respuestaCU.getDeveloperMessage());
         return ResponseEntity.ok().body(respuesta);
     }
-    @PatchMapping("/actualizarEstadoSemillero/{idSemillero}")
-    public ResponseEntity<Respuesta> actualizarEstadoSemillero(@PathVariable(value = "idSemillero")int idSemillero,@Valid @RequestBody SemilleroActualizarEstadoDTO nuevoEstadoSemillero){
-        Respuesta respuesta=semilleroActualizarCU.actualizarEstadoSemillero(idSemillero,nuevoEstadoSemillero);
-        return ResponseEntity.ok().body(respuesta);
-    }
+*/
     @PatchMapping("/semilleroPorApoyo")
     public ResponseEntity<Respuesta> actualizarPorApoyo(@Valid @RequestBody SemilleroActualizarPorApoyoDTO nuevoSemilleroDto){
         Respuesta respuesta= semilleroActualizarCU.actualizarPorApoyo(semilleroDtoMapper.actualizarPorApoyo(nuevoSemilleroDto));

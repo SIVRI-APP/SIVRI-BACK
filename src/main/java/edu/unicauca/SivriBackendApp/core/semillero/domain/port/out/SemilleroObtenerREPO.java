@@ -13,7 +13,7 @@ public interface SemilleroObtenerREPO {
     Optional<Semillero> obtenerSemilleroPorId(int id);
 
     List<Semillero> obtenerSemillerosPorIdGrupo(int idGrupo);
-    List<Semillero> obtenerSemillerosPorIdMentor(String idMentor);
+    //List<Semillero> obtenerSemillerosPorIdMentor(String idMentor);
     List<Semillero> obtenerSemilleros();
     Page<Semillero> obtenerListadoSemilleroPaginado(PageRequest pageRequest);
 }

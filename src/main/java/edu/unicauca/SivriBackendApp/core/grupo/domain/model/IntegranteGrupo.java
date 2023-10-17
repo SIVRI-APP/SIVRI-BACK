@@ -15,7 +15,8 @@ public class IntegranteGrupo {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private RolGrupo rolGrupo;
-    private Usuario usuario;
+    //TODO
+    //private Usuario usuario;
     private Grupo grupo;
 
 }

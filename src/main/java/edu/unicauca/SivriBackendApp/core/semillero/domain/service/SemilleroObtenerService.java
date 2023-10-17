@@ -49,7 +49,7 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuesta).getRespuesta();
     }
 
-    @Override
+    /*@Override
     public Respuesta<List<Semillero>> obtenerSemillerosPorIdMentor(String idMentor) {
         List<Semillero> respuesta=semilleroObtenerREPO.obtenerSemillerosPorIdMentor(idMentor);
         if (respuesta.isEmpty()){
@@ -58,7 +58,7 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
 
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuesta).getRespuesta();
 
-    }
+    }*/
 
     @Override
     public Respuesta<List<Semillero>> obtenerSemilleros() {

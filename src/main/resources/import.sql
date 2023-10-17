@@ -31,13 +31,13 @@ INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin
 -- |***** ACADEMICA *****|
 --
 -- -- FACULTAD
--- INSERT INTO facultad (id, nombre) VALUES (1, 'Ingeniería Electronica y Telecomunicaciones');
+ INSERT INTO facultad (idFacultad, nombre) VALUES (1, 'Ingeniería Electronica y Telecomunicaciones');
 --
 -- -- DEPARTAMENTO
--- INSERT INTO departamento (id, nombre, facultadId) VALUES (1, 'Sistemas', 1);
+ INSERT INTO departamento (id, nombre, facultadId) VALUES (1, 'Sistemas', 1);
 --
 -- -- PROGRAMAS
--- INSERT INTO programa (id, nombre, departamentoId) VALUES (1, 'Ingeniería de Sistemas', 1);
+ INSERT INTO programa (id, nombre, departamentoId) VALUES (1, 'Ingeniería de Sistemas', 1);
 --
 --
 --
@@ -45,10 +45,10 @@ INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin
 -- -- |***** USUARIO *****|
 --
 -- -- USUARIO
--- INSERT INTO usuario (numeroDocumento, tipoDocumento, sexo, nombres, apellidos, telefono, correo) VALUES ('10611', 'cc', 'masculino', 'Miguel', 'Mosquera', '3225864404', 'miguelmonje@unicauca.edu.co');
+ INSERT INTO usuario (numeroDocumento, tipoDocumento, sexo, nombres, apellidos, telefono, correo) VALUES ('10611', 'cc', 'masculino', 'Miguel', 'Mosquera', '3225864404', 'miguelmonje@unicauca.edu.co');
 --
 -- -- ROL USUARIO
--- INSERT INTO rol_usuario (id, usuarioNumeroDocumento, estado, fechaInicio) VALUES (1, '10611', 'activo', '2023-08-30');
+ INSERT INTO rol_usuario (id, usuarioNumeroDocumento, estado, fechaInicio) VALUES (1, '10611', 'activo', '2023-08-30');
 --
 -- -- ROL POSGRADO
 -- INSERT INTO rol_posgrado (rolUsuarioId, programaId) VALUES (1,1);
@@ -66,7 +66,7 @@ INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin
 -- INSERT INTO rol_docente (rolUsuarioId, CvLAC, departamentoId) VALUES (1, 'www.cvlac.com', 1);
 --
 -- -- ROL FUNCIONARIO
--- INSERT INTO rol_funcionario (rolUsuarioId) VALUES (1);
+ INSERT INTO rol_funcionario (rolUsuarioId) VALUES (1);
 --
 --
 --
@@ -77,19 +77,19 @@ INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin
 -- -- |***** PROYECTO *****|
 --
 -- -- PROYECTO
--- INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, convocatoriaId) VALUES (1, 'Proyecto super Elegante', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', '', '', '', '', '', '', '', 1);
+ INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, convocatoriaId) VALUES (1, 'Proyecto super Elegante', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', '', '', '', '', '', '', '', 1);
 --
 -- -- -- ROL PROYECTO
--- -- INSERT INTO rolproyecto (id, nombre) VALUES (1, 'Director de Proyecto');
+ INSERT INTO rolproyecto (id, nombre) VALUES (1, 'Director de Proyecto');
 -- --
 -- -- -- INTEGRANTE PROYECTO
--- -- INSERT INTO integrante_proyecto (id, fechaInicio, fechaFin, estado, proyectoId, usuarioId, rolId) VALUES (1, '2024-08-30', '2024-08-30', 'activo', 1, '10611', 1);
+ INSERT INTO integrante_proyecto (id, fechaInicio, fechaFin, estado, proyectoId, usuarioId, rolId) VALUES (1, '2024-08-30', '2024-08-30', 'activo', 1, '10611', 1);
 -- --
 -- -- -- ENFOQUE DIFERENCIAL
--- -- INSERT INTO enfoque_diferencial (id, nombre) VALUES (1, 'Comunidad LGBTIQ+');
+ INSERT INTO enfoque_diferencial (id, nombre) VALUES (1, 'Comunidad LGBTIQ+');
 -- --
 -- -- -- ENFOQUE DIFERENCIAL PROYECTO
--- -- INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (1, 1, 1);
+ INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (1, 1, 1);
 
 
 
@@ -113,8 +113,8 @@ INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin
 
 --***************************--
 -- organismo de investigacion
-INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, estado, objetivo, mision, vision) VALUES (1,'GRUPO DE CIENCIA','2023-03-08','activo','Desarrollar investigación científica ','mision del grupo','El grupo GCISA-TSEJK tiene');
-INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, estado, objetivo, mision, vision) VALUES (2,'ÁGORA - INVESTIGACION POLITICA','2023-03-08','Activo','Impulsar el interés investigativo ', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (1,'GRUPO DE CIENCIA','2023-03-08','Desarrollar investigación científica ','mision del grupo','El grupo GCISA-TSEJK tiene');
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (2,'ÁGORA - INVESTIGACION POLITICA','2023-03-08','Impulsar el interés investigativo ', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
 
 --AREA DE GRUPO
 INSERT INTO area (idArea, area) VALUES (1, 'Ingenierpia y Tecnología');
@@ -140,14 +140,14 @@ INSERT INTO compromiso_semillero(id,nombre) VALUES(1, 'compromiso 1');
 INSERT INTO evidencia_actividad(id,evidencia) VALUES(1,'evidencia');
 
 --grupo
-INSERT INTO grupo (grupoId,facultadId, direccion, telefono, email, sitioWeb, escalafonColciencias, direccionGrupLac, codigoColciencias, centroInvestigaciones, realizaciones, perspectivas) VALUES (1,1,'Facultad de Ingeniería','2-8209800','jccasas@unicauca.edu.co','No','A','http://scienti.colciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000012079','COL0119567','centro investigacion','Desarrollo y aprobación de 5 trabajos de Pregrado en el Departamento de Ingeniería Ambiental y Sanitaria, Facultad de Ingeniería Civil.','perspectivas del grupo');
+INSERT INTO grupo (grupoId,facultadId,estado, direccion, telefono, email, sitioWeb, escalafonColciencias, direccionGrupLac, codigoColciencias, centroInvestigaciones, realizaciones, perspectivas) VALUES (1,1,'ACTIVO','Facultad de Ingeniería','2-8209800','jccasas@unicauca.edu.co','No','A','http://scienti.colciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000012079','COL0119567','centro investigacion','Desarrollo y aprobación de 5 trabajos de Pregrado en el Departamento de Ingeniería Ambiental y Sanitaria, Facultad de Ingeniería Civil.','perspectivas del grupo');
 
 --ROL GRUPO
 INSERT INTO rol_grupo(id,rolGrupo) VALUES(1,'Director de Grupo');
 INSERT INTO rol_grupo(id,rolGrupo) VALUES(2,'Coinvestigador');
 
 --semillero
-INSERT INTO semillero(semilleroId,grupoId,sede) VALUES (2,1,'popayan');
+INSERT INTO semillero(semilleroId,grupoId, estado,sede) VALUES (2,1,'ACTIVO','popayan');
 
 --rol semillero
 INSERT INTO rol_semillero(id,rolSemillero) VALUES(1,'mentor');

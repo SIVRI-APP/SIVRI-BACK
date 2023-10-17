@@ -15,7 +15,7 @@ public interface IntegranteGrupoDtoMapper {
 
     IntegranteGrupoObtenerDTO obtenerIntegranteGrupo(final IntegranteGrupo integranteGrupo);
     @Mappings({
-        @Mapping(source = "numeroDocumento",target = "usuario.numeroDocumento"),
+       // @Mapping(source = "numeroDocumento",target = "usuario.numeroDocumento"),
         @Mapping(source = "rolGrupoId",target = "rolGrupo.id"),
         @Mapping(source = "grupoId",target = "grupo.grupoId")
     })

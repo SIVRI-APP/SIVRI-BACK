@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class SemilleroActualizarService implements SemilleroActualizarCU {
+public  class SemilleroActualizarService implements SemilleroActualizarCU {
 
     private final SemilleroActualizarREPO semilleroActualizarREPO;
     private final SemilleroObtenerCU semilleroObtenerCU;
@@ -43,16 +43,6 @@ public class SemilleroActualizarService implements SemilleroActualizarCU {
         return new RespuestaHandler<>(200, "success.actualizacion.objeto", List.of("Semillero"), "", true).getRespuesta();
     }
 
-    @Override
-    public Respuesta<Boolean> actualizarEstadoSemillero(int idSemillero, @Valid SemilleroActualizarEstadoDTO nuevoEstadoSemillero) {
-        Semillero objSemilleroActualiza= semilleroObtenerCU.obtenerSemilleroPorId(idSemillero).getData();
-        objSemilleroActualiza.setEstado(nuevoEstadoSemillero.getEstado());
-        Boolean respuesta=semilleroActualizarREPO.actualizarEstadoSemillero(objSemilleroActualiza);
-        if (!respuesta) {
-            throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Semillero", "Id", String.valueOf(nuevoEstadoSemillero.getId())));
-        }
-        return new RespuestaHandler<>(200, "success.actualizacion.objeto", List.of("Semillero"), "", true).getRespuesta();
-    }
 
     @Override
     public Respuesta<Boolean> actualizarPorMentor(Semillero nuevoSemillero) {
