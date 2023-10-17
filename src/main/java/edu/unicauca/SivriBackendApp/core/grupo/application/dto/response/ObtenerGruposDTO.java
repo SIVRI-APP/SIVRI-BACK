@@ -29,4 +29,5 @@ public class ObtenerGruposDTO {
     private String realizaciones;
     private String perspectivas;
     private FacultadDTO facultad;
+
 }
