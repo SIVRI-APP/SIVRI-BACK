@@ -49,17 +49,13 @@ public class SemilleroControlller {
         return ResponseEntity.ok().body(respuesta);
 
     }
-    /*@GetMapping("/semillerosPorMentorId/{id}")
-    public ResponseEntity<Respuesta> obtenerSemillerosPorIdMentor(@PathVariable(value = "id")String idMentor){
-        Respuesta<List<Semillero>> respuestaCU=semilleroObtenerCU.obtenerSemillerosPorIdMentor(idMentor);
-        Respuesta<List<SemilleroObtenerDTO>> respuesta=new Respuesta<>();
-        respuesta.setData(respuestaCU.getData().stream().map(semilleroDtoMapper::dtoObtenerSemillero).toList());
-        respuesta.setStatus(respuestaCU.getStatus());
-        respuesta.setUserMessage(respuestaCU.getUserMessage());
-        respuesta.setDeveloperMessage(respuestaCU.getDeveloperMessage());
+    @PatchMapping("/actualizarEstadoSemillero/{id}")
+   public ResponseEntity<Respuesta> actualizarEstadoSemillero(@PathVariable(value = "id") int idSemillero, @Valid @RequestBody SemilleroActualizarEstadoDTO semilleroActualizarEstadoDTO){
+        System.out.println("IDSemillero controller "+idSemillero+" datosque recibe delDto "+semilleroActualizarEstadoDTO);
+        Respuesta respuesta=semilleroActualizarCU.actualizarEstadoSemillero(idSemillero,semilleroDtoMapper.actualizarEstadoSemillero(semilleroActualizarEstadoDTO));
+        System.out.println("RESPUESTA DELCONTROLLER "+respuesta);
         return ResponseEntity.ok().body(respuesta);
-    }
-*/
+   }
     @PatchMapping("/semilleroPorApoyo")
     public ResponseEntity<Respuesta> actualizarPorApoyo(@Valid @RequestBody SemilleroActualizarPorApoyoDTO nuevoSemilleroDto){
         Respuesta respuesta= semilleroActualizarCU.actualizarPorApoyo(semilleroDtoMapper.actualizarPorApoyo(nuevoSemilleroDto));
@@ -109,6 +105,16 @@ public class SemilleroControlller {
         return ResponseEntity.ok().body(respuesta);
     }
 
-
+     /*@GetMapping("/semillerosPorMentorId/{id}")
+    public ResponseEntity<Respuesta> obtenerSemillerosPorIdMentor(@PathVariable(value = "id")String idMentor){
+        Respuesta<List<Semillero>> respuestaCU=semilleroObtenerCU.obtenerSemillerosPorIdMentor(idMentor);
+        Respuesta<List<SemilleroObtenerDTO>> respuesta=new Respuesta<>();
+        respuesta.setData(respuestaCU.getData().stream().map(semilleroDtoMapper::dtoObtenerSemillero).toList());
+        respuesta.setStatus(respuestaCU.getStatus());
+        respuesta.setUserMessage(respuestaCU.getUserMessage());
+        respuesta.setDeveloperMessage(respuestaCU.getDeveloperMessage());
+        return ResponseEntity.ok().body(respuesta);
+    }
+*/
 
 }

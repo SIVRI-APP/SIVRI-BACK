@@ -23,6 +23,13 @@ public class SemilleroActualizarAdapter implements SemilleroActualizarREPO {
     }
 
     @Override
+    public Boolean actualizarEstadoSemillero(Semillero nuevoEstadoSemillero) {
+        System.out.println("DATOS QUE LLEGAN ALADAPTER "+nuevoEstadoSemillero);
+        semilleroRepository.save(semilleroMapper.obtenerEntity(nuevoEstadoSemillero));
+        return true;
+    }
+
+    @Override
     public Boolean actualizarPorMentor(Semillero nuevoSemillero) {
         semilleroRepository.save(semilleroMapper.obtenerEntity(nuevoSemillero));
         return true;

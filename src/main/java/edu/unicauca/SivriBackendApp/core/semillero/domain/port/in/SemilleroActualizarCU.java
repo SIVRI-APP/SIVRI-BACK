@@ -9,6 +9,6 @@ public interface SemilleroActualizarCU {
 
     Respuesta<Boolean> actualizarPorApoyo(Semillero nuevoSemillero);
 
-
+    Respuesta<Boolean> actualizarEstadoSemillero(int idSemillero,Semillero nuevoEstadoSemillero);
     Respuesta<Boolean> actualizarPorMentor(Semillero nuevoSemillero);
 }

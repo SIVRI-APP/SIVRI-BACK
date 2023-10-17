@@ -23,6 +23,6 @@ public interface SemilleroDtoMapper {
     Semillero crear(final SemilleroCrearDTO nuevoSemillero);
 
     Semillero actualizarPorApoyo(final SemilleroActualizarPorApoyoDTO actualizarSemilleroPorApoyoDTO);
-    Semillero actualizarEstadoSemillero(int idSemillero, SemilleroActualizarEstadoDTO actualizarEstadoSemilleroDTO);
+    Semillero actualizarEstadoSemillero(final SemilleroActualizarEstadoDTO actualizarEstadoSemilleroDTO);
     Semillero actualizarPorMentor(final SemilleroActualizarPorMentorDTO actualizarSemilleroPoMentor);
 }

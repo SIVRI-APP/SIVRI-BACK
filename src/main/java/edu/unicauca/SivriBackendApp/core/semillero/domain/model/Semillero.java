@@ -14,6 +14,6 @@ public class Semillero extends OrganismoDeInvestigacion{
     private SemilleroEstado estado;
     private String sede;
     private Integer grupoId;
-    private List<IntegranteSemilleroEntity> integrantes;
+    //private List<IntegranteSemilleroEntity> integrantes;
     //private String mentorId;
 }

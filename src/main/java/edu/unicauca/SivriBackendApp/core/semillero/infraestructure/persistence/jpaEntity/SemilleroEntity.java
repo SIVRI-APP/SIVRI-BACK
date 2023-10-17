@@ -9,16 +9,16 @@ import edu.unicauca.SivriBackendApp.core.semillero.domain.model.SemilleroEstado;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 import java.util.List;
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "semilleroId")
+
 @Entity
 @Table(name = "semillero")
 @Data
 //relacion de herencia
 @PrimaryKeyJoinColumn(name = "semilleroId")
 public class SemilleroEntity extends OrganismoDeInvestigacionEntity{
+
     @Column(nullable = false,length = 10)
     @Enumerated(EnumType.STRING)
     private SemilleroEstado estado;
@@ -48,6 +48,8 @@ public class SemilleroEntity extends OrganismoDeInvestigacionEntity{
     private List<LineaInvestigacionEntity> lineasInvestigacion;
 
     //relacion de *a1 con entidad grupo
+    //@PrimaryKeyJoinColumn(name = "grupoId")
+
     @JsonManagedReference
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "grupoId")

@@ -12,7 +12,7 @@ public interface SemilleroMapper {
     @Mappings({
         @Mapping(source = "id",target = "semilleroId"),
         @Mapping(source = "grupo.id",target = "grupoId"),
-        @Mapping(source = "integrantes",target = "integrantes")
+      //  @Mapping(source = "integrantes",target = "integrantes")
     })
     Semillero obtenerModelo (final SemilleroEntity semilleroEntity);
 

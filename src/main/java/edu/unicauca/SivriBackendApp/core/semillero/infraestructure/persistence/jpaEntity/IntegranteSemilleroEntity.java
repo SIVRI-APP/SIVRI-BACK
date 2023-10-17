@@ -18,9 +18,7 @@ import java.time.LocalDate;
                 @UniqueConstraint(columnNames = {"usuarioNumeroDocumento", "rolId", "fechaIngreso"})
         })
 @Data
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "idIntegranteSemillero")
+
 public class IntegranteSemilleroEntity {
 
     //IntegranteSemilleroKey idKey;

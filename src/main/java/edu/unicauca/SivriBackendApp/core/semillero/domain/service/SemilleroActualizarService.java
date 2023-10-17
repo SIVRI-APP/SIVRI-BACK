@@ -43,6 +43,22 @@ public  class SemilleroActualizarService implements SemilleroActualizarCU {
         return new RespuestaHandler<>(200, "success.actualizacion.objeto", List.of("Semillero"), "", true).getRespuesta();
     }
 
+    @Override
+    public Respuesta<Boolean> actualizarEstadoSemillero(int idSemillero, Semillero nuevoEstadoSemillero) {
+        System.out.println("ENTRA AL SERVICE");
+        System.out.println("id semillero "+idSemillero+" semillero que llega "+nuevoEstadoSemillero);
+        Semillero objSemilleroActualizar=semilleroObtenerCU.obtenerSemilleroPorId(idSemillero).getData();
+        System.out.println("obj semillero que se obtiene "+objSemilleroActualizar);
+        //TODO verificar si elsemillero existe en la bd
+        objSemilleroActualizar.setEstado(nuevoEstadoSemillero.getEstado());
+        System.out.println("semillero con actualizacion "+objSemilleroActualizar);
+        Boolean respuesta=semilleroActualizarREPO.actualizarEstadoSemillero(objSemilleroActualizar);
+        System.out.println("respuesta "+respuesta);
+        if (!respuesta){
+            throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Semillero", "Id", String.valueOf(objSemilleroActualizar.getSemilleroId())));
+        }
+        return new RespuestaHandler<>(200, "success.actualizacion.objeto", List.of("Estado Semillero"), "", true).getRespuesta();
+    }
 
     @Override
     public Respuesta<Boolean> actualizarPorMentor(Semillero nuevoSemillero) {
