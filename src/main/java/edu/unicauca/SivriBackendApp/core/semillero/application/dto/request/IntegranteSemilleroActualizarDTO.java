@@ -2,11 +2,11 @@ package edu.unicauca.SivriBackendApp.core.semillero.application.dto.request;
 
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.EstadoIntegranteSemillero;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok. Data;
 
 import java.time.LocalDate;
 
-@Data
+@Data 
 public class IntegranteSemilleroActualizarDTO {
     @NotNull(message = "El id del integrante del semillero es necesario para su actualización")
     private Integer id;

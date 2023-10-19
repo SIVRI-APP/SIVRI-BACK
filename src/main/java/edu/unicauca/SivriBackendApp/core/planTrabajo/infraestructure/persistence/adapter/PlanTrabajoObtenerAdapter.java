@@ -32,6 +32,11 @@ public class PlanTrabajoObtenerAdapter implements PlanTrabajoObtenerREPO {
     }
 
     @Override
+    public List<PlanTrabajo> obtenerPlanesPorIdSemillero(int idSemillero) {
+        return planTrabajoRepository.findBySemilleroId(idSemillero).stream().map(planTrabajoMapper::obtenerModelo).collect(Collectors.toList());
+    }
+
+    @Override
     public List<PlanTrabajo> obtenerListadoPlanes() {
         return planTrabajoRepository.findAll().stream().map(planTrabajoMapper::obtenerModelo).collect(Collectors.toList());
     }

@@ -4,11 +4,7 @@ import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.model.Convocatoria;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.model.PlanTrabajo;
 
-import java.util.List;
+public interface PlanTrabajoActualizarCU {
+    Respuesta<Boolean> actualizar(int idPlan,PlanTrabajo nuevosDatosPlan);
 
-public interface PlanTrabajoObtenerCU {
-    Respuesta<Boolean> existePorId(int id);
-    Respuesta<PlanTrabajo> obtenerPorId(int id);
-    Respuesta<List<PlanTrabajo>> obtenerPlanesPorIdSemillero(int idSemillero);
-    Respuesta<List<PlanTrabajo>> obtenerListadoPlanes();
 }

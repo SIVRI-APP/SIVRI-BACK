@@ -25,18 +25,13 @@ public class PlanTrabajoCrearService implements PlanTrabajoCrearCU {
     }
 
     @Override
-    public Respuesta<Boolean> crear(PlanTrabajo nuevoPlan) {
-        System.out.println("DATOS QUE LLEGAN AL SERVICE "+nuevoPlan);
-
-
-        System.out.println("el semillero existe "+nuevoPlan.getSemillero().getSemilleroId()+
-                " : "+semilleroObtenerCU.existePorId(nuevoPlan.getSemillero().getSemilleroId()));
+    public Respuesta<Boolean> crear(int idSemillero, PlanTrabajo nuevoPlan) {
+        //System.out.println("DATOS QUE LLEGAN AL SERVICE "+idSemillero+" nuevo plan "+nuevoPlan);
         nuevoPlan.setEstado(EstadoPlanTrabajo.FORMULADO);
-
-
-        System.out.println("nueuvo plan "+nuevoPlan);
-        Boolean respuesta=planTrabajoCrearREPO.crear(nuevoPlan);
-        System.out.println("RESPUESTA SERVICE "+respuesta);
+        Semillero semillero= semilleroObtenerCU.obtenerSemilleroPorId(idSemillero).getData();
+        nuevoPlan.setSemillero(semillero);
+        //System.out.println("nuevo plan "+nuevoPlan);
+        Boolean respuesta= planTrabajoCrearREPO.crear(nuevoPlan);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.creacion.objeto", List.of("Plan Trabajo", "Id", String.valueOf(nuevoPlan.getId())));
         }

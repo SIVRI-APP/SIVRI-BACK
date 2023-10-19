@@ -34,8 +34,17 @@ public class PlanTrabajoObtenerService implements PlanTrabajoObtenerCU {
         if (respuestaBd.isEmpty()){
             throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("Plan Trabajo", "Id", String.valueOf(id)));
         }
-
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd.get()).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<List<PlanTrabajo>> obtenerPlanesPorIdSemillero(int idSemillero) {
+        List<PlanTrabajo> respuestaBd= planTrabajoObtenerREPO.obtenerPlanesPorIdSemillero(idSemillero);
+        if (respuestaBd.isEmpty()){
+            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros");
+        }
+
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
     }
 
     @Override
