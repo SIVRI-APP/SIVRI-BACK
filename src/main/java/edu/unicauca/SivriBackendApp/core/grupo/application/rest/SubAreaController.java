@@ -25,6 +25,7 @@ public class SubAreaController {
     @GetMapping("/{id}/disciplinas")
     public ResponseEntity<Respuesta> obtenerDisciplinasPorIdSubArea(@PathVariable(value = "id") int id){
         Respuesta respuesta=obtenerSubAreaCU.obtenerDisciplinasPorIdSubArea(id);
+
         respuesta.setData(subAreaDtoMapper.dtoObtenerDisciplinas((List<Disciplina>) respuesta.getData()));
 
         return ResponseEntity.ok().body(respuesta);

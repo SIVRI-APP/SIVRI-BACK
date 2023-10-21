@@ -5,6 +5,7 @@ import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpa
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,10 +13,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name="actividad_plan_trabajo")
-@Getter
-@Setter
-@AllArgsConstructor
-
+@Data
 public class ActividadPlanTrabajoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

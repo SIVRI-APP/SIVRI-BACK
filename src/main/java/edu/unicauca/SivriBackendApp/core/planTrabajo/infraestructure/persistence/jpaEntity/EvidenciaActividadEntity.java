@@ -19,6 +19,6 @@ public class EvidenciaActividadEntity {
     private String evidencia;
 
     //relacion 1a1 con entidad ActividadPlanTrabajo
-    @OneToOne(mappedBy ="evidenciaActividad")
-    private ActividadPlanTrabajoEntity evidenciaActividad;
+    //@OneToOne(mappedBy ="evidenciaActividad")
+    //private ActividadPlanTrabajoEntity evidenciaActividad;
 }
