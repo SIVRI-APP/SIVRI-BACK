@@ -9,6 +9,6 @@ import org.mapstruct.Mapping;
 public interface LineaInvestigacionMapper {
     @Mapping(source = "semillero.id",target = "semilleroId")
     LineaInvestigacion obtenerModelo(final LineaInvestigacionEntity lineaInvestigacionEntity);
-
+    @Mapping(source = "semilleroId",target = "semillero.id")
     LineaInvestigacionEntity obtenerEntity(final LineaInvestigacion lineaInvestigacion);
 }
