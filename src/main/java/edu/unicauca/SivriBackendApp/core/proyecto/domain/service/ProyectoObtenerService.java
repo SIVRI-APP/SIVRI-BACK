@@ -9,11 +9,12 @@ import edu.unicauca.SivriBackendApp.core.proyecto.domain.port.out.ProyectoObtene
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class ProyectoObtenerService implements ProyectoObtenerCU {
 
     private final ProyectoObtenerREPO proyectoObtenerREPO;

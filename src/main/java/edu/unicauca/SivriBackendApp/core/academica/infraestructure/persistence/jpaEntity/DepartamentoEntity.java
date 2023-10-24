@@ -1,5 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.RolDocenteEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,11 +28,14 @@ public class DepartamentoEntity {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "facultadId")
+    @JsonBackReference
     private FacultadEntity facultad;
 
     @OneToMany(mappedBy = "departamento", cascade = CascadeType.REMOVE)
+    @JsonManagedReference
     private List<ProgramaEntity> programas;
 
     @OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<RolDocenteEntity> usuariosDocente;
 }

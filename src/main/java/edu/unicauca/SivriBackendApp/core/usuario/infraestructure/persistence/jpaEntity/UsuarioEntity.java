@@ -1,5 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity;
 
+import edu.unicauca.SivriBackendApp.core.usuario.domain.model.EstadoUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Sexo;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,15 +11,15 @@ import java.util.List;
 @Table(name = "usuario")
 @Data
 public class UsuarioEntity {
-    @Id
-    @Column(name = "numeroDocumento", length = 45)
-    private String numeroDocumento;
 
-    @Column(name = "tipoDocumento", length = 45, nullable = false)
-    private String tipoDocumento;
+    @EmbeddedId
+    private UsuarioEntityID id;
 
-    @Column(name = "sexo", length = 20, nullable = false)
-    private String sexo;
+    @Enumerated(EnumType.STRING)
+    private Sexo sexo;
+
+    @Enumerated(EnumType.STRING)
+    private EstadoUsuario estado;
 
     @Column(name = "nombres", length = 100, nullable = false)
     private String nombres;
@@ -34,8 +36,8 @@ public class UsuarioEntity {
     @Column(name = "contraseña", length = 50)
     private String contraseña;
 
-    @OneToMany(mappedBy="usuarioNumeroDocumento", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<RolUsuarioEntity> rolesAcademicos;
+    @OneToMany(mappedBy = "usuario")
+    private List<RolUsuarioEntity> rolesDeUsuario;
 
 //    @OneToMany(mappedBy="usuario", cascade = CascadeType.REMOVE)
 //    private List<IntegranteProyectoEntity> participacionProyectos;

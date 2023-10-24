@@ -8,14 +8,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "rol_docente")
-@PrimaryKeyJoinColumn(name = "rolUsuarioId")
+@PrimaryKeyJoinColumn(name = "rolAcademicoId")
 @Getter
 @Setter
 @NoArgsConstructor
-public class RolDocenteEntity extends RolUsuarioEntity {
+public class RolDocenteEntity extends RolAcademicoEntity {
 
     @Column(name = "CvLAC")
     private String cvLac;
@@ -24,9 +25,8 @@ public class RolDocenteEntity extends RolUsuarioEntity {
     @JoinColumn(name = "departamentoId")
     private DepartamentoEntity departamento;
 
-    public RolDocenteEntity(Integer id, String estado, @FutureOrPresent LocalDate fechaInicio, @FutureOrPresent LocalDate fechaFin, UsuarioEntity usuarioNumeroDocumento, String cvLac, DepartamentoEntity departamento) {
-        super(id, estado, fechaInicio, fechaFin, usuarioNumeroDocumento);
+    public RolDocenteEntity(Integer id, String nombre, List<RolUsuarioEntity> rolDeUsuarios, String cvLac) {
+        super(id, nombre, rolDeUsuarios);
         this.cvLac = cvLac;
-        this.departamento = departamento;
     }
 }

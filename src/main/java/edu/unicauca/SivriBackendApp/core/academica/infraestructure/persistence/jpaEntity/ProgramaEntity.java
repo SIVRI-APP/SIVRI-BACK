@@ -1,12 +1,10 @@
 package edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.RolPosgradoEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.RolPregradoEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -30,8 +28,10 @@ public class ProgramaEntity {
     private DepartamentoEntity departamento;
 
     @OneToMany(mappedBy = "programa", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<RolPosgradoEntity> usuariosPosgrado;
 
     @OneToMany(mappedBy = "programa", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<RolPregradoEntity> usuariosPregrado;
 }

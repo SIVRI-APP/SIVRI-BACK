@@ -11,18 +11,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "rol_funcionario")
-@PrimaryKeyJoinColumn(name = "rolUsuarioId")
+@PrimaryKeyJoinColumn(name = "rolAcademicoId")
 @Getter
 @Setter
 @NoArgsConstructor
-public class RolFuncionarioEntity extends RolUsuarioEntity {
+public class RolFuncionarioEntity extends RolAcademicoEntity {
 
-    @OneToMany(mappedBy = "rolFuncionarioId", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private List<FuncionAdministrativaFuncionarioEntity> funcionesAdministrativaFuncionario;
-
-    public RolFuncionarioEntity(Integer id, String estado, @FutureOrPresent LocalDate fechaInicio, @FutureOrPresent LocalDate fechaFin, UsuarioEntity usuarioNumeroDocumento, List<FuncionAdministrativaFuncionarioEntity> funcionesAdministrativaFuncionario) {
-        super(id, estado, fechaInicio, fechaFin, usuarioNumeroDocumento);
-        this.funcionesAdministrativaFuncionario = funcionesAdministrativaFuncionario;
+    public RolFuncionarioEntity(Integer id, String nombre, List<RolUsuarioEntity> rolDeUsuarios) {
+        super(id, nombre, rolDeUsuarios);
     }
-
 }
