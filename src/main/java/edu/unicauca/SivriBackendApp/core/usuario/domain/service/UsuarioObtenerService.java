@@ -5,7 +5,6 @@ import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Proyections.validarVinculacionUsuarioGrupo;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.TipoDocumento;
-import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Usuario;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.port.in.UsuarioObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.port.out.UsuarioObtenerREPO;
 import org.springframework.stereotype.Service;
@@ -23,17 +22,13 @@ public class UsuarioObtenerService implements UsuarioObtenerCU {
     }
 
     @Override
-    public Respuesta<Usuario> validarVinculacionUsuarioGrupo(TipoDocumento tipoDocumento, String numeroDocumento) {
+    public Respuesta<validarVinculacionUsuarioGrupo> validarVinculacionUsuarioGrupo(TipoDocumento tipoDocumento, String numeroDocumento) {
         Optional<validarVinculacionUsuarioGrupo> respuestaBd = usuarioObtenerREPO.validarVinculacionUsuarioGrupo(tipoDocumento, numeroDocumento);
 
         if (respuestaBd.isEmpty()){
             throw new ReglaDeNegocioException("bad.no.se.encontro.registro.ebedded.id", List.of("Usuario", "Tipo Documento", tipoDocumento.getDescripcion(), "Numero de Documento", numeroDocumento));
         }
 
-        System.out.println("---------------------------");
-        System.out.println(respuestaBd.get().getNombres());
-        System.out.println(respuestaBd.get().getApellidos());
-
-        return new RespuestaHandler<>(200, "sucess.usuario.existe", List.of(tipoDocumento.getDescripcion(), numeroDocumento), "", new Usuario()).getRespuesta();
+        return new RespuestaHandler<>(200, "sucess.usuario.existe", List.of(tipoDocumento.getDescripcion(), numeroDocumento), "", respuestaBd.get()).getRespuesta();
     }
 }

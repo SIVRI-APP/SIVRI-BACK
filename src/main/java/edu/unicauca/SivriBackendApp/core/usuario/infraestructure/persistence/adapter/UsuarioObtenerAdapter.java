@@ -2,24 +2,20 @@ package edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.ad
 
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Proyections.validarVinculacionUsuarioGrupo;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.TipoDocumento;
-import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Usuario;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.port.out.UsuarioObtenerREPO;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.mapper.UsuarioInfraMapper;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaRepository.UsuarioRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
 public class UsuarioObtenerAdapter implements UsuarioObtenerREPO {
 
     private UsuarioRepository usuarioRepository;
-    private UsuarioInfraMapper usuarioInfraMapper;
 
-    public UsuarioObtenerAdapter(UsuarioRepository usuarioRepository, UsuarioInfraMapper usuarioInfraMapper) {
+    public UsuarioObtenerAdapter(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
-        this.usuarioInfraMapper = usuarioInfraMapper;
     }
 
     @Override
