@@ -26,9 +26,20 @@ public class UsuarioObtenerService implements UsuarioObtenerCU {
         Optional<validarVinculacionUsuarioGrupo> respuestaBd = usuarioObtenerREPO.validarVinculacionUsuarioGrupo(tipoDocumento, numeroDocumento);
 
         if (respuestaBd.isEmpty()){
-            throw new ReglaDeNegocioException("bad.no.se.encontro.registro.ebedded.id", List.of("Usuario", "Tipo Documento", tipoDocumento.getDescripcion(), "Numero de Documento", numeroDocumento));
+            throw new ReglaDeNegocioException("bad.no.se.encontro.registro.ebedded.id", List.of(tipoDocumento.getDescripcion(), numeroDocumento));
         }
 
         return new RespuestaHandler<>(200, "sucess.usuario.existe", List.of(tipoDocumento.getDescripcion(), numeroDocumento), "", respuestaBd.get()).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Boolean> validarExistencia(TipoDocumento tipoDocumento, String numeroDocumento) {
+        Boolean respuestaBd = usuarioObtenerREPO.validarExistencia(tipoDocumento, numeroDocumento);
+
+        if (!respuestaBd){
+            throw new ReglaDeNegocioException("bad.no.se.encontro.registro.ebedded.id", List.of(tipoDocumento.getDescripcion(), numeroDocumento));
+        }
+
+        return new RespuestaHandler<>(200, "sucess.usuario.existe", List.of(tipoDocumento.getDescripcion(), numeroDocumento), "", true).getRespuesta();
     }
 }

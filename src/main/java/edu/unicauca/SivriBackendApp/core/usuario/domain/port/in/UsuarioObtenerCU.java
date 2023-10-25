@@ -6,4 +6,6 @@ import edu.unicauca.SivriBackendApp.core.usuario.domain.model.TipoDocumento;
 
 public interface UsuarioObtenerCU {
     Respuesta<validarVinculacionUsuarioGrupo> validarVinculacionUsuarioGrupo(TipoDocumento tipoDocumento, String numeroDocumento);
+
+    Respuesta<Boolean> validarExistencia(TipoDocumento tipoDocumento, String numeroDocumento);
 }

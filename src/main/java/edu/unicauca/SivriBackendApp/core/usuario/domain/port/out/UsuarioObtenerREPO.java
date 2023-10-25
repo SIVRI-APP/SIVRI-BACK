@@ -7,4 +7,8 @@ import java.util.Optional;
 
 public interface UsuarioObtenerREPO {
     Optional<validarVinculacionUsuarioGrupo> validarVinculacionUsuarioGrupo(TipoDocumento tipoDocumento, String numeroDocumento);
+
+    Boolean validarExistencia(TipoDocumento tipoDocumento, String numeroDocumento);
+
+    Boolean validarExistenciaCorreo(String correo);
 }

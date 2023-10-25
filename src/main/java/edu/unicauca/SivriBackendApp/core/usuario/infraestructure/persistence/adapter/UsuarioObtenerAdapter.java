@@ -3,10 +3,10 @@ package edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.ad
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Proyections.validarVinculacionUsuarioGrupo;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.port.out.UsuarioObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntityID;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaRepository.UsuarioRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -23,6 +23,16 @@ public class UsuarioObtenerAdapter implements UsuarioObtenerREPO {
         Optional<validarVinculacionUsuarioGrupo> respuestaJpa = usuarioRepository.validarVinculacionUsuarioGrupo(numeroDocumento, String.valueOf(tipoDocumento));
 
         return respuestaJpa;
+    }
+
+    @Override
+    public Boolean validarExistencia(TipoDocumento tipoDocumento, String numeroDocumento) {
+        return usuarioRepository.existsById(new UsuarioEntityID(tipoDocumento, numeroDocumento));
+    }
+
+    @Override
+    public Boolean validarExistenciaCorreo(String correo) {
+        return usuarioRepository.existsByCorreo(correo);
     }
 
 }

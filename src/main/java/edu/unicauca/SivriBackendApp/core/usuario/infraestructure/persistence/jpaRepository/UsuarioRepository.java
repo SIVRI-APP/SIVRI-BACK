@@ -22,4 +22,6 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, UsuarioE
             "GROUP BY u.numeroDocumento, u.tipoDocumento "
             , nativeQuery = true)
     Optional<validarVinculacionUsuarioGrupo> validarVinculacionUsuarioGrupo(@Param("numeroDoc") String numeroDoc, @Param("tipoDoc") String tipoDoc);
+
+    boolean existsByCorreo(String correo);
 }
