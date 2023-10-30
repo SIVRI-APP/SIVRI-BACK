@@ -35,14 +35,6 @@ public class SemilleroEntity extends OrganismoDeInvestigacionEntity{
     @OneToMany(mappedBy = "semillero", fetch = FetchType.LAZY)
     private List<SemilleroDocumentacionEntity> documentosSemillero;
 
-    //relacion *a* con entidad programa
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "semillero_programa",
-            joinColumns = @JoinColumn(name="semilleroId"),
-            inverseJoinColumns = @JoinColumn(name="idPrograma")
-            )
-    private List<ProgramaEntity> programas;
-
     //relacion 1a* con entidad lineadeInvestiacion
     @OneToMany(mappedBy = "semillero",fetch = FetchType.LAZY)
     private List<LineaInvestigacionEntity> lineasInvestigacion;
