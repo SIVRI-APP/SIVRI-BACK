@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity;
 
+import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity.SemilleroEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.RolPosgradoEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.RolPregradoEntity;
 import jakarta.persistence.*;
@@ -28,6 +29,10 @@ public class ProgramaEntity {
     @JoinColumn(name = "departamentoId")
     private DepartamentoEntity departamento;
 
+    //relacion *a* con semillero
+    /* @ManyToMany(mappedBy = "programas")
+    private List<SemilleroEntity> semilleros;
+    */
     @OneToMany(mappedBy = "programa", fetch = FetchType.LAZY)
     private List<RolPosgradoEntity> usuariosPosgrado;
 
