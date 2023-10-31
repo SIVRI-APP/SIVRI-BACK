@@ -37,7 +37,9 @@ INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin
  INSERT INTO departamento (id, nombre, facultadId) VALUES (1, 'Sistemas', 1);
 --
 -- -- PROGRAMAS
- INSERT INTO programa (id, nombre, departamentoId) VALUES (1, 'Ingeniería de Sistemas', 1);
+INSERT INTO programa (id, nombre, departamentoId) VALUES (1, 'Ingeniería de Sistemas', 1);
+INSERT INTO programa (id, nombre, departamentoId) VALUES (2, 'Ingeniería civil', 1);
+INSERT INTO programa (id, nombre, departamentoId) VALUES (3, 'Ingeniería Electronica', 1);
 --
 --
 --
@@ -166,6 +168,7 @@ INSERT INTO semillero_documentacion(semilleroId,idDocumentoSemillero,fecha) VALU
 
 --semillero programa
 INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,1);
+INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,2);
 
 --plan de trabajo
 INSERT INTO plan_trabajo(id,semilleroId,nombrePlan, estado) VALUES(1,2, 'plan 2023','formulado');

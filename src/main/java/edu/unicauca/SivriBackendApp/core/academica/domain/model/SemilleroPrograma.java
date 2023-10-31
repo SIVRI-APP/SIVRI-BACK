@@ -8,5 +8,5 @@ public class SemilleroPrograma {
     private long id;
     private Semillero semillero;
     private Programa programa;
-
+    private boolean eliminadoLogico;
 }
