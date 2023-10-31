@@ -32,6 +32,15 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
     }
 
     @Override
+    public Respuesta<Boolean> existePorNombre(String nombre) {
+        Boolean respuesta=semilleroObtenerREPO.existePorNombre(nombre);
+        if (respuesta){
+            throw new ReglaDeNegocioException("bad.se.encontro.nombre.semillero", List.of("Semillero", "Nombre", String.valueOf(nombre)));
+        }
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta();
+    }
+
+    @Override
     public Respuesta<Semillero> obtenerSemilleroPorId(int id) {
         Optional<Semillero> respuesta=semilleroObtenerREPO.obtenerSemilleroPorId(id);
         if (respuesta.isEmpty()) {

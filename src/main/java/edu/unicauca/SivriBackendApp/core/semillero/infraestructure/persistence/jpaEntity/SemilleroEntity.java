@@ -14,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "semillero")
+
 @Data
 //relacion de herencia
 @PrimaryKeyJoinColumn(name = "semilleroId")

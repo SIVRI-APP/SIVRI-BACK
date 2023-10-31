@@ -5,7 +5,9 @@ import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.Grupo;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.*;
+import edu.unicauca.SivriBackendApp.core.semillero.domain.port.in.IntegranteSemilleroCrearCU;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.port.in.SemilleroCrearCU;
+import edu.unicauca.SivriBackendApp.core.semillero.domain.port.in.SemilleroObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.port.out.IntegranteSemilleroCrearREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.port.out.SemilleroCrearREPO;
 import org.springframework.stereotype.Component;
@@ -17,17 +19,21 @@ import java.util.List;
 public class SemilleroCrearService implements SemilleroCrearCU {
 
     private final SemilleroCrearREPO semilleroCrearREPO;
-    private final IntegranteSemilleroCrearREPO integranteSemilleroCrearREPO;
+    private final SemilleroObtenerCU semilleroObtenerCU;
+    private final IntegranteSemilleroCrearCU integranteSemilleroCrearCU;
 
-    public SemilleroCrearService(SemilleroCrearREPO semilleroCrearREPO, IntegranteSemilleroCrearREPO integranteSemilleroCrearREPO) {
+    public SemilleroCrearService(SemilleroCrearREPO semilleroCrearREPO, SemilleroObtenerCU semilleroObtenerCU, IntegranteSemilleroCrearCU integranteSemilleroCrearCU) {
         this.semilleroCrearREPO = semilleroCrearREPO;
-        this.integranteSemilleroCrearREPO = integranteSemilleroCrearREPO;
+        this.semilleroObtenerCU = semilleroObtenerCU;
+        this.integranteSemilleroCrearCU = integranteSemilleroCrearCU;
     }
 
     @Override
     public Respuesta<Boolean> crear(Semillero semillero, String mentorId) {
         System.out.println("DATOS que recive el service del semillero nuevo: "+semillero+"nombre "+semillero.getNombre() );
         System.out.println("mentorid "+mentorId);
+        Boolean existe= semilleroObtenerCU.existePorNombre(semillero.getNombre()).getData();
+        System.out.println("existe nombre "+existe);
         Grupo grupo=new Grupo();
         grupo.setGrupoId(semillero.getGrupoId());
         semillero.setGrupoId(grupo.getGrupoId());

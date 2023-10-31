@@ -89,9 +89,9 @@ public class SemilleroControlller {
     }
     @PostMapping("")
     public ResponseEntity<Respuesta> crear(@Valid @RequestBody SemilleroCrearDTO nuevoSemillero){
-        //System.out.println("DATOS QUE RECIBE SEMILLERO PARA CREAR "+nuevoSemillero);
+        System.out.println("DATOS QUE RECIBE SEMILLERO PARA CREAR "+nuevoSemillero);
         String mentorId= nuevoSemillero.getMentorId();
-        //System.out.println("id mentor "+mentorId);
+        System.out.println("id mentor "+mentorId);
         Respuesta respuesta= semilleroCrearCU.crear(semilleroDtoMapper.crear(nuevoSemillero),mentorId);
         //System.out.println("DATOS RESPUESTA DE CONTROLLER: "+respuesta);
         return ResponseEntity.ok().body(respuesta);

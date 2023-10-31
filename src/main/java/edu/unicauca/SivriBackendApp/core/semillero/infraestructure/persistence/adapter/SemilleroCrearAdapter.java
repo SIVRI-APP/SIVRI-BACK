@@ -37,9 +37,10 @@ public class SemilleroCrearAdapter implements SemilleroCrearREPO {
         System.out.println("ID DEL semillero: "+semillero.getId());
         System.out.println("id del integrante "+integranteSemillero.getId());
         integranteSemillero.setSemilleroId(semillero.getId());
-        IntegranteSemilleroEntity integrante= integranteSemilleroRepository.save(integranteSemilleroMapper.obtenerEntity(integranteSemillero));
-        System.out.println("id integrante "+integrante.getIdIntegranteSemillero());
-        return semillero.getId() != null && integrante.getIdIntegranteSemillero() != null;
+        //debo llamar el caso de uso de crear el integrante
+        //IntegranteSemilleroEntity integrante= integranteSemilleroRepository.save(integranteSemilleroMapper.obtenerEntity(integranteSemillero));
+        //System.out.println("id integrante "+integrante.getIdIntegranteSemillero());
+        return semillero.getId() != null; //&& integrante.getIdIntegranteSemillero() != null;
 
     }
 

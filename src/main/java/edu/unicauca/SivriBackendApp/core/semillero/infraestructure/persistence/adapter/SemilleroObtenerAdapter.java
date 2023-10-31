@@ -30,6 +30,11 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
     }
 
     @Override
+    public Boolean existePorNombre(String nombre) {
+        return semilleroRepository.existsByNombre(nombre);
+    }
+
+    @Override
     public Optional<Semillero> obtenerSemilleroPorId(int id) {
         Optional<SemilleroEntity> respuestaJpa=semilleroRepository.findById(id);
         if (respuestaJpa.isPresent()){

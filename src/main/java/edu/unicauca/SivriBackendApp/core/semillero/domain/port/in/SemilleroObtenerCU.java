@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface SemilleroObtenerCU {
     Respuesta<Boolean> existePorId(int id);
+    Respuesta<Boolean> existePorNombre(String nombre);
     Respuesta<Semillero> obtenerSemilleroPorId(int id);
     Respuesta<List<Semillero>> obtenerSemillerosPorIdGrupo(int idGrupo);
     //Respuesta<List<Semillero>> obtenerSemillerosPorIdMentor(String idMentor);

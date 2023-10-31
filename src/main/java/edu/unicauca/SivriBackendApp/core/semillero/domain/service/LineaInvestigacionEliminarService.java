@@ -22,7 +22,7 @@ public class LineaInvestigacionEliminarService implements LineaInvestigacionElim
 
     @Override
     public Respuesta<Boolean> eliminadoFisico(int id) {
-        Boolean objLineaEliminar=lineaInvestigacionObtenerCU.existePorId(id).getData();
+        lineaInvestigacionObtenerCU.existePorId(id).getData();
 
         Boolean respuesta=lineaInvestigacionEliminarREPO.eliminadoFisicoLinea(id);
         if (!respuesta){
