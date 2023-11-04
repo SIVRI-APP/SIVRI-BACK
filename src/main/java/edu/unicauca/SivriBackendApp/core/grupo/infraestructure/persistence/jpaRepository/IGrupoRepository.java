@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IGrupoRepository extends JpaRepository<GrupoEntity,Integer> {
+    public Boolean existsByNombre(String nombre);
 }

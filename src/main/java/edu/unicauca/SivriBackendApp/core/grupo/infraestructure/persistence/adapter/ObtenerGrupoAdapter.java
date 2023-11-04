@@ -26,6 +26,11 @@ public class ObtenerGrupoAdapter implements GrupoObtenerREPO {
     }
 
     @Override
+    public Boolean existePorNombre(String nombre) {
+        return grupoRepository.existsByNombre(nombre);
+    }
+
+    @Override
     public Optional<Grupo> obtenerGrupoPorId(int id) {
         System.out.println("ENTRA A OBTENER GRUPO POR ID DEL ADAPTER ");
         Optional<GrupoEntity> respuestaJpa=grupoRepository.findById(id);

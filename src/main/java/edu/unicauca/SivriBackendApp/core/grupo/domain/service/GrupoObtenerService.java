@@ -32,6 +32,15 @@ public class GrupoObtenerService implements GrupoObtenerCU {
     }
 
     @Override
+    public Respuesta<Boolean> existePorNombre(String nombre) {
+        Boolean respuesta=grupoObtenerREPO.existePorNombre(nombre);
+        if (respuesta){
+            throw new ReglaDeNegocioException("bad.se.encontro.nombre.grupo", List.of("Grupo", "Nombre", String.valueOf(nombre)));
+        }
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta();
+    }
+
+    @Override
     public Respuesta<Grupo> obtenerGrupoPorId(int id) {
         System.out.println("INGRESA AL SERVICE DE BUSCAR GRUPO POR ID ");
         Optional<Grupo> respuestaBd = grupoObtenerREPO.obtenerGrupoPorId(id);

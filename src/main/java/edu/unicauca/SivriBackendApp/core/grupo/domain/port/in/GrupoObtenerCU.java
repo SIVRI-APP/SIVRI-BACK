@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface GrupoObtenerCU {
     Respuesta<Boolean> existePorId(int id);
+    Respuesta<Boolean> existePorNombre(String nombre);
     Respuesta<Grupo> obtenerGrupoPorId(int id);
-
     Respuesta<List<Grupo>> obtenerGrupos();
 
 }

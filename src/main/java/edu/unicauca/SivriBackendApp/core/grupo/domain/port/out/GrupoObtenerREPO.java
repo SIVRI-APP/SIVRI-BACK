@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface GrupoObtenerREPO {
     Boolean existePorId(int id);
+    Boolean existePorNombre(String nombre);
     Optional<Grupo> obtenerGrupoPorId(int id);
 
     List<Grupo> obtenerGrupos();
