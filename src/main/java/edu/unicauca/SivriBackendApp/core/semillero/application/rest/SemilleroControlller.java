@@ -49,6 +49,21 @@ public class SemilleroControlller {
         return ResponseEntity.ok().body(respuesta);
 
     }
+
+    @GetMapping("")
+    public ResponseEntity<Respuesta> obtenerSemilleros(){
+        Respuesta<List<Semillero>> respuestaCU=semilleroObtenerCU.obtenerSemilleros();
+        //System.out.println("LISSTADO RESPUESTA: "+respuestaCU);
+        Respuesta<List<SemilleroObtenerDTO>> respuesta=new Respuesta<>();
+        respuesta.setData(respuestaCU.getData().stream().map(semilleroDtoMapper::dtoObtenerSemillero).toList());
+        respuesta.setStatus(respuestaCU.getStatus());
+        respuesta.setUserMessage(respuestaCU.getUserMessage());
+        respuesta.setDeveloperMessage(respuestaCU.getDeveloperMessage());
+        return ResponseEntity.ok().body(respuesta);
+    }
+    //@GetMapping("/obtenerPorIdNombre")
+
+
     @PatchMapping("/actualizarEstadoSemillero/{id}")
    public ResponseEntity<Respuesta> actualizarEstadoSemillero(@PathVariable(value = "id") int idSemillero, @Valid @RequestBody SemilleroActualizarEstadoDTO semilleroActualizarEstadoDTO){
         System.out.println("IDSemillero controller "+idSemillero+" datosque recibe delDto "+semilleroActualizarEstadoDTO);
@@ -62,17 +77,7 @@ public class SemilleroControlller {
         return ResponseEntity.ok().body(respuesta);
     }
 
-    @GetMapping("")
-    public ResponseEntity<Respuesta> obtenerSemilleros(){
-        Respuesta<List<Semillero>> respuestaCU=semilleroObtenerCU.obtenerSemilleros();
-        //System.out.println("LISSTADO RESPUESTA: "+respuestaCU);
-        Respuesta<List<SemilleroObtenerDTO>> respuesta=new Respuesta<>();
-        respuesta.setData(respuestaCU.getData().stream().map(semilleroDtoMapper::dtoObtenerSemillero).toList());
-        respuesta.setStatus(respuestaCU.getStatus());
-        respuesta.setUserMessage(respuestaCU.getUserMessage());
-        respuesta.setDeveloperMessage(respuestaCU.getDeveloperMessage());
-        return ResponseEntity.ok().body(respuesta);
-    }
+
     @GetMapping("paginado")
     public ResponseEntity<Respuesta> obtenerListadoSemillerosPaginado(
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,

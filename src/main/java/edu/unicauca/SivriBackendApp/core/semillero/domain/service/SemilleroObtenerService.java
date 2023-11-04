@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.semillero.domain.service;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
+import edu.unicauca.SivriBackendApp.core.semillero.application.dto.request.SemilleroObtenerIdONombreDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.port.in.SemilleroObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.port.out.SemilleroObtenerREPO;
@@ -48,6 +49,27 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
         }
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "Exitoso", respuesta.get()).getRespuesta();
     }
+
+    /*@Override
+    public Respuesta<Optional<Semillero>> obtenerSemillerosPorIdONombre(SemilleroObtenerIdONombreDTO semillero) {
+        System.out.println("idSemillero "+semillero.getSemilleroId()+" nombre "+semillero.getNombre());
+        int idSemillero=semillero.getSemilleroId();
+        String nombre=semillero.getNombre();
+        Optional<Semillero> respuesta = semilleroObtenerREPO.obtenerSemilleroPorIdOrNombre(idSemillero,nombre);
+        if (idSemillero != 0){
+            respuesta=semilleroObtenerREPO.obtenerSemilleroPorId(idSemillero);
+            if (respuesta.isEmpty()) {
+                throw new ReglaDeNegocioException("el id " + idSemillero + " no existe.");
+            }
+        } else if (nombre != null) {
+            respuesta=semilleroObtenerREPO.obtenerSemilleroPorIdOrNombre(idSemillero,nombre);
+            if (respuesta.isEmpty()) {
+                throw new ReglaDeNegocioException("el nombre " + nombre + " no existe.");
+            }
+        }
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "Exitoso", respuesta).getRespuesta();
+    }
+*/
     @Override
     public Respuesta<List<Semillero>> obtenerSemillerosPorIdGrupo(int idGrupo) {
         List<Semillero> respuesta=semilleroObtenerREPO.obtenerSemillerosPorIdGrupo(idGrupo);

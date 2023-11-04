@@ -10,8 +10,12 @@ import java.util.List;
 
 @Repository
 public interface ISemilleroRepository extends JpaRepository<SemilleroEntity, Integer> {
+    //@Query("SELECT s FROM Semillero s WHERE s.idSemillero = ?1 OR s.nombreSemillero = ?2")
+    public List<SemilleroEntity> findByIdOrNombre(int idSemillero, String nombre);
+    //public List<SemilleroEntity> findByNombre( String nombre);
     public Boolean existsByNombre(String nombre);
     //@Query("SELECT s FROM semillero s WHERE s.grupoId = ?1")
+
     public List<SemilleroEntity> findByGrupoId(int idGrupo);
     //@Query("SELECT DISTINCT i.semilleroId FROM integrante_semillero i JOIN FETCH i.semilleroId s WHERE  s.usuarioNumeroDocumento = ?1")
    // public List<SemilleroEntity> findByusuarioNumeroDocumento(String idMentor);

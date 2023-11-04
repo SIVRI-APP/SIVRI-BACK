@@ -1,6 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.semillero.domain.port.in;
 
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
+import edu.unicauca.SivriBackendApp.core.semillero.application.dto.request.SemilleroObtenerIdONombreDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.Semillero;
 import org.springframework.data.domain.Page;
 
@@ -10,6 +11,10 @@ public interface SemilleroObtenerCU {
     Respuesta<Boolean> existePorId(int id);
     Respuesta<Boolean> existePorNombre(String nombre);
     Respuesta<Semillero> obtenerSemilleroPorId(int id);
+    //Respuesta<Semillero> obtenerSemillerosPorIdONombre(SemilleroObtenerIdONombreDTO semillero);
+
+    //Respuesta<Semillero> obtenerSemilleroPorIdONombre(Semillero semillero);
+
     Respuesta<List<Semillero>> obtenerSemillerosPorIdGrupo(int idGrupo);
     //Respuesta<List<Semillero>> obtenerSemillerosPorIdMentor(String idMentor);
     Respuesta<List<Semillero>> obtenerSemilleros();

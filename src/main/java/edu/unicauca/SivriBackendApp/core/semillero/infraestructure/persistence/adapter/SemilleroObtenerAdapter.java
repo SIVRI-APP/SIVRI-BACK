@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,6 +33,8 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
         return semilleroRepository.existsByNombre(nombre);
     }
 
+
+
     @Override
     public Optional<Semillero> obtenerSemilleroPorId(int id) {
         Optional<SemilleroEntity> respuestaJpa=semilleroRepository.findById(id);
@@ -44,6 +45,14 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
         }
         return Optional.empty();
     }
+    /*@Override
+    public Optional<Semillero> obtenerSemilleroPorIdOrNombre(int id, String nombre) {
+        List<Semillero> semilleros=semilleroRepository.findBySemilleroIdOrNombre(id,nombre).stream().map(semilleroEntity -> {
+            Semillero semillero=semilleroMapper.obtenerModelo(semilleroEntity);
+            return semillero;
+        }).collect(Collectors.toList());
+        return semilleros;
+    }*/
     @Override
     public List<Semillero> obtenerSemillerosPorIdGrupo(int idGrupo) {
 
