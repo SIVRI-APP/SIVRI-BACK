@@ -57,7 +57,7 @@ public  class SemilleroActualizarService implements SemilleroActualizarCU {
         semilleroObtenerCU.existePorId(idSemillero);
         Semillero objSemilleroActualizar=semilleroObtenerCU.obtenerSemilleroPorId(idSemillero).getData();
         System.out.println("obj semillero que se obtiene "+objSemilleroActualizar);
-        //TODO verificar si elsemillero existe en la bd
+
         objSemilleroActualizar.setEstado(nuevoEstadoSemillero.getEstado());
         System.out.println("semillero con actualizacion "+objSemilleroActualizar);
         Boolean respuesta=semilleroActualizarREPO.actualizarEstadoSemillero(objSemilleroActualizar);

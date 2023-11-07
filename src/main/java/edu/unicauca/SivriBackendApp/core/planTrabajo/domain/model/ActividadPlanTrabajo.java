@@ -15,10 +15,10 @@ public class ActividadPlanTrabajo {
     private String actividad;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
-    private PlanTrabajoEntity planTrabajo;
-    private EvidenciaActividadEntity evidenciaActividad;
-    private CompromisoSemilleroEntity compromiso;
-    //TODO
-    //private UsuarioEntity responsableUsuario;
+    private PlanTrabajo planTrabajo;
+    private EvidenciaActividad evidenciaActividad;
+    private CompromisoSemillero compromiso;
+    //TODO SE DEBE CAMBIAR PORELMODELO
+    private String responsableUsuarioId;
 
 }
