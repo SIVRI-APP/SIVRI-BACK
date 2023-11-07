@@ -9,10 +9,13 @@ import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.GrupoActualizarCU;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.GrupoCrearCU;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.GrupoObtenerCU;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("grupos")
@@ -45,6 +48,17 @@ public class GrupoController {
         respuesta.setStatus(respuestaCU.getStatus());
         respuesta.setUserMessage(respuestaCU.getUserMessage());
         respuesta.setDeveloperMessage(respuestaCU.getDeveloperMessage());
+        return ResponseEntity.ok().body(respuesta);
+    }
+    @GetMapping("paginado")
+    public ResponseEntity<Respuesta> obtenerGruposPaginado(
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
+    ){
+        Respuesta respuesta = grupoObtenerCU.obtenerGruposPaginado(pageNo,pageSize);
+        Page<Grupo> dataService=(Page<Grupo>) respuesta.getData();
+        List dataRespuesta = dataService.stream().map(grupoDtoMapper::dtoObtenerGrupo).collect(Collectors.toList());
+        respuesta.setData(new PageImpl<>(dataRespuesta,dataService.getPageable(),dataService.getTotalElements()));
         return ResponseEntity.ok().body(respuesta);
     }
     @PostMapping("")

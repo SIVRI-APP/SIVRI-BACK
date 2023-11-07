@@ -5,6 +5,8 @@ import edu.unicauca.SivriBackendApp.core.grupo.domain.port.out.GrupoObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.mapper.GrupoMapper;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity.GrupoEntity;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaRepository.IGrupoRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -50,5 +52,10 @@ public class ObtenerGrupoAdapter implements GrupoObtenerREPO {
              return grupo;
          }).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public Page<Grupo> obtenerGruposPaginado(PageRequest pageRequest) {
+        return grupoRepository.findAll(pageRequest).map(grupoMapper::obtenerModelo);
     }
 }

@@ -6,6 +6,8 @@ import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.Grupo;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.GrupoObtenerCU;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.port.out.GrupoObtenerREPO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 
@@ -60,5 +62,15 @@ public class GrupoObtenerService implements GrupoObtenerCU {
         }
 
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Page<Grupo>> obtenerGruposPaginado(int pageNo, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        Page<Grupo> respuestaBd=grupoObtenerREPO.obtenerGruposPaginado(pageRequest);
+        if (respuestaBd.isEmpty()){
+            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros");
+        }
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
     }
 }
