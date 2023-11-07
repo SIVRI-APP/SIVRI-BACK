@@ -29,7 +29,7 @@ public class GrupoActualizarAdapter implements GrupoActualizarREPO {
         return true;
     }
 
-    @Override
+    /*@Override
     public Boolean actualizarGrupoFormuladoPorDirector(Grupo datosGrupo) {
         grupoRepository.save(grupoMapper.obtenerEntity(datosGrupo));
         return true;
@@ -39,6 +39,6 @@ public class GrupoActualizarAdapter implements GrupoActualizarREPO {
     public Boolean actualizarGrupoActivoPorDirector(Grupo datosGrupo) {
         grupoRepository.save(grupoMapper.obtenerEntity(datosGrupo));
         return true;
-    }
+    }*/
 
 }

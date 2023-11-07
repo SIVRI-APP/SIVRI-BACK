@@ -4,11 +4,11 @@ import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.Grupo;
 
 public interface GrupoActualizarCU {
-    Respuesta<Boolean> actualizarPorApoyo(Grupo nuevosDatos);
+    Respuesta<Boolean> actualizarPorApoyo(int idGrupo,Grupo nuevosDatos);
 
-    Respuesta<Boolean> actualizarPorDirector(Grupo nuevosDatos);
+    Respuesta<Boolean> actualizarPorDirector(int idGrupo,Grupo nuevosDatos);
 
-    Respuesta<Boolean> actualizarGrupoFormuladoPorDirector(Grupo datosGrupo);
-    Respuesta<Boolean> actualizarGrupoActivoPorDirector(Grupo datosGrupo);
+    //Respuesta<Boolean> actualizarGrupoFormuladoPorDirector(Grupo datosGrupo);
+    //Respuesta<Boolean> actualizarGrupoActivoPorDirector(Grupo datosGrupo);
 
 }

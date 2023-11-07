@@ -54,17 +54,17 @@ public class GrupoController {
 
         return ResponseEntity.ok().body(respuesta);
     }
-    @PatchMapping("/apoyo")
-    public ResponseEntity<Respuesta> actualizarPorApoyo(@Valid @RequestBody GrupoActualizarPorApoyoDTO nuevosDatos){
-        Respuesta respuesta=grupoActualizarCU.actualizarPorApoyo(grupoDtoMapper.actualizarPorApoyo(nuevosDatos));
+    @PatchMapping("/apoyo/{id}")
+    public ResponseEntity<Respuesta> actualizarPorApoyo(@PathVariable(value = "id") int idGrupo,@Valid @RequestBody GrupoActualizarPorApoyoDTO nuevosDatos){
+        Respuesta respuesta=grupoActualizarCU.actualizarPorApoyo(idGrupo,grupoDtoMapper.actualizarPorApoyo(nuevosDatos));
         return ResponseEntity.ok().body(respuesta);
     }
-    @PatchMapping("/director")
-    public ResponseEntity<Respuesta> actualizarPorDirector(@Valid @RequestBody GrupoActualizarPorDirectorDTO nuevosDatos){
-        Respuesta respuesta=grupoActualizarCU.actualizarPorDirector(grupoDtoMapper.actualizarPorDirector(nuevosDatos));
+    @PatchMapping("/director/{id}")
+    public ResponseEntity<Respuesta> actualizarPorDirector(@PathVariable(value = "id") int idGrupo,@Valid @RequestBody GrupoActualizarPorDirectorDTO nuevosDatos){
+        Respuesta respuesta=grupoActualizarCU.actualizarPorDirector(idGrupo,grupoDtoMapper.actualizarPorDirector(nuevosDatos));
         return ResponseEntity.ok().body(respuesta);
     }
-    @PatchMapping("/grupoFormuladoDirector")
+    /*@PatchMapping("/grupoFormuladoDirector")
     public ResponseEntity<Respuesta> actualizarGrupoFormuladoPorDirector(@Valid @RequestBody GrupoFormuladoActualizarPorDirectorDTO nuevoDatosGrupo){
         Respuesta respuesta=grupoActualizarCU.actualizarGrupoFormuladoPorDirector(grupoDtoMapper.actualizarGrupoFormuladoPorDirector(nuevoDatosGrupo));
         return ResponseEntity.ok().body(respuesta);
@@ -75,5 +75,5 @@ public class GrupoController {
         Respuesta respuesta=grupoActualizarCU.actualizarGrupoActivoPorDirector(grupoDtoMapper.actualizarGrupoActivoPorDirector(nuevosDatosGrupo));
         return ResponseEntity.ok().body(respuesta);
     }
-
+*/
 }

@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.grupo.domain.service;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
+import edu.unicauca.SivriBackendApp.core.academica.domain.model.Facultad;
 import edu.unicauca.SivriBackendApp.core.academica.domain.port.in.FacultadObtenerCU;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.Grupo;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.GrupoEstado;
@@ -12,6 +13,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.domain.port.out.GrupoActualizarRE
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class GrupoActualizarService implements GrupoActualizarCU {
@@ -26,9 +28,15 @@ public class GrupoActualizarService implements GrupoActualizarCU {
     }
 
     @Override
-    public Respuesta<Boolean> actualizarPorApoyo(Grupo nuevosDatos) {
-        Grupo objGrupoActualizar=grupoObtenerCU.obtenerGrupoPorId(nuevosDatos.getId()).getData();
+    public Respuesta<Boolean> actualizarPorApoyo(int idGrupo,Grupo nuevosDatos) {
+        Grupo objGrupoActualizar=grupoObtenerCU.obtenerGrupoPorId(idGrupo).getData();
+        String nombreBd=objGrupoActualizar.getNombre();
+        String nombreLlega=nuevosDatos.getNombre();
+        if (!Objects.equals(nombreLlega,nombreBd)){
+            grupoObtenerCU.existePorNombre(nuevosDatos.getNombre());
+        }
 
+        GrupoEstado EstadoAnt=objGrupoActualizar.getEstado();
         objGrupoActualizar.setNombre(nuevosDatos.getNombre());
         objGrupoActualizar.setFacultad(nuevosDatos.getFacultad());
         objGrupoActualizar.setDireccion(nuevosDatos.getDireccion());
@@ -48,22 +56,27 @@ public class GrupoActualizarService implements GrupoActualizarCU {
         objGrupoActualizar.setPerspectivas(nuevosDatos.getPerspectivas());
 
         facultadObtenerCU.existePorId(nuevosDatos.getFacultad().getIdFacultad());
-        objGrupoActualizar.getFacultad().setIdFacultad(nuevosDatos.getFacultad().getIdFacultad());
+        Facultad facultad=facultadObtenerCU.obtenerPorId(nuevosDatos.getFacultad().getIdFacultad()).getData();
+        objGrupoActualizar.setFacultad(facultad);
+        //objGrupoActualizar.getFacultad().setIdFacultad(nuevosDatos.getFacultad().getIdFacultad());
+
 
         Boolean respuesta=grupoActualizarREPO.actualizarPorApoyo(objGrupoActualizar);
 
         if (!respuesta){
-            throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Grupo", "Id", String.valueOf(nuevosDatos.getId())));
+            throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Grupo", "Id", String.valueOf(idGrupo)));
         }
 
         return new RespuestaHandler<>(200, "success.actualizacion.objeto", List.of("Grupo"), "", true).getRespuesta();
     }
     @Override
-    public Respuesta<Boolean> actualizarPorDirector(Grupo nuevosDatos) {
-        Grupo objGrupoActualizar=grupoObtenerCU.obtenerGrupoPorId(nuevosDatos.getId()).getData();
+    public Respuesta<Boolean> actualizarPorDirector(int idGrupo,Grupo nuevosDatos) {
+        Grupo objGrupoActualizar=grupoObtenerCU.obtenerGrupoPorId(idGrupo).getData();
         GrupoEstado estado=objGrupoActualizar.getEstado();
+        System.out.println("estado en service "+estado);
         if (estado==GrupoEstado.FORMULADO){
             //ACTUALIZA TODOS LOS CAMPOS DE GRUPO MENOS NOMBRE, FECHA CREACION Y ESTADO
+            facultadObtenerCU.existePorId(nuevosDatos.getFacultad().getIdFacultad());
             objGrupoActualizar.setFacultad(nuevosDatos.getFacultad());
             objGrupoActualizar.setDireccion(nuevosDatos.getDireccion());
             objGrupoActualizar.setTelefono(nuevosDatos.getTelefono());
@@ -78,7 +91,7 @@ public class GrupoActualizarService implements GrupoActualizarCU {
             objGrupoActualizar.setObjetivo(nuevosDatos.getObjetivo());
             objGrupoActualizar.setRealizaciones(nuevosDatos.getRealizaciones());
             objGrupoActualizar.setPerspectivas(nuevosDatos.getPerspectivas());
-        }else {
+        } else if (estado==GrupoEstado.ACTIVO){
             //actualiza los siguientes campos direccion, tel, email,sitioweb.
             objGrupoActualizar.setDireccion(nuevosDatos.getDireccion());
             objGrupoActualizar.setTelefono(nuevosDatos.getTelefono());
@@ -92,7 +105,7 @@ public class GrupoActualizarService implements GrupoActualizarCU {
         return new RespuestaHandler<>(200, "success.actualizacion.objeto", List.of("Grupo"), "", true).getRespuesta();
     }
 
-    @Override
+    /*@Override
     public Respuesta<Boolean> actualizarGrupoFormuladoPorDirector(Grupo datosGrupo) {
         Grupo objGrupoActualizar=grupoObtenerCU.obtenerGrupoPorId(datosGrupo.getId()).getData();
         GrupoEstado estado=objGrupoActualizar.getEstado();
@@ -143,5 +156,5 @@ public class GrupoActualizarService implements GrupoActualizarCU {
         }
         return new RespuestaHandler<>(200, "success.actualizacion.objeto", List.of("Grupo"), "", true).getRespuesta();
     }
-
+*/
 }

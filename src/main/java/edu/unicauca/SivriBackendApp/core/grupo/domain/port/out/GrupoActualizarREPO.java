@@ -8,8 +8,8 @@ public interface GrupoActualizarREPO {
 
     Boolean actualizarPorDirector(Grupo nuevosDatos);
 
-    Boolean actualizarGrupoFormuladoPorDirector(Grupo datosGrupo);
+    //Boolean actualizarGrupoFormuladoPorDirector(Grupo datosGrupo);
 
-    Boolean actualizarGrupoActivoPorDirector(Grupo datosGrupo);
+    //Boolean actualizarGrupoActivoPorDirector(Grupo datosGrupo);
 
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring" )
 public interface GrupoDtoMapper {
+    @Mapping(source = "facultad.idFacultad",target = "facultad.id")
     ObtenerGruposDTO dtoObtenerGrupo(final Grupo grupo);
 
     List<ObtenerGruposDTO> dtoObtenerGrupos(final List<Grupo> grupos);
@@ -19,9 +20,9 @@ public interface GrupoDtoMapper {
     Grupo actualizarPorApoyo(final GrupoActualizarPorApoyoDTO nuevosDatos);
     @Mapping(source = "idFacultad",target = "facultad.idFacultad")
     Grupo actualizarPorDirector(final GrupoActualizarPorDirectorDTO nuevosDatos);
-    @Mapping(source = "idFacultad",target = "facultad.idFacultad")
+    /*@Mapping(source = "idFacultad",target = "facultad.idFacultad")
     Grupo actualizarGrupoFormuladoPorDirector(final GrupoFormuladoActualizarPorDirectorDTO nuevoGrupo);
 
     Grupo actualizarGrupoActivoPorDirector(final GrupoActivoActualizarPorDirectorDTO nuevoGrupo);
-
+*/
 }
