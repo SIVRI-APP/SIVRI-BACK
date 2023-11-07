@@ -16,14 +16,18 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RolPregradoEntity extends RolAcademicoEntity {
+public class RolPregradoEntity extends RolEntity {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "programaId")
     private ProgramaEntity programa;
 
-    public RolPregradoEntity(Integer id, String nombre, List<RolUsuarioEntity> rolDeUsuarios, ProgramaEntity programa) {
-        super(id, nombre, rolDeUsuarios);
+    public RolPregradoEntity(Long id, Boolean estado, @FutureOrPresent LocalDate fechaInicio, @FutureOrPresent LocalDate fechaFin, UsuarioEntity usuario, RolUsuarioEntity rolUsuario, ProgramaEntity programa) {
+        super(id, estado, fechaInicio, fechaFin, usuario, rolUsuario);
+        this.programa = programa;
+    }
+
+    public RolPregradoEntity(ProgramaEntity programa) {
         this.programa = programa;
     }
 }

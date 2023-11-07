@@ -1,10 +1,9 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "rol_usuario")
@@ -15,23 +14,11 @@ public class RolUsuarioEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false)
-    Boolean estado;
+    @Column(nullable = false, length = 45)
+    private String nombre;
 
-    @FutureOrPresent
-    private LocalDate fechaInicio;
+    @OneToMany(mappedBy = "rolUsuario")
+    private List<RolEntity> usuariosDeRol;
 
-    @FutureOrPresent
-    private LocalDate fechaFin;
 
-    @ManyToOne()
-    @JoinColumns({
-            @JoinColumn(name = "usuarioTipoDocumento", referencedColumnName = "tipoDocumento"),
-            @JoinColumn(name = "usuarioNumeroDocumento", referencedColumnName = "numeroDocumento")
-    })
-    private UsuarioEntity usuario;
-
-    @ManyToOne()
-    @JoinColumn(name = "rolAcademicoId")
-    private RolAcademicoEntity rolAcademico;
 }

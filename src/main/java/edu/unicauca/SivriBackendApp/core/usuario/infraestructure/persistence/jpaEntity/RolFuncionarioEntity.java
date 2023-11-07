@@ -14,10 +14,12 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "rolAcademicoId")
 @Getter
 @Setter
-@NoArgsConstructor
-public class RolFuncionarioEntity extends RolAcademicoEntity {
+public class RolFuncionarioEntity extends RolEntity {
 
-    public RolFuncionarioEntity(Integer id, String nombre, List<RolUsuarioEntity> rolDeUsuarios) {
-        super(id, nombre, rolDeUsuarios);
+    public RolFuncionarioEntity(Long id, Boolean estado, @FutureOrPresent LocalDate fechaInicio, @FutureOrPresent LocalDate fechaFin, UsuarioEntity usuario, RolUsuarioEntity rolUsuario) {
+        super(id, estado, fechaInicio, fechaFin, usuario, rolUsuario);
+    }
+
+    public RolFuncionarioEntity() {
     }
 }

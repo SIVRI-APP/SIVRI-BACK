@@ -70,23 +70,35 @@ INSERT INTO programa (id, nombre, departamentoId) VALUES (1, 'Ingenieria de Sist
 -- |***** USUARIO *****|
 
 -- USUARIO
-INSERT INTO usuario (numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES ('10611', 'CEDULA_CIUDADANIA', 'MASCULINO', 'ACTIVO', 'Miguel', 'Proyectos', '3225864404', 'miguelmonje@unicauca.edu.co');
-INSERT INTO usuario (numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES ('10612', 'CEDULA_CIUDADANIA', 'FEMENINO', 'ACTIVO', 'Yurani', 'Semilleros', '3225864404', 'correoSemilleros@unicauca.edu.co');
-INSERT INTO usuario (numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES ('10613', 'CEDULA_CIUDADANIA', 'OTRO', 'ACTIVO', 'Daniel', 'Grupos', '3225864404', 'correoGrupos@unicauca.edu.co');
-INSERT INTO usuario (numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES ('10614', 'CEDULA_CIUDADANIA', 'MASCULINO', 'ACTIVO', 'Martin', 'Investigador Externo', '3225864404', 'correo4@unicauca.edu.co');
-INSERT INTO usuario (numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES ('10615', 'CEDULA_CIUDADANIA', 'MASCULINO', 'ACTIVO', 'Jacob', 'Docente', '3225864404', 'correo5@unicauca.edu.co');
-INSERT INTO usuario (numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES ('10616', 'CEDULA_EXTRANJERIA', 'MASCULINO', 'ACTIVO', 'Jacob', 'Egresado', '3225864404', 'correo6@unicauca.edu.co');
-INSERT INTO usuario (numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES ('10617', 'TARJETA_IDENTIDAD', 'MASCULINO', 'ACTIVO', 'Jacob', 'Pregrado', '3225864404', 'correo7@unicauca.edu.co');
-INSERT INTO usuario (numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES ('10618', 'PASAPORTE', 'MASCULINO', 'ACTIVO', 'Jacob', 'Posgrado', '3225864404', 'correo8@unicauca.edu.co');
+INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (1, '10611', 'CEDULA_CIUDADANIA', 'MASCULINO', 'ACTIVO', 'Miguel', 'Proyectos', '3225864404', 'miguelmonje@unicauca.edu.co');
+INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (2, '10612', 'CEDULA_CIUDADANIA', 'FEMENINO', 'ACTIVO', 'Yurani', 'Semilleros', '3225864404', 'correoSemilleros@unicauca.edu.co');
+INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (3, '10613', 'CEDULA_CIUDADANIA', 'OTRO', 'ACTIVO', 'Daniel', 'Grupos', '3225864404', 'correoGrupos@unicauca.edu.co');
+INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (4, '10614', 'CEDULA_CIUDADANIA', 'MASCULINO', 'ACTIVO', 'Martin', 'Investigador Externo', '3225864404', 'correo4@unicauca.edu.co');
+INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (5, '10615', 'CEDULA_CIUDADANIA', 'MASCULINO', 'ACTIVO', 'Jacob', 'Docente', '3225864404', 'correo5@unicauca.edu.co');
+INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (6, '10616', 'CEDULA_EXTRANJERIA', 'MASCULINO', 'ACTIVO', 'Jacob', 'Egresado', '3225864404', 'correo6@unicauca.edu.co');
+INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (7, '10617', 'TARJETA_IDENTIDAD', 'MASCULINO', 'ACTIVO', 'Jacob', 'Pregrado', '3225864404', 'correo7@unicauca.edu.co');
+INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (8, '10618', 'PASAPORTE', 'MASCULINO', 'ACTIVO', 'Jacob', 'Posgrado', '3225864404', 'correo8@unicauca.edu.co');
 
--- ROL ACADEMICO
-INSERT INTO rol_academico (id, nombre) VALUES (1, 'FUNCIONARIO');
-INSERT INTO rol_academico (id, nombre) VALUES (2, 'INVESTIGADOR_EXTERNO');
-INSERT INTO rol_academico (id, nombre) VALUES (3, 'DOCENTE');
-INSERT INTO rol_academico (id, nombre) VALUES (4, 'EGRESADO');
-INSERT INTO rol_academico (id, nombre) VALUES (5, 'POSGRADO');
-INSERT INTO rol_academico (id, nombre) VALUES (6, 'PREGRADO');
+-- ROL USUARIO
+INSERT INTO rol_usuario (id, nombre) VALUES (1, 'FUNCIONARIO');
+INSERT INTO rol_usuario (id, nombre) VALUES (2, 'INVESTIGADOR_EXTERNO');
+INSERT INTO rol_usuario (id, nombre) VALUES (3, 'DOCENTE');
+INSERT INTO rol_usuario (id, nombre) VALUES (4, 'EGRESADO');
+INSERT INTO rol_usuario (id, nombre) VALUES (5, 'POSGRADO');
+INSERT INTO rol_usuario (id, nombre) VALUES (6, 'PREGRADO');
 
+-- ROL
+INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (1, 1, '2023-08-30', 1, 1);
+INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (2, 1, '2023-08-30', 2, 2);
+INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (3, 1, '2023-08-30', 3, 3);
+INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (4, 1, '2023-08-30', 4, 4);
+INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (5, 1, '2023-08-30', 5, 5);
+INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (6, 1, '2023-08-30', 6, 6);
+INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (7, 1, '2023-08-30', 7, 3);
+INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (8, 1, '2023-08-30', 8, 3);
+INSERT INTO rol (id, estado, fechaInicio, fechaFin, usuarioId, rolUsuarioId) VALUES (9, 0, '2023-08-30', '2023-08-30', 1, 4);
+INSERT INTO rol (id, estado, fechaInicio, fechaFin, usuarioId, rolUsuarioId) VALUES (10, 0, '2023-08-30', '2023-08-30', 1, 5);
+INSERT INTO rol (id, estado, fechaInicio, fechaFin, usuarioId, rolUsuarioId) VALUES (11, 0, '2023-08-30', '2023-08-30', 1, 6);
 
 -- ROL FUNCIONARIO
 INSERT INTO rol_funcionario (rolAcademicoId) VALUES (1);
@@ -105,20 +117,6 @@ INSERT INTO rol_posgrado (rolAcademicoId, programaId) VALUES (5,1);
 
 -- ROL PREGRADO
 INSERT INTO rol_pregrado (rolAcademicoId, programaId) VALUES (6,1);
-
--- ROL USUARIO
-INSERT INTO rol_usuario (id, estado, fechaInicio, usuarioTipoDocumento, usuarioNumeroDocumento, rolAcademicoId) VALUES (1, 1, '2023-08-30', 'CEDULA_CIUDADANIA', '10611', 1);
-INSERT INTO rol_usuario (id, estado, fechaInicio, usuarioTipoDocumento, usuarioNumeroDocumento, rolAcademicoId) VALUES (2, 1, '2023-08-30', 'CEDULA_CIUDADANIA', '10612', 2);
-INSERT INTO rol_usuario (id, estado, fechaInicio, usuarioTipoDocumento, usuarioNumeroDocumento, rolAcademicoId) VALUES (3, 1, '2023-08-30', 'CEDULA_CIUDADANIA', '10613', 3);
-INSERT INTO rol_usuario (id, estado, fechaInicio, usuarioTipoDocumento, usuarioNumeroDocumento, rolAcademicoId) VALUES (4, 1, '2023-08-30', 'CEDULA_CIUDADANIA', '10614', 4);
-INSERT INTO rol_usuario (id, estado, fechaInicio, usuarioTipoDocumento, usuarioNumeroDocumento, rolAcademicoId) VALUES (5, 1, '2023-08-30', 'CEDULA_CIUDADANIA', '10615', 5);
-INSERT INTO rol_usuario (id, estado, fechaInicio, usuarioTipoDocumento, usuarioNumeroDocumento, rolAcademicoId) VALUES (6, 1, '2023-08-30', 'CEDULA_CIUDADANIA', '10616', 6);
-INSERT INTO rol_usuario (id, estado, fechaInicio, usuarioTipoDocumento, usuarioNumeroDocumento, rolAcademicoId) VALUES (7, 1, '2023-08-30', 'CEDULA_CIUDADANIA', '10617', 3);
-INSERT INTO rol_usuario (id, estado, fechaInicio, usuarioTipoDocumento, usuarioNumeroDocumento, rolAcademicoId) VALUES (8, 1, '2023-08-30', 'CEDULA_EXTRANJERIA', '10618', 3);
-INSERT INTO rol_usuario (id, estado, fechaInicio, fechaFin, usuarioTipoDocumento, usuarioNumeroDocumento, rolAcademicoId) VALUES (9, 0, '2023-08-30', '2023-08-30', 'CEDULA_CIUDADANIA', '10611', 4);
-INSERT INTO rol_usuario (id, estado, fechaInicio, fechaFin, usuarioTipoDocumento, usuarioNumeroDocumento, rolAcademicoId) VALUES (10, 0, '2023-08-30', '2023-08-30', 'CEDULA_CIUDADANIA', '10611', 5);
-INSERT INTO rol_usuario (id, estado, fechaInicio, fechaFin, usuarioTipoDocumento, usuarioNumeroDocumento, rolAcademicoId) VALUES (11, 0, '2023-08-30', '2023-08-30', 'CEDULA_CIUDADANIA', '10611', 6);
-
 
 
 

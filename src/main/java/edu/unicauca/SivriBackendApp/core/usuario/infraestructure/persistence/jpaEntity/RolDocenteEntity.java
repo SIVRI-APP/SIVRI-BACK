@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RolDocenteEntity extends RolAcademicoEntity {
+public class RolDocenteEntity extends RolEntity {
 
     @Column(name = "CvLAC")
     private String cvLac;
@@ -25,8 +25,14 @@ public class RolDocenteEntity extends RolAcademicoEntity {
     @JoinColumn(name = "departamentoId")
     private DepartamentoEntity departamento;
 
-    public RolDocenteEntity(Integer id, String nombre, List<RolUsuarioEntity> rolDeUsuarios, String cvLac) {
-        super(id, nombre, rolDeUsuarios);
+    public RolDocenteEntity(Long id, Boolean estado, @FutureOrPresent LocalDate fechaInicio, @FutureOrPresent LocalDate fechaFin, UsuarioEntity usuario, RolUsuarioEntity rolUsuario, String cvLac, DepartamentoEntity departamento) {
+        super(id, estado, fechaInicio, fechaFin, usuario, rolUsuario);
         this.cvLac = cvLac;
+        this.departamento = departamento;
+    }
+
+    public RolDocenteEntity(String cvLac, DepartamentoEntity departamento) {
+        this.cvLac = cvLac;
+        this.departamento = departamento;
     }
 }

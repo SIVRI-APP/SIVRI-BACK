@@ -3,7 +3,6 @@ package edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.ad
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Proyections.validarVinculacionUsuarioGrupo;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.port.out.UsuarioObtenerREPO;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntityID;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaRepository.UsuarioRepository;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +26,7 @@ public class UsuarioObtenerAdapter implements UsuarioObtenerREPO {
 
     @Override
     public Boolean validarExistencia(TipoDocumento tipoDocumento, String numeroDocumento) {
-        return usuarioRepository.existsById(new UsuarioEntityID(tipoDocumento, numeroDocumento));
+        return usuarioRepository.existsByTipoDocumentoAndNumeroDocumento(tipoDocumento, numeroDocumento);
     }
 
     @Override
