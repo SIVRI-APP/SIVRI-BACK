@@ -4,15 +4,16 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "rol_funcionario")
+@Table(name = "funcionario")
 @Data
-public class RolFuncionarioEntity {
+public class FuncionarioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false, length = 45)
-    private String nombre;
-
+    @ManyToOne
+    @JoinColumn(name = "usuarioId")
+    private UsuarioEntity usuario;
+    
 }

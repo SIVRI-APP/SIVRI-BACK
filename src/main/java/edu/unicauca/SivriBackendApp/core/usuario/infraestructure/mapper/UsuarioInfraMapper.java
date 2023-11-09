@@ -8,6 +8,5 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UsuarioInfraMapper {
 
-    @Mapping(target = "rolesDeUsuario", ignore = true)
     UsuarioEntity solicitudCreacionDeUsuario (Usuario modelo);
 }

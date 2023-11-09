@@ -1,7 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.usuario.application.dto.response;
 
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.EstadoUsuario;
-import edu.unicauca.SivriBackendApp.core.usuario.domain.model.RolUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Sexo;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.TipoDocumento;
 import lombok.Data;
@@ -27,5 +26,4 @@ public class UsuarioValidarExistenciaDTO {
 
     private String correo;
 
-    private List<RolUsuario> rolesDeUsuario;
 }

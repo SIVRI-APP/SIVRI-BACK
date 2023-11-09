@@ -1,15 +1,12 @@
 package edu.unicauca.SivriBackendApp.core.usuario.domain.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.Data;
 
-import java.util.List;
+public class RolFuncionario {
 
-@Getter
-@Setter
-public class RolFuncionario extends RolAcademico {
+    Long id;
 
-    public RolFuncionario(Integer id, String nombre, List<RolUsuario> rolDeUsuarios) {
-        super(id, nombre, rolDeUsuarios);
-    }
+    private String nombre;
+
 }

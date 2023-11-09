@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioObtenerService implements UsuarioObtenerCU {
+public class UsuarioObtenerService implements UsuarioObtenerCU{
 
     private UsuarioObtenerREPO usuarioObtenerREPO;
 
@@ -23,23 +23,11 @@ public class UsuarioObtenerService implements UsuarioObtenerCU {
 
     @Override
     public Respuesta<validarVinculacionUsuarioGrupo> validarVinculacionUsuarioGrupo(TipoDocumento tipoDocumento, String numeroDocumento) {
-        Optional<validarVinculacionUsuarioGrupo> respuestaBd = usuarioObtenerREPO.validarVinculacionUsuarioGrupo(tipoDocumento, numeroDocumento);
-
-        if (respuestaBd.isEmpty()){
-            throw new ReglaDeNegocioException("bad.no.se.encontro.registro.ebedded.id", List.of(tipoDocumento.getDescripcion(), numeroDocumento));
-        }
-
-        return new RespuestaHandler<>(200, "sucess.usuario.existe", List.of(tipoDocumento.getDescripcion(), numeroDocumento), "", respuestaBd.get()).getRespuesta();
+        return null;
     }
 
     @Override
     public Respuesta<Boolean> validarExistencia(TipoDocumento tipoDocumento, String numeroDocumento) {
-        Boolean respuestaBd = usuarioObtenerREPO.validarExistencia(tipoDocumento, numeroDocumento);
-
-        if (!respuestaBd){
-            throw new ReglaDeNegocioException("bad.no.se.encontro.registro.ebedded.id", List.of(tipoDocumento.getDescripcion(), numeroDocumento));
-        }
-
-        return new RespuestaHandler<>(200, "sucess.usuario.existe", List.of(tipoDocumento.getDescripcion(), numeroDocumento), "", true).getRespuesta();
+        return null;
     }
 }

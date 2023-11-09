@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.common.security.token;
 
-import edu.unicauca.SivriBackendApp.common.security.user.User;
+import edu.unicauca.SivriBackendApp.common.security.credential.Credential;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,22 +12,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "_token")
 public class Token {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
 
-    @Column(unique = true)
-    public String token;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public Integer id;
 
-    @Enumerated(EnumType.STRING)
-    public TokenType tokenType = TokenType.BEARER;
+  @Column(unique = true)
+  public String token;
 
-    public boolean revoked;
+  @Enumerated(EnumType.STRING)
+  public TokenType tokenType = TokenType.BEARER;
 
-    public boolean expired;
+  public boolean revoked;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    public User user;
+  public boolean expired;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "credential_id")
+  public Credential credential;
 }

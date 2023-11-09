@@ -8,8 +8,5 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UsuarioDtoMapper {
 
-    @Mapping(target = "estado", ignore = true)
-    @Mapping(target = "contraseña", ignore = true)
-    @Mapping(target = "rolesDeUsuario", ignore = true)
     Usuario solicitudCreacionDeUsuario (SolicitudCreacionUsuarioDTO nuevoUsuario);
 }

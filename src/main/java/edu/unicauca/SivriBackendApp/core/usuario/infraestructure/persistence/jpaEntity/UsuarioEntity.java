@@ -3,18 +3,17 @@ package edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jp
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.EstadoUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Sexo;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.domain.model.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.List;
 
 @Entity
-@Table(name = "usuario")
 @Data
-public class UsuarioEntity implements UserDetails {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "usuario")
+public class UsuarioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +21,6 @@ public class UsuarioEntity implements UserDetails {
 
     @Column(name = "correo", length = 50, nullable = false, unique = true)
     private String correo;
-
-    @Column(name = "contraseña", length = 50)
-    private String contraseña;
 
     @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento;
@@ -38,6 +34,9 @@ public class UsuarioEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private EstadoUsuario estado;
 
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipoUsuario;
+
     @Column(name = "nombres", length = 100, nullable = false)
     private String nombres;
 
@@ -47,45 +46,7 @@ public class UsuarioEntity implements UserDetails {
     @Column(name = "telefono", length = 45, nullable = false)
     private String telefono;
 
+    @Column(name = "cvLac", length = 150)
+    private String cvLac;
 
-
-    @OneToMany(mappedBy = "usuario")
-    private List<RolEntity> rolesDeUsuario;
-
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return contraseña;
-    }
-
-    @Override
-    public String getUsername() {
-        return correo;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
 }

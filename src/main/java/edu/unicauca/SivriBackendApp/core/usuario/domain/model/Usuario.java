@@ -2,18 +2,24 @@ package edu.unicauca.SivriBackendApp.core.usuario.domain.model;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 public class Usuario {
 
-    private String numeroDocumento;
+    private Long id;
+
+    private String correo;
+
+    private String contraseña;
 
     private TipoDocumento tipoDocumento;
+
+    private String numeroDocumento;
 
     private Sexo sexo;
 
     private EstadoUsuario estado;
+
+    private TipoUsuario tipoUsuario;
 
     private String nombres;
 
@@ -21,12 +27,6 @@ public class Usuario {
 
     private String telefono;
 
-    private String correo;
+    private String cvLac;
 
-    private String contraseña;
-
-    private List<RolUsuario> rolesDeUsuario;
-
-//    @OneToMany(mappedBy="usuario", cascade = CascadeType.REMOVE)
-//    private List<IntegranteProyectoEntity> participacionProyectos;
 }

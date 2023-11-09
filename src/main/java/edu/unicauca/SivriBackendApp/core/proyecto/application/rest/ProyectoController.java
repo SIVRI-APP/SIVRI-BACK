@@ -14,14 +14,14 @@ import jakarta.validation.constraints.Positive;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("proyecto")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/v1/proyecto")
 public class ProyectoController<T> {
 
     private final ProyectoObtenerCU proyectoObtenerCU;
@@ -37,6 +37,7 @@ public class ProyectoController<T> {
         this.proyectoEliminarCU = proyectoEliminarCU;
         this.proyectoDtoMapper = proyectoDtoMapper;
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Respuesta> obtenerFullDetallePorId(@PathVariable(value = "id") long id) {

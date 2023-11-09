@@ -52,77 +52,25 @@ INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) V
 
 
 
--- |***** ACADEMICA *****|
-
--- FACULTAD
-INSERT INTO facultad (id, nombre) VALUES (1, 'Ingeniria Electronica y Telecomunicaciones');
-
--- DEPARTAMENTO
-INSERT INTO departamento (id, nombre, facultadId) VALUES (1, 'Departamento de Sistemas', 1);
-
--- PROGRAMA
-INSERT INTO programa (id, nombre, departamentoId) VALUES (1, 'Ingenieria de Sistemas', 1);
-
-
-
-
-
 -- |***** USUARIO *****|
 
--- USUARIO
-INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (1, '10611', 'CEDULA_CIUDADANIA', 'MASCULINO', 'ACTIVO', 'Miguel', 'Proyectos', '3225864404', 'miguelmonje@unicauca.edu.co');
-INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (2, '10612', 'CEDULA_CIUDADANIA', 'FEMENINO', 'ACTIVO', 'Yurani', 'Semilleros', '3225864404', 'correoSemilleros@unicauca.edu.co');
-INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (3, '10613', 'CEDULA_CIUDADANIA', 'OTRO', 'ACTIVO', 'Daniel', 'Grupos', '3225864404', 'correoGrupos@unicauca.edu.co');
-INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (4, '10614', 'CEDULA_CIUDADANIA', 'MASCULINO', 'ACTIVO', 'Martin', 'Investigador Externo', '3225864404', 'correo4@unicauca.edu.co');
-INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (5, '10615', 'CEDULA_CIUDADANIA', 'MASCULINO', 'ACTIVO', 'Jacob', 'Docente', '3225864404', 'correo5@unicauca.edu.co');
-INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (6, '10616', 'CEDULA_EXTRANJERIA', 'MASCULINO', 'ACTIVO', 'Jacob', 'Egresado', '3225864404', 'correo6@unicauca.edu.co');
-INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (7, '10617', 'TARJETA_IDENTIDAD', 'MASCULINO', 'ACTIVO', 'Jacob', 'Pregrado', '3225864404', 'correo7@unicauca.edu.co');
-INSERT INTO usuario (id, numeroDocumento, tipoDocumento, sexo, estado, nombres, apellidos, telefono, correo) VALUES (8, '10618', 'PASAPORTE', 'MASCULINO', 'ACTIVO', 'Jacob', 'Posgrado', '3225864404', 'correo8@unicauca.edu.co');
-
--- ROL USUARIO
-INSERT INTO rol_usuario (id, nombre) VALUES (1, 'FUNCIONARIO');
-INSERT INTO rol_usuario (id, nombre) VALUES (2, 'INVESTIGADOR_EXTERNO');
-INSERT INTO rol_usuario (id, nombre) VALUES (3, 'DOCENTE');
-INSERT INTO rol_usuario (id, nombre) VALUES (4, 'EGRESADO');
-INSERT INTO rol_usuario (id, nombre) VALUES (5, 'POSGRADO');
-INSERT INTO rol_usuario (id, nombre) VALUES (6, 'PREGRADO');
-
--- ROL
-INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (1, 1, '2023-08-30', 1, 1);
-INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (2, 1, '2023-08-30', 2, 2);
-INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (3, 1, '2023-08-30', 3, 3);
-INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (4, 1, '2023-08-30', 4, 4);
-INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (5, 1, '2023-08-30', 5, 5);
-INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (6, 1, '2023-08-30', 6, 6);
-INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (7, 1, '2023-08-30', 7, 3);
-INSERT INTO rol (id, estado, fechaInicio, usuarioId, rolUsuarioId) VALUES (8, 1, '2023-08-30', 8, 3);
-INSERT INTO rol (id, estado, fechaInicio, fechaFin, usuarioId, rolUsuarioId) VALUES (9, 0, '2023-08-30', '2023-08-30', 1, 4);
-INSERT INTO rol (id, estado, fechaInicio, fechaFin, usuarioId, rolUsuarioId) VALUES (10, 0, '2023-08-30', '2023-08-30', 1, 5);
-INSERT INTO rol (id, estado, fechaInicio, fechaFin, usuarioId, rolUsuarioId) VALUES (11, 0, '2023-08-30', '2023-08-30', 1, 6);
-
 -- ROL FUNCIONARIO
-INSERT INTO rol_funcionario (rolAcademicoId) VALUES (1);
+INSERT INTO rol_funcionario (id, nombre) VALUES (1, 'SUPER_ADMIN');
+INSERT INTO rol_funcionario (id, nombre) VALUES (2, 'USUARIOS');
+INSERT INTO rol_funcionario (id, nombre) VALUES (3, 'GRUPOS');
+INSERT INTO rol_funcionario (id, nombre) VALUES (4, 'SEMILLEROS');
+INSERT INTO rol_funcionario (id, nombre) VALUES (5, 'PROYECTOS_INTERNOS');
+INSERT INTO rol_funcionario (id, nombre) VALUES (6, 'PROYECTOS_EXTERNOS');
 
--- ROL INVESTIGADOR EXTERNO
-INSERT INTO rol_investigador_externo (rolAcademicoId) VALUES (2);
-
--- ROL DOCENTE
-INSERT INTO rol_docente (rolAcademicoId, CvLAC, departamentoId) VALUES (3, 'www.cvlac.com', 1);
-
--- ROL EGRESADO
-INSERT INTO rol_egresado (rolAcademicoId) VALUES (4);
-
--- ROL POSGRADO
-INSERT INTO rol_posgrado (rolAcademicoId, programaId) VALUES (5,1);
-
--- ROL PREGRADO
-INSERT INTO rol_pregrado (rolAcademicoId, programaId) VALUES (6,1);
+-- USUARIO
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, estado, tipoUsuario, nombres, apellidos, telefono) VALUES (1, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ACTIVO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
 
 
+-- FUNCIONARIO
+INSERT INTO funcionario (id, usuarioId) VALUES (1, 1);
 
--- -- -- ROL PROYECTO
--- -- INSERT INTO rolproyecto (id, nombre) VALUES (1, 'Director de Proyecto');
--- --
--- -- -- INTEGRANTE PROYECTO
--- -- INSERT INTO integrante_proyecto (id, fechaInicio, fechaFin, estado, proyectoId, usuarioId, rolId) VALUES (1, '2024-08-30', '2024-08-30', 'activo', 1, '10611', 1);
--- --
+
+-- ROL ADMINISTRATIVO
+INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (1, 1, 1, true, '2024-01-01');
+INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (2, 1, 2, true, '2024-01-01');
+
