@@ -34,4 +34,9 @@ public class UsuarioObtenerAdapter implements UsuarioObtenerREPO {
         return usuarioRepository.existsByCorreo(correo);
     }
 
+    @Override
+    public Boolean existsById(Long id) {
+        return usuarioRepository.existsById(id);
+    }
+
 }

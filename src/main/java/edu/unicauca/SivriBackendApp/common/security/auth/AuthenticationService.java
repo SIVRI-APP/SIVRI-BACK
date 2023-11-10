@@ -32,9 +32,10 @@ public class AuthenticationService {
 
   public AuthenticationResponse register(RegisterRequest request) {
     var user = Credential.builder()
+        .usuario(usuarioRepository.findByCorreo(request.getEmail()).orElseThrow())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
-        .usuario(usuarioRepository.findByCorreo(request.getEmail()).orElseThrow())
+        .created(true)
         .build();
     var savedUser = repository.save(user);
     var jwtToken = jwtService.generateToken(user);

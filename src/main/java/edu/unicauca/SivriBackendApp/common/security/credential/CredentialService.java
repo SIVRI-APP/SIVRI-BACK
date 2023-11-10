@@ -1,18 +1,27 @@
 package edu.unicauca.SivriBackendApp.common.security.credential;
 
+import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
+import edu.unicauca.SivriBackendApp.common.security.auth.AuthenticationService;
+import edu.unicauca.SivriBackendApp.common.security.auth.RegisterRequest;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntity;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaRepository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class CredentialService {
 
     private final PasswordEncoder passwordEncoder;
-    private final CredentialRepository repository;
+    private final CredentialRepository credentialRepository;
+    private final AuthenticationService authenticationService;
+    private final UsuarioRepository usuarioRepository;
+
     public void changePassword(ChangePasswordRequest request, Principal connectedUser) {
 
         var user = (Credential) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
@@ -30,6 +39,36 @@ public class CredentialService {
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
 
         // save the new password
-        repository.save(user);
+        credentialRepository.save(user);
+    }
+
+    public Boolean registrarUsuario(RegisterRequest request){
+
+        if (!usuarioRepository.existsByCorreo(request.getEmail())){
+            throw new ReglaDeNegocioException("bad.request");
+        }
+
+        if (!usuarioRepository.existsById(request.getSecretId())){
+            throw new ReglaDeNegocioException("bad.request");
+        }
+
+        Optional<Credential> credential = credentialRepository.findByEmail(request.getEmail());
+        if (credential.isPresent()){
+            if (credential.get().getCreated()) {
+                throw new ReglaDeNegocioException("bad.credentials.ya.existen");
+            }
+        }
+
+        Optional<UsuarioEntity> respuestaBd = usuarioRepository.findByCorreo(request.getEmail());
+        if (respuestaBd.isEmpty()){
+            throw new ReglaDeNegocioException("bad.request");
+        } else if (respuestaBd.get().getId() != request.getSecretId()) {
+            throw new ReglaDeNegocioException("bad.request");
+        }
+
+
+        authenticationService.register(request);
+
+        return true;
     }
 }

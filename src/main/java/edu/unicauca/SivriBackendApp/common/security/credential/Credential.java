@@ -26,6 +26,7 @@ public class Credential implements UserDetails {
   private Integer id;
   private String email;
   private String password;
+  private Boolean created;
 
   @OneToMany(mappedBy = "credential")
   private List<Token> tokens;

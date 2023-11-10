@@ -41,4 +41,10 @@ public class UsuarioObtenerService implements UsuarioObtenerCU{
         Boolean respuestaBd = usuarioObtenerREPO.existsByCorreo(correo);
         return new RespuestaHandler<>(200, "ok.usuario.correo.encontrado", List.of(correo), "",respuestaBd).getRespuesta();
     }
+
+    @Override
+    public Respuesta<Boolean> existsById(Long id) {
+        Boolean respuestaBd = usuarioObtenerREPO.existsById(id);
+        return new RespuestaHandler<>(200, "ok.usuario.correo.encontrado", List.of(id), "",respuestaBd).getRespuesta();
+    }
 }

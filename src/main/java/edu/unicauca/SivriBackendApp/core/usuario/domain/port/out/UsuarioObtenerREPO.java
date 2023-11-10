@@ -14,4 +14,6 @@ public interface UsuarioObtenerREPO {
 
     Boolean existsByCorreo(String correo);
 
+    Boolean existsById(Long id);
+
 }

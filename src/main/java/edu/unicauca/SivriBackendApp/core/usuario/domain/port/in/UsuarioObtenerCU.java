@@ -11,4 +11,5 @@ public interface UsuarioObtenerCU {
     Respuesta<ValidarExistenciaUsuarioSistema> validarExistenciaUsuarioSistema(String tipoDocumento, String numeroDocumento);
     Respuesta<Boolean> existsByTipoDocumentoAndNumeroDocumento(TipoDocumento tipoDocumento, String numeroDocumento);
     Respuesta<Boolean> existsByCorreo(String correo);
+    Respuesta<Boolean> existsById(Long id);
 }

@@ -1,16 +1,14 @@
 package edu.unicauca.SivriBackendApp.common.security.credential;
 
+import edu.unicauca.SivriBackendApp.common.security.auth.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/v1/credential")
 @RequiredArgsConstructor
 public class CredentialController {
 
@@ -23,5 +21,13 @@ public class CredentialController {
     ) {
         service.changePassword(request, connectedUser);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("registration")
+    public  ResponseEntity<Boolean> userRegistration(@RequestBody RegisterRequest request){
+
+        service.registrarUsuario(request);
+
+        return ResponseEntity.ok().body(true);
     }
 }

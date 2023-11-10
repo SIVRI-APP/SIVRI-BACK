@@ -23,15 +23,15 @@ public class UsuarioController<T> {
 
     @GetMapping("validarExistenciaSistema")
     @PreAuthorize("hasAnyAuthority(" +
-            "'FUNCIONARIO:SUPER_ADMIN', " +
             "'GRUPO:DIRECTOR',  " +
             "'SEMILLERO:MENTOR',  " +
             "'PROYECTO:DIRECTOR',    " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:SUPER_ADMIN',  " +
             "'FUNCIONARIO:USUARIOS',   " +
             "'FUNCIONARIO:GRUPOS',  " +
             "'FUNCIONARIO:SEMILLEROS',  " +
-            "'FUNCIONARIO:PROYECTOS_INTERNOS',  " +
+            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
             "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
     public ResponseEntity<Respuesta> validarExistenciaUsuarioSistema(
             @RequestParam(name = "tipoDocumento") String tipoDocumento,
