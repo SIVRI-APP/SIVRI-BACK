@@ -14,15 +14,12 @@ import org.hibernate.annotations.Cascade;
 import java.time.LocalDate;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "grupo")
 //relacion de herencia
 @PrimaryKeyJoinColumn(name = "grupoId")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
+@Data
 public class GrupoEntity extends OrganismoDeInvestigacionEntity {
 
     @Column(nullable = false,length = 10)
@@ -55,13 +52,6 @@ public class GrupoEntity extends OrganismoDeInvestigacionEntity {
     @JoinColumn(name = "facultadId")
     private FacultadEntity facultad;
 
-    // relacion *a* con entidad Disciplina
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "grupo_disciplina",
-            joinColumns = @JoinColumn(name="disciplinaId"),
-            inverseJoinColumns = @JoinColumn(name="grupoId"))
-    private List<DisciplinaEntity> disciplinas;
-
     // relacion 1a* con entidad integranteGrupo
     @OneToMany(mappedBy = "grupo", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -76,4 +66,21 @@ public class GrupoEntity extends OrganismoDeInvestigacionEntity {
     @JsonBackReference
     private List<SemilleroEntity> semilleros;
 
+    @Override
+    public String toString() {
+        return "GrupoEntity{" +
+                "estado=" + estado +
+                ", direccion='" + direccion + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", email='" + email + '\'' +
+                ", sitioWeb='" + sitioWeb + '\'' +
+                ", escalafonColciencias='" + escalafonColciencias + '\'' +
+                ", direccionGrupLac='" + direccionGrupLac + '\'' +
+                ", codigoColciencias='" + codigoColciencias + '\'' +
+                ", centroInvestigaciones='" + centroInvestigaciones + '\'' +
+                ", realizaciones='" + realizaciones + '\'' +
+                ", perspectivas='" + perspectivas + '\'' +
+                ", facultad=" + facultad +
+                '}';
+    }
 }

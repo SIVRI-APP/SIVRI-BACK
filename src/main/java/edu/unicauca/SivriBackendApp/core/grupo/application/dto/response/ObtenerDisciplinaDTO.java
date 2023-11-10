@@ -7,5 +7,5 @@ import lombok.Data;
 public class ObtenerDisciplinaDTO {
     private Integer id;
     private String disciplina;
-    private SubArea subArea;
+    private ObtenerSubAreasDTO subArea;
 }

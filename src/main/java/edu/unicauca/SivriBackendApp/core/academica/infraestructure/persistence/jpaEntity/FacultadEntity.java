@@ -8,10 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "facultad")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class FacultadEntity {
 
     @Id
@@ -27,4 +24,12 @@ public class FacultadEntity {
 
     @OneToMany(mappedBy = "facultad", cascade = CascadeType.REMOVE)
     private List<DepartamentoEntity> departamentos;
+
+    @Override
+    public String toString() {
+        return "FacultadEntity{" +
+                "idFacultad=" + idFacultad +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
 }

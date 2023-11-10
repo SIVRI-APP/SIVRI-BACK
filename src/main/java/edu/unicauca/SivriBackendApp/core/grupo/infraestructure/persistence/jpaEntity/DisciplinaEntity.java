@@ -6,11 +6,7 @@ import lombok.*;
 
 @Entity
 @Table(name = "disciplina")
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
+@Data
 public class DisciplinaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +23,12 @@ public class DisciplinaEntity {
     // relacion *a* con entidad grupo ESTA relacion esta en la entidad grupo
 
 
+    @Override
+    public String toString() {
+        return "DisciplinaEntity{" +
+                "id=" + id +
+                ", disciplina='" + disciplina + '\'' +
+                ", subArea=" + subArea +
+                '}';
+    }
 }

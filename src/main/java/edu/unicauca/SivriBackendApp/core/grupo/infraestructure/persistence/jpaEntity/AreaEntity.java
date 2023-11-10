@@ -9,11 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "area")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-
+@Data
 public class AreaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

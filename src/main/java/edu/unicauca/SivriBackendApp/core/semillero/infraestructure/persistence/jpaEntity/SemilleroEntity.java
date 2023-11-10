@@ -12,9 +12,9 @@ import lombok.*;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "semillero")
-
 @Data
 //relacion de herencia
 @PrimaryKeyJoinColumn(name = "semilleroId")
@@ -28,11 +28,12 @@ public class SemilleroEntity extends OrganismoDeInvestigacionEntity{
     private String sede;
 
     //relacion ce 1a* con integranteSemillero
-    @JsonBackReference
+
+    //@JsonBackReference
     //@JsonIgnore
-    @OneToMany(mappedBy = "semillero",fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    /*@OneToMany(mappedBy = "semillero",fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     private List<IntegranteSemilleroEntity> integrantes;
-    //relacion 1a* con entidad semilleroDocumentacion
+    *///relacion 1a* con entidad semilleroDocumentacion
     @OneToMany(mappedBy = "semillero", fetch = FetchType.LAZY)
     private List<SemilleroDocumentacionEntity> documentosSemillero;
 
@@ -49,8 +50,17 @@ public class SemilleroEntity extends OrganismoDeInvestigacionEntity{
     private GrupoEntity grupo;
 
     //relacion de 1a* con plan de trabajo
-    @JsonBackReference
+    /*@JsonBackReference
     @OneToMany(mappedBy = "semillero",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<PlanTrabajoEntity> planesTrabajo;
+*/
 
+    @Override
+    public String toString() {
+        return "SemilleroEntity{" +
+                "estado=" + estado +
+                ", sede='" + sede + '\'' +
+                ", grupo=" + grupo +
+                '}';
+    }
 }

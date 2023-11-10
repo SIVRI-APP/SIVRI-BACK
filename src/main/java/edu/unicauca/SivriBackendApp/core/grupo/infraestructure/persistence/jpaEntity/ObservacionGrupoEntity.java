@@ -9,10 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "observacion_grupo")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class ObservacionGrupoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

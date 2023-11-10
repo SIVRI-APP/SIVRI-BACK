@@ -22,7 +22,15 @@ public class RolGrupoEntity {
     private String rolGrupo;
 
     //relacion 1a* con entidad integrantegrupo
-    @OneToMany(mappedBy = "rolGrupo",fetch = FetchType.LAZY)
+    /*@OneToMany(mappedBy = "rolGrupo",fetch = FetchType.LAZY)
     private List<IntegranteGrupoEntity> integrantesGrupo;
+*/
 
+    @Override
+    public String toString() {
+        return "RolGrupoEntity{" +
+                "id=" + id +
+                ", rolGrupo='" + rolGrupo + '\'' +
+                '}';
+    }
 }

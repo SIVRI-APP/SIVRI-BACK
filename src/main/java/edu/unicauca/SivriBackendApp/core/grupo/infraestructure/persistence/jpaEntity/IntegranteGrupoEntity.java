@@ -12,11 +12,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "integrante_grupo")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
+@Data
 public class IntegranteGrupoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +34,6 @@ public class IntegranteGrupoEntity {
     @ManyToOne()
     @JoinColumn(name = "grupoId")
     @JsonBackReference
-
     private GrupoEntity grupo;
 
     //relacion 1a1 con entidad usuario aqui esta la foranea

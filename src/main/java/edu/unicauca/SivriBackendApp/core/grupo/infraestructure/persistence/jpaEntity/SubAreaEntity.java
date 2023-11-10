@@ -10,11 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "sub_area")
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
-
+@Data
 public class SubAreaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

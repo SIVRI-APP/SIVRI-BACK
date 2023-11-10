@@ -18,10 +18,7 @@ import java.time.LocalDate;
                 @UniqueConstraint(columnNames = {"usuarioNumeroDocumento", "rolId", "fechaIngreso"})
         })
 @Data
-
 public class IntegranteSemilleroEntity {
-
-    //IntegranteSemilleroKey idKey;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
