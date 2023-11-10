@@ -1,12 +1,14 @@
 package edu.unicauca.SivriBackendApp.common.exception.handler;
 
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
+import edu.unicauca.SivriBackendApp.common.exception.UsuarioSinCredencialesException;
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -37,13 +39,15 @@ public class CustomExceptionHandler{
         return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, "", errors).getRespuesta(), HttpStatus.BAD_REQUEST);
     }
 
-//    @ExceptionHandler(MissingServletRequestParameterException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public ResponseEntity<String> handleMissingParameterException(MissingServletRequestParameterException ex) {
-//        return ResponseEntity
-//                .status(HttpStatus.BAD_REQUEST)
-//                .body("Parámetro de solicitud faltante: " + ex.getParameterName());
-//    }
+    @ExceptionHandler(UsuarioSinCredencialesException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Respuesta<Map<String, String>>> usuarioSinCredencialesException(final HttpServletRequest req,
+                                                                                 final ReglaDeNegocioException ex, final Locale locale) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+
+        return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, "", error).getRespuesta(), HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(ReglaDeNegocioException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

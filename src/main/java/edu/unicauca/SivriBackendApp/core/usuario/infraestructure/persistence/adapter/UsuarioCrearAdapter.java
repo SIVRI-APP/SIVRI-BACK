@@ -15,7 +15,7 @@ public class UsuarioCrearAdapter implements UsuarioCrearREPO {
     private final UsuarioInfraMapper usuarioInfraMapper;
 
     @Override
-    public Usuario save(Usuario usuario) {
+    public Usuario registrarUsuario(Usuario usuario) {
         return usuarioInfraMapper.toModel(usuarioRepository.save(usuarioInfraMapper.toEntity(usuario)));
     }
 }

@@ -75,3 +75,12 @@ INSERT INTO funcionario (id, usuarioId) VALUES (2, 2);
 INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (1, 1, 1, true, '2024-01-01');
 INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (2, 2, 2, true, '2024-01-01');
 
+
+
+
+
+-- |***** MAIL TEMPLATE *****|
+INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (1, 'template.html', 'correo para crear credenciales de Usuario', 'nombre,tipoUsuario,grupoInvestigacion,rolGrupo');
+
+
+

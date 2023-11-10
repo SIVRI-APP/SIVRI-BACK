@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.common.security.credential;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.security.auth.AuthenticationService;
 import edu.unicauca.SivriBackendApp.common.security.auth.RegisterRequest;
+import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Usuario;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaRepository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -68,6 +69,24 @@ public class CredentialService {
 
 
         authenticationService.register(request);
+
+        return true;
+    }
+
+    public Boolean crearCredencial(Usuario nuevoUsuario){
+        //Creamos la credencial en pendiente
+        Optional<Credential> credential = credentialRepository.findByEmail(nuevoUsuario.getCorreo());
+
+        if (credential.isPresent()){
+            throw new ReglaDeNegocioException("bad.credentials.ya.existen");
+        }else{
+            Credential user = Credential.builder()
+                    .email(nuevoUsuario.getCorreo())
+                    .created(false)
+                    .usuario(usuarioRepository.findById(nuevoUsuario.getId()).get())
+                    .build();
+            credentialRepository.save(user);
+        }
 
         return true;
     }

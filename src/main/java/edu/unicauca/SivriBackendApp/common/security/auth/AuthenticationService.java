@@ -31,19 +31,16 @@ public class AuthenticationService {
   private final UsuarioRepository usuarioRepository;
 
   public AuthenticationResponse register(RegisterRequest request) {
-    var user = Credential.builder()
-        .usuario(usuarioRepository.findByCorreo(request.getEmail()).orElseThrow())
-        .email(request.getEmail())
-        .password(passwordEncoder.encode(request.getPassword()))
-        .created(true)
-        .build();
-    var savedUser = repository.save(user);
-    var jwtToken = jwtService.generateToken(user);
-    var refreshToken = jwtService.generateRefreshToken(user);
-    saveUserToken(savedUser, jwtToken);
+
+    Credential savedUser = repository.findByEmail(request.getEmail()).get();
+    savedUser.setPassword(passwordEncoder.encode(request.getPassword()));
+    savedUser.setCreated(true);
+
+    repository.save(savedUser);
+
     return AuthenticationResponse.builder()
-        .accessToken(jwtToken)
-            .refreshToken(refreshToken)
+        .accessToken("jwtToken")
+        .refreshToken("refreshToken")
         .build();
   }
 

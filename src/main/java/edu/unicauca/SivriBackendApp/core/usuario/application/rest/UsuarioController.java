@@ -3,6 +3,8 @@ package edu.unicauca.SivriBackendApp.core.usuario.application.rest;
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.core.usuario.application.dto.request.RegistroUsuarioDTO;
 import edu.unicauca.SivriBackendApp.core.usuario.application.mapper.UsuarioAppMapper;
+import edu.unicauca.SivriBackendApp.core.usuario.domain.model.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.domain.model.TipoUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.port.in.UsuarioCrearCU;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.port.in.UsuarioObtenerCU;
 import jakarta.validation.Valid;
@@ -49,7 +51,25 @@ public class UsuarioController<T> {
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:USUARIOS')")
     public  ResponseEntity<Respuesta> registrarUsuario(@Valid @RequestBody RegistroUsuarioDTO registro){
-        Respuesta respuesta = usuarioCrearCU.guardar(usuarioAppMapper.registrarUsuario(registro));
+        Respuesta respuesta = usuarioCrearCU.registrarUsuario(usuarioAppMapper.registrarUsuario(registro));
+        return ResponseEntity.ok().body(respuesta);
+    }
+
+    @GetMapping("listarConFiltro")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:USUARIOS')")
+    public  ResponseEntity<Respuesta> listarConFiltro(
+            @RequestParam(required = false) String correo,
+            @RequestParam(required = false) TipoDocumento tipoDocumento,
+            @RequestParam(required = false) String numeroDocumento,
+            @RequestParam(required = false) String nombres,
+            @RequestParam(required = false) String apellidos,
+            @RequestParam(required = false) TipoUsuario tipoUsuario,
+            @RequestParam(required = false) int pageNo,
+            @RequestParam(required = false) int pageSize
+    ){
+        Respuesta respuesta = usuarioObtenerCU.listarConFiltro(pageNo, pageSize, correo, tipoDocumento, numeroDocumento, nombres, apellidos, tipoUsuario);
         return ResponseEntity.ok().body(respuesta);
     }
 
