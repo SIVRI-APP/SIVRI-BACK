@@ -26,25 +26,25 @@ public class GrupoActualizarPorDirectorDTO {
     private String direccionGrupLac;
     private String codigoColciencias;
     private String centroInvestigaciones;
-    @NotEmpty(message = "Campo Obligatorio")
+    /*@NotEmpty(message = "Campo Obligatorio")
     @NotBlank(message = "Dato Invalido")
     @Size(max = 1500, message = "Caracteres Excedidos")
-    private String mision;
-    @NotEmpty(message = "Campo Obligatorio")
+    */private String mision;
+   /* @NotEmpty(message = "Campo Obligatorio")
     @NotBlank(message = "Dato Invalido")
     @Size(max = 1500, message = "Caracteres Excedidos")
-    private String vision;
-    @NotEmpty(message = "Campo Obligatorio")
+   */ private String vision;
+   /* @NotEmpty(message = "Campo Obligatorio")
     @NotBlank(message = "Dato Invalido")
     @Size(max = 1500, message = "Caracteres Excedidos")
-    private String objetivo;
-    @NotEmpty(message = "Campo Obligatorio")
+  */  private String objetivo;
+  /*  @NotEmpty(message = "Campo Obligatorio")
     @NotBlank(message = "Dato Invalido")
     @Size(max = 1500, message = "Caracteres Excedidos")
-    private String realizaciones;
-    @NotEmpty(message = "Campo Obligatorio")
+  */  private String realizaciones;
+  /*  @NotEmpty(message = "Campo Obligatorio")
     @NotBlank(message = "Dato Invalido")
     @Size(max = 1500, message = "Caracteres Excedidos")
-    private String perspectivas;
+  */  private String perspectivas;
 
 }

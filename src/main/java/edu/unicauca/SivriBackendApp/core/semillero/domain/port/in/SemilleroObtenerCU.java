@@ -11,8 +11,8 @@ public interface SemilleroObtenerCU {
     Respuesta<Boolean> existePorId(int id);
     Respuesta<Boolean> existePorNombre(String nombre);
     Respuesta<Semillero> obtenerSemilleroPorId(int id);
-    //Respuesta<Semillero> obtenerSemillerosPorIdONombre(SemilleroObtenerIdONombreDTO semillero);
-
+    //Respuesta<List<Semillero>> obtenerSemillerosPorIdAndNombre(int idSemillero,String nombre);
+    //Respuesta<List<Semillero>> obtenerSemillerosPorIdOrNombre(String dato);
     //Respuesta<Semillero> obtenerSemilleroPorIdONombre(Semillero semillero);
 
     Respuesta<List<Semillero>> obtenerSemillerosPorIdGrupo(int idGrupo);

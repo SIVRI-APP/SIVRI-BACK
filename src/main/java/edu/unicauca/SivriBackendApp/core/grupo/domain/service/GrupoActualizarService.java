@@ -97,10 +97,12 @@ public class GrupoActualizarService implements GrupoActualizarCU {
             objGrupoActualizar.setTelefono(nuevosDatos.getTelefono());
             objGrupoActualizar.setEmail(nuevosDatos.getEmail());
             objGrupoActualizar.setSitioWeb(nuevosDatos.getSitioWeb());
+        } else if (estado==GrupoEstado.INACTIVO) {
+            throw new ReglaDeNegocioException("bad.error.actualizacion.grupo.inactivo",List.of("Grupo", "Id", String.valueOf(idGrupo)));
         }
         Boolean respuesta=grupoActualizarREPO.actualizarPorDirector(objGrupoActualizar);
         if (!respuesta){
-            throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Grupo", "Id", String.valueOf(nuevosDatos.getId())));
+            throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Grupo", "Id", String.valueOf(idGrupo)));
         }
         return new RespuestaHandler<>(200, "success.actualizacion.objeto", List.of("Grupo"), "", true).getRespuesta();
     }

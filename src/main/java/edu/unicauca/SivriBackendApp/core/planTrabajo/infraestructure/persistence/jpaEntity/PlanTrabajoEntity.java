@@ -1,6 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructure.persistence.jpaEntity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.model.EstadoPlanTrabajo;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity.SemilleroEntity;
@@ -30,8 +31,18 @@ public class PlanTrabajoEntity {
     @JoinColumn(name = "semilleroId")
     private SemilleroEntity semillero;
     //relacion 1a* actividadPlanTrabajo
-    @OneToMany(mappedBy = "planTrabajo", fetch = FetchType.LAZY)
+    /*@OneToMany(mappedBy = "planTrabajo", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<ActividadPlanTrabajoEntity> actividades;
+*/
 
+    @Override
+    public String toString() {
+        return "PlanTrabajoEntity{" +
+                "id=" + id +
+                ", nombrePlan='" + nombrePlan + '\'' +
+                ", estado=" + estado +
+                ", semillero=" + semillero +
+                '}';
+    }
 }

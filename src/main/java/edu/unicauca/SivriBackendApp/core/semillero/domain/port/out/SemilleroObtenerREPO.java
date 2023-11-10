@@ -10,7 +10,9 @@ import java.util.Optional;
 public interface SemilleroObtenerREPO {
     Boolean existePorId(int id);
     Boolean existePorNombre(String nombre);
-    //Optional<Semillero> obtenerSemilleroPorIdOrNombre(int id, String nombre);
+    //List<Semillero> obtenerSemilleroPorIdAndNombre(int idSemillero, String nombre);
+    //List<Semillero> obtenerSemilleroPorNombre(String nombre);
+
     Optional<Semillero> obtenerSemilleroPorId(int id);
     //Optional<Semillero> obtenerSemilleroPorNombre(String nombre);
     List<Semillero> obtenerSemillerosPorIdGrupo(int idGrupo);

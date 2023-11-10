@@ -9,7 +9,9 @@ import edu.unicauca.SivriBackendApp.core.semillero.domain.port.in.SemilleroObten
 import edu.unicauca.SivriBackendApp.core.semillero.domain.port.out.SemilleroObtenerREPO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +52,8 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "Exitoso", respuesta.get()).getRespuesta();
     }
 
+
+
     /*@Override
     public Respuesta<Optional<Semillero>> obtenerSemillerosPorIdONombre(SemilleroObtenerIdONombreDTO semillero) {
         System.out.println("idSemillero "+semillero.getSemilleroId()+" nombre "+semillero.getNombre());
@@ -70,6 +74,46 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "Exitoso", respuesta).getRespuesta();
     }
 */
+    /*@Override
+    public Respuesta<List<Semillero>> obtenerSemillerosPorIdAndNombre(int idSemillero, String nombre) {
+        System.out.println("id semillero "+idSemillero+" nombre "+nombre);
+        if (nombre.isBlank()){
+            //busca por ids
+        }else {
+            //busca por nombre
+            System.out.println("ingresaa buscar por nombre");
+            List<Semillero> respuesta=semilleroObtenerREPO.obtenerSemilleroPorNombre(nombre);
+        }
+        List<Semillero> respuesta=semilleroObtenerREPO.obtenerSemilleroPorIdAndNombre(idSemillero,nombre);
+        if (respuesta.isEmpty()){
+            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.semilleros");
+        }
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuesta).getRespuesta();
+
+    }*/
+
+    /*@Override
+    public Respuesta<List<Semillero>> obtenerSemillerosPorIdOrNombre(String dato) {
+        List<Semillero> respuesta= (List<Semillero>) semilleroObtenerREPO;
+        if (StringUtils.hasText(dato)){
+            int dato1=Integer.parseInt(dato);
+            if (JdbcUtils.isNumeric(dato1)){
+                //dato numerico
+
+            }else {
+                //dato string
+                respuesta = semilleroObtenerREPO.obtenerSemilleroPorNombre(dato);
+            }
+        }else {
+            //dato vacio
+            System.out.println("dato vacio");
+        }
+        if (respuesta.isEmpty()){
+            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.semilleros");
+        }
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuesta).getRespuesta();
+    }*/
+
     @Override
     public Respuesta<List<Semillero>> obtenerSemillerosPorIdGrupo(int idGrupo) {
         List<Semillero> respuesta=semilleroObtenerREPO.obtenerSemillerosPorIdGrupo(idGrupo);

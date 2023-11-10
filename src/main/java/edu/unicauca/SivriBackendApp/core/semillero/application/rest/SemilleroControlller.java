@@ -49,7 +49,19 @@ public class SemilleroControlller {
         return ResponseEntity.ok().body(respuesta);
 
     }
+    /*@GetMapping("/semilleroPorPatron")
+    public ResponseEntity<Respuesta> obtenerSemillerosPorPatron(
 
+            @RequestParam(value = "dato") String dato)
+    {
+        Respuesta<List<Semillero>> respuestaCU=semilleroObtenerCU.obtenerSemillerosPorIdOrNombre(dato);
+        Respuesta<List<SemilleroObtenerDTO>> respuesta=new Respuesta<>();
+        respuesta.setData(respuestaCU.getData().stream().map(semilleroDtoMapper::dtoObtenerSemillero).toList());
+        respuesta.setStatus(respuestaCU.getStatus());
+        respuesta.setUserMessage(respuestaCU.getUserMessage());
+        respuesta.setDeveloperMessage(respuestaCU.getDeveloperMessage());
+        return ResponseEntity.ok().body(respuesta);
+    }*/
     @GetMapping("")
     public ResponseEntity<Respuesta> obtenerSemilleros(){
         Respuesta<List<Semillero>> respuestaCU=semilleroObtenerCU.obtenerSemilleros();

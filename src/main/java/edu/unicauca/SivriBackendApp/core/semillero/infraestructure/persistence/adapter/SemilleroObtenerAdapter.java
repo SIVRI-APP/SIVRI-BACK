@@ -35,6 +35,7 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
 
 
 
+
     @Override
     public Optional<Semillero> obtenerSemilleroPorId(int id) {
         Optional<SemilleroEntity> respuestaJpa=semilleroRepository.findById(id);
@@ -53,6 +54,18 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
         }).collect(Collectors.toList());
         return semilleros;
     }*/
+    /*@Override
+    public List<Semillero> obtenerSemilleroPorIdAndNombre(int idSemillero, String nombre) {
+        *//*if (){
+
+        }*//*
+        List<Semillero> semilleros=semilleroRepository.findByIdAndNombreLikeIgnoreCase(idSemillero,nombre).stream().map(semilleroEntity -> {
+            Semillero semillero=semilleroMapper.obtenerModelo(semilleroEntity);
+            return semillero;
+        }).collect(Collectors.toList());
+        return semilleros;
+    }*/
+
     @Override
     public List<Semillero> obtenerSemillerosPorIdGrupo(int idGrupo) {
 
@@ -73,7 +86,14 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
    *//*
     return null;
     }*/
+   /* @Override
+    public List<Semillero> obtenerSemilleroPorNombre(String nombre) {
+        return this.semilleroRepository.findByNombreLikeIgnoreCase(nombre).stream().map(semilleroEntity -> {
+            Semillero semillero=semilleroMapper.obtenerModelo(semilleroEntity);
+            return semillero;
+        }).collect(Collectors.toList());
 
+    }*/
     @Override
     public List<Semillero> obtenerSemilleros() {
         List<Semillero> semilleros=semilleroRepository.findAll().stream().map(semilleroEntity -> {
