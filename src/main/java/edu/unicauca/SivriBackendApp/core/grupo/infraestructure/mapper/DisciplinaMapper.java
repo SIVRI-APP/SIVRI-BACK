@@ -13,5 +13,7 @@ import java.util.List;
 public interface DisciplinaMapper {
 
     List<Disciplina> obtenerModelo(final List<DisciplinaEntity> areasEntity);
+    Disciplina obtenerModeloUno(final DisciplinaEntity areasEntity);
+    DisciplinaEntity obtenerEntityDisciplina(final Disciplina modelDisciplina);
     AreaEntity obtenerEntity(final Area area);
 }
