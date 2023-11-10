@@ -34,6 +34,7 @@ public class RegistroUsuarioDTO {
     @Size(min = 5, max = 45, message = "El telefono del usuario debe contener minimo 5 y maximo 45 caracteres")
     private String telefono;
 
+    @NotNull(message = "Debe seleccionar un tipo valido para el usuario")
     private TipoUsuario tipoUsuario;
 
     private String cvLac;

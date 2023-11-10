@@ -1,6 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.adapter;
 
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Proyections.ValidarExistenciaUsuarioSistema;
+import edu.unicauca.SivriBackendApp.core.usuario.domain.model.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Usuario;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.port.out.UsuarioObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.mapper.UsuarioInfraMapper;
@@ -24,12 +25,13 @@ public class UsuarioObtenerAdapter implements UsuarioObtenerREPO {
     }
 
     @Override
-    public Boolean existsByCorreoAndTipoDocumentoAndNumeroDocumento(String correo, String tipoDocumento, String numeroDocumento) {
-        return usuarioRepository.existsByCorreoAndTipoDocumentoAndNumeroDocumento(correo, tipoDocumento, numeroDocumento);
+    public Boolean existsByTipoDocumentoAndNumeroDocumento(TipoDocumento tipoDocumento, String numeroDocumento) {
+        return usuarioRepository.existsByTipoDocumentoAndNumeroDocumento(tipoDocumento, numeroDocumento);
     }
 
     @Override
-    public Usuario guardar(Usuario usuario) {
-        return usuarioInfraMapper.toModel(usuarioRepository.save(usuarioInfraMapper.toEntity(usuario)));
+    public Boolean existsByCorreo(String correo) {
+        return usuarioRepository.existsByCorreo(correo);
     }
+
 }

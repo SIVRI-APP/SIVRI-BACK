@@ -4,6 +4,7 @@ import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Proyections.ValidarExistenciaUsuarioSistema;
+import edu.unicauca.SivriBackendApp.core.usuario.domain.model.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.port.in.UsuarioObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.port.out.UsuarioObtenerREPO;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,14 @@ public class UsuarioObtenerService implements UsuarioObtenerCU{
     }
 
     @Override
-    public Boolean existsByCorreoAndTipoDocumentoAndNumeroDocumento(String correo, String tipoDocumento, String numeroDocumento) {
-        return usuarioObtenerREPO.existsByCorreoAndTipoDocumentoAndNumeroDocumento(correo, tipoDocumento, numeroDocumento);
+    public Respuesta<Boolean> existsByTipoDocumentoAndNumeroDocumento(TipoDocumento tipoDocumento, String numeroDocumento) {
+        Boolean respuestaBd = usuarioObtenerREPO.existsByTipoDocumentoAndNumeroDocumento(tipoDocumento, numeroDocumento);
+        return new RespuestaHandler<>(200, "ok.usuario.encontrado", List.of(tipoDocumento.toString(), numeroDocumento), "",respuestaBd).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Boolean> existsByCorreo(String correo) {
+        Boolean respuestaBd = usuarioObtenerREPO.existsByCorreo(correo);
+        return new RespuestaHandler<>(200, "ok.usuario.correo.encontrado", List.of(correo), "",respuestaBd).getRespuesta();
     }
 }

@@ -48,7 +48,7 @@ public class UsuarioController<T> {
             "'GRUPO:DIRECTOR',  " +
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:USUARIOS')")
-    public  ResponseEntity<Respuesta> registrarUsuario(@RequestBody @Valid RegistroUsuarioDTO registro){
+    public  ResponseEntity<Respuesta> registrarUsuario(@Valid @RequestBody RegistroUsuarioDTO registro){
         Respuesta respuesta = usuarioCrearCU.guardar(usuarioAppMapper.registrarUsuario(registro));
         return ResponseEntity.ok().body(respuesta);
     }

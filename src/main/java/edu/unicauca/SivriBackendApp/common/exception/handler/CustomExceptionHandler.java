@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -35,6 +36,14 @@ public class CustomExceptionHandler{
 
         return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, "", errors).getRespuesta(), HttpStatus.BAD_REQUEST);
     }
+
+//    @ExceptionHandler(MissingServletRequestParameterException.class)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    public ResponseEntity<String> handleMissingParameterException(MissingServletRequestParameterException ex) {
+//        return ResponseEntity
+//                .status(HttpStatus.BAD_REQUEST)
+//                .body("Parámetro de solicitud faltante: " + ex.getParameterName());
+//    }
 
     @ExceptionHandler(ReglaDeNegocioException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

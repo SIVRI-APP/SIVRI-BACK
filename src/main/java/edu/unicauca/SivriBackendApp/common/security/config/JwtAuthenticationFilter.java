@@ -58,7 +58,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   }
 
   /**
-   *
    * Procesa las solicitudes HTTP para validar y autenticar los tokens JWT en el encabezado 'Authorization'.
    *
    * @param request     La solicitud HTTP actual

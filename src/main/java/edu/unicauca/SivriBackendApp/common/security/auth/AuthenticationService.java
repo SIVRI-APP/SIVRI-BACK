@@ -8,7 +8,6 @@ import edu.unicauca.SivriBackendApp.common.security.token.Token;
 import edu.unicauca.SivriBackendApp.common.security.token.TokenRepository;
 import edu.unicauca.SivriBackendApp.common.security.token.TokenType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.unicauca.SivriBackendApp.core.usuario.domain.port.in.UsuarioObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaRepository.UsuarioRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
