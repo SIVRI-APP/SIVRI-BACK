@@ -23,6 +23,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Filtro de autenticación JWT para procesar las solicitudes de autenticación con tokens JWT.
+ * Este filtro se encarga de validar y autenticar los tokens JWT presentes en las solicitudes HTTP.
+ */
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -32,6 +36,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   private final TokenRepository tokenRepository;
   private final CredentialRepository credentialRepository;
 
+  /**
+   * Obtiene las autoridades (roles) asociadas al usuario con el correo electrónico proporcionado.
+   *
+   * @param userEmail Correo electrónico del usuario
+   * @return Conjunto de autoridades asignadas al usuario
+   */
   private Set<SimpleGrantedAuthority> getAuthorities (String userEmail){
     Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 
@@ -46,6 +56,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     return authorities;
   }
+
+  /**
+   *
+   * Procesa las solicitudes HTTP para validar y autenticar los tokens JWT en el encabezado 'Authorization'.
+   *
+   * @param request     La solicitud HTTP actual
+   * @param response    La respuesta HTTP actual
+   * @param filterChain Cadena de filtros para continuar con el procesamiento de la solicitud
+   * @throws ServletException Si ocurre una excepción en el servlet
+   * @throws IOException      Si ocurre una excepción de entrada/salida
+   */
   @Override
   protected void doFilterInternal(
       @NonNull HttpServletRequest request,
@@ -82,6 +103,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authToken);
       }
     }
+
     filterChain.doFilter(request, response);
   }
 }

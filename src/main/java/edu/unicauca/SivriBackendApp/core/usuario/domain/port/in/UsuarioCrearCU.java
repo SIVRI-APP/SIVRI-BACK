@@ -4,5 +4,5 @@ import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.model.Usuario;
 
 public interface UsuarioCrearCU {
-    Respuesta<Boolean> solicitudCreacionDeUsuario (Usuario nuevoUsuario);
+    Respuesta guardar(Usuario usuario);
 }

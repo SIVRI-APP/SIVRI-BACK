@@ -61,14 +61,13 @@ INSERT INTO rol_funcionario (id, nombre) VALUES (3, 'GRUPOS');
 INSERT INTO rol_funcionario (id, nombre) VALUES (4, 'SEMILLEROS');
 INSERT INTO rol_funcionario (id, nombre) VALUES (5, 'PROYECTOS_INTERNOS');
 INSERT INTO rol_funcionario (id, nombre) VALUES (6, 'PROYECTOS_EXTERNOS');
+INSERT INTO rol_funcionario (id, nombre) VALUES (7, 'VICERRECTOR');
 
 -- USUARIO
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, estado, tipoUsuario, nombres, apellidos, telefono) VALUES (1, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ACTIVO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
-
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (1, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
 
 -- FUNCIONARIO
 INSERT INTO funcionario (id, usuarioId) VALUES (1, 1);
-
 
 -- ROL ADMINISTRATIVO
 INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (1, 1, 1, true, '2024-01-01');

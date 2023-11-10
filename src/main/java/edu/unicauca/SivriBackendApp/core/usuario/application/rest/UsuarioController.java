@@ -1,45 +1,56 @@
 package edu.unicauca.SivriBackendApp.core.usuario.application.rest;
 
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
-import edu.unicauca.SivriBackendApp.core.usuario.application.dto.request.SolicitudCreacionUsuarioDTO;
-import edu.unicauca.SivriBackendApp.core.usuario.application.mapper.UsuarioDtoMapper;
-import edu.unicauca.SivriBackendApp.core.usuario.domain.model.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.application.dto.request.RegistroUsuarioDTO;
+import edu.unicauca.SivriBackendApp.core.usuario.application.mapper.UsuarioAppMapper;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.port.in.UsuarioCrearCU;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.port.in.UsuarioObtenerCU;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("usuario")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@AllArgsConstructor
 public class UsuarioController<T> {
 
-    private UsuarioObtenerCU usuarioObtenerCU;
-    private UsuarioCrearCU usuarioCrearCU;
-    private UsuarioDtoMapper usuarioDtoMapper;
+    private final UsuarioObtenerCU usuarioObtenerCU;
+    private final UsuarioCrearCU usuarioCrearCU;
+    private  final UsuarioAppMapper usuarioAppMapper;
 
-    public UsuarioController(UsuarioObtenerCU usuarioObtenerCU, UsuarioCrearCU usuarioCrearCU, UsuarioDtoMapper usuarioDtoMapper) {
-        this.usuarioObtenerCU = usuarioObtenerCU;
-        this.usuarioCrearCU = usuarioCrearCU;
-        this.usuarioDtoMapper = usuarioDtoMapper;
-    }
-
-    @GetMapping("/validar_vinculacion")
-    public ResponseEntity<Respuesta> validarVinculacionUsuarioGrupo(
-            @RequestParam(value = "tipoDocumento", required = true) TipoDocumento tipoDocumento,
-            @RequestParam(value = "numeroDocumento", required = true) String numeroDocumento
+    @GetMapping("validarExistenciaSistema")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'GRUPO:DIRECTOR',  " +
+            "'SEMILLERO:MENTOR',  " +
+            "'PROYECTO:DIRECTOR',    " +
+            "'FUNCIONARIO:SUPER_ADMIN',  " +
+            "'FUNCIONARIO:USUARIOS',   " +
+            "'FUNCIONARIO:GRUPOS',  " +
+            "'FUNCIONARIO:SEMILLEROS',  " +
+            "'FUNCIONARIO:PROYECTOS_INTERNOS',  " +
+            "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
+    public ResponseEntity<Respuesta> validarExistenciaUsuarioSistema(
+            @RequestParam(name = "tipoDocumento") String tipoDocumento,
+            @RequestParam(name = "numeroDocumento") String numeroDocumento
     ) {
-        Respuesta respuesta = usuarioObtenerCU.validarVinculacionUsuarioGrupo(tipoDocumento, numeroDocumento);
+
+        Respuesta respuesta = usuarioObtenerCU.validarExistenciaUsuarioSistema(tipoDocumento, numeroDocumento);
 
         return ResponseEntity.ok().body(respuesta);
     }
 
-    @PostMapping("/solicitud_creacion")
-    public ResponseEntity<Respuesta> solicitudCreacionDeUsuario(@Valid @RequestBody SolicitudCreacionUsuarioDTO nuevoUsuario) {
-        Respuesta respuesta = usuarioCrearCU.solicitudCreacionDeUsuario(usuarioDtoMapper.solicitudCreacionDeUsuario(nuevoUsuario));
-
+    @PostMapping("registrarUsuario")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR',  " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:USUARIOS')")
+    public  ResponseEntity<Respuesta> registrarUsuario(@RequestBody @Valid RegistroUsuarioDTO registro){
+        Respuesta respuesta = usuarioCrearCU.guardar(usuarioAppMapper.registrarUsuario(registro));
         return ResponseEntity.ok().body(respuesta);
     }
+
 }

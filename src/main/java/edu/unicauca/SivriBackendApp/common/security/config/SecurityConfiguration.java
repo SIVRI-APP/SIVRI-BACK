@@ -36,19 +36,41 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
 
+    /**
+     * Configuración del filtro de seguridad para Spring Security.
+     *
+     * Este método define y configura el filtro de seguridad para controlar el acceso a las solicitudes HTTP.
+     * La configuración incluye la desactivación de CSRF, la definición de reglas de autorización, la gestión de sesiones,
+     * la provisión de un proveedor de autenticación, la adición de un filtro JWT y la configuración de la gestión de cierre de sesión.
+     *
+     * @param http Objeto HttpSecurity proporcionado por Spring Security para configurar las reglas de seguridad.
+     * @return Una cadena de filtros de seguridad configurada.
+     * @throws Exception Si ocurre una excepción al configurar el filtro de seguridad.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // Desactivar CSRF para simplificar la configuración en este ejemplo
                 .csrf(AbstractHttpConfigurer::disable)
+
+                // Configurar reglas de autorización
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )
+
+                // Configurar la gestión de sesiones para que sea sin estado (stateless)
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+
+                // Proporcionar un proveedor de autenticación personalizado
                 .authenticationProvider(authenticationProvider)
+
+                // Agregar el filtro de autenticación JWT antes del filtro de nombre de usuario y contraseña
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+
+                // Configurar la gestión de cierre de sesión
                 .logout(logout ->
                         logout.logoutUrl("/api/v1/auth/logout")
                                 .addLogoutHandler(logoutHandler)
@@ -56,6 +78,7 @@ public class SecurityConfiguration {
                 )
         ;
 
+        // Construir y devolver la cadena de filtros de seguridad configurada
         return http.build();
     }
 }
