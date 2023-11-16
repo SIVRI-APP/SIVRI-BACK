@@ -5,7 +5,6 @@ import edu.unicauca.SivriBackendApp.core.academica.domain.port.out.SemilleroProg
 import edu.unicauca.SivriBackendApp.core.academica.infraestructure.mapper.SemilleroProgramaMapper;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity.SemilleroProgramaEntity;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaRepository.ISemilleroProgramaRepository;
-import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persistence.jpaEntity.ConvocatoriaEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.adapter;
 
-import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity.RolGrupoEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.RolSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.port.out.RolesSemilleroObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.mapper.RolSemilleroMapper;

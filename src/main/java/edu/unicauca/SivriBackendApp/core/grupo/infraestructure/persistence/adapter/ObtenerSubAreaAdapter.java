@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.adapter;
 
-import edu.unicauca.SivriBackendApp.core.grupo.application.mapper.DisciplinaDtoMapper;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.Disciplina;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.port.out.SubAreaObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.mapper.DisciplinaMapper;

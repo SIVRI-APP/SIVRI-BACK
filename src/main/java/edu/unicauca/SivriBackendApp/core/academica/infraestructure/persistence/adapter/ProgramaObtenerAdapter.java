@@ -5,7 +5,6 @@ import edu.unicauca.SivriBackendApp.core.academica.domain.port.out.ProgramaObten
 import edu.unicauca.SivriBackendApp.core.academica.infraestructure.mapper.ProgramaMapper;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity.ProgramaEntity;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaRepository.IProgramaRepository;
-import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persistence.jpaEntity.ConvocatoriaEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -5,7 +5,6 @@ import edu.unicauca.SivriBackendApp.core.semillero.domain.model.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.port.out.SemilleroCrearREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.mapper.IntegranteSemilleroMapper;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.mapper.SemilleroMapper;
-import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity.IntegranteSemilleroEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity.SemilleroEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaRepository.IIntegranteSemilleroRepository;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaRepository.ISemilleroRepository;

@@ -6,4 +6,5 @@ import lombok.Data;
 public class RolSemillero {
     private Integer id;
     private String rolSemillero;
+
 }

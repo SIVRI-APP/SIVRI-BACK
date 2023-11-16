@@ -3,15 +3,12 @@ package edu.unicauca.SivriBackendApp.core.semillero.domain.service;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
-import edu.unicauca.SivriBackendApp.core.semillero.application.dto.request.SemilleroObtenerIdONombreDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.port.in.SemilleroObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.port.out.SemilleroObtenerREPO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;

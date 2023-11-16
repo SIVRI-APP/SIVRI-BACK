@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.grupo.application.dto.request;
 
-import edu.unicauca.SivriBackendApp.core.grupo.domain.model.GrupoEstado;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 

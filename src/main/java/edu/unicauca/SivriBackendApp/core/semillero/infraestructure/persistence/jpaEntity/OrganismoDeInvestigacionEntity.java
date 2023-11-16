@@ -2,17 +2,14 @@ package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PastOrPresent;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "organismo_de_investigacion")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Data
 public abstract class OrganismoDeInvestigacionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

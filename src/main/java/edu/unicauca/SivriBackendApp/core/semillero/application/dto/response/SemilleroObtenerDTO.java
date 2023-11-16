@@ -1,7 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.semillero.application.dto.response;
 
-import edu.unicauca.SivriBackendApp.core.grupo.application.dto.response.ObtenerGruposDTO;
-import edu.unicauca.SivriBackendApp.core.grupo.domain.model.Grupo;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.SemilleroEstado;
 import lombok.Data;
 

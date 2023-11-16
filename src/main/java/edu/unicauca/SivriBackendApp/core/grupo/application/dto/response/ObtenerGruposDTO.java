@@ -3,8 +3,6 @@ package edu.unicauca.SivriBackendApp.core.grupo.application.dto.response;
 
 import edu.unicauca.SivriBackendApp.core.academica.application.dto.response.FacultadDTO;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.GrupoEstado;
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.Email;
 import lombok.Data;
 
 import java.time.LocalDate;

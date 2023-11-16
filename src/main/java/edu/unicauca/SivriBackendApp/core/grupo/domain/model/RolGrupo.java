@@ -2,11 +2,7 @@ package edu.unicauca.SivriBackendApp.core.grupo.domain.model;
 
 import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Data
 public class RolGrupo {
 
     private Integer id;

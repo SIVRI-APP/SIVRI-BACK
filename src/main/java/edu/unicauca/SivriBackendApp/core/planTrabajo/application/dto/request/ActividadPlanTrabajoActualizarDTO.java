@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.planTrabajo.application.dto.request;
 
-import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.model.CompromisoSemillero;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

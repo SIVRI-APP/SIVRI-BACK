@@ -1,8 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.grupo.application.dto.request;
 
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.EstadoIntegranteGrupo;
-import edu.unicauca.SivriBackendApp.core.grupo.domain.model.GrupoEstado;
-import edu.unicauca.SivriBackendApp.core.grupo.domain.model.RolGrupo;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 

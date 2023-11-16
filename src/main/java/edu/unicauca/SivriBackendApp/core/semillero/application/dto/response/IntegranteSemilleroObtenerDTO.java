@@ -1,7 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.semillero.application.dto.response;
 
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.EstadoIntegranteSemillero;
-import edu.unicauca.SivriBackendApp.core.semillero.domain.model.SemilleroEstado;
 import lombok.Data;
 
 import java.time.LocalDate;

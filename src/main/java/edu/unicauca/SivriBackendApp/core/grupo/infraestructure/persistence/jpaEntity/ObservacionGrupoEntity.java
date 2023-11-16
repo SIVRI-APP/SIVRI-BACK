@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity;
 
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.RolFuncionarioEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.*;
@@ -24,10 +23,10 @@ public class ObservacionGrupoEntity {
     @ManyToOne
     @JoinColumn(name = "grupoId", nullable = false)
     private GrupoEntity grupo;
-
+    //TODO USUARIO FUNCIONARIO
     //relacion *a1 con entidad funcionario
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "rolfuncionarioId",nullable = false)
     private RolFuncionarioEntity funcionarioRol;
-
+*/
 }

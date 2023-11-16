@@ -1,20 +1,13 @@
 package edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity;
 
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.RolDocenteEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "departamento")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class DepartamentoEntity {
 
     @Id
@@ -30,7 +23,7 @@ public class DepartamentoEntity {
 
     @OneToMany(mappedBy = "departamento", cascade = CascadeType.REMOVE)
     private List<ProgramaEntity> programas;
-
-    @OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)
+    //TODO usuario
+    /*@OneToMany(mappedBy = "departamento", fetch = FetchType.LAZY)
     private List<RolDocenteEntity> usuariosDocente;
-}
+*/}

@@ -1,17 +1,11 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "linea_investigacion")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class LineaInvestigacionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

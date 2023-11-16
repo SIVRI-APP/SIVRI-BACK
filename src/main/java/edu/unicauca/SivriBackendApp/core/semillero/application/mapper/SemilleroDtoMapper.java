@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.semillero.application.mapper;
 
-import edu.unicauca.SivriBackendApp.core.grupo.application.mapper.AreaDtoMapper;
 import edu.unicauca.SivriBackendApp.core.grupo.application.mapper.GrupoDtoMapper;
 import edu.unicauca.SivriBackendApp.core.semillero.application.dto.request.SemilleroActualizarEstadoDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.application.dto.request.SemilleroActualizarPorApoyoDTO;
@@ -9,8 +8,6 @@ import edu.unicauca.SivriBackendApp.core.semillero.application.dto.request.Semil
 import edu.unicauca.SivriBackendApp.core.semillero.application.dto.response.SemilleroObtenerDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.Semillero;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 import java.util.List;
 

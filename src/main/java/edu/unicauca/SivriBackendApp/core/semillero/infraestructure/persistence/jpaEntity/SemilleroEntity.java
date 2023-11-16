@@ -1,15 +1,10 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity;
 
-
 import com.fasterxml.jackson.annotation.*;
-import edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity.ProgramaEntity;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity.GrupoEntity;
-import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructure.persistence.jpaEntity.PlanTrabajoEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.SemilleroEstado;
 import jakarta.persistence.*;
 import lombok.*;
-
-
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)

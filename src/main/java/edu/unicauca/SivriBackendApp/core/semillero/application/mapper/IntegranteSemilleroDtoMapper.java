@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.semillero.application.mapper;
 
-import edu.unicauca.SivriBackendApp.core.convocatoria.application.mapper.TipoFinanciacionDtoMapper;
 import edu.unicauca.SivriBackendApp.core.semillero.application.dto.request.IntegranteSemilleroActualizarDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.application.dto.request.IntegranteSemilleroCrearDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.application.dto.response.IntegranteSemilleroObtenerDTO;

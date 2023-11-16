@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.planTrabajo.application.dto.request;
 
-import edu.unicauca.SivriBackendApp.core.semillero.application.dto.response.SemilleroObtenerDTO;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

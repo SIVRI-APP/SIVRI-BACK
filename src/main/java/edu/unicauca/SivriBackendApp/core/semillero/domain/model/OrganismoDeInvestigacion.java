@@ -1,12 +1,9 @@
 package edu.unicauca.SivriBackendApp.core.semillero.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Data
 public abstract class OrganismoDeInvestigacion {
 
     private Integer id;

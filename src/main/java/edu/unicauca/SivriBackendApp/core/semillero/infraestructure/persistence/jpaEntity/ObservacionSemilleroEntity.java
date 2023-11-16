@@ -1,21 +1,14 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity;
 
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.RolFuncionarioEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PastOrPresent;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "observacion_semillero")
-@Getter
-@Setter
-@AllArgsConstructor
-
+@Data
 public class ObservacionSemilleroEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +21,9 @@ public class ObservacionSemilleroEntity {
     @ManyToOne
     @JoinColumn(name = "semilleroId")
     private SemilleroEntity semillero;
+    //TODO ROLFUNCIONARIO
     //relacion *a1 funcionario
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "RolFuncionarioId")
-    private RolFuncionarioEntity rolFuncionarioSemillero;
+    private RolFuncionarioEntity rolFuncionarioSemillero;*/
 }

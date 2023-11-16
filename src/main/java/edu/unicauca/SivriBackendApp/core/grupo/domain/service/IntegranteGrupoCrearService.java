@@ -31,6 +31,7 @@ public class IntegranteGrupoCrearService implements IntegranteGrupoCrearCU {
     public Respuesta<Boolean> asociarIntegranteGrupo(IntegranteGrupo nuevosDatos) {
         //System.out.println("ingreso al service de asociar grupo");
        // System.out.println(" que datosd trae: "+grupoObtenerCU.existePorId(nuevosDatos.getGrupo().getGrupoId()));
+        // TODO validar si el integrante existe en ususarios
         rolesGrupoObtenerCU.existePorId(nuevosDatos.getRolGrupo().getId());
         nuevosDatos.setEstado(EstadoIntegranteGrupo.ACTIVO);
         nuevosDatos.setFechaInicio(LocalDate.now());

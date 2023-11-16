@@ -1,7 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,7 +20,6 @@ public class AreaEntity {
     //relacion 1a* con entidad subarea
     @OneToMany(mappedBy = "area",fetch = FetchType.LAZY)
     @JsonBackReference
-    //@JsonIgnoreProperties
     private List<SubAreaEntity> subareas;
 
     @Override

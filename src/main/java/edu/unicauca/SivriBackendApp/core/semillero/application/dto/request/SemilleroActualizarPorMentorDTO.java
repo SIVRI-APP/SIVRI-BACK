@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.semillero.application.dto.request;
 
-import edu.unicauca.SivriBackendApp.core.semillero.domain.model.SemilleroEstado;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

@@ -9,9 +9,6 @@ import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.j
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)

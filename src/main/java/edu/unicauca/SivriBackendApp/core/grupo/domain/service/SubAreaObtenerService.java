@@ -7,7 +7,6 @@ import edu.unicauca.SivriBackendApp.core.grupo.domain.model.Disciplina;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.SubAreaObtenerCU;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.port.out.SubAreaObtenerREPO;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Component

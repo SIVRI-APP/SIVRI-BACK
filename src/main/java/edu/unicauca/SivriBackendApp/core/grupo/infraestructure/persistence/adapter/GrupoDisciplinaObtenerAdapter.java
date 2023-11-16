@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.adapter;
 
-import edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity.SemilleroProgramaEntity;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.GrupoDisciplina;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.port.out.GrupoDisciplinaObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.mapper.GrupoDisciplinaMapper;

@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.semillero.application.dto.request;
 
-import edu.unicauca.SivriBackendApp.core.semillero.domain.model.SemilleroEstado;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;

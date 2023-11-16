@@ -1,9 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.grupo.domain.model;
 
 import edu.unicauca.SivriBackendApp.core.academica.domain.model.Facultad;
-import edu.unicauca.SivriBackendApp.core.usuario.domain.Usuario;
 import lombok.*;
-
 
 @EqualsAndHashCode(callSuper = true)
 @Data

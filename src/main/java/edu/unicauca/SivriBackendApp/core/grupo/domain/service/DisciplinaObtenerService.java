@@ -3,7 +3,6 @@ package edu.unicauca.SivriBackendApp.core.grupo.domain.service;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
-import edu.unicauca.SivriBackendApp.core.academica.domain.model.Programa;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.Disciplina;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.DisciplinaObtenerCU;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.port.out.DisciplinaObtenerREPO;

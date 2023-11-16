@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructure.persistence.jpaRepository;
 
-import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.model.ActividadPlanTrabajo;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructure.persistence.jpaEntity.ActividadPlanTrabajoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 

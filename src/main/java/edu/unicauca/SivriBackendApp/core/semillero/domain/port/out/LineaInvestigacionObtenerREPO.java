@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.semillero.domain.port.out;
 
-import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.model.PlanTrabajo;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.LineaInvestigacion;
 
 import java.util.List;

@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.planTrabajo.application.dto.request;
 
-import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.model.EstadoPlanTrabajo;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

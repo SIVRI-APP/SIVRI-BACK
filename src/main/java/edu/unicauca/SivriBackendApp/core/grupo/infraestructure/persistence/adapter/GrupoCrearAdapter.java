@@ -8,7 +8,6 @@ import edu.unicauca.SivriBackendApp.core.grupo.domain.port.out.GrupoCrearREPO;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.mapper.GrupoMapper;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.mapper.IntegranteGrupoMapper;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity.GrupoEntity;
-import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity.IntegranteGrupoEntity;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaRepository.IGrupoRepository;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaRepository.IIntegranteGrupoRepository;
 import edu.unicauca.SivriBackendApp.core.usuario.domain.Usuario;

@@ -1,9 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.EstadoIntegranteGrupo;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.*;
@@ -35,11 +33,11 @@ public class IntegranteGrupoEntity {
     @JoinColumn(name = "grupoId")
     @JsonBackReference
     private GrupoEntity grupo;
-
+    //TODO USUARIO
     //relacion 1a1 con entidad usuario aqui esta la foranea
-    @OneToOne
+    /*@OneToOne
     @JoinColumn(name = "usuarioNumeroDocumento")
     private UsuarioEntity usuario;
-
+*/
 
 }

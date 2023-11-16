@@ -1,11 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.EstadoIntegranteSemillero;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.*;
@@ -15,7 +11,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "integrante_semillero",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"usuarioNumeroDocumento", "rolId", "fechaIngreso"})
+                @UniqueConstraint(columnNames = {/*"usuarioNumeroDocumento",*/ "rolId", "fechaIngreso"})
         })
 @Data
 public class IntegranteSemilleroEntity {
@@ -44,10 +40,11 @@ public class IntegranteSemilleroEntity {
     @MapsId("semilleroId")
     @JoinColumn(name = "semilleroId")
     private SemilleroEntity semillero;
+    //TODO USUARIO
     //relacion *a1 usuario
-    @JsonManagedReference
+    /*@JsonManagedReference
     @ManyToOne
     @MapsId("usuarioNumeroDocumento")
     @JoinColumn(name = "usuarioNumeroDocumento")
-    private UsuarioEntity usuario;
+    private UsuarioEntity usuario;*/
 }

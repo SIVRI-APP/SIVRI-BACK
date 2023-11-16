@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructure.mapper;
 
-import edu.unicauca.SivriBackendApp.core.grupo.application.mapper.GrupoDtoMapper;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity.SemilleroEntity;
 import org.mapstruct.Mapper;

@@ -6,8 +6,6 @@ import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.academica.domain.model.SemilleroPrograma;
 import edu.unicauca.SivriBackendApp.core.academica.domain.port.in.SemilleroProgramaObtenerCU;
 import edu.unicauca.SivriBackendApp.core.academica.domain.port.out.SemilleroProgramaObtenerREPO;
-import edu.unicauca.SivriBackendApp.core.convocatoria.domain.model.Convocatoria;
-import edu.unicauca.SivriBackendApp.core.semillero.domain.model.LineaInvestigacion;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.semillero.domain.model;
 
-import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity.SemilleroEntity;
 import lombok.Data;
 
 @Data

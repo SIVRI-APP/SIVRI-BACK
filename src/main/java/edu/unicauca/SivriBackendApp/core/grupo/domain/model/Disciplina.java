@@ -2,11 +2,7 @@ package edu.unicauca.SivriBackendApp.core.grupo.domain.model;
 
 import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-
+@Data
 public class Disciplina {
     private Integer id;
     private String disciplina;

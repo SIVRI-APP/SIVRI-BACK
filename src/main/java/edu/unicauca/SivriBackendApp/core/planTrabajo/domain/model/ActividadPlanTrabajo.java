@@ -1,11 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.planTrabajo.domain.model;
 
-import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructure.persistence.jpaEntity.CompromisoSemilleroEntity;
-import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructure.persistence.jpaEntity.EvidenciaActividadEntity;
-import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructure.persistence.jpaEntity.PlanTrabajoEntity;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntity;
 import lombok.Data;
-
 import java.time.LocalDate;
 
 @Data

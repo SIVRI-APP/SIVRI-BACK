@@ -1,8 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.academica.infraestructure.mapper;
 
-import edu.unicauca.SivriBackendApp.core.academica.domain.model.Programa;
 import edu.unicauca.SivriBackendApp.core.academica.domain.model.SemilleroPrograma;
-import edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity.ProgramaEntity;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity.SemilleroProgramaEntity;
 import org.mapstruct.Mapper;
 

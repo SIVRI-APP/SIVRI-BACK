@@ -4,7 +4,6 @@ import edu.unicauca.SivriBackendApp.core.grupo.domain.model.GrupoEstado;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-import java.time.LocalDate;
 @Data
 public class GrupoActualizarPorApoyoDTO {
     //@NotNull(message = "el id es obligatorio")

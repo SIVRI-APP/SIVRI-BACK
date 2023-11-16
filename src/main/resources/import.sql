@@ -158,10 +158,10 @@ INSERT INTO rol_semillero(id,rolSemillero) VALUES(1,'mentor');
 INSERT INTO linea_investigacion(id,semilleroId,linea) VALUES(1,2,'linea 1');
 
 --observacion semillero
-INSERT INTO observacion_semillero(id,semilleroId,rolFuncionarioId,observacion,fecha) VALUES (1,2,1, '','2023-09-04')
+INSERT INTO observacion_semillero(id,semilleroId,/*rolFuncionarioId,*/observacion,fecha) VALUES (1,2/*,1*/, '','2023-09-04')
 
 -- integrantesemillero
-INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioNumeroDocumento,rolId, estado, semestre, fechaIngreso, fechaRetiro)VALUES(1,2,10611,1, 'activo', 'n.a', '2023-09-04',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,/*usuarioNumeroDocumento,*/rolId, estado, semestre, fechaIngreso, fechaRetiro)VALUES(1,2,/*10611,*/1, 'activo', 'n.a', '2023-09-04',NULL);
 
 --semillero documentacion
 INSERT INTO semillero_documentacion(semilleroId,idDocumentoSemillero,fecha) VALUES(2,1,'2023-09-04');
@@ -174,13 +174,13 @@ INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,2);
 INSERT INTO plan_trabajo(id,semilleroId,nombrePlan, estado) VALUES(1,2, 'plan 2023','formulado');
 
 --actividad plan de trabajo
-INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsable)VALUES(1,1,1,'obj','act','2023-03-08','2023-08-05',10611);
+INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin/*,responsable*/)VALUES(1,1,1,'obj','act','2023-03-08','2023-08-05'/*,10611*/);
 
 --INTEGRANTE GRUPO
-INSERT INTO integrante_grupo(id,rolGrupoId,usuarioNumeroDocumento,grupoId,estado,fechaInicio,fechaFin) VALUES(1,1,10611,1,'Activo','2023-09-07',NULL);
+INSERT INTO integrante_grupo(id,rolGrupoId/*,usuarioNumeroDocumento*/,grupoId,estado,fechaInicio,fechaFin) VALUES(1,1/*,10611*/,1,'Activo','2023-09-07',NULL);
 
 --observacion grupo
-INSERT INTO observacion_grupo(idObservacion,grupoId,rolFuncionarioId,observacion,fecha)VALUES(1,1,1,'observacion de un grupo','2023-09-08');
+INSERT INTO observacion_grupo(idObservacion,grupoId,/*rolFuncionarioId,*/observacion,fecha)VALUES(1,1,/*1,*/'observacion de un grupo','2023-09-08');
 
 --GRUPO DISCIPLINA
 INSERT INTO grupo_disciplina(disciplinaId,grupoId) VALUES(1,1);

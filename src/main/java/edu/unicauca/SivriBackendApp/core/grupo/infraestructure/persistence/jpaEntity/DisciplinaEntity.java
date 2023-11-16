@@ -22,7 +22,6 @@ public class DisciplinaEntity {
 
     // relacion *a* con entidad grupo ESTA relacion esta en la entidad grupo
 
-
     @Override
     public String toString() {
         return "DisciplinaEntity{" +

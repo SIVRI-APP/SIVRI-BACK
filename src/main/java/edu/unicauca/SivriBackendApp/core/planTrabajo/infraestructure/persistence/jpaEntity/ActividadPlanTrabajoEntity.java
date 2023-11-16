@@ -1,13 +1,9 @@
 package edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructure.persistence.jpaEntity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 
@@ -40,7 +36,8 @@ public class ActividadPlanTrabajoEntity {
     @JoinColumn(name = "compromisoSemilleroId")
     private CompromisoSemilleroEntity compromiso;
     //relacion *a1 usuario
-    @ManyToOne(optional = false)
+    //TODO USUARIO
+    /*@ManyToOne(optional = false)
     @JoinColumn(name = "responsable")
-    private UsuarioEntity responsableUsuario;
+    private UsuarioEntity responsableUsuario;*/
 }

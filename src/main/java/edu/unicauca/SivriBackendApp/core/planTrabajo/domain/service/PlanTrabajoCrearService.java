@@ -9,7 +9,6 @@ import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.port.in.PlanTrabajoC
 import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.port.out.PlanTrabajoCrearREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.port.in.SemilleroObtenerCU;
-import org.hibernate.loader.NonUniqueDiscoveredSqlAliasException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

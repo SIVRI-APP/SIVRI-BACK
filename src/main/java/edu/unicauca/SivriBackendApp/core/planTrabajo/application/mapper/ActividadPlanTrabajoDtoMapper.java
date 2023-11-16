@@ -2,10 +2,8 @@ package edu.unicauca.SivriBackendApp.core.planTrabajo.application.mapper;
 
 import edu.unicauca.SivriBackendApp.core.planTrabajo.application.dto.request.ActividadPlanTrabajoActualizarDTO;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.application.dto.request.ActividadPlanTrabajoCrearDTO;
-import edu.unicauca.SivriBackendApp.core.planTrabajo.application.dto.request.PlanTrabajoCrearDTO;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.application.dto.response.ActividadPlanTrabajoObtenerDTO;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.model.ActividadPlanTrabajo;
-import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.model.PlanTrabajo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
