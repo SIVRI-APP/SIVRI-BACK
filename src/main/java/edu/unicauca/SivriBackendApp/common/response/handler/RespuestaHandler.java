@@ -2,6 +2,7 @@ package edu.unicauca.SivriBackendApp.common.response.handler;
 
 import edu.unicauca.SivriBackendApp.common.ResourceBundleMessages.BundleMessage;
 import edu.unicauca.SivriBackendApp.common.response.Respuesta;
+import edu.unicauca.SivriBackendApp.core.grupo.domain.model.Area;
 import lombok.Getter;
 
 import java.util.List;
