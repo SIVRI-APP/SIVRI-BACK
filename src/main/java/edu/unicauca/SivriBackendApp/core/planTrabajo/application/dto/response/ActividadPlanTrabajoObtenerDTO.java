@@ -2,7 +2,7 @@ package edu.unicauca.SivriBackendApp.core.planTrabajo.application.dto.response;
 
 import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.model.CompromisoSemillero;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.model.EvidenciaActividad;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntity;
+//import edu.unicauca.SivriBackendApp.core.usuario.infraestructure.persistence.jpaEntity.UsuarioEntity;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -18,5 +18,5 @@ public class ActividadPlanTrabajoObtenerDTO {
     private EvidenciaActividad evidenciaActividad;
     private CompromisoSemillero compromiso;
     //TODO DEBE MOSTRAR EL NOMBRE DEL RESPONSABLE DE LA ACTIVIDAD
-    private UsuarioEntity responsableUsuario;
+//    private UsuarioEntity responsableUsuario;
 }

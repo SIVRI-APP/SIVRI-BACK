@@ -10,7 +10,6 @@ import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.mapper.Integrante
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaEntity.GrupoEntity;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaRepository.IGrupoRepository;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaRepository.IIntegranteGrupoRepository;
-import edu.unicauca.SivriBackendApp.core.usuario.domain.Usuario;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -34,7 +33,7 @@ public class GrupoCrearAdapter implements GrupoCrearREPO {
     public Boolean crear(Grupo nuevoGrupo) {
        // System.out.println("datos que llegan al adapter del grupo que se va a crear "+nuevoGrupo);
         IntegranteGrupo objIntegranteGrupo=new IntegranteGrupo();
-        Usuario usuario=new Usuario(nuevoGrupo.getNumeroDocumento());
+//        Usuario usuario=new Usuario(nuevoGrupo.getNumeroDocumento());
         RolGrupo idRolGrupo=new RolGrupo(1);
         Grupo grupoIntegrante=new Grupo();
       //  objIntegranteGrupo.setUsuario(usuario);
