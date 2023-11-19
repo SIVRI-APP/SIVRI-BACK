@@ -1,7 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.application.dto.response;
 
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.EnfoqueDiferencialProyecto;
-import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.EstadoProyecto;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.IntegranteProyecto;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.LineaDeInvestigacionProyecto;
 import lombok.Data;
@@ -16,7 +15,7 @@ public class ProyectoDTO {
 
     private String nombre;
 
-    private EstadoProyecto estado;
+//    private EstadoProyecto estado;
 
     private LocalDate fechaInicio;
 
