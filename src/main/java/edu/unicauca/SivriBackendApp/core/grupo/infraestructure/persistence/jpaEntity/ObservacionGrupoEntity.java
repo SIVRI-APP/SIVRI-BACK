@@ -23,6 +23,7 @@ public class ObservacionGrupoEntity {
     @ManyToOne
     @JoinColumn(name = "grupoId", nullable = false)
     private GrupoEntity grupo;
+
     //TODO USUARIO FUNCIONARIO
     //relacion *a1 con entidad funcionario
     /*@ManyToOne

@@ -21,6 +21,7 @@ public class ObservacionSemilleroEntity {
     @ManyToOne
     @JoinColumn(name = "semilleroId")
     private SemilleroEntity semillero;
+
     //TODO ROLFUNCIONARIO
     //relacion *a1 funcionario
     /*@ManyToOne

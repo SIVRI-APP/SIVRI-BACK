@@ -33,6 +33,7 @@ public class IntegranteGrupoEntity {
     @JoinColumn(name = "grupoId")
     @JsonBackReference
     private GrupoEntity grupo;
+
     //TODO USUARIO
     //relacion 1a1 con entidad usuario aqui esta la foranea
     /*@OneToOne
