@@ -1,17 +1,15 @@
 package edu.unicauca.SivriBackendApp.common.exception.handler;
 
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
-import edu.unicauca.SivriBackendApp.common.exception.UsuarioSinCredencialesException;
-import edu.unicauca.SivriBackendApp.common.response.Respuesta;
-import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
+import edu.unicauca.SivriBackendApp.common.exception.CredencialIncorrectaException;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -39,7 +37,7 @@ public class CustomExceptionHandler{
         return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, "", errors).getRespuesta(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(UsuarioSinCredencialesException.class)
+    @ExceptionHandler(CredencialIncorrectaException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Respuesta<Map<String, String>>> usuarioSinCredencialesException(final HttpServletRequest req,
                                                                                  final ReglaDeNegocioException ex, final Locale locale) {

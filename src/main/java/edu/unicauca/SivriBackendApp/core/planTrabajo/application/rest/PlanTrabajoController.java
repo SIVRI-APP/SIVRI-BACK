@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.planTrabajo.application.rest;
 
-import edu.unicauca.SivriBackendApp.common.response.Respuesta;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.application.dto.request.PlanTrabajoActualizarDTO;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.application.dto.request.PlanTrabajoCrearDTO;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.application.mapper.PlanTrabajoDtoMapper;

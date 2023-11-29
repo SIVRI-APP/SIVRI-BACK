@@ -1,7 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.grupo.application.rest;
 
 
-import edu.unicauca.SivriBackendApp.common.response.Respuesta;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.grupo.application.dto.response.ObtenerAreasDTO;
 import edu.unicauca.SivriBackendApp.core.grupo.application.mapper.AreaDtoMapper;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.Area;

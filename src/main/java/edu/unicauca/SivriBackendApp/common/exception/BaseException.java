@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.common.exception;
 
-import edu.unicauca.SivriBackendApp.common.ResourceBundleMessages.BundleMessage;
+import edu.unicauca.SivriBackendApp.common.resourceBundleMessages.BundleMessage;
 
 import java.util.List;
 

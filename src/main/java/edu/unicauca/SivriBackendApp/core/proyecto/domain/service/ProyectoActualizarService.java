@@ -1,13 +1,10 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.domain.service;
 
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
-import edu.unicauca.SivriBackendApp.common.response.Respuesta;
-import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.model.Convocatoria;
-import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ConvocatoriaActualizarCU;
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.ConvocatoriaObtenerCU;
-import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.in.TipoFinanciacionObtenerCU;
-import edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.out.ConvocatoriaActualizarREPO;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.port.in.ProyectoActualizarCU;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.port.in.ProyectoObtenerCU;

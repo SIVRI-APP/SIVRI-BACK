@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.convocatoria.application.rest;
 
-import edu.unicauca.SivriBackendApp.common.response.Respuesta;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.convocatoria.application.dto.request.ConvocatoriaActualizarDTO;
 import edu.unicauca.SivriBackendApp.core.convocatoria.application.dto.request.ConvocatoriaCrearDTO;
 import edu.unicauca.SivriBackendApp.core.convocatoria.application.mapper.ConvocatoriaDtoMapper;
@@ -14,7 +14,6 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

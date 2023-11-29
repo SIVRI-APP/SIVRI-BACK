@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.academica.application.rest;
 
-import edu.unicauca.SivriBackendApp.common.response.Respuesta;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.academica.application.dto.response.FacultadDTO;
 import edu.unicauca.SivriBackendApp.core.academica.application.mapper.FacultadDtoMapper;
 import edu.unicauca.SivriBackendApp.core.academica.domain.model.Facultad;

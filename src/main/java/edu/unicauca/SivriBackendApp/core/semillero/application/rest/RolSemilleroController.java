@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.semillero.application.rest;
 
-import edu.unicauca.SivriBackendApp.common.response.Respuesta;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.semillero.application.dto.response.RolesSemilleroObtenerDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.application.mapper.RolSemilleroDtoMapper;
 import edu.unicauca.SivriBackendApp.core.semillero.domain.model.RolSemillero;

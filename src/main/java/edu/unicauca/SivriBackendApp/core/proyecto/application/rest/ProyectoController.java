@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.application.rest;
 
-import edu.unicauca.SivriBackendApp.common.response.Respuesta;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.proyecto.application.dto.request.ProyectoActualizarDTO;
 import edu.unicauca.SivriBackendApp.core.proyecto.application.dto.request.ProyectoCrearDTO;
 import edu.unicauca.SivriBackendApp.core.proyecto.application.mapper.ProyectoDtoMapper;
@@ -14,7 +14,6 @@ import jakarta.validation.constraints.Positive;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

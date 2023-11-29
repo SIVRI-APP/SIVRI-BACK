@@ -1,8 +1,8 @@
 package edu.unicauca.SivriBackendApp.core.grupo.domain.service;
 
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
-import edu.unicauca.SivriBackendApp.common.response.Respuesta;
-import edu.unicauca.SivriBackendApp.common.response.handler.RespuestaHandler;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.IntegranteGrupo;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.IntegranteGrupoActualizarCU;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.IntegranteGrupoObtenerCU;

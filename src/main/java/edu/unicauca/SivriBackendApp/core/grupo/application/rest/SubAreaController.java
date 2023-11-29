@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.grupo.application.rest;
 
-import edu.unicauca.SivriBackendApp.common.response.Respuesta;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.grupo.application.mapper.SubAreaDtoMapper;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.Disciplina;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.port.in.SubAreaObtenerCU;

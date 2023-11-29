@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.convocatoria.domain.port.out;
 
-import edu.unicauca.SivriBackendApp.common.response.Respuesta;
 import edu.unicauca.SivriBackendApp.core.convocatoria.domain.model.Convocatoria;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

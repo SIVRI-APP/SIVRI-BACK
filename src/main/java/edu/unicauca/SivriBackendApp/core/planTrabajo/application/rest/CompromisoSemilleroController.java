@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.planTrabajo.application.rest;
 
-import edu.unicauca.SivriBackendApp.common.response.Respuesta;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.application.mapper.CompromisoSemilleroDtoMapper;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.model.CompromisoSemillero;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.domain.port.in.CompromisoSemilleroObtenerCU;

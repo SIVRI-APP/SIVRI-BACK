@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.grupo.application.rest;
 
-import edu.unicauca.SivriBackendApp.common.response.Respuesta;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.grupo.application.dto.response.ObtenerRolesGrupoDTO;
 import edu.unicauca.SivriBackendApp.core.grupo.application.mapper.RolGrupoDtoMapper;
 
