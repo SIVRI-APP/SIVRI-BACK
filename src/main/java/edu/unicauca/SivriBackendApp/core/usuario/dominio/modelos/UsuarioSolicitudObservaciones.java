@@ -1,6 +1,8 @@
-package edu.unicauca.SivriBackendApp.core.usuario.dominio.model;
+package edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos;
 
 import lombok.Data;
+
+import java.time.LocalDate;
 
 @Data
 public class UsuarioSolicitudObservaciones {
@@ -11,5 +13,7 @@ public class UsuarioSolicitudObservaciones {
 
     private Funcionario funcionario;
 
-    private String observacion;
+    private String observación;
+
+    private LocalDate fechaObservación;
 }

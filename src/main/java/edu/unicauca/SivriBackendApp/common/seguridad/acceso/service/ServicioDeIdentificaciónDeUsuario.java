@@ -37,6 +37,15 @@ public class ServicioDeIdentificaciónDeUsuario {
         return userRunTimeRoles;
     }
 
+    public boolean esFuncionario() {
+        List<String> roles = obtenerRoles();
+
+        if (roles.stream().anyMatch(rol -> rol.contains("FUNCIONARIO"))){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Obtiene el nombre de usuario actual a partir del contexto de seguridad.
      *

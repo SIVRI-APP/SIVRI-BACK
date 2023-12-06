@@ -1,4 +1,4 @@
-package edu.unicauca.SivriBackendApp.core.usuario.dominio.model;
+package edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos;
 
 import java.time.LocalDate;
 

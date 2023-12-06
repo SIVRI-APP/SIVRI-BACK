@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.mapper;
 
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.UsuarioSolicitud;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitud;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.entity.UsuarioSolicitudEntity;
 import org.mapstruct.Mapper;
 

@@ -1,10 +1,13 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -27,5 +30,8 @@ public class UsuarioSolicitudObservacionesEntity {
     private FuncionarioEntity funcionario;
 
     @Column(length = 260, nullable = false)
-    private String observacion;
+    private String observación;
+
+    @FutureOrPresent
+    private LocalDate fechaObservación;
 }

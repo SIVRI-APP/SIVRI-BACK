@@ -1,9 +1,9 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.entity;
 
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.EstadoSolicitudUsuario;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.Sexo;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.TipoDocumento;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.TipoUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.EstadoSolicitudUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Sexo;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,6 +32,7 @@ public class UsuarioSolicitudEntity {
     private String numeroDocumento;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Sexo sexo;
 
     @Enumerated(EnumType.STRING)
@@ -57,4 +58,10 @@ public class UsuarioSolicitudEntity {
     private Long departamentoId;
 
     private Long programaId;
+
+    @Column(nullable = false)
+    private Integer grupoId;
+
+    @Column(nullable = false)
+    private Integer rolGrupoId;
 }

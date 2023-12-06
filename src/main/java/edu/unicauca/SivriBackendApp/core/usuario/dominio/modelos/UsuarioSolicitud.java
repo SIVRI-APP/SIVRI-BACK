@@ -1,4 +1,4 @@
-package edu.unicauca.SivriBackendApp.core.usuario.dominio.model;
+package edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,4 +38,8 @@ public class UsuarioSolicitud {
     private Long departamentoId;
 
     private Long programaId;
+
+    private Integer grupoId;
+
+    private Integer rolGrupoId;
 }
