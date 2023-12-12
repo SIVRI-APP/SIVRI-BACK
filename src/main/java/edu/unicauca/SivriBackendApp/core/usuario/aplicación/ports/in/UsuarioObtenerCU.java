@@ -3,7 +3,7 @@ package edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in;
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudListarConFiltroProyección;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioListarConFiltroProyección;
 
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoUsuario;
@@ -16,5 +16,5 @@ public interface UsuarioObtenerCU {
 
     Respuesta<Usuario> obtenerUsuario(long usuarioId);
 
-    Respuesta<Page<List<UsuarioSolicitudListarConFiltroProyección>>> listarConFiltro(int pageNo, int pageSize, String correo, TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String apellidos, TipoUsuario tipoUsuario);
+    Respuesta<Page<List<UsuarioListarConFiltroProyección>>> listarConFiltro(int pageNo, int pageSize, String correo, TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String apellidos, TipoUsuario tipoUsuario);
 }

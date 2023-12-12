@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.repository;
 
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudListarConFiltroProyección;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioListarConFiltroProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.entity.UsuarioEntity;
 import org.springframework.data.domain.Page;
@@ -25,14 +25,14 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
     @Query(value = "SELECT u.id, u.correo, u.tipoDocumento, u.numeroDocumento, u.nombres, u.apellidos, u.tipoUsuario " +
             "FROM usuario u " +
             "WHERE " +
-            "    (LOWER(u.correo) = COALESCE(LOWER(:correo), LOWER(u.correo)) OR :correo IS NULL) " +
-            "    AND (LOWER(u.tipoDocumento) = COALESCE(LOWER(:tipoDocumento), LOWER(u.tipoDocumento)) OR :tipoDocumento IS NULL) " +
-            "    AND (LOWER(u.numeroDocumento) = COALESCE(LOWER(:numeroDocumento), LOWER(u.numeroDocumento)) OR :numeroDocumento IS NULL) " +
-            "    AND (LOWER(u.nombres) = COALESCE(LOWER(:nombres), LOWER(u.nombres)) OR :nombres IS NULL) " +
-            "    AND (LOWER(u.apellidos) = COALESCE(LOWER(:apellidos), LOWER(u.apellidos)) OR :apellidos IS NULL) " +
-            "    AND (LOWER(u.tipoUsuario) = COALESCE(LOWER(:tipoUsuario), LOWER(u.tipoUsuario)) OR :tipoUsuario IS NULL);"
+            "  (LOWER(u.correo) LIKE COALESCE(LOWER(CONCAT('%', :correo, '%')), LOWER(u.correo)) OR :correo IS NULL) AND " +
+            "  (LOWER(u.tipoDocumento) LIKE COALESCE(LOWER(CONCAT('%', :tipoDocumento, '%')), LOWER(u.tipoDocumento)) OR :tipoDocumento IS NULL) AND " +
+            "  (LOWER(u.numeroDocumento) LIKE COALESCE(LOWER(CONCAT('%', :numeroDocumento, '%')), LOWER(u.numeroDocumento)) OR :numeroDocumento IS NULL) AND " +
+            "  (LOWER(u.nombres) LIKE COALESCE(LOWER(CONCAT('%', :nombres, '%')), LOWER(u.nombres)) OR :nombres IS NULL) AND " +
+            "  (LOWER(u.apellidos) LIKE COALESCE(LOWER(CONCAT('%', :apellidos, '%')), LOWER(u.apellidos)) OR :apellidos IS NULL) AND " +
+            "  (LOWER(u.tipoUsuario) LIKE COALESCE(LOWER(CONCAT('%', :tipoUsuario, '%')), LOWER(u.tipoUsuario)) OR :tipoUsuario IS NULL)  "
             , nativeQuery = true)
-    Page<List<UsuarioSolicitudListarConFiltroProyección>> listarConFiltro(
+    Page<List<UsuarioListarConFiltroProyección>> listarConFiltro(
             @Param("correo") String correo,
             @Param("tipoDocumento") String tipoDocumento,
             @Param("numeroDocumento") String numeroDocumento,

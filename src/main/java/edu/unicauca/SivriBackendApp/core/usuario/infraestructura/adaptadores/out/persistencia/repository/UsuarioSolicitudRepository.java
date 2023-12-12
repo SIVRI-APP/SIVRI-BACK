@@ -1,6 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.repository;
 
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudEliminadoProgramadoProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudInformaciónDetalladaProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudListarConFiltroProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.entity.UsuarioSolicitudEntity;
@@ -11,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UsuarioSolicitudRepository extends JpaRepository<UsuarioSolicitudEntity, Long> {
@@ -81,4 +83,26 @@ public interface UsuarioSolicitudRepository extends JpaRepository<UsuarioSolicit
     Optional<UsuarioSolicitudInformaciónDetalladaProyección> obtenerSolicitudUsuario(
             @Param("solicitudUsuarioId") long solicitudUsuarioId);
 
+    @Query(value = "with ObservacionesConRango as ( " +
+            "select " +
+            " us.id, " +
+            " MIN(uso.fechaObservación) as fechaObservacionMinima " +
+            "from " +
+            " usuario_solicitud us " +
+            "join usuario_solicitud_observaciones uso on " +
+            " uso.solicitudUsuarioId = us.id " +
+            "group by " +
+            " us.id " +
+            ") " +
+            "select " +
+            " id, " +
+            " fechaObservacionMinima as fechaObservación, " +
+            " DATE_SUB(CURDATE(), interval 3 month) as fechaLimite " +
+            "from " +
+            " ObservacionesConRango " +
+            "where " +
+            " fechaObservacionMinima < DATE_SUB(CURDATE(), interval 3 month);"
+            , nativeQuery = true)
+    List<UsuarioSolicitudEliminadoProgramadoProyección> eliminadoProgramado();
+    
 }

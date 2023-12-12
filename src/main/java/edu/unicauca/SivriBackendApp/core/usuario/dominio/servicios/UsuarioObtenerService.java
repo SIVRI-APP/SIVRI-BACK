@@ -4,6 +4,7 @@ import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioListarConFiltroProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudListarConFiltroProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoUsuario;
@@ -33,10 +34,11 @@ public class UsuarioObtenerService implements UsuarioObtenerCU{
     }
 
     @Override
-    public Respuesta<Page<List<UsuarioSolicitudListarConFiltroProyección>>> listarConFiltro(int pageNo, int pageSize, String correo, TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String apellidos, TipoUsuario tipoUsuario) {
+    public Respuesta<Page<List<UsuarioListarConFiltroProyección>>> listarConFiltro(int pageNo, int pageSize, String correo, TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String apellidos, TipoUsuario tipoUsuario) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
 
-        Page<List<UsuarioSolicitudListarConFiltroProyección>> respuestaBd = usuarioObtenerREPO.listarConFiltro(pageable, correo, tipoDocumento, numeroDocumento, nombres, apellidos, tipoUsuario);
+        Page<List<UsuarioListarConFiltroProyección>> respuestaBd = usuarioObtenerREPO.listarConFiltro(pageable, correo, tipoDocumento, numeroDocumento, nombres, apellidos, tipoUsuario);
+
         return new RespuestaHandler<>(200, "ok", "",respuestaBd).getRespuesta();
     }
 }

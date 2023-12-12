@@ -6,7 +6,7 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHa
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioSolicitudObservacionesObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.out.UsuarioSolicitudObservacionesObtenerREPO;
 
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudObservaciónListar;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudObservaciónListarProyección;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,10 +23,10 @@ public class UsuarioSolicitudObservacionesObtenerService implements UsuarioSolic
     private final UsuarioSolicitudObservacionesObtenerREPO usuarioSolicitudObservacionesObtenerREPO;
 
     @Override
-    public Respuesta<Page<UsuarioSolicitudObservaciónListar>> listar(int pageNo, int pageSize, long solicitudUsuarioId) {
+    public Respuesta<Page<UsuarioSolicitudObservaciónListarProyección>> listar(int pageNo, int pageSize, long solicitudUsuarioId) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
 
-        Page<UsuarioSolicitudObservaciónListar> respuestaBd = usuarioSolicitudObservacionesObtenerREPO.listar(pageable, solicitudUsuarioId);
+        Page<UsuarioSolicitudObservaciónListarProyección> respuestaBd = usuarioSolicitudObservacionesObtenerREPO.listar(pageable, solicitudUsuarioId);
         return new RespuestaHandler<>(200, "ok", "",respuestaBd).getRespuesta();
     }
 

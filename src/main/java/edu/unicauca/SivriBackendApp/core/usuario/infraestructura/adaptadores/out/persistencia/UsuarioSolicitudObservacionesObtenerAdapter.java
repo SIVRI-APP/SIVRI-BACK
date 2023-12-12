@@ -2,7 +2,7 @@ package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.ou
 
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.out.UsuarioSolicitudObservacionesObtenerREPO;
 
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudObservaciónListar;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudObservaciónListarProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.repository.UsuarioSolicitudObservacionesRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,7 +18,7 @@ public class UsuarioSolicitudObservacionesObtenerAdapter implements UsuarioSolic
     private final UsuarioSolicitudObservacionesRepository usuarioSolicitudObservacionesRepository;
 
     @Override
-    public Page<UsuarioSolicitudObservaciónListar> listar(Pageable pageable, long solicitudUsuarioId) {
+    public Page<UsuarioSolicitudObservaciónListarProyección> listar(Pageable pageable, long solicitudUsuarioId) {
         return usuarioSolicitudObservacionesRepository.listar(solicitudUsuarioId, pageable);
     }
 
