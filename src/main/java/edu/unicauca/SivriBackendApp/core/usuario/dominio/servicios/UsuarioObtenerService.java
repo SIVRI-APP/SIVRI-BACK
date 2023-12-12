@@ -3,7 +3,6 @@ package edu.unicauca.SivriBackendApp.core.usuario.dominio.servicios;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Funcionario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudListarConFiltroProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
@@ -24,6 +23,14 @@ import java.util.List;
 public class UsuarioObtenerService implements UsuarioObtenerCU{
 
     private final UsuarioObtenerREPO usuarioObtenerREPO;
+
+    @Override
+    public Respuesta<Usuario> obtenerUsuario(long usuarioId) {
+        Usuario respuestaBd = usuarioObtenerREPO.obtenerUsuario(usuarioId).orElseThrow(
+                () -> new ReglaDeNegocioException("bad.no.se.encontró.usuario.id", List.of(Long.toString(usuarioId))));
+
+        return new RespuestaHandler<>(200, "ok", "",respuestaBd).getRespuesta();
+    }
 
     @Override
     public Respuesta<Page<List<UsuarioSolicitudListarConFiltroProyección>>> listarConFiltro(int pageNo, int pageSize, String correo, TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String apellidos, TipoUsuario tipoUsuario) {

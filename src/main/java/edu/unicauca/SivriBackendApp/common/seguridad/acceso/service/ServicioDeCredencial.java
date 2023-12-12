@@ -5,7 +5,6 @@ import edu.unicauca.SivriBackendApp.common.seguridad.acceso.dto.RegistroCredenci
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.Credencial;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.RepositorioCredencial;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.validadores.CredencialValidador;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,14 +17,13 @@ import java.security.Principal;
 public class ServicioDeCredencial {
 
   private final RepositorioCredencial repositorioCredencial;
-  private final UsuarioRepository usuarioRepository;
   private final CredencialValidador credencialValidador;
   private final PasswordEncoder passwordEncoder;
 
-  public Boolean registrarCredencial(RegistroCredencialPetición request) {
+  public Boolean registrarCredencial(RegistroCredencialPetición petición) {
 
     //Válida que la credencial no exista y retorna un objeto Credencial.
-    Credencial nuevaCredencial = credencialValidador.credencialNoExisteValidación(request);
+    Credencial nuevaCredencial = credencialValidador.validaciónParaCrearCredencial(petición);
 
     repositorioCredencial.save(nuevaCredencial);
 

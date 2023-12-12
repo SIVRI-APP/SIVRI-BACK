@@ -21,4 +21,9 @@ public class UsuarioSolicitudObservacionesObtenerAdapter implements UsuarioSolic
     public Page<UsuarioSolicitudObservaciónListar> listar(Pageable pageable, long solicitudUsuarioId) {
         return usuarioSolicitudObservacionesRepository.listar(solicitudUsuarioId, pageable);
     }
+
+    @Override
+    public Integer solicitudConObservacionesPendientes(long solicitudUsuarioId) {
+        return usuarioSolicitudObservacionesRepository.solicitudConObservacionesPendientes(solicitudUsuarioId);
+    }
 }

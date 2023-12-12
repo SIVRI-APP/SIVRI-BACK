@@ -1,8 +1,14 @@
 package edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Usuario {
 
     private Long id;
@@ -24,5 +30,11 @@ public class Usuario {
     private String telefono;
 
     private String cvLac;
+
+    private Long facultadId;
+
+    private Long departamentoId;
+
+    private Long programaId;
 
 }

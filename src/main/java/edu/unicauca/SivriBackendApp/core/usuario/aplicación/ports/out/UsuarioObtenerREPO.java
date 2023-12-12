@@ -14,6 +14,8 @@ import java.util.Optional;
 
 public interface UsuarioObtenerREPO {
 
+    Optional<Usuario> obtenerUsuario(long usuarioId);
+
     Optional<UsuarioEntity> obtenerEntidadUsuarioPorCorreo (String correo);
 
     boolean existsByCorreoOrTipoDocumentoAndNumeroDocumento(String correo, TipoDocumento tipoDocumento, String numeroDocumento);

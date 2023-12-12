@@ -6,7 +6,6 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.out.UsuarioObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.entity.UsuarioEntity;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.entity.UsuarioSolicitudEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.mapper.UsuarioInfraMapper;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
@@ -24,6 +23,17 @@ public class UsuarioObtenerAdapter implements UsuarioObtenerREPO {
 
     private final UsuarioRepository usuarioRepository;
     private final UsuarioInfraMapper usuarioInfraMapper;
+
+    @Override
+    public Optional<Usuario> obtenerUsuario(long usuarioId) {
+        Optional<UsuarioEntity> respuestaBd = usuarioRepository.findById(usuarioId);
+
+        if (respuestaBd.isEmpty()){
+            return Optional.empty();
+        }
+
+        return Optional.of(usuarioInfraMapper.toModel(respuestaBd.get()));
+    }
 
     @Override
     public Optional<UsuarioEntity> obtenerEntidadUsuarioPorCorreo(String correo) {

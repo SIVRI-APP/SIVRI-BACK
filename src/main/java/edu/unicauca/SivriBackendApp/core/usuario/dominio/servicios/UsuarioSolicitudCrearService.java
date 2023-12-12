@@ -5,10 +5,13 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificaciónDeUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioSolicitudCrearCU;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioSolicitudObservacionesObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioSolicitudObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.out.UsuarioSolicitudCrearREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.out.UsuarioSolicitudEliminarREPO;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.out.UsuarioSolicitudObservaciónCrearREPO;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.EstadoSolicitudUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitud;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitudObservaciones;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.validadores.UsuarioSolicitudValidador;
@@ -22,11 +25,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
 
-    private final UsuarioSolicitudCrearREPO usuarioSolicitudCrearREPO;
+    private final UsuarioCrearService usuarioCrearService;
+
     private final UsuarioSolicitudObtenerCU usuarioSolicitudObtenerCU;
+    private final UsuarioSolicitudCrearREPO usuarioSolicitudCrearREPO;
+    private final UsuarioSolicitudEliminarREPO usuarioSolicitudEliminarREPO;
     private final UsuarioSolicitudValidador usuarioSolicitudValidador;
 
     private final UsuarioSolicitudObservaciónCrearREPO usuarioSolicitudObservaciónCrearREPO;
+    private final UsuarioSolicitudObservacionesObtenerCU usuarioSolicitudObservacionesObtenerCU;
 
     private final ServicioDeIdentificaciónDeUsuario servicioDeIdentificaciónDeUsuario;
 
@@ -97,6 +104,40 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
         solicitudUsuario.setNota(usuario.getNota());
 
         usuarioSolicitudCrearREPO.actualizarUsuarioSolicitud(solicitudUsuario);
+
+        return new RespuestaHandler<>(200, "ok", "",true).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Boolean> aprobarSolicitudUsuario(long solicitudId) {
+        UsuarioSolicitud solicitudUsuario = usuarioSolicitudObtenerCU.obtenerSolicitudUsuario(solicitudId).getData();
+
+        if (usuarioSolicitudObservacionesObtenerCU.solicitudConObservacionesPendientes(solicitudId).getData() > 0){
+            throw new ReglaDeNegocioException("bad.no.se.puede.aprobar.solicitud.observaciones.pendientes");
+        }
+
+        // Crear usuario
+        usuarioCrearService.crearUsuario(Usuario
+                .builder()
+                        .correo(solicitudUsuario.getCorreo())
+                        .tipoDocumento(solicitudUsuario.getTipoDocumento())
+                        .numeroDocumento(solicitudUsuario.getNumeroDocumento())
+                        .sexo(solicitudUsuario.getSexo())
+                        .tipoUsuario(solicitudUsuario.getTipoUsuario())
+                        .nombres(solicitudUsuario.getNombres())
+                        .apellidos(solicitudUsuario.getApellidos())
+                        .telefono(solicitudUsuario.getTelefono())
+                        .cvLac(solicitudUsuario.getCvLac())
+                        .facultadId(solicitudUsuario.getFacultadId())
+                        .departamentoId(solicitudUsuario.getDepartamentoId())
+                        .programaId(solicitudUsuario.getProgramaId())
+                .build()
+        );
+
+        // TODO Miguel crear el rol en el grupo
+
+        // Eliminar solicitud
+        usuarioSolicitudEliminarREPO.eliminar(solicitudId);
 
         return new RespuestaHandler<>(200, "ok", "",true).getRespuesta();
     }

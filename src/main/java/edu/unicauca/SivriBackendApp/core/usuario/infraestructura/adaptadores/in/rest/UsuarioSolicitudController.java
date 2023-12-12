@@ -87,4 +87,13 @@ public class UsuarioSolicitudController<T> {
         return ResponseEntity.ok().body(respuesta);
     }
 
+    @PostMapping("aprobar")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:USUARIOS')")
+    public  ResponseEntity<Respuesta> aprobar(@RequestParam() long solicitudUsuarioId){
+        Respuesta respuesta = usuarioSolicitudCrearCU.aprobarSolicitudUsuario(solicitudUsuarioId);
+        return ResponseEntity.ok().body(respuesta);
+    }
+
 }

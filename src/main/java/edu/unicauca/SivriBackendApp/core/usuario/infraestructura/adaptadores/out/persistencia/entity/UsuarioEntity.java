@@ -45,5 +45,9 @@ public class UsuarioEntity {
     @Column(name = "cvLac", length = 200)
     private String cvLac;
 
-    // TODO Facultad, Departamento, Programa
+    private Long facultadId;
+
+    private Long departamentoId;
+
+    private Long programaId;
 }

@@ -8,5 +8,6 @@ import org.springframework.data.domain.Page;
 public interface UsuarioSolicitudObservacionesObtenerCU {
 
     Respuesta<Page<UsuarioSolicitudObservaciónListar>> listar(int pageNo, int pageSize, long solicitudUsuarioId);
+    Respuesta<Integer> solicitudConObservacionesPendientes(long solicitudUsuarioId);
 
 }

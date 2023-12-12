@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial;
 
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -27,5 +26,7 @@ public interface RepositorioCredencial extends JpaRepository<Credencial, Integer
   List<IGetAuthorities> getAuthoritiesFuncionario (@Param("email") String email);
 
   boolean existsByEmail(String email);
+
+  boolean existsByUsuarioId(long usuarioId);
 
 }

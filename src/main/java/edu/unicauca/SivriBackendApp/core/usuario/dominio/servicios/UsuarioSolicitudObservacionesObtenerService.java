@@ -26,4 +26,10 @@ public class UsuarioSolicitudObservacionesObtenerService implements UsuarioSolic
         Page<UsuarioSolicitudObservaciónListar> respuestaBd = usuarioSolicitudObservacionesObtenerREPO.listar(pageable, solicitudUsuarioId);
         return new RespuestaHandler<>(200, "ok", "",respuestaBd).getRespuesta();
     }
+
+    @Override
+    public Respuesta<Integer> solicitudConObservacionesPendientes(long solicitudUsuarioId) {
+        Integer respuestaBd = usuarioSolicitudObservacionesObtenerREPO.solicitudConObservacionesPendientes(solicitudUsuarioId);
+        return new RespuestaHandler<>(200, "ok", "",respuestaBd).getRespuesta();
+    }
 }

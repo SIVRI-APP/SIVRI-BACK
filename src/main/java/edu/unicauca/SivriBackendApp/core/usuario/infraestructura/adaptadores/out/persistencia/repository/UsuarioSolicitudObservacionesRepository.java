@@ -24,4 +24,15 @@ public interface UsuarioSolicitudObservacionesRepository extends JpaRepository<U
     Page<UsuarioSolicitudObservaciónListar> listar(
             @Param("solicitudUsuarioId") long solicitudUsuarioId,
             @PageableDefault(size = 10, page = 0, sort = "id") Pageable pageable);
+
+    @Query(value = "select " +
+            " count(uso.fechaObservación) " +
+            "from " +
+            " usuario_solicitud_observaciones uso  " +
+            "where " +
+            " :solicitudUsuarioId = uso.solicitudUsuarioId " +
+            " and uso.resuelta = false"
+            , nativeQuery = true)
+    Integer solicitudConObservacionesPendientes(
+            @Param("solicitudUsuarioId") long solicitudUsuarioId);
 }

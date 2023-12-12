@@ -9,4 +9,6 @@ public interface UsuarioSolicitudCrearCU {
     Respuesta<Boolean> devolverSolicitudConObservaciones(long solicitudUsuarioId, String observaciones);
 
     Respuesta<Boolean> editarSolicitudUsuario(long solicitudId, UsuarioSolicitud usuario);
+
+    Respuesta<Boolean> aprobarSolicitudUsuario(long solicitudId);
 }

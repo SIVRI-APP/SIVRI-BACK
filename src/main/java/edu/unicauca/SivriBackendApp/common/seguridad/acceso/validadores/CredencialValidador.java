@@ -19,15 +19,10 @@ public class CredencialValidador {
     private final RepositorioCredencial repositorioCredencial;
     private final UsuarioRepository usuarioRepository;
 
-    public Credencial credencialNoExisteValidación(RegistroCredencialPetición credencial) {
-        Optional<Credencial> credencialByEmail = repositorioCredencial.findByEmail(credencial.getEmail());
-        Optional<Credencial> credencialByUsuarioId = repositorioCredencial.findByUsuarioId(credencial.getUsuarioId());
+    public Credencial validaciónParaCrearCredencial(RegistroCredencialPetición credencial) {
+        credencialNoExiste(credencial.getEmail(), credencial.getUsuarioId());
+
         Optional<UsuarioEntity> usuario = usuarioRepository.findById(credencial.getUsuarioId());
-
-        if (credencialByEmail.isPresent() || credencialByUsuarioId.isPresent()){
-            throw new ReglaDeNegocioException("bad.credentials.ya.existen");
-        }
-
         if (usuario.isEmpty()){
             throw new ReglaDeNegocioException("bad.usuario.no.existe");
         }
@@ -37,5 +32,16 @@ public class CredencialValidador {
                 .password(credencial.getPassword())
                 .usuario(usuario.get())
                 .build();
+    }
+
+    public boolean credencialNoExiste(String correo, long usuarioId){
+        Optional<Credencial> credencialByEmail = repositorioCredencial.findByEmail(correo);
+        Optional<Credencial> credencialByUsuarioId = repositorioCredencial.findByUsuarioId(usuarioId);
+
+        if (credencialByEmail.isPresent() || credencialByUsuarioId.isPresent()){
+            throw new ReglaDeNegocioException("bad.credentials.ya.existen");
+        }
+
+        return true;
     }
 }
