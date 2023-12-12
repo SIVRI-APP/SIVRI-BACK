@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.usuario.dominio.servicios;
 
+import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioSolicitudObservacionesObtenerCU;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -31,5 +34,13 @@ public class UsuarioSolicitudObservacionesObtenerService implements UsuarioSolic
     public Respuesta<Integer> solicitudConObservacionesPendientes(long solicitudUsuarioId) {
         Integer respuestaBd = usuarioSolicitudObservacionesObtenerREPO.solicitudConObservacionesPendientes(solicitudUsuarioId);
         return new RespuestaHandler<>(200, "ok", "",respuestaBd).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Boolean> existePorId(long solicitudUsuarioId) {
+        if (!usuarioSolicitudObservacionesObtenerREPO.existePorId(solicitudUsuarioId)){
+            throw new ReglaDeNegocioException("bad.observación.solicitud.usuario.no.existe", List.of(Long.toString(solicitudUsuarioId)));
+        }
+        return new RespuestaHandler<>(200, "ok", "",true).getRespuesta();
     }
 }

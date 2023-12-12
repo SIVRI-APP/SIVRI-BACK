@@ -13,6 +13,7 @@ public interface UsuarioSolicitudObservacionesRepository extends JpaRepository<U
 
 
     @Query(value = "select " +
+            " uso.id, " +
             " uso.observación, " +
             " uso.fechaObservación " +
             "from " +
@@ -35,4 +36,6 @@ public interface UsuarioSolicitudObservacionesRepository extends JpaRepository<U
             , nativeQuery = true)
     Integer solicitudConObservacionesPendientes(
             @Param("solicitudUsuarioId") long solicitudUsuarioId);
+
+    boolean existsById (long id);
 }

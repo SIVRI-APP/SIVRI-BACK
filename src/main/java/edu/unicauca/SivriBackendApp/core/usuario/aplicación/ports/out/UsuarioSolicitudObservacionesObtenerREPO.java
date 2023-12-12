@@ -7,5 +7,8 @@ import org.springframework.data.domain.Pageable;
 public interface UsuarioSolicitudObservacionesObtenerREPO {
 
     Page<UsuarioSolicitudObservaciónListar> listar(Pageable pageable, long solicitudUsuarioId);
+
     Integer solicitudConObservacionesPendientes(long solicitudUsuarioId);
+
+    Boolean existePorId(long solicitudUsuarioId);
 }

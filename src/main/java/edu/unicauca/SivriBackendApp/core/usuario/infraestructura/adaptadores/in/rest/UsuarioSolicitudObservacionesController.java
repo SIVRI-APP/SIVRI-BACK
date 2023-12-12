@@ -2,6 +2,7 @@ package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.in
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioSolicitudCrearCU;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioSolicitudObservacionesEliminarCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioSolicitudObservacionesObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioSolicitudObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.EstadoSolicitudUsuario;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioSolicitudObservacionesController<T> {
 
     private final UsuarioSolicitudObservacionesObtenerCU usuarioSolicitudObservacionesObtenerCU;
+    private final UsuarioSolicitudObservacionesEliminarCU usuarioSolicitudObservacionesEliminarCU;
 
     @GetMapping("listar")
     @PreAuthorize("hasAnyAuthority(" +
@@ -35,6 +37,15 @@ public class UsuarioSolicitudObservacionesController<T> {
             @RequestParam() int pageSize
     ){
         Respuesta respuesta = usuarioSolicitudObservacionesObtenerCU.listar(pageNo, pageSize, solicitudUsuarioId);
+        return ResponseEntity.ok().body(respuesta);
+    }
+
+    @DeleteMapping("eliminar")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:USUARIOS')")
+    public  ResponseEntity<Respuesta> eliminar(@RequestParam() long solicitudUsuarioObservaciónId){
+        Respuesta respuesta = usuarioSolicitudObservacionesEliminarCU.eliminar(solicitudUsuarioObservaciónId);
         return ResponseEntity.ok().body(respuesta);
     }
 

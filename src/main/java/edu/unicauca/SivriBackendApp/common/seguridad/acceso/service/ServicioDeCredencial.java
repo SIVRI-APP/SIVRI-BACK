@@ -22,6 +22,9 @@ public class ServicioDeCredencial {
 
   public Boolean registrarCredencial(RegistroCredencialPetición petición) {
 
+    // Codificar contraseña
+    petición.setPassword(passwordEncoder.encode(petición.getPassword()));
+
     //Válida que la credencial no exista y retorna un objeto Credencial.
     Credencial nuevaCredencial = credencialValidador.validaciónParaCrearCredencial(petición);
 

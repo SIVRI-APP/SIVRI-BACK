@@ -26,4 +26,9 @@ public class UsuarioSolicitudObservacionesObtenerAdapter implements UsuarioSolic
     public Integer solicitudConObservacionesPendientes(long solicitudUsuarioId) {
         return usuarioSolicitudObservacionesRepository.solicitudConObservacionesPendientes(solicitudUsuarioId);
     }
+
+    @Override
+    public Boolean existePorId(long solicitudUsuarioId) {
+        return usuarioSolicitudObservacionesRepository.existsById(solicitudUsuarioId);
+    }
 }
