@@ -5,4 +5,6 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitu
 
 public interface UsuarioSolicitudCrearREPO {
     UsuarioSolicitud crearUsuarioSolicitud(UsuarioSolicitud usuario);
+
+    UsuarioSolicitud actualizarUsuarioSolicitud(UsuarioSolicitud usuario);
 }

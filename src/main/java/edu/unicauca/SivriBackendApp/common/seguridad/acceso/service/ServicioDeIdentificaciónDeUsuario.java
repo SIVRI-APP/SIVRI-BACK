@@ -1,5 +1,11 @@
 package edu.unicauca.SivriBackendApp.common.seguridad.acceso.service;
 
+import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.out.FuncionarioObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.out.UsuarioObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.entity.FuncionarioEntity;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.entity.UsuarioEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +22,21 @@ import java.util.List;
  * @version 1.0
  */
 @Component
+@RequiredArgsConstructor
 public class ServicioDeIdentificaciónDeUsuario {
+
+    private final UsuarioObtenerREPO usuarioObtenerREPO;
+    private final FuncionarioObtenerREPO funcionarioObtenerREPO;
+
+    public UsuarioEntity obtenerUsuario(){
+         return usuarioObtenerREPO.obtenerEntidadUsuarioPorCorreo(obtenerNombreUsuario()).orElseThrow(
+                () -> new ReglaDeNegocioException("bad.imposible.obtener.usuario.autenticado"));
+    }
+
+    public FuncionarioEntity obtenerFuncionario(){
+        return funcionarioObtenerREPO.obtenerEntidadFuncionarioPorUsuarioId(obtenerUsuario().getId()).orElseThrow(
+                () -> new ReglaDeNegocioException("bad.imposible.obtener.funcionario.autenticado"));
+    }
 
     /**
      * Obtiene los roles del usuario actual a partir del contexto de seguridad.
@@ -57,5 +77,23 @@ public class ServicioDeIdentificaciónDeUsuario {
 
         // Obtener el nombre de usuario
         return authentication.getName();
+    }
+
+    public boolean perteneceAlGrupo(long grupoId){
+        UsuarioEntity usuario = obtenerUsuario();
+        // TODO Miguel el usuario pertenece al grupo que dice ser
+        return true;
+    }
+
+    public boolean perteneceAlSemillero(long semilleroId){
+        UsuarioEntity usuario = obtenerUsuario();
+        // TODO Miguel el usuario pertenece al semillero que dice ser
+        return true;
+    }
+
+    public boolean perteneceAlProyecto(long proyectoId){
+        UsuarioEntity usuario = obtenerUsuario();
+        // TODO Miguel el usuario pertenece al proyecto que dice ser
+        return true;
     }
 }

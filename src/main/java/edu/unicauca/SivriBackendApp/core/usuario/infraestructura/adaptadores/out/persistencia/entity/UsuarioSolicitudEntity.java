@@ -59,6 +59,9 @@ public class UsuarioSolicitudEntity {
 
     private Long programaId;
 
+    @Column(length = 1000)
+    private String nota;
+
     @Column(nullable = false)
     private Integer grupoId;
 

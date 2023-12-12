@@ -7,6 +7,7 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.EstadoSolicitud
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.in.rest.dto.petición.RegistroUsuarioDTO;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.in.rest.dto.petición.devolverSolicitudConObservacionesDTO;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.in.rest.mapper.UsuarioSolicitudRestMapper;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -34,8 +35,21 @@ public class UsuarioSolicitudController<T> {
         return ResponseEntity.ok().body(respuesta);
     }
 
+    @PatchMapping("editarSolicitudUsuario")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR',  " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:USUARIOS')")
+    public  ResponseEntity<Respuesta> editarSolicitudUsuario(
+            @RequestParam() long solicitudUsuarioId,
+            @Valid @RequestBody RegistroUsuarioDTO registro){
+        Respuesta respuesta = usuarioSolicitudCrearCU.editarSolicitudUsuario(solicitudUsuarioId, usuarioSolicitudRestMapper.registrarUsuario(registro));
+        return ResponseEntity.ok().body(respuesta);
+    }
+
     @GetMapping("listarTodoConFiltro")
     @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR', " +
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:USUARIOS')")
     public  ResponseEntity<Respuesta> listarTodoConFiltro(
@@ -54,26 +68,23 @@ public class UsuarioSolicitudController<T> {
         return ResponseEntity.ok().body(respuesta);
     }
 
-    //    @GetMapping("obtenerUsuario")
-//    @PreAuthorize("hasAnyAuthority(" +
-//            "'GRUPO:DIRECTOR',  " +
-//            "'SEMILLERO:MENTOR',  " +
-//            "'PROYECTO:DIRECTOR',    " +
-//            "'FUNCIONARIO:VICERRECTOR',  " +
-//            "'FUNCIONARIO:SUPER_ADMIN', " +
-//            "'FUNCIONARIO:USUARIOS',   " +
-//            "'FUNCIONARIO:GRUPOS',  " +
-//            "'FUNCIONARIO:SEMILLEROS',  " +
-//            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-//            "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
-//    public ResponseEntity<Respuesta> obtenerUsuario(
-//            @RequestParam(name = "tipoDocumento") String tipoDocumento,
-//            @RequestParam(name = "numeroDocumento") String numeroDocumento
-//    ) {
-//
-//        Respuesta respuesta = usuarioSolicitudObtenerCU.obtenerUsuarioSolicitud(tipoDocumento, numeroDocumento);
-//
-//        return ResponseEntity.ok().body(respuesta);
-//    }
+    @GetMapping("obtenerSolicitudUsuario")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR', " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:USUARIOS')")
+    public  ResponseEntity<Respuesta> obtenerSolicitudUsuario(@RequestParam() long solicitudUsuarioId){
+        Respuesta respuesta = usuarioSolicitudObtenerCU.obtenerSolicitudUsuarioInformaciónDetallada(solicitudUsuarioId);
+        return ResponseEntity.ok().body(respuesta);
+    }
+
+    @PostMapping("devolverSolicitudConObservaciones")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:USUARIOS')")
+    public  ResponseEntity<Respuesta> devolverSolicitudConObservaciones(@Valid @RequestBody devolverSolicitudConObservacionesDTO petición){
+        Respuesta respuesta = usuarioSolicitudCrearCU.devolverSolicitudConObservaciones(petición.getSolicitudUsuarioId(), petición.getObservación());
+        return ResponseEntity.ok().body(respuesta);
+    }
 
 }

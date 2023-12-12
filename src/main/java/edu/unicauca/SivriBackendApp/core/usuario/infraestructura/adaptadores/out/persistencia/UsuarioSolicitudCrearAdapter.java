@@ -18,4 +18,9 @@ public class UsuarioSolicitudCrearAdapter implements UsuarioSolicitudCrearREPO {
     public UsuarioSolicitud crearUsuarioSolicitud(UsuarioSolicitud usuario) {
         return usuarioSolicitudInfraMapper.toModel(usuarioSolicitudRepository.save(usuarioSolicitudInfraMapper.toEntity(usuario)));
     }
+
+    @Override
+    public UsuarioSolicitud actualizarUsuarioSolicitud(UsuarioSolicitud usuario) {
+        return usuarioSolicitudInfraMapper.toModel(usuarioSolicitudRepository.save(usuarioSolicitudInfraMapper.toEntity(usuario)));
+    }
 }

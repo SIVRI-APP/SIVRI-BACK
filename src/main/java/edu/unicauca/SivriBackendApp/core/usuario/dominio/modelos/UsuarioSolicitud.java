@@ -42,4 +42,6 @@ public class UsuarioSolicitud {
     private Integer grupoId;
 
     private Integer rolGrupoId;
+
+    private String nota;
 }

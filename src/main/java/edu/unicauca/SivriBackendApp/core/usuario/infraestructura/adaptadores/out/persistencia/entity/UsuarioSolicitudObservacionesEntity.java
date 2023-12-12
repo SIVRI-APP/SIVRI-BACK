@@ -25,13 +25,15 @@ public class UsuarioSolicitudObservacionesEntity {
     @JoinColumn(name = "solicitudUsuarioId", referencedColumnName = "id")
     private UsuarioSolicitudEntity solicitudUsuario;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "funcionarioId", referencedColumnName = "id")
     private FuncionarioEntity funcionario;
 
-    @Column(length = 260, nullable = false)
+    @Column(length = 1000, nullable = false)
     private String observación;
 
     @FutureOrPresent
     private LocalDate fechaObservación;
+
+    private Boolean resuelta;
 }

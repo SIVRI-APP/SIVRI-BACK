@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.repository;
 
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.ListarUsuarioSolicitudConFiltroProyección;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudListarConFiltroProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.entity.UsuarioEntity;
 import org.springframework.data.domain.Page;
@@ -13,21 +13,12 @@ import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
 
-//    @Query(value = "SELECT usu.id, usu.nombres, usu.apellidos, usu.tipoDocumento, usu.numeroDocumento, usu.correo, usu.telefono, usu.tipoUsuario, usu.sexo, usu.cvLac    " +
-//            "FROM usuario usu   " +
-//            "WHERE usu.tipoDocumento = :tipoDocumento AND usu.numeroDocumento = :numeroDocumento"
-//            , nativeQuery = true)
-//    Optional<InformacionPublicaUsuario> validarExistenciaUsuarioSistema(String tipoDocumento, String numeroDocumento);
-//
-//    Optional<UsuarioEntity> findByCorreo(String correo);
-//
-//    Boolean existsByTipoDocumentoAndNumeroDocumento(TipoDocumento tipoDocumento, String numeroDocumento);
-//
-//    Boolean existsByCorreo(String correo);
+    Optional<UsuarioEntity> findByCorreo (String correo);
 
     boolean existsByCorreoOrTipoDocumentoAndNumeroDocumento(String correo, TipoDocumento tipoDocumento, String numeroDocumento);
 
@@ -41,7 +32,7 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
             "    AND (LOWER(u.apellidos) = COALESCE(LOWER(:apellidos), LOWER(u.apellidos)) OR :apellidos IS NULL) " +
             "    AND (LOWER(u.tipoUsuario) = COALESCE(LOWER(:tipoUsuario), LOWER(u.tipoUsuario)) OR :tipoUsuario IS NULL);"
             , nativeQuery = true)
-    Page<List<ListarUsuarioSolicitudConFiltroProyección>> listarConFiltro(
+    Page<List<UsuarioSolicitudListarConFiltroProyección>> listarConFiltro(
             @Param("correo") String correo,
             @Param("tipoDocumento") String tipoDocumento,
             @Param("numeroDocumento") String numeroDocumento,

@@ -5,4 +5,8 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitu
 
 public interface UsuarioSolicitudCrearCU {
     Respuesta<Boolean> crearSolicitudUsuario(UsuarioSolicitud usuario);
+
+    Respuesta<Boolean> devolverSolicitudConObservaciones(long solicitudUsuarioId, String observaciones);
+
+    Respuesta<Boolean> editarSolicitudUsuario(long solicitudId, UsuarioSolicitud usuario);
 }
