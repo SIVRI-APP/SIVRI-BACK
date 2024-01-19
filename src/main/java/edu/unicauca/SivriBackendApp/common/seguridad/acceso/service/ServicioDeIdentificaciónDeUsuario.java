@@ -1,10 +1,10 @@
 package edu.unicauca.SivriBackendApp.common.seguridad.acceso.service;
 
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.out.FuncionarioObtenerREPO;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.out.UsuarioObtenerREPO;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.entity.FuncionarioEntity;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.entity.UsuarioEntity;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.FuncionarioObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.UsuarioObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidad.FuncionarioEntity;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidad.UsuarioEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

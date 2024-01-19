@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.mapper;
 
-import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.mapper.ConvocatoriaInfraMapper;
+import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.mapper.ConvocatoriaInfraMapper;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jpaEntity.ProyectoEntity;
 import org.mapstruct.Mapper;

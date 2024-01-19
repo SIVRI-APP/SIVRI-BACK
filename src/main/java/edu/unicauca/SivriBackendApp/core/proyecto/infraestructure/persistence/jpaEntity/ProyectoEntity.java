@@ -1,7 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jpaEntity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructure.persistence.jpaEntity.ConvocatoriaEntity;
+import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.salida.persistencia.entidad.ConvocatoriaEntity;
 import edu.unicauca.SivriBackendApp.core.proyecto.domain.model.EstadoProyecto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;

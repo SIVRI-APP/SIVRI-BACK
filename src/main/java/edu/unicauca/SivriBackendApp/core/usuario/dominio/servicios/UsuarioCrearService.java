@@ -7,14 +7,10 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.dto.RegistroCredencialPetición;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeCredencial;
-import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificaciónDeUsuario;
-import edu.unicauca.SivriBackendApp.common.seguridad.acceso.validadores.CredencialValidador;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioCrearCU;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioObtenerCU;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.out.UsuarioCrearREPO;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.out.UsuarioSolicitudCrearREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioCrearCU;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.UsuarioCrearREPO;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.validadores.UsuarioValidador;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,18 +18,26 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * El servicio UsuarioCrearService implementa la lógica de creación de usuarios y realiza
+ * validaciones necesarias antes de persistir los datos en el repositorio de persistencia.
+ */
 @Service
 @RequiredArgsConstructor
 public class UsuarioCrearService implements UsuarioCrearCU {
 
     private final UsuarioCrearREPO usuarioCrearREPO;
-
     private final UsuarioValidador usuarioValidador;
-
     private final ServicioDeCredencial servicioDeCredencial;
-
     private final SendMessageService sendMessageService;
 
+    /**
+     * Crea un nuevo usuario en el sistema, realizando validaciones y acciones adicionales según
+     * el tipo de usuario. También envía un correo de bienvenida al nuevo usuario.
+     *
+     * @param usuario Objeto Usuario que contiene la información del nuevo usuario.
+     * @return Respuesta que indica el resultado de la creación del usuario.
+     */
     @Override
     public Respuesta<Boolean> crearUsuario(Usuario usuario) {
         // Validaciones
@@ -43,22 +47,29 @@ public class UsuarioCrearService implements UsuarioCrearCU {
         Usuario nuevoUsuario = usuarioCrearREPO.crearUsuario(usuario);
 
         // Si es Docente o Administrativo se crean credenciales
-        if (usuario.getTipoUsuario().equals(TipoUsuario.DOCENTE) || usuario.getTipoUsuario().equals(TipoUsuario.ADMINISTRATIVO)){
+        if (usuario.getTipoUsuario().equals(TipoUsuario.DOCENTE) || usuario.getTipoUsuario().equals(TipoUsuario.ADMINISTRATIVO)) {
             servicioDeCredencial.registrarCredencial(RegistroCredencialPetición
                     .builder()
-                            .usuarioId(nuevoUsuario.getId())
-                            .email(nuevoUsuario.getCorreo())
-                            .password(nuevoUsuario.getNumeroDocumento())
+                    .usuarioId(nuevoUsuario.getId())
+                    .email(nuevoUsuario.getCorreo())
+                    .password(nuevoUsuario.getNumeroDocumento())
                     .build());
         }
 
-        //Enviar Correo
+        // Enviar Correo de Bienvenida
         enviarCorreo(nuevoUsuario);
 
-        return new RespuestaHandler<>(200, "ok", "",true).getRespuesta();
+        return new RespuestaHandler<>(200, "ok", "", true).getRespuesta();
     }
 
-    private Respuesta enviarCorreo(Usuario usuario){
+    /**
+     * Envía un correo de bienvenida al nuevo usuario, incluyendo información personalizada
+     * como el nombre, tipo de usuario, grupo de investigación, etc.
+     *
+     * @param usuario Objeto Usuario que contiene la información del nuevo usuario.
+     * @return Respuesta que indica el resultado del envío del correo.
+     */
+    private Respuesta enviarCorreo(Usuario usuario) {
         List<MetaData> metaData = new ArrayList<>();
         metaData.add(MetaData.builder()
                 .key("nombre")
@@ -84,5 +95,4 @@ public class UsuarioCrearService implements UsuarioCrearCU {
                 .metaData(metaData)
                 .build());
     }
-
 }

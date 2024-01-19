@@ -1,7 +1,7 @@
 package edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial;
 
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.token.Token;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.out.persistencia.entity.UsuarioEntity;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidad.UsuarioEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

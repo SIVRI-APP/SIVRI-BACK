@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyecto.domain.model;
 
-import edu.unicauca.SivriBackendApp.core.convocatoria.domain.model.Convocatoria;
+import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.Convocatoria;
 import lombok.Data;
 
 import java.time.LocalDate;
