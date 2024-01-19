@@ -7,6 +7,9 @@ import edu.unicauca.SivriBackendApp.common.seguridad.acceso.dto.AutenticaciónRe
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeAutenticación;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeCredencial;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,13 +28,51 @@ public class ControladorDeAcceso {
   private final ServicioDeCredencial servicioDeCredencial;
 
   @PostMapping("/autenticar")
-  @Operation(summary = "Autenticar usuario", description = "Autenticar a un usuario con las credenciales proporcionadas.")
-  public ResponseEntity<AutenticaciónRespuesta> autenticar(@Valid @RequestBody AutenticaciónPetición request) {
+  @Operation(
+          summary = "Autenticar usuario",
+          description = "Autenticar a un usuario con las credenciales proporcionadas."
+  )
+  @ApiResponse(
+          responseCode = "200",
+          description = "Autenticación exitosa",
+          content = @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = AutenticaciónRespuesta.class)
+          )
+  )
+  @ApiResponse(
+          responseCode = "400",
+          description = "Solicitud inválida",
+          content = @Content(mediaType = "application/json")
+  )
+  public ResponseEntity<AutenticaciónRespuesta> autenticar(
+          @Valid @RequestBody AutenticaciónPetición request
+  ) {
     return ResponseEntity.ok(servicioDeAutenticación.autenticar(request));
   }
 
   @PatchMapping
-  public ResponseEntity<Boolean> cambiarContraseña(@RequestBody CambioContraseñaPetición request, Principal connectedUser) {
+  @Operation(
+          summary = "Cambiar contraseña",
+          description = "Cambiar la contraseña del usuario conectado."
+  )
+  @ApiResponse(
+          responseCode = "200",
+          description = "Cambio de contraseña exitoso",
+          content = @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = Boolean.class)
+          )
+  )
+  @ApiResponse(
+          responseCode = "400",
+          description = "Solicitud inválida",
+          content = @Content(mediaType = "application/json")
+  )
+  public ResponseEntity<Boolean> cambiarContraseña(
+          @RequestBody CambioContraseñaPetición request,
+          Principal connectedUser
+  ) {
     return ResponseEntity.ok(servicioDeCredencial.cambiarContraseña(request, connectedUser));
   }
 }
