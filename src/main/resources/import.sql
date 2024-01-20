@@ -83,17 +83,26 @@ INSERT INTO rol_funcionario (id, nombre) VALUES (7, 'VICERRECTOR');
 
 -- USUARIO
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (1, 'miguel@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'MASCULINO', 'ADMINISTRATIVO', 'Yurani', 'Mosquera', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'FEMENINO', 'ADMINISTRATIVO', 'Yurani', 'Mosquera', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (3, 'yurany@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'FEMENINO', 'ADMINISTRATIVO', 'Yurani', 'Guevara', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (4, 'susana@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10614', 'FEMENINO', 'ADMINISTRATIVO', 'susana', 'Guevara', '3225864404' );
 
 -- CREDENTIAL
 INSERT INTO _credencial (id, email, password, usuarioId) VALUES (1, 'miguel@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 1)
-INSERT INTO _credencial (id, email, password, usuarioId) VALUES (2, 'yurani@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 2)
+INSERT INTO _credencial (id, email, password, usuarioId) VALUES (2, 'yurani@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 2);
+INSERT INTO _credencial (id, email, password, usuarioId) VALUES (3, 'yurany@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 3);
+INSERT INTO _credencial (id, email, password, usuarioId) VALUES (4, 'susana@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 4);
 
 -- FUNCIONARIO
 INSERT INTO funcionario (id, usuarioId) VALUES (1, 1);
+INSERT INTO funcionario (id, usuarioId) VALUES (2, 2);
+INSERT INTO funcionario (id, usuarioId) VALUES (3, 3);
+INSERT INTO funcionario (id, usuarioId) VALUES (4, 4);
 
 -- ROL ADMINISTRATIVO
 INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (1, 1, 1, true, '2024-01-01');
+INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (2, 2, 4, true, '2023-12-08');
+INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (3, 4, 3, true, '2023-12-08');
 
 
 
@@ -141,7 +150,9 @@ INSERT INTO disciplina (id, disciplina, idSubArea) VALUES (2,'Ëtica Relacionada
 INSERT INTO disciplina (id, disciplina, idSubArea) VALUES (3,'Geotécnicas',2);
 
 --documento semillero
-INSERT INTO documento_semillero(id, avalDepartamento, otros, observacion, estado) VALUES(1,'aval','otr','','en revision');
+INSERT INTO documento_semillero(id, tipo, rutaDocumento, observacion, estado) VALUES(1,'AVAL_DEPARTAMENTO','documento 1','','APROBADO');
+INSERT INTO documento_semillero(id, tipo, rutaDocumento, observacion, estado) VALUES(2,'OTROS','documento 2','','APROBADO');
+INSERT INTO documento_semillero(id, tipo, rutaDocumento, observacion, estado) VALUES(3,'AVAL_DEPARTAMENTO','documento 3','','REVISION');
 
 --compromiso Semillero
 INSERT INTO compromiso_semillero(id,nombre) VALUES(1, 'compromiso 1');
@@ -179,13 +190,15 @@ INSERT INTO rol_semillero(id,rolSemillero) VALUES(6,'SEMILLAS');
 INSERT INTO linea_investigacion(id,semilleroId,linea) VALUES(1,2,'linea 1');
 
 --observacion semillero
-INSERT INTO observacion_semillero(id,semilleroId,observacion,fecha) VALUES (1,2,'','2023-09-04')
+INSERT INTO observacion_semillero(id,semilleroId,funcionarioId,observacion,fecha) VALUES (1,2,2,'','2023-09-04')
 
 -- integrantesemillero
-INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,rolId, estado, semestre, fechaIngreso, fechaRetiro)VALUES(1,2,1, 'activo', 'n.a', '2023-09-04',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(1,2,3,2, 'activo', '2023-09-04',NULL);
 
 --semillero documentacion
 INSERT INTO semillero_documentacion(semilleroId,idDocumentoSemillero,fecha) VALUES(2,1,'2023-09-04');
+INSERT INTO semillero_documentacion(semilleroId,idDocumentoSemillero,fecha) VALUES(2,2,'2023-09-04');
+INSERT INTO semillero_documentacion(semilleroId,idDocumentoSemillero,fecha) VALUES(2,3,'2023-10-10');
 
 --semillero programa
 INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,1);
@@ -195,13 +208,13 @@ INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,2);
 INSERT INTO plan_trabajo(id,semilleroId,nombrePlan, estado) VALUES(1,2, 'plan 2023','formulado');
 
 --actividad plan de trabajo
-INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin)VALUES(1,1,1,'obj','act','2023-03-08','2023-08-05');
+INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId,evidenciaId)VALUES(1,1,1,'obj','act','2023-03-08','2023-08-05',3,1);
 
 --INTEGRANTE GRUPO
-INSERT INTO integrante_grupo(id,rolGrupoId,grupoId,estado,fechaInicio,fechaFin) VALUES(1,1,1,'Activo','2023-09-07',NULL);
+INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(1,1,3,1,'Activo','2023-09-07',NULL);
 
 --observacion grupo
-INSERT INTO observacion_grupo(idObservacion,grupoId,observacion,fecha)VALUES(1,1,'observacion de un grupo','2023-09-08');
+INSERT INTO observacion_grupo(idObservacion,funcionarioId,grupoId,observacion,fecha)VALUES(1,2,1,'observacion de un grupo','2023-09-08');
 
 --GRUPO DISCIPLINA
 INSERT INTO grupo_disciplina(disciplinaId,grupoId) VALUES(1,1);
