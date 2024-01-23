@@ -17,30 +17,41 @@ INSERT INTO programa (id, nombre, departamentoId) VALUES (3, 'Ingeniería Electr
 
 -- |***** CONVOCATORIA *****|
 
--- DOCUMENTACION
-INSERT INTO documentacion (id, nombre) VALUES (1, 'PagaFor-24');
-INSERT INTO documentacion (id, nombre) VALUES (2, 'PagaFor-25');
-INSERT INTO documentacion (id, nombre) VALUES (3, 'PagaFor-26');
-INSERT INTO documentacion (id, nombre) VALUES (4, 'PagaFor-27');
-INSERT INTO documentacion (id, nombre) VALUES (5, 'PagaFor-28');
+-- DOCUMENTO CONVOCATORIA
+INSERT INTO documento_convocatoria (id, nombre) VALUES (1, 'PagaFor-24');
+INSERT INTO documento_convocatoria (id, nombre) VALUES (2, 'PagaFor-25');
+INSERT INTO documento_convocatoria (id, nombre) VALUES (3, 'PagaFor-26');
+INSERT INTO documento_convocatoria (id, nombre) VALUES (4, 'PagaFor-27');
+INSERT INTO documento_convocatoria (id, nombre) VALUES (5, 'PagaFor-28');
 
--- TIPO FINANCIACION
-INSERT INTO tipofinanciacion (id, tipo) VALUES (1, 'Interno');
-INSERT INTO tipofinanciacion (id, tipo) VALUES (2, 'Externo');
 
--- CHECKLIST
-INSERT INTO checklist (id, tipoFinanciacionId, documentacionId) VALUES (1, 1, 1);
-INSERT INTO checklist (id, tipoFinanciacionId, documentacionId) VALUES (2, 1, 2);
-INSERT INTO checklist (id, tipoFinanciacionId, documentacionId) VALUES (3, 1, 3);
-INSERT INTO checklist (id, tipoFinanciacionId, documentacionId) VALUES (4, 2, 4);
-INSERT INTO checklist (id, tipoFinanciacionId, documentacionId) VALUES (5, 2, 5);
+-- TIPO CONVOCATORIA
+INSERT INTO tipo_convocatoria (id, nombre, tipoFinanciación) VALUES (1, 'Proyectos Internos', 'PROYECTOS_INTERNOS');
+INSERT INTO tipo_convocatoria (id, nombre, tipoFinanciación) VALUES (2, 'Proyectos Externos 2024', 'PROYECTOS_EXTERNOS');
+INSERT INTO tipo_convocatoria (id, nombre, tipoFinanciación) VALUES (3, 'Alcaldía de Popayan', 'PROYECTOS_EXTERNOS');
+
+
+-- LISTADO DE DOCUMENTOS
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (1, 1, 1, 'PRE_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (2, 1, 2, 'EJECUCIÓN', 'DIRECTOR_PROYECTO', 2, true);
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (3, 1, 3, 'POST_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (4, 1, 4, 'POST_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, false);
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (5, 1, 4, 'POST_EJECUCIÓN', 'ADMINISTRATIVO', 1, true);
+
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (6, 2, 1, 'PRE_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (7, 2, 2, 'EJECUCIÓN', 'DIRECTOR_PROYECTO', 2, true);
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (8, 2, 3, 'POST_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
+
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (9, 3, 3, 'PRE_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (10, 3, 4, 'EJECUCIÓN', 'DIRECTOR_PROYECTO', 2, true);
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (11, 3, 5, 'POST_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
+
 
 -- CONVOCATORIA
-INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin, estado, recurrente, eliminadoLogico, tipoFinanciacionId) VALUES (1, 'Internos 2023', 'Ayudar a la investigación de la U 2023', 'Universidad del Cauca', '2023-01-01', '2023-12-31', 'ABIERTA', true, false, 1);
-INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin, estado, recurrente, eliminadoLogico, tipoFinanciacionId) VALUES (2, 'Internos 2022', 'Ayudar a la investigación de la U 2022', 'Universidad del Cauca', '2022-01-01', '2024-12-31', 'CERRADA', true, false, 1);
-INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin, estado, recurrente, eliminadoLogico, tipoFinanciacionId) VALUES (3, 'Internos 2024', 'Ayudar a la investigación de la U 2024', 'Universidad del Cauca', '2024-01-01', '2024-12-31', 'PROGRAMADA', true, false, 1);
-INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin, estado, recurrente, eliminadoLogico, tipoFinanciacionId) VALUES (4, 'Externo Gobernacion del Cauca', 'Plan para mejorar el sistema de producción', 'Licorería del Cauca', '2024-01-01', '2024-12-31', 'PROGRAMADA', true, false, 2);
-
+INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin, estado, tipoConvocatoriaId) VALUES (1, 'Internos 2023', 'Ayudar a la investigación de la U 2023', 'Universidad del Cauca', '2023-01-01', '2023-12-31', 'CERRADA', 1);
+INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin, estado, tipoConvocatoriaId) VALUES (2, 'Internos 2024', 'Ayudar a la investigación de la U 2024', 'Universidad del Cauca', '2024-01-01', '2024-12-31', 'ABIERTA', 1);
+INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin, estado, tipoConvocatoriaId) VALUES (3, 'Externo Gobernación del Cauca', 'Plan para mejorar el sistema de producción', 'Licorería del Cauca', '2024-01-01', '2024-12-31', 'ABIERTA', 2);
+INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin, estado, tipoConvocatoriaId) VALUES (4, 'Externo Alcaldía de Popayan', 'Plan para mejorar el sistema de producción', 'Licorería del Cauca', '2024-01-01', '2024-12-31', 'ABIERTA', 3);
 
 
 
@@ -141,7 +152,7 @@ INSERT INTO disciplina (id, disciplina, idSubArea) VALUES (1,'Biotecnología Amb
 INSERT INTO disciplina (id, disciplina, idSubArea) VALUES (2,'Ëtica Relacionada con Biotecnología Ambiental',1);
 INSERT INTO disciplina (id, disciplina, idSubArea) VALUES (3,'Geotécnicas',2);
 
---documento semillero
+--documentoConvocatoria semillero
 INSERT INTO documento_semillero(id, avalDepartamento, otros, observacion, estado) VALUES(1,'aval','otr','','en revision');
 
 --compromiso Semillero
@@ -185,7 +196,7 @@ INSERT INTO observacion_semillero(id,semilleroId,observacion,fecha) VALUES (1,2,
 -- integrantesemillero
 INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,rolId, estado, semestre, fechaIngreso, fechaRetiro)VALUES(1,2,1, 'activo', 'n.a', '2023-09-04',NULL);
 
---semillero documentacion
+--semillero documentoConvocatoria
 INSERT INTO semillero_documentacion(semilleroId,idDocumentoSemillero,fecha) VALUES(2,1,'2023-09-04');
 
 --semillero programa

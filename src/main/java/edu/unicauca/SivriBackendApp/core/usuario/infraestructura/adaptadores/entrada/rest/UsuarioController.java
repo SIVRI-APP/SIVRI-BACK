@@ -3,8 +3,8 @@ package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.en
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioSolicitudEliminarCU;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

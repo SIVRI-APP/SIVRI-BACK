@@ -1,5 +1,9 @@
 package edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos;
 
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.Sexo;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

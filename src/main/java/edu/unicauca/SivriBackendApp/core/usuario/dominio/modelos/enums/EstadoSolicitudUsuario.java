@@ -1,4 +1,4 @@
-package edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos;
+package edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums;
 
 /**
  * Enumeración que representa los posibles estados de una solicitud de usuario.

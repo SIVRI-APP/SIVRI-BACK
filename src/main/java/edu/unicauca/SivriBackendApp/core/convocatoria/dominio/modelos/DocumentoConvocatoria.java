@@ -3,12 +3,10 @@ package edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos;
 import lombok.Data;
 
 @Data
-public class Checklist {
+public class DocumentoConvocatoria {
 
     private Long id;
 
-    private TipoFinanciacion tipoFinanciacion;
+    private String nombre;
 
-    private Documentacion documentacion;
 }
-

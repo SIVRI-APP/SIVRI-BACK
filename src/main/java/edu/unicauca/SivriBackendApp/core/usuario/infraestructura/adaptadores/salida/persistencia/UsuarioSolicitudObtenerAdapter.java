@@ -1,9 +1,9 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia;
 
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.UsuarioSolicitudObtenerREPO;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.EstadoSolicitudUsuario;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitud;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudInformaciónDetalladaProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudListarConFiltroProyección;

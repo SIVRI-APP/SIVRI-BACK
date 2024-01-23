@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos;
 
+import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.ConvocatoriaEstado;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -19,14 +20,8 @@ public class Convocatoria {
 
     private LocalDate fechaFin;
 
-    private boolean recurrente;
-
-    private boolean eliminadoLogico;
-
     private ConvocatoriaEstado estado;
 
-    private TipoFinanciacion tipoFinanciacion;
+    private TipoConvocatoria tipoConvocatoria;
 
-//    @OneToMany(mappedBy = "convocatoria", fetch = FetchType.LAZY)
-//    private List<ProyectoEntity> proyectos;
 }

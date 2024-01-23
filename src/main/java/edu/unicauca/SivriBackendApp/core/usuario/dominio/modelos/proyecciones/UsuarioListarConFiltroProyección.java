@@ -1,7 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones;
 
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 
 public interface UsuarioListarConFiltroProyección {
     Long getId();

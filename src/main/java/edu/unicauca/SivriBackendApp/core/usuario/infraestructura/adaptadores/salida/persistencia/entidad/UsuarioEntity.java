@@ -1,8 +1,8 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidad;
 
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Sexo;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.Sexo;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.*;
 

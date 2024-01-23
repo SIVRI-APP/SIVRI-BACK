@@ -7,7 +7,7 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.dto.RegistroCredencialPetición;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeCredencial;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioCrearCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.UsuarioCrearREPO;

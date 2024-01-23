@@ -1,21 +1,16 @@
 package edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.salida.persistencia.entidad;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.ConvocatoriaEstado;
-import edu.unicauca.SivriBackendApp.core.proyecto.infraestructure.persistence.jpaEntity.ProyectoEntity;
+import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.ConvocatoriaEstado;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "convocatoria")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class ConvocatoriaEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,20 +28,10 @@ public class ConvocatoriaEntity {
 
     private LocalDate fechaFin;
 
-    @Column(nullable = false)
-    private boolean recurrente;
-
-    @Column(nullable = false)
-    private boolean eliminadoLogico;
-
     @Enumerated(EnumType.STRING)
     private ConvocatoriaEstado estado;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "tipoFinanciacionId")
-    private TipoFinanciacionEntity tipoFinanciacion;
-
-    @OneToMany(mappedBy = "convocatoria", fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<ProyectoEntity> proyectos;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "tipoConvocatoriaId")
+    private TipoConvocatoriaEntity tipoConvocatoriaEntity;
 }

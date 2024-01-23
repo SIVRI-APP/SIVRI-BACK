@@ -2,9 +2,9 @@ package edu.unicauca.SivriBackendApp.core.usuario.dominio.servicios;
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Sexo;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoDocumento;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.TipoUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.Sexo;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.MetadataCU;
 import org.springframework.stereotype.Service;
 
