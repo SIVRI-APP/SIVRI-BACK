@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 public class Semillero extends OrganismoDeInvestigacion {
     private Integer semilleroId;
     private SemilleroEstado estado;
+    private String correo;
     private String sede;
     private Integer grupoId;
 

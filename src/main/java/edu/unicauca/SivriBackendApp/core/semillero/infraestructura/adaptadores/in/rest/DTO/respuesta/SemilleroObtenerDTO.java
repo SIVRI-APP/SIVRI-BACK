@@ -11,6 +11,7 @@ public class SemilleroObtenerDTO {
     private String nombre;
     private SemilleroEstado estado;
     private LocalDate fechaCreacion;
+    private String correo;
     private String sede;
     private String objetivo;
     private String mision;

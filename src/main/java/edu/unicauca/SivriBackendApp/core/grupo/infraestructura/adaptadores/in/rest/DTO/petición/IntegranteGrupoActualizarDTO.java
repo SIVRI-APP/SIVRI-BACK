@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 @Data
 public class IntegranteGrupoActualizarDTO {
-    @NotNull(message = "el id del integrante del grupo es necesario para la actualizacion")
     private int id;
     @NotNull(message = "el rol del integrante del grupo no puede ser nulo.")
     private Integer rolGrupoId;

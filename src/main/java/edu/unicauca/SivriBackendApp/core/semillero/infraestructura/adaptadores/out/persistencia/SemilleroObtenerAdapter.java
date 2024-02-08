@@ -42,8 +42,12 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
     @Override
     public Optional<Semillero> obtenerSemilleroPorId(int id) {
         Optional<SemilleroEntity> respuestaJpa=semilleroRepository.findById(id);
+        System.out.println("respuestaJpa:"+ respuestaJpa);
         if (respuestaJpa.isPresent()){
-            Optional<Semillero> resp= Optional.of(semilleroMapper.obtenerModelo(respuestaJpa.get()));
+            System.out.println("coore: "+respuestaJpa.get());
+            Semillero semilleromap=semilleroMapper.obtenerModelo(respuestaJpa.get());
+            System.out.println("correo: "+semilleromap.getCorreo());
+            Optional<Semillero> resp= Optional.of(semilleromap);
             //System.out.println("DATOS DESPUES DEL MAPEO: "+resp);
             return resp;
         }

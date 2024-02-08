@@ -23,9 +23,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "http://localhost:4200/",allowedHeaders = "*")
 @RestController
 @RequestMapping("semilleros")
-@CrossOrigin(origins = "#",allowedHeaders = "#")
+
 public class SemilleroControlller {
     private final SemilleroObtenerCU semilleroObtenerCU;
     private final SemilleroCrearCU semilleroCrearCU;
@@ -40,10 +41,11 @@ public class SemilleroControlller {
     }
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyAuthority(" +
-            "'FUNCIONARIO:SEMILLEROS')" +
+            "'FUNCIONARIO:SEMILLEROS'," +
             "'SEMILLERO:MENTOR' )"
             )
     public ResponseEntity<Respuesta> obtenerSemilleroPorId(@PathVariable(value = "id")int id){
+
         Respuesta respuesta=semilleroObtenerCU.obtenerSemilleroPorId(id);
         respuesta.setData(semilleroDtoMapper.dtoObtenerSemillero((Semillero) respuesta.getData()));
         return ResponseEntity.ok().body(respuesta);

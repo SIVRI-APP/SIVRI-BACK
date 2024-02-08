@@ -19,9 +19,8 @@ public class  IntegranteGrupoAcualizarAdapter implements IntegranteGrupoActualiz
 
     @Override
     public Boolean actualizar(IntegranteGrupo nuevosDatos) {
-        //System.out.println("DATOS QUE LLEGAN AL ADAPTER: "+nuevosDatos);
+
         IntegranteGrupoEntity integranteGrupo=integranteGrupoRepository.save(integranteGrupoMapper.obtenerEntity(nuevosDatos));
-        //System.out.println("INTERGANTE GRUPO DESPUES DEL MAPEO: "+integranteGrupo);
         return true;
     }
 }

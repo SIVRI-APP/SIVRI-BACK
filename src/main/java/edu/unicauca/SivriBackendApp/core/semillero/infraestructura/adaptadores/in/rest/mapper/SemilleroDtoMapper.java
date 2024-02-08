@@ -8,12 +8,13 @@ import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.i
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.SemilleroCrearDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.respuesta.SemilleroObtenerDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring",uses = {GrupoDtoMapper.class})
 public interface SemilleroDtoMapper {
-
+    //@Mapping(source = "correo",target = "correo")
     SemilleroObtenerDTO dtoObtenerSemillero(final Semillero semillero);
    //@Mapping(source = "grupoId",target = "grupo.id")
     List<SemilleroObtenerDTO> dtoObtenerSemilleros(final List<Semillero> semilleros);

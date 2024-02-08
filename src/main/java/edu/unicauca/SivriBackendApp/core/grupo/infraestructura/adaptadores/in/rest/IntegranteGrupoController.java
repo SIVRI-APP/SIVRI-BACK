@@ -10,6 +10,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.re
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.rest.mapper.IntegranteGrupoDtoMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -57,12 +58,12 @@ public class IntegranteGrupoController {
         return ResponseEntity.ok().body(respuesta);
     }
 
-    @PatchMapping("")
+    @PatchMapping("/actualizarIntegranteGrupo")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:GRUPOS')")
     public ResponseEntity<Respuesta> actualizar(@Valid @RequestBody IntegranteGrupoActualizarDTO nuevosDatos){
 
-        //System.out.println("DATOS DE INTEGRANTE quE LLEGAN EN EL CONTROLER POARA ACTUALIZAR "+nuevosDatos);
         Respuesta respuesta=integranteGrupoActualizarCU.actualizar(integranteGrupoDtoMapper.actualizar(nuevosDatos));
-        //System.out.println("DATOS DESPUES DEL MAPEO EN CONTROLLER "+respuesta);
         return ResponseEntity.ok().body(respuesta);
     }
 

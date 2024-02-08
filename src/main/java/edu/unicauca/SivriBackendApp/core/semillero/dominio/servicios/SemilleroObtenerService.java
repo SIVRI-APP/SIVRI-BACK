@@ -48,6 +48,7 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
 
     @Override
     public Respuesta<Semillero> obtenerSemilleroPorId(int id) {
+
         Optional<Semillero> respuesta=semilleroObtenerREPO.obtenerSemilleroPorId(id);
         if (respuesta.isEmpty()) {
             throw new ReglaDeNegocioException("el id " + id + " no existe.");

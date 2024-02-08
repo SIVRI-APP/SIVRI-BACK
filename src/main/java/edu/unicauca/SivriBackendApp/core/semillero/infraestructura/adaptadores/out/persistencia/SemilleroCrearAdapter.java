@@ -24,9 +24,7 @@ public class SemilleroCrearAdapter implements SemilleroCrearREPO {
 
     @Override
     public Semillero crear(Semillero nuevoSemillero) {
-
         Semillero semillero=semilleroMapper.obtenerModelo(semilleroRepository.save(semilleroMapper.obtenerEntity(nuevoSemillero)));
-
         return semillero ;
     }
 

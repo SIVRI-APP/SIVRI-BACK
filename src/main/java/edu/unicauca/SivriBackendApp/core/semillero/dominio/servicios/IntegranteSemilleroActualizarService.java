@@ -9,7 +9,6 @@ import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.RolesSem
 import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.IntegranteSemilleroActualizarREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoIntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSemillero;
-import edu.unicauca.SivriBackendApp.core.semillero.dominio.validadores.IntegranteSemilleroValidador;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -19,15 +18,12 @@ public class IntegranteSemilleroActualizarService implements IntegranteSemillero
     private final IntegranteSemilleroActualizarREPO integranteSemilleroActualizarREPO;
     private final IntegranteSemilleroObtenerCU integranteSemilleroObtenerCU;
     private final RolesSemilleroObtenerCU rolesSemilleroObtenerCU;
-    private final IntegranteSemilleroValidador integranteSemilleroValidador;
 
-    public IntegranteSemilleroActualizarService(IntegranteSemilleroActualizarREPO integranteSemilleroActualizarREPO, IntegranteSemilleroObtenerCU integranteSemilleroObtenerCU, RolesSemilleroObtenerCU rolesSemilleroObtenerCU, IntegranteSemilleroValidador integranteSemilleroValidador) {
+    public IntegranteSemilleroActualizarService(IntegranteSemilleroActualizarREPO integranteSemilleroActualizarREPO, IntegranteSemilleroObtenerCU integranteSemilleroObtenerCU, RolesSemilleroObtenerCU rolesSemilleroObtenerCU) {
         this.integranteSemilleroActualizarREPO = integranteSemilleroActualizarREPO;
         this.integranteSemilleroObtenerCU = integranteSemilleroObtenerCU;
         this.rolesSemilleroObtenerCU = rolesSemilleroObtenerCU;
-
-        this.integranteSemilleroValidador = integranteSemilleroValidador;
-    }
+}
 
     @Override
     public Respuesta<Boolean> actualizar(IntegranteSemillero nuevosDatosIntegrante) {

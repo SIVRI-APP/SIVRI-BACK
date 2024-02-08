@@ -7,6 +7,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.in.IntegranteGr
 import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.in.IntegranteGrupoObtenerCU;
 import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.in.RolesGrupoObtenerCU;
 import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.out.IntegranteGrupoActualizarREPO;
+import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.Grupo;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.IntegranteGrupo;
 import org.springframework.stereotype.Component;
 
@@ -26,15 +27,14 @@ public class IntegranteGrupoActualizarService implements IntegranteGrupoActualiz
 
     @Override
     public Respuesta<Boolean> actualizar(IntegranteGrupo nuevosDatos) {
-        //System.out.println("DAOTS QUE LLEGAN A SERVICE: "+nuevosDatos);
-        IntegranteGrupo objParaActualizar=integranteGrupoObtenerCU.obtenerIntegrantePorId(nuevosDatos.getId()).getData();
-        //System.out.println("id grupo "+objParaActualizar.getGrupo().getId());
 
-        //System.out.println("DATOS en DB DE INTEGRANTE obtenido por cu "+objParaActualizar);
+        IntegranteGrupo objParaActualizar=integranteGrupoObtenerCU.obtenerIntegrantePorId(nuevosDatos.getId()).getData();
+        Grupo grupo= objParaActualizar.getGrupo();
+        objParaActualizar.getGrupo().setGrupoId(grupo.getId());
+
         rolesGrupoObtenerCU.existePorId(nuevosDatos.getRolGrupo().getId());
 
         objParaActualizar.getRolGrupo().setId(nuevosDatos.getRolGrupo().getId());
-
         objParaActualizar.setEstado(nuevosDatos.getEstado());
         objParaActualizar.setFechaFin(nuevosDatos.getFechaFin());
         boolean respuesta=integranteGrupoActualizarREPO.actualizar(objParaActualizar);
