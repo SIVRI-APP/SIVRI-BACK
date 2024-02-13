@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.Random;
 
 @Component
 @AllArgsConstructor
@@ -43,5 +44,42 @@ public class CredencialValidador {
         }
 
         return true;
+    }
+
+    public int códigoAleatorioParaRecuperarContraseña(){
+        limpiarCódigosAntiguosRecuperaciónDeContraseña();
+
+        int existe = 0;
+        int codigo = 0;
+        do {
+            Random random = new Random();
+            codigo =  random.nextInt(900000) + 100000; // Rango de 100000 a 999999
+
+            existe = repositorioCredencial.códigoAleatorioParaRecuperarContraseñaExiste(codigo);
+        }while (existe > 0);
+
+        return codigo;
+    }
+
+    public Credencial validarCodigoRecuperarContraseña(String email, int codigoRecuperarContraseña){
+
+        // Código existe y coincide con el correo y se solicitó recuperar la contraseña
+        int respuestaBD = repositorioCredencial.validarCodigoRecuperarContraseña(email, codigoRecuperarContraseña);
+
+        if (respuestaBD != 1){
+            throw new ReglaDeNegocioException("bad.recuperar.contraseña");
+        }
+
+        Optional<Credencial> credencial = repositorioCredencial.findByEmail(email);
+
+        if (credencial.isEmpty()){
+            throw new ReglaDeNegocioException("bad.recuperar.contraseña");
+        }
+
+        return credencial.get();
+    }
+
+    private void limpiarCódigosAntiguosRecuperaciónDeContraseña(){
+        repositorioCredencial.limpiarCódigosAntiguosRecuperaciónDeContraseña();
     }
 }

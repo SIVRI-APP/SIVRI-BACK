@@ -33,6 +33,41 @@ public class UsuarioSolicitudController<T> {
     private final UsuarioSolicitudObtenerCU usuarioSolicitudObtenerCU;
     private final UsuarioSolicitudRestMapper usuarioSolicitudRestMapper;
 
+
+    @Operation(
+            summary = "Editar solicitud de usuario",
+            description = "Edita una solicitud existente para registrar un nuevo usuario.",
+            responses = {
+                @ApiResponse(
+                        responseCode = "200",
+                        description = "Solicitud de usuario editada exitosamente"
+                )
+            }
+    )
+    @PatchMapping("editarSolicitudUsuario")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR',  " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:USUARIOS')")
+    public ResponseEntity<Respuesta> editarSolicitudUsuario(
+            @Parameter(
+                    name = "solicitudUsuarioId",
+                    description = "ID de la solicitud de usuario a editar",
+                    required = true
+            )
+            @RequestParam @Min(value = 0, message = "El valor de solicitudUsuarioId debe ser positivo") long solicitudUsuarioId,
+
+            @Parameter(
+                    name = "registro",
+                    description = "Datos para registrar un nuevo usuario",
+                    required = true
+            )
+            @Valid @RequestBody RegistroUsuarioDTO registro
+    ) {
+        Respuesta respuesta = usuarioSolicitudCrearCU.editarSolicitudUsuario(solicitudUsuarioId, usuarioSolicitudRestMapper.registrarUsuario(registro));
+        return ResponseEntity.ok().body(respuesta);
+    }
+
     @PostMapping("crearSolicitudUsuario")
     @PreAuthorize("hasAnyAuthority(" +
             "'GRUPO:DIRECTOR',  " +
@@ -59,42 +94,6 @@ public class UsuarioSolicitudController<T> {
             @Valid @RequestBody RegistroUsuarioDTO registro
     ) {
         Respuesta respuesta = usuarioSolicitudCrearCU.crearSolicitudUsuario(usuarioSolicitudRestMapper.registrarUsuario(registro));
-        return ResponseEntity.ok().body(respuesta);
-    }
-
-    @PatchMapping("editarSolicitudUsuario")
-    @PreAuthorize("hasAnyAuthority(" +
-            "'GRUPO:DIRECTOR',  " +
-            "'FUNCIONARIO:SUPER_ADMIN', " +
-            "'FUNCIONARIO:USUARIOS')")
-    @Operation(
-            summary = "Editar solicitud de usuario",
-            description = "Edita una solicitud existente para registrar un nuevo usuario."
-    )
-    @ApiResponse(
-            responseCode = "200",
-            description = "Solicitud de usuario editada exitosamente",
-            content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = Respuesta.class)
-            )
-    )
-    public ResponseEntity<Respuesta> editarSolicitudUsuario(
-            @Parameter(
-                    name = "solicitudUsuarioId",
-                    description = "ID de la solicitud de usuario a editar",
-                    required = true
-            )
-            @RequestParam @Min(value = 0, message = "El valor de solicitudUsuarioId debe ser positivo") long solicitudUsuarioId,
-
-            @Parameter(
-                    name = "registro",
-                    description = "Datos para registrar un nuevo usuario",
-                    required = true
-            )
-            @Valid @RequestBody RegistroUsuarioDTO registro
-    ) {
-        Respuesta respuesta = usuarioSolicitudCrearCU.editarSolicitudUsuario(solicitudUsuarioId, usuarioSolicitudRestMapper.registrarUsuario(registro));
         return ResponseEntity.ok().body(respuesta);
     }
 

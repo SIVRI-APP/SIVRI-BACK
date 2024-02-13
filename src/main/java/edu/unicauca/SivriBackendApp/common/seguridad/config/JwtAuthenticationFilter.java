@@ -73,7 +73,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       @NonNull HttpServletResponse response,
       @NonNull FilterChain filterChain
   ) throws ServletException, IOException, CredencialIncorrectaException {
-    if (request.getServletPath().contains("/v1/acceso/autenticar")) {
+    if (request.getServletPath().contains("/v1/acceso")) {
       filterChain.doFilter(request, response);
       return;
     }

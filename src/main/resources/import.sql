@@ -93,17 +93,17 @@ INSERT INTO rol_funcionario (id, nombre) VALUES (6, 'PROYECTOS_EXTERNOS');
 INSERT INTO rol_funcionario (id, nombre) VALUES (7, 'VICERRECTOR');
 
 -- USUARIO
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (1, 'miguel@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (1, 'mandresmosquera@gmail.com', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'MASCULINO', 'ADMINISTRATIVO', 'Yurani', 'Mosquera', '3225864404' );
-
--- CREDENCIAL
-INSERT INTO _credencial (id, email, password, usuarioId) VALUES (1, 'miguel@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 1)
-INSERT INTO _credencial (id, email, password, usuarioId) VALUES (2, 'yurani@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 2)
-
--- FUNCIONARIO
+--
+-- -- CREDENCIAL
+INSERT INTO _credencial (id, email, password, usuarioId) VALUES (1, 'mandresmosquera@gmail.com', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 1);
+INSERT INTO _credencial (id, email, password, usuarioId) VALUES (2, 'yurani@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 2);
+--
+-- -- FUNCIONARIO
 INSERT INTO funcionario (id, usuarioId) VALUES (1, 1);
-
--- ROL ADMINISTRATIVO
+--
+-- -- ROL ADMINISTRATIVO
 INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (1, 1, 1, true, '2024-01-01');
 INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (2, 1, 2, true, '2024-01-01');
 
@@ -115,6 +115,7 @@ INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fec
 
 -- MAIL TEMPLATE
 INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (1, 'template.html', 'correo para crear credenciales de Usuario', 'nombre,tipoUsuario,grupoInvestigacion,rolGrupo');
+INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (2, 'recuperarContraseña.html', 'correo para recuperar la contraseña de un usuario', 'correo,codigo');
 
 
 
