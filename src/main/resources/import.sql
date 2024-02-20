@@ -86,6 +86,11 @@ INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuar
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'FEMENINO', 'ADMINISTRATIVO', 'Yurani', 'Mosquera', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (3, 'yurany@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'FEMENINO', 'ADMINISTRATIVO', 'Yurani', 'Guevara', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (4, 'susana@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10614', 'FEMENINO', 'ADMINISTRATIVO', 'susana', 'Guevara', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (5, 'usu1@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10615', 'MASCULINO', 'ADMINISTRATIVO', 'usuario1', 'Guevara', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (6, 'usu2@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10616', 'FEMENINO', 'ADMINISTRATIVO', 'usuario2', 'Guevara', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (7, 'usu3@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10617', 'MASCULINO', 'ADMINISTRATIVO', 'usuario3', 'Guevara', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (8, 'usu4@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10618', 'FEMENINO', 'ADMINISTRATIVO', 'usuario4', 'Guevara', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (9, 'usu5@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10619', 'MASCULINO', 'ADMINISTRATIVO', 'usuario5', 'Guevara', '3225864404' );
 
 -- CREDENTIAL
 INSERT INTO _credencial (id, email, password, usuarioId) VALUES (1, 'miguel@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 1)
@@ -206,6 +211,13 @@ INSERT INTO observacion_semillero(id,semilleroId,funcionarioId,observacion,fecha
 
 -- integrantesemillero
 INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(1,2,3,2, 'activo', '2023-09-04',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(2,4,5,1, 'activo', '2023-09-04',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(3,5,4,6, 'activo', '2023-09-04',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(4,6,6,6, 'activo', '2023-09-04',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(5,7,7,6, 'activo', '2023-09-04',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(6,8,8,6, 'activo', '2023-09-04',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(7,2,9,6, 'activo', '2023-09-04',NULL);
+
 
 --semillero documentacion
 INSERT INTO semillero_documentacion(semilleroId,idDocumentoSemillero,fecha) VALUES(2,1,'2023-09-04');

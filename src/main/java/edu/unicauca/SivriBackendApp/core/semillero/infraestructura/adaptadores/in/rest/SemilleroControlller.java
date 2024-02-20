@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:4200/",allowedHeaders = "*")
+
 @RestController
 @RequestMapping("semilleros")
-
+@CrossOrigin(origins = "htt://localhost:4200/")
 public class SemilleroControlller {
     private final SemilleroObtenerCU semilleroObtenerCU;
     private final SemilleroCrearCU semilleroCrearCU;
@@ -106,8 +106,8 @@ public class SemilleroControlller {
         Page<Semillero> dataService= (Page<Semillero>) respuesta.getData();
         List dataRespuesta= dataService.stream().map(semilleroDtoMapper::dtoObtenerSemillero)
                 .collect(Collectors.toList());
-
         respuesta.setData(new PageImpl<>(dataRespuesta,dataService.getPageable(),dataService.getTotalElements()));
+        System.out.println("dsdsd");
         return ResponseEntity.ok().body(respuesta);
 
     }

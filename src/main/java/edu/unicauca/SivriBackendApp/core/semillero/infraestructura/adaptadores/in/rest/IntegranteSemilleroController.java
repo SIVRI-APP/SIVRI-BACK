@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("integranteSemillero")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class IntegranteSemilleroController {
      private final IntegranteSemilleroObtenerCU integranteSemilleroObtenerCU;
      private final IntegranteSemilleroCrearCU integranteSemilleroCrearCU;
@@ -47,6 +47,7 @@ public class IntegranteSemilleroController {
           Page<IntegranteSemillero> dataService=(Page<IntegranteSemillero>) respuesta.getData();
           List dataRespuesta=dataService.stream().map(integranteSemilleroDtoMapper::obtenerDtoIntegranteSemillero).collect(Collectors.toList());
           respuesta.setData(new PageImpl<>(dataRespuesta,dataService.getPageable(),dataService.getTotalElements()));
+
           return ResponseEntity.ok().body(respuesta);
      }
      @GetMapping("integrantesPorSemilleroId")
