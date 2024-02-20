@@ -78,6 +78,7 @@ public class SecurityConfiguration {
                                 .addLogoutHandler(logoutHandler)
                                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
                 )
+                .cors()
         ;
 
         // Construir y devolver la cadena de filtros de seguridad configurada
