@@ -25,4 +25,28 @@ public interface RepositorioCredencial extends JpaRepository<Credencial, Integer
           , nativeQuery = true)
   List<IGetAuthorities> getAuthoritiesFuncionario (@Param("email") String email);
 
+  @Query(value = "SELECT CONCAT('SEMILLERO:', rol_sem.rolSemillero) AS authorities " +
+          "FROM usuario usu " +
+          "INNER JOIN integrante_semillero int_sem ON usu.id = int_sem.usuarioId " +
+          "INNER JOIN rol_semillero rol_sem ON rol_sem.id = int_sem.rolId " +
+          "WHERE usu.id IN (SELECT usu.id " +
+          "FROM _credencial _cre " +
+          "INNER JOIN usuario usu ON _cre.usuarioId = usu.id " +
+          "INNER JOIN funcionario fun ON fun.usuarioId = usu.id "  +
+          "WHERE _cre.email = :email)"
+          , nativeQuery = true)
+  List<IGetAuthorities> getAuthoritiesSemillero (@Param("email") String email);
+
+  @Query(value = "SELECT CONCAT('GRUPO:', rol_gru.rolGrupo) AS authorities " +
+          "FROM usuario usu " +
+          "INNER JOIN integrante_grupo int_gru ON usu.id = int_gru.usuarioId " +
+          "INNER JOIN rol_grupo rol_gru ON rol_gru.id = int_gru.rolGrupoId " +
+          "WHERE usu.id IN ( SELECT usu.id " +
+          "FROM _credencial _cre " +
+          "INNER JOIN usuario usu ON _cre.usuarioId = usu.id " +
+          "INNER JOIN funcionario fun ON fun.usuarioId = usu.id  " +
+          "WHERE _cre.email = :email)"
+          , nativeQuery = true)
+  List<IGetAuthorities> getAuthoritiesGrupo (@Param("email") String email);
+
 }
