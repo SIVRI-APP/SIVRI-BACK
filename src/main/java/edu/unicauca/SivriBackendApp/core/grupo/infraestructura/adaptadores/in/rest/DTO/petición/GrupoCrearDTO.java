@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.rest.DTO.petición;
 
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 

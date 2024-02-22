@@ -1,7 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.respuesta;
 
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoIntegranteSemillero;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.Usuario;
 import lombok.Data;
 
 import java.time.LocalDate;

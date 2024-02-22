@@ -9,7 +9,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.out.GrupoCrearR
 import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.out.IntegranteGrupoCrearREPO;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.Grupo;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.GrupoEstado;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioObtenerCU;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioObtenerCU;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

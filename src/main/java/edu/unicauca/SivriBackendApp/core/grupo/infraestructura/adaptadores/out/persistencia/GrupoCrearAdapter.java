@@ -11,9 +11,8 @@ import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.p
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.persistencia.mapper.IntegranteGrupoMapper;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.persistencia.repository.IGrupoRepository;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.persistencia.repository.IIntegranteGrupoRepository;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioObtenerCU;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.Usuario;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.proyecciones.InformacionDetalladaUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioObtenerCU;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -38,11 +37,12 @@ public class GrupoCrearAdapter implements GrupoCrearREPO {
     @Override
     public Boolean crear(Grupo nuevoGrupo) {
         //System.out.println("datos que llegan al adapter del grupo que se va a crear "+nuevoGrupo);
-        InformacionDetalladaUsuario integranteDirector=usuarioObtenerCU.validarExistenciaUsuarioSistema(nuevoGrupo.getTipoDocumento().toString(),nuevoGrupo.getNumeroDocumento()).getData();
+        //TODO AGREGRAR LO DE USUARIO
+        //InformacionDetalladaUsuario integranteDirector=usuarioObtenerCU.validarExistenciaUsuarioSistema(nuevoGrupo.getTipoDocumento().toString(),nuevoGrupo.getNumeroDocumento()).getData();
         IntegranteGrupo objIntegranteGrupo=new IntegranteGrupo();
         RolGrupo idRolGrupo=new RolGrupo(1);
         Usuario director=new Usuario();
-        director.setId(integranteDirector.getId());
+        //director.setId(integranteDirector.getId());
         Grupo grupoIntegrante=new Grupo();
         objIntegranteGrupo.setRolGrupo(idRolGrupo);
         objIntegranteGrupo.setEstado(EstadoIntegranteGrupo.ACTIVO);

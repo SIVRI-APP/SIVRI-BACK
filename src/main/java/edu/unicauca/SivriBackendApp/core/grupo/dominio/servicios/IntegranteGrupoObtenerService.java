@@ -8,7 +8,6 @@ import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.out.IntegranteG
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.EstadoIntegranteGrupo;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.IntegranteGrupo;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.proyecciones.ListarIntegrantesConFiltro;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.proyecciones.ListarConFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

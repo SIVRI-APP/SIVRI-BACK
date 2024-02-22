@@ -9,9 +9,8 @@ import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.Semiller
 import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.IntegranteSemilleroCrearREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoIntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSemillero;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioObtenerCU;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.Usuario;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.proyecciones.InformacionDetalladaUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioObtenerCU;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,12 +38,12 @@ public class IntegranteSemilleroCrearService implements IntegranteSemilleroCrear
         semilleroObtenerCU.existePorId(nuevosIntegranteSemillero.getSemillero().getSemilleroId());
 
         rolesSemilleroObtenerCU.existePorId(nuevosIntegranteSemillero.getRolSemillero().getId());
-
-        usuarioObtenerCU.existsByTipoDocumentoAndNumeroDocumento(nuevosIntegranteSemillero.getUsuario().getTipoDocumento(),nuevosIntegranteSemillero.getUsuario().getNumeroDocumento());
-        InformacionDetalladaUsuario usuarioObt=usuarioObtenerCU.validarExistenciaUsuarioSistema(nuevosIntegranteSemillero.getUsuario().getTipoDocumento().toString(),nuevosIntegranteSemillero.getUsuario().getNumeroDocumento()).getData();
+//TODO FALTA ARREGLAR LO DE USUARIO
+       // usuarioObtenerCU.existsByTipoDocumentoAndNumeroDocumento(nuevosIntegranteSemillero.getUsuario().getTipoDocumento(),nuevosIntegranteSemillero.getUsuario().getNumeroDocumento());
+        //InformacionDetalladaUsuario usuarioObt=usuarioObtenerCU.validarExistenciaUsuarioSistema(nuevosIntegranteSemillero.getUsuario().getTipoDocumento().toString(),nuevosIntegranteSemillero.getUsuario().getNumeroDocumento()).getData();
 
         Usuario usuario=new Usuario();
-        usuario.setId(usuarioObt.getId());
+        //usuario.setId(usuarioObt.getId());
 
         nuevosIntegranteSemillero.setUsuario(usuario);
         nuevosIntegranteSemillero.setEstado(EstadoIntegranteSemillero.ACTIVO);

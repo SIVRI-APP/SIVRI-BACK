@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos;
 
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.Usuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import lombok.Data;
 
 import java.time.LocalDate;

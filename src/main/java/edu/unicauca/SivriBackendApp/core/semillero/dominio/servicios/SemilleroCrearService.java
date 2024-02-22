@@ -9,7 +9,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.Semiller
 import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.SemilleroCrearREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroEstado;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.ports.in.UsuarioObtenerCU;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioObtenerCU;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

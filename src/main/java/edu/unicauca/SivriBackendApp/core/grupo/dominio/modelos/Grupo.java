@@ -1,7 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos;
 
 import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Facultad;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.model.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
