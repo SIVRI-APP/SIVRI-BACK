@@ -43,7 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
    * @param userEmail Correo electrónico del usuario
    * @return Conjunto de autoridades asignadas al usuario
    */
-  private Set<SimpleGrantedAuthority> getAuthorities (String userEmail){
+  public Set<SimpleGrantedAuthority> getAuthorities (String userEmail){
     Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 
     //Grupo

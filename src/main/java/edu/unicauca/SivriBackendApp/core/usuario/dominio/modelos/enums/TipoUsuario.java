@@ -15,5 +15,6 @@ public enum TipoUsuario {
     PREGRADO,
     POSGRADO,
     EGRESADO,
-    EXTERNO
+    EXTERNO;
+
 }

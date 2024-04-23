@@ -86,7 +86,7 @@ public class SendMessageService {
 				}
 				String finalMessage = templateContent.get();
 
-				//Set metadata
+				//Set MetadataService
 				for (MetaData meta : sendRequest.getMetaData()) {
 					if(template.get().getVars().contains(meta.getKey())) {
 						finalMessage = finalMessage.replace("$[{" + meta.getKey() + "}]", meta.getValue());

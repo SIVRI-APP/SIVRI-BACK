@@ -1,10 +1,12 @@
 package edu.unicauca.SivriBackendApp.common.seguridad.acceso.service;
 
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.FuncionarioObtenerREPO;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.UsuarioObtenerREPO;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidad.FuncionarioEntity;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidad.UsuarioEntity;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.FuncionarioEntity;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.UsuarioEntity;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.UsuarioInfraMapper;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.FuncionarioRepository;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,16 +27,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ServicioDeIdentificaciónDeUsuario {
 
-    private final UsuarioObtenerREPO usuarioObtenerREPO;
-    private final FuncionarioObtenerREPO funcionarioObtenerREPO;
+    private final UsuarioRepository usuarioRepository;
+    private final FuncionarioRepository funcionarioRepository;
+    private final UsuarioInfraMapper usuarioInfraMapper;
 
-    public UsuarioEntity obtenerUsuario(){
-         return usuarioObtenerREPO.obtenerEntidadUsuarioPorCorreo(obtenerNombreUsuario()).orElseThrow(
+    public UsuarioEntity obtenerUsuarioEntity(){
+         return usuarioRepository.findByCorreo(obtenerCorreoUsuario()).orElseThrow(
                 () -> new ReglaDeNegocioException("bad.imposible.obtener.usuario.autenticado"));
     }
 
+    public Usuario obtenerUsuario(){
+        return usuarioInfraMapper.toModel(obtenerUsuarioEntity());
+    }
+
     public FuncionarioEntity obtenerFuncionario(){
-        return funcionarioObtenerREPO.obtenerEntidadFuncionarioPorUsuarioId(obtenerUsuario().getId()).orElseThrow(
+        return funcionarioRepository.findByUsuarioId(obtenerUsuario().getId()).orElseThrow(
                 () -> new ReglaDeNegocioException("bad.imposible.obtener.funcionario.autenticado"));
     }
 
@@ -67,11 +74,11 @@ public class ServicioDeIdentificaciónDeUsuario {
     }
 
     /**
-     * Obtiene el nombre de usuario actual a partir del contexto de seguridad.
+     * Obtiene el correo de usuario actual a partir del contexto de seguridad.
      *
      * @return El nombre de usuario actual.
      */
-    public String obtenerNombreUsuario() {
+    public String obtenerCorreoUsuario() {
         // Obtener el contexto de seguridad
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -80,19 +87,19 @@ public class ServicioDeIdentificaciónDeUsuario {
     }
 
     public boolean perteneceAlGrupo(long grupoId){
-        UsuarioEntity usuario = obtenerUsuario();
+        UsuarioEntity usuario = obtenerUsuarioEntity();
         // TODO Miguel el usuario pertenece al grupo que dice ser
         return true;
     }
 
     public boolean perteneceAlSemillero(long semilleroId){
-        UsuarioEntity usuario = obtenerUsuario();
+        UsuarioEntity usuario = obtenerUsuarioEntity();
         // TODO Miguel el usuario pertenece al semillero que dice ser
         return true;
     }
 
     public boolean perteneceAlProyecto(long proyectoId){
-        UsuarioEntity usuario = obtenerUsuario();
+        UsuarioEntity usuario = obtenerUsuarioEntity();
         // TODO Miguel el usuario pertenece al proyecto que dice ser
         return true;
     }

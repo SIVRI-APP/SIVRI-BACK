@@ -6,9 +6,7 @@ import edu.unicauca.SivriBackendApp.common.seguridad.acceso.dto.AutenticaciónPe
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.dto.AutenticaciónRespuesta;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeAutenticación;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeCredencial;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioCrearCU;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -33,13 +31,6 @@ public class ControladorDeAcceso {
 
   private final ServicioDeAutenticación servicioDeAutenticación;
   private final ServicioDeCredencial servicioDeCredencial;
-
-    private final UsuarioCrearCU usuarioCrearCU;
-    @PostMapping("/test")
-    public ResponseEntity<Boolean> crearCredencialTest() {
-        usuarioCrearCU.crearUsuario(Usuario.builder().correo("mandresmosquera@gmail.com").numeroDocumento("123").nombres("miguel").apellidos("mosquera").telefono("3225864404").tipoUsuario(TipoUsuario.ADMINISTRATIVO).build());
-        return ResponseEntity.ok(true);
-    }
 
   @PostMapping("/autenticar")
   @Operation(

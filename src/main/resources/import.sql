@@ -83,6 +83,14 @@ INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) V
 
 -- |***** USUARIO *****|
 
+-- USUARIO
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (1, 'mandresmosquera@gmail.com', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'MASCULINO', 'ADMINISTRATIVO', 'Yurani', 'Mosquera', '3225864404' );
+
+-- SOLICITUD DE USUARIO
+INSERT INTO usuario_solicitud (id, creadoPorUsuarioId, correo, tipoDocumento, numeroDocumento, sexo, estado, tipoUsuario, nombre, apellido, telefono, nota, organismoDeInvestigacionId, rolGrupoId) VALUES (1, 1, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'MASCULINO', 'FORMULADO_OBSERVACIONES', 'ADMINISTRATIVO', 'Miguel Andres', 'Mosquera', '3225864404', 'no me lo nieguen porfa', 1, 1);
+INSERT INTO usuario_solicitud (id, creadoPorUsuarioId, correo, tipoDocumento, numeroDocumento, sexo, estado, tipoUsuario, nombre, apellido, telefono, nota, organismoDeInvestigacionId, rolGrupoId) VALUES (2, 1, 'angeehin24@gmail.com', 'CEDULA_CIUDADANIA', '10614', 'MASCULINO', 'FORMULADO_OBSERVACIONES', 'ADMINISTRATIVO', 'Angee Vannessa', 'Hincapie', '3225864404', 'no me lo nieguen porfa', 1, 1 );
+
 -- ROL FUNCIONARIO
 INSERT INTO rol_funcionario (id, nombre) VALUES (1, 'SUPER_ADMIN');
 INSERT INTO rol_funcionario (id, nombre) VALUES (2, 'USUARIOS');
@@ -92,21 +100,12 @@ INSERT INTO rol_funcionario (id, nombre) VALUES (5, 'PROYECTOS_INTERNOS');
 INSERT INTO rol_funcionario (id, nombre) VALUES (6, 'PROYECTOS_EXTERNOS');
 INSERT INTO rol_funcionario (id, nombre) VALUES (7, 'VICERRECTOR');
 
--- USUARIO
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (1, 'mandresmosquera@gmail.com', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'MASCULINO', 'ADMINISTRATIVO', 'Yurani', 'Mosquera', '3225864404' );
---
 -- -- CREDENCIAL
 INSERT INTO _credencial (id, email, password, usuarioId) VALUES (1, 'mandresmosquera@gmail.com', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 1);
 INSERT INTO _credencial (id, email, password, usuarioId) VALUES (2, 'yurani@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 2);
---
--- -- FUNCIONARIO
-INSERT INTO funcionario (id, usuarioId) VALUES (1, 1);
---
--- -- ROL ADMINISTRATIVO
-INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (1, 1, 1, true, '2024-01-01');
-INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (2, 1, 2, true, '2024-01-01');
 
+-- -- FUNCIONARIO
+INSERT INTO funcionario (id, usuarioId, rolId, estado, fechaInicio) VALUES (1, 1, 1, true, '2024-01-01');
 
 
 
@@ -201,8 +200,8 @@ INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,rolId, estado
 INSERT INTO semillero_documentacion(semilleroId,idDocumentoSemillero,fecha) VALUES(2,1,'2023-09-04');
 
 --semillero programa
-INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,1);
-INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,2);
+-- INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,1);
+-- INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,2);
 
 --plan de trabajo
 INSERT INTO plan_trabajo(id,semilleroId,nombrePlan, estado) VALUES(1,2, 'plan 2023','formulado');

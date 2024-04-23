@@ -2,16 +2,23 @@ package edu.unicauca.SivriBackendApp.common.seguridad.acceso.service;
 
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.dto.AutenticaciónPetición;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.dto.AutenticaciónRespuesta;
+import edu.unicauca.SivriBackendApp.common.seguridad.config.JwtAuthenticationFilter;
 import edu.unicauca.SivriBackendApp.common.seguridad.config.JwtService;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.Credencial;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.RepositorioCredencial;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.token.Token;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.token.TokenRepository;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.token.TokenType;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.UsuarioEntity;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Servicio encargado de manejar la autenticación de usuarios.
@@ -23,6 +30,8 @@ public class ServicioDeAutenticación {
   private final TokenRepository tokenRepository;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
+  private final UsuarioRepository usuarioRepository;
+  private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
   /**
    * Realiza la autenticación de un usuario con las credenciales proporcionadas.
@@ -47,10 +56,21 @@ public class ServicioDeAutenticación {
     revokeAllUserTokens(user);
     saveUserToken(user, jwtToken);
 
+    // Obtener el usuario
+    UsuarioEntity usuarioAutenticado = usuarioRepository.findById(user.getUsuario().getId()).get();
+
+    // Obtener las autoridades de usuario
+    Set<String> autoridades =  jwtAuthenticationFilter.getAuthorities(usuarioAutenticado.getCorreo()).stream()
+            .map(SimpleGrantedAuthority::getAuthority)
+            .collect(Collectors.toSet());
+
     // Construye y devuelve la respuesta de autenticación
     return AutenticaciónRespuesta.builder()
         .accessToken(jwtToken)
         .refreshToken(refreshToken)
+        .nombreCompleto(usuarioAutenticado.getNombre() + " " + usuarioAutenticado.getApellido())
+        .tipoUsuario(String.valueOf(usuarioAutenticado.getTipoUsuario()))
+        .authorities(autoridades)
         .build();
   }
 

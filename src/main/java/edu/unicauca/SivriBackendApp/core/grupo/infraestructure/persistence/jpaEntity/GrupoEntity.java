@@ -2,7 +2,7 @@ package edu.unicauca.SivriBackendApp.core.grupo.infraestructure.persistence.jpaE
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import edu.unicauca.SivriBackendApp.core.academica.infraestructure.persistence.jpaEntity.FacultadEntity;
+import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.salida.persistencia.entidad.FacultadEntity;
 import edu.unicauca.SivriBackendApp.core.grupo.domain.model.GrupoEstado;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity.OrganismoDeInvestigacionEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructure.persistence.jpaEntity.SemilleroEntity;

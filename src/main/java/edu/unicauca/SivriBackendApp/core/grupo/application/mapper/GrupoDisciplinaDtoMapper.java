@@ -9,9 +9,7 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring")
 public interface GrupoDisciplinaDtoMapper {
     @Mappings({
-            @Mapping(source = "grupo.id",target = "grupo.grupoId"),
-            @Mapping(source = "grupo.facultad.idFacultad",target = "grupo.facultad.id")
-
+            @Mapping(source = "grupo.id",target = "grupo.grupoId")
     })
     GrupoDisciplinaDTO obtenerDisciplinasPorGrupoId(final GrupoDisciplina objModelo);
 }

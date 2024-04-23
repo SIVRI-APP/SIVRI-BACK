@@ -3,6 +3,9 @@ package edu.unicauca.SivriBackendApp.common.seguridad.acceso.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.Set;
 
 /**
  * DTO que representa la respuesta de autenticación.
@@ -22,4 +25,19 @@ public class AutenticaciónRespuesta {
    */
   @JsonProperty("refresh_token")
   private String refreshToken;
+
+  /**
+   * Nombre completo del usuario autenticado
+   */
+  private String nombreCompleto;
+
+  /**
+   * Almacena el tipo de Usuarios
+   */
+  private String tipoUsuario;
+
+  /**
+   * Autoridades de usuario
+   */
+  private Set<String> authorities;
 }

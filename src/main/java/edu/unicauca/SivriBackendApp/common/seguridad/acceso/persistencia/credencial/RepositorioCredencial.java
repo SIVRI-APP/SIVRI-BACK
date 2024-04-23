@@ -21,9 +21,8 @@ public interface RepositorioCredencial extends JpaRepository<Credencial, Integer
   @Query(value = "SELECT CONCAT('FUNCIONARIO:', rol_fun.nombre) AS authorities " +
           "FROM _credencial _cre " +
           "INNER JOIN usuario usu ON _cre.usuarioId = usu.id  " +
-          "INNER JOIN funcionario fun ON fun.usuarioId = usu.id " +
-          "INNER JOIN rol_administrativo rol_adm ON rol_adm.funcionarioId = fun.id AND rol_adm.estado = 1 " +
-          "INNER JOIN rol_funcionario rol_fun ON rol_fun.id = rol_adm.rolFuncionarioId " +
+          "INNER JOIN funcionario fun ON fun.usuarioId = usu.id AND fun.estado = 1 " +
+          "INNER JOIN rol_funcionario rol_fun ON rol_fun.id = fun.rolId " +
           "WHERE _cre.email = :email "
           , nativeQuery = true)
   List<IGetAuthorities> getAuthoritiesFuncionario (@Param("email") String email);
