@@ -15,4 +15,5 @@ public interface UsuarioSolicitudCrearREPO {
      * @return Objeto UsuarioSolicitud que representa la solicitud de usuario creada.
      */
     UsuarioSolicitud crearUsuarioSolicitud(UsuarioSolicitud usuario);
+
 }

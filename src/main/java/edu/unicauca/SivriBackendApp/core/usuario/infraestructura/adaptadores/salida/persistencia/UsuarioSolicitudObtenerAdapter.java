@@ -1,9 +1,13 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia;
 
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.UsuarioSolicitudObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitud;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioSolicitudInformaciónDetalladaProyección;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.UsuarioSolicitudEntity;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.UsuarioSolicitudInfraMapper;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioSolicitudRepository;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioSolicitudListarConFiltroProyección;
 
@@ -11,6 +15,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 
 /**
@@ -26,18 +32,23 @@ public class UsuarioSolicitudObtenerAdapter implements UsuarioSolicitudObtenerRE
      */
     private final UsuarioSolicitudRepository usuarioSolicitudRepository;
 
+    /**
+     * Mapper
+     */
+    private final UsuarioSolicitudInfraMapper usuarioSolicitudInfraMapper;
+
 
     /**
      * Lista las solicitudes de usuario con filtros opcionales paginados.
      *
-     * @param pageable      Objeto Pageable para la paginación.
-     * @param correo        Correo de la solicitud de usuario.
-     * @param tipoDocumento Tipo de documento de la solicitud de usuario.
-     * @param numeroDocumento Número de documento de la solicitud de usuario.
-     * @param nombre       Nombres de la solicitud de usuario.
-     * @param apellidos    Apellidos de la solicitud de usuario.
-     * @param tipoUsuario   Tipo de usuario de la solicitud.
-     * @param estado        Estado de la solicitud de usuario.
+     * @param pageable          Objeto Pageable para la paginación.
+     * @param correo            Correo de la solicitud de usuario.
+     * @param tipoDocumento     Tipo de documento de la solicitud de usuario.
+     * @param numeroDocumento   Número de documento de la solicitud de usuario.
+     * @param nombre            Nombres de la solicitud de usuario.
+     * @param apellido          Apellidos de la solicitud de usuario.
+     * @param tipoUsuario       Tipo de usuario de la solicitud.
+     * @param estado            Estado de la solicitud de usuario.
      * @param organismoDeInvestigacionId       ID del grupo al que pertenece la solicitud de usuario.
      * @return Página de solicitudes de usuario que cumplen con los filtros especificados.
      */
@@ -51,6 +62,22 @@ public class UsuarioSolicitudObtenerAdapter implements UsuarioSolicitudObtenerRE
         String estadoUsu = (estado != null) ? estado.toString() : null;
 
         return usuarioSolicitudRepository.listarConFiltro(correo, tipoDoc, numeroDocumento, nombre, apellido, tipoUsu, estadoUsu, organismoDeInvestigacionId, pageable);
+    }
+
+    @Override
+    public Optional<UsuarioSolicitudInformaciónDetalladaProyección> obtenerSolicitudUsuarioInformaciónDetallada(long solicitudUsuarioId) {
+        return usuarioSolicitudRepository.obtenerSolicitudUsuarioInformaciónDetallada(solicitudUsuarioId);
+    }
+
+    @Override
+    public Optional<UsuarioSolicitud> obtenerSolicitudUsuario(long solicitudUsuarioId) {
+        Optional<UsuarioSolicitudEntity> respuestaBd = usuarioSolicitudRepository.findById(solicitudUsuarioId);
+
+        if (respuestaBd.isEmpty()){
+            return Optional.empty();
+        }
+
+        return Optional.of(usuarioSolicitudInfraMapper.toModel(respuestaBd.get()));
     }
 
 }

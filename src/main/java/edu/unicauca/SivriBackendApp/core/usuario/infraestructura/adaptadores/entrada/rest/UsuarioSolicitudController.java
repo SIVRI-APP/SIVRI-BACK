@@ -74,4 +74,23 @@ public class UsuarioSolicitudController<T> {
     }
 
 
+    @GetMapping("obtenerSolicitudUsuario")
+    @PreAuthorize("hasAnyAuthority(" + "'GRUPO:DIRECTOR', " + "'FUNCIONARIO:SUPER_ADMIN', " + "'FUNCIONARIO:USUARIOS')")
+    @Operation(summary = "Obtener información detallada de solicitud de usuario", description = "Obtiene información detallada de una solicitud de usuario por su ID.")
+    @ApiResponse(responseCode = "200", description = "Información detallada de solicitud de usuario obtenida exitosamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Respuesta.class)))
+    public ResponseEntity<Respuesta> obtenerSolicitudUsuario(@Parameter(name = "solicitudUsuarioId", description = "ID de la solicitud de usuario a obtener", required = true) @RequestParam @Min(value = 0, message = "El valor de solicitudUsuarioId debe ser positivo") long solicitudUsuarioId) {
+        Respuesta respuesta = usuarioSolicitudObtenerCU.obtenerSolicitudUsuarioInformaciónDetallada(solicitudUsuarioId);
+        return ResponseEntity.ok().body(respuesta);
+    }
+
+    @PostMapping("aprobar")
+    @PreAuthorize("hasAnyAuthority(" + "'FUNCIONARIO:SUPER_ADMIN', " + "'FUNCIONARIO:USUARIOS')")
+    @Operation(summary = "Aprobar solicitud de usuario", description = "Aprueba una solicitud de usuario.")
+    @ApiResponse(responseCode = "200", description = "Solicitud de usuario aprobada exitosamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Respuesta.class)))
+    public ResponseEntity<Respuesta> aprobarSolicitudUsuario(@Parameter(name = "solicitudUsuarioId", description = "ID de la solicitud de usuario a aprobar", required = true) @RequestParam @Min(value = 0, message = "El valor de solicitudUsuarioId debe ser positivo") long solicitudUsuarioId) {
+        Respuesta respuesta = usuarioSolicitudCrearCU.aprobarSolicitudUsuario(solicitudUsuarioId);
+        return ResponseEntity.ok().body(respuesta);
+    }
+
+
 }

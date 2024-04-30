@@ -1,6 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios;
 
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioSolicitudInformaciónDetalladaProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioSolicitudListarConFiltroProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.UsuarioSolicitudEntity;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 public interface UsuarioSolicitudRepository extends JpaRepository<UsuarioSolicitudEntity, Long> {
@@ -47,4 +50,26 @@ public interface UsuarioSolicitudRepository extends JpaRepository<UsuarioSolicit
             @Param("estado") String estado,
             @Param("organismoDeInvestigacionId") Integer organismoDeInvestigacionId,
             @PageableDefault(size = 10, page = 0, sort = "id") Pageable pageable);
+
+
+    @Query(value = "select " +
+            " u.id, " +
+            " u.numeroDocumento, " +
+            " u.tipoDocumento, " +
+            " u.nombre, " +
+            " u.apellido, " +
+            " u.correo, " +
+            " u.telefono, " +
+            " u.cvLac, " +
+            " u.estado, " +
+            " u.sexo, " +
+            " u.tipoUsuario, " +
+            " u.nota " +
+            "from " +
+            " usuario_solicitud u " +
+            "where " +
+            " u.id = :solicitudUsuarioId"
+            , nativeQuery = true)
+    Optional<UsuarioSolicitudInformaciónDetalladaProyección> obtenerSolicitudUsuarioInformaciónDetallada(
+            @Param("solicitudUsuarioId") long solicitudUsuarioId);
 }

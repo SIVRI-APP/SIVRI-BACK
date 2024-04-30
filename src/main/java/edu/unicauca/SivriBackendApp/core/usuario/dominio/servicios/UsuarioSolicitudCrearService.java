@@ -5,7 +5,11 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificaciónDeUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioSolicitudCrearCU;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioSolicitudObservacionesObtenerCU;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioSolicitudObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.UsuarioSolicitudCrearREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.UsuarioSolicitudEliminarREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitud;
 
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
@@ -24,21 +28,28 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
-
     /**
-     * Adaptador a la base de datos
+     * CU
      */
-    private final UsuarioSolicitudCrearREPO usuarioSolicitudCrearREPO;
+    private final UsuarioSolicitudObtenerCU usuarioSolicitudObtenerCU;
+    private final UsuarioSolicitudObservacionesObtenerCU usuarioSolicitudObservacionesObtenerCU;
 
     /**
-     * Validador de solicutudes de Usuario
-     */
-    private final UsuarioSolicitudValidador usuarioSolicitudValidador;
-
-    /**
-     * Servicio de Identificacion de Usuario
+     * Servicios
      */
     private final ServicioDeIdentificaciónDeUsuario servicioDeIdentificaciónDeUsuario;
+    private final UsuarioCrearService usuarioCrearService;
+
+    /**
+     * Adaptadores a la base de datos
+     */
+    private final UsuarioSolicitudCrearREPO usuarioSolicitudCrearREPO;
+    private final UsuarioSolicitudEliminarREPO usuarioSolicitudEliminarREPO;
+
+    /**
+     * Validadores
+     */
+    private final UsuarioSolicitudValidador usuarioSolicitudValidador;
 
 
     /**
@@ -64,5 +75,43 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
         usuarioSolicitudCrearREPO.crearUsuarioSolicitud(usuario);
 
         return new RespuestaHandler<>(200, "ok.usuario.solicitud.creación", List.of(usuario.getTipoDocumento().toString(), usuario.getNumeroDocumento(), usuario.getCorreo()), "", true).getRespuesta();
+    }
+
+    /**
+     * Aprueba una solicitud de usuario en el sistema.
+     *
+     * @param solicitudId Identificador de la solicitud de usuario.
+     * @return Respuesta que indica el éxito de la operación.
+     * @throws ReglaDeNegocioException Sí existen observaciones pendientes para la solicitud.
+     */
+    @Override
+    public Respuesta<Boolean> aprobarSolicitudUsuario(long solicitudId) {
+        UsuarioSolicitud solicitudUsuario = usuarioSolicitudObtenerCU.obtenerSolicitudUsuario(solicitudId).getData();
+
+        if (usuarioSolicitudObservacionesObtenerCU.solicitudConObservacionesPendientes(solicitudId).getData() > 0) {
+            throw new ReglaDeNegocioException("bad.no.se.puede.aprobar.solicitud.observaciones.pendientes");
+        }
+
+        // Crear usuario
+        usuarioCrearService.crearUsuario(Usuario
+                .builder()
+                .correo(solicitudUsuario.getCorreo())
+                .tipoDocumento(solicitudUsuario.getTipoDocumento())
+                .numeroDocumento(solicitudUsuario.getNumeroDocumento())
+                .sexo(solicitudUsuario.getSexo())
+                .tipoUsuario(solicitudUsuario.getTipoUsuario())
+                .nombre(solicitudUsuario.getNombre())
+                .apellido(solicitudUsuario.getApellido())
+                .telefono(solicitudUsuario.getTelefono())
+                .cvLac(solicitudUsuario.getCvLac())
+                .build()
+        );
+
+        // TODO: Miguel crear el rol en el grupo
+
+        // Eliminar solicitud
+        usuarioSolicitudEliminarREPO.eliminar(solicitudId);
+
+        return new RespuestaHandler<>(200, "ok", "", true).getRespuesta();
     }
 }

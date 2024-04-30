@@ -17,4 +17,11 @@ public interface UsuarioSolicitudCrearCU {
      */
     Respuesta<Boolean> crearSolicitudUsuario(UsuarioSolicitud usuario);
 
+    /**
+     * Aprueba una solicitud de usuario.
+     *
+     * @param solicitudId Identificador único de la solicitud de usuario.
+     * @return Respuesta que indica si la aprobación de la solicitud de usuario fue exitosa o no.
+     */
+    Respuesta<Boolean> aprobarSolicitudUsuario(long solicitudId);
 }

@@ -1,12 +1,16 @@
 package edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida;
 
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitud;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioSolicitudInformaciónDetalladaProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioSolicitudListarConFiltroProyección;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
 
 
 /**
@@ -30,4 +34,20 @@ public interface UsuarioSolicitudObtenerREPO {
      * @return Página que contiene la lista de solicitudes de usuario con proyecciones específicas.
      */
     Page<UsuarioSolicitudListarConFiltroProyección> listarConFiltro(Pageable pageable, String correo, TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String apellidos, TipoUsuario tipoUsuario, EstadoSolicitudUsuario estado, Integer organismoDeInvestigacionId);
+
+    /**
+     * Obtiene información detallada de una solicitud de usuario.
+     *
+     * @param solicitudUsuarioId Identificador único de la solicitud de usuario.
+     * @return Optional que contiene información detallada de la solicitud de usuario si existe, o un Optional vacío si no existe.
+     */
+    Optional<UsuarioSolicitudInformaciónDetalladaProyección> obtenerSolicitudUsuarioInformaciónDetallada(long solicitudUsuarioId);
+
+    /**
+     * Obtiene una solicitud de usuario por su identificador único.
+     *
+     * @param solicitudUsuarioId Identificador único de la solicitud de usuario.
+     * @return Optional que contiene la solicitud de usuario obtenida si existe, o un Optional vacío si no existe.
+     */
+    Optional<UsuarioSolicitud> obtenerSolicitudUsuario(long solicitudUsuarioId);
 }

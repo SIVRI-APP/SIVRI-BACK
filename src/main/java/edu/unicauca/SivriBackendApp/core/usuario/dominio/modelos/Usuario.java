@@ -4,12 +4,14 @@ import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.s
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.Sexo;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
+import lombok.Builder;
 import lombok.Data;
 
 /**
  * Representa la entidad de persistencia para los usuarios en el sistema.
  */
 @Data
+@Builder
 public class Usuario {
 
     /**
