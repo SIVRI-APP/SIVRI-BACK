@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.persistencia.repository;
 
+import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.IntegranteGrupo;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.proyecciones.ListarIntegrantesConFiltro;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.persistencia.entity.IntegranteGrupoEntity;
 import org.springframework.data.domain.Page;
@@ -13,4 +14,5 @@ public interface IIntegranteGrupoRepository extends JpaRepository<IntegranteGrup
 
     //@Query(value = "",nativeQuery = true)
     //Page<List<ListarIntegrantesConFiltro>> listarIntegrantesConFiltro();
+    public List<IntegranteGrupoEntity> findByGrupoId(int idGrupo);
 }

@@ -7,13 +7,9 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class IntegranteSemilleroCrearDTO {
-
+public class IntegranteSemilleroCrearMentorDto {
     private int semilleroId;
-    @NotNull(message = "El usuario no puede ser nulo")
-    private Long usuarioId;
-    //TODO falta el id del programa
-    //private int programaId;
+    private long usuarioId;
     @NotNull(message = "El rol del interante del semillero no puede ser Nulo")
     private Integer rolSemilleroId;
 

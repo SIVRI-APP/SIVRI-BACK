@@ -1,12 +1,10 @@
 package edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out;
 
-import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
-import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoIntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroEstado;
-import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroIntegrantesSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroSemilleros;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarSemilleroPorIdMentor;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarSemillerosConFiltroxMentor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,10 +21,13 @@ public interface SemilleroObtenerREPO {
     Optional<Semillero> obtenerSemilleroPorId(int id);
     //Optional<Semillero> obtenerSemilleroPorNombre(String nombre);
     List<Semillero> obtenerSemillerosPorIdGrupo(int idGrupo);
+    List<Semillero> obtenerSemillerosPorIdDirectorGrupo(long idDirector);
+
     Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosPorIdMentor(Pageable pageable, int idMentor);
     List<Semillero> obtenerSemilleros();
     Page<Semillero> obtenerListadoSemilleroPaginado(PageRequest pageRequest);
     Page<List<ListarConFiltroSemilleros>> listarSemillerosConfiltro(Pageable pageable, String nombre, String correo, SemilleroEstado estado);
+    Page<List<ListarSemillerosConFiltroxMentor>> listarSemilleroConFiltroxMentor(Pageable pageable, Integer semilleroId, Long usuarioId, String nombre, SemilleroEstado estado);
 
 
 }

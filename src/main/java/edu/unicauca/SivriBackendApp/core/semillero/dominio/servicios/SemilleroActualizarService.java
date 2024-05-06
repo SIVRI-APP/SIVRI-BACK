@@ -78,6 +78,7 @@ public  class SemilleroActualizarService implements SemilleroActualizarCU {
         }
         //System.out.println("IDSEMILLERO: "+nuevoSemillero);
         objSemilleroActualizar.setNombre(nuevoSemillero.getNombre());
+        objSemilleroActualizar.setCorreo(nuevoSemillero.getCorreo());
         objSemilleroActualizar.setObjetivo(nuevoSemillero.getObjetivo());
         objSemilleroActualizar.setMision(nuevoSemillero.getMision());
         objSemilleroActualizar.setVision(nuevoSemillero.getVision());

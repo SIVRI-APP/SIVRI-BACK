@@ -2,6 +2,7 @@ package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.
 
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroSemilleros;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarSemilleroPorIdMentor;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarSemillerosConFiltroxMentor;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.SemilleroEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,8 +23,15 @@ public interface ISemilleroRepository extends JpaRepository<SemilleroEntity, Int
     public Boolean existsByNombre(String nombre);
 
     public List<SemilleroEntity> findByGrupoId(int idGrupo);
+    @Query(value = "select s.*,oi.* from integrante_grupo ig " +
+            "inner join grupo g on ig.grupoId=g.grupoId " +
+            "inner join semillero s on s.grupoId=g.grupoId " +
+            "inner join organismo_de_investigacion oi on oi.id=s.semilleroId " +
+            "where usuarioId=(:idDirectorGrupo) and rolGrupoId=1;", nativeQuery = true)
+    public List<SemilleroEntity> listarxIdDirectorGrupo(long idDirectorGrupo);
 
-     @Query(value = "SELECT s.semilleroId,oi.nombre,s.correo,oi.fechaCreacion,s.estado " +
+
+    @Query(value = "SELECT s.semilleroId,oi.nombre,s.correo,oi.fechaCreacion,s.estado " +
             "FROM semillero s left JOIN organismo_de_investigacion oi " +
             "ON s.semilleroId=oi.id " +
             "WHERE " +
@@ -33,6 +41,22 @@ public interface ISemilleroRepository extends JpaRepository<SemilleroEntity, Int
     Page<List<ListarConFiltroSemilleros>> listarSemillerosConFiltro(
             @Param("nombre") String nombre,
             @Param("correo") String correo,
+            @Param("estado") String estado,
+            @PageableDefault(size = 10,page = 0,sort = "id")Pageable pageable);
+    // CONSULTA LOS SEMILLEROS DE UN MENTOR
+    @Query(value = "SELECT s.semilleroId,oi.nombre,s.estado " +
+            "            FROM semillero s left JOIN organismo_de_investigacion oi " +
+            "            ON s.semilleroId=oi.id " +
+            "            inner join integrante_semillero ins on ins.semilleroId=s.semilleroId " +
+            "            WHERE " +
+            "               (LOWER(oi.nombre) LIKE %:nombre% OR LOWER(oi.nombre) = COALESCE(LOWER(:nombre),LOWER(oi.nombre) ) OR :nombre IS NULL) " +
+            "               AND (LOWER(s.estado) = COALESCE(LOWER(:estado),LOWER(s.estado)) OR :estado IS NULL) " +
+            "               AND ((s.semilleroId) like (:semilleroId) or (s.semilleroId)= coalesce((:semilleroId),(s.semilleroId)) or (:semilleroId) IS NULL) " +
+            "               AND ins.usuarioId = (:usuarioId) and ins.rolId=2;",nativeQuery = true)
+    Page<List<ListarSemillerosConFiltroxMentor>> listarSemillerosConFiltroxMentor(
+            @Param("semilleroId") Integer semilleroId,
+            @Param("usuarioId") Long usuarioId,
+            @Param("nombre") String nombre,
             @Param("estado") String estado,
             @PageableDefault(size = 10,page = 0,sort = "id")Pageable pageable);
 

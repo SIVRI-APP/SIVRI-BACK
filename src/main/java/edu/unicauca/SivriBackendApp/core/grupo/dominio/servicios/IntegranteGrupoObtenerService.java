@@ -47,6 +47,15 @@ public class IntegranteGrupoObtenerService implements IntegranteGrupoObtenerCU {
     }
 
     @Override
+    public Respuesta<List<IntegranteGrupo>> obtenerIntegranteGrupoPorIdGrupo(int idGrupo) {
+        List<IntegranteGrupo> respuesta= integranteGrupoObtenerREPO.obtenerIntegrantesGrupoPorIdGrupo(idGrupo);
+        if (respuesta.isEmpty()){
+            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.integrantes.grupo");
+        }
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuesta).getRespuesta();
+    }
+
+    @Override
     public Respuesta<Page<List<ListarIntegrantesConFiltro>>> listarIntegrantesConFiltro(int pageNo, int pageSize, String numeroDocumento, LocalDate fechaIngresoo, LocalDate fechaRetiro, Integer idGrupo, String nombreGrupo, String rolGrupo, EstadoIntegranteGrupo estado) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<List<ListarIntegrantesConFiltro>> respuestaBd =integranteGrupoObtenerREPO.listarIntegrantesConFiltro(pageable,numeroDocumento, fechaIngresoo, fechaRetiro,idGrupo,nombreGrupo,rolGrupo, estado);

@@ -5,4 +5,5 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSem
 
 public interface IntegranteSemilleroCrearCU {
     Respuesta<Boolean> crear(IntegranteSemillero nuevosIntegranteSemillero);
+
 }

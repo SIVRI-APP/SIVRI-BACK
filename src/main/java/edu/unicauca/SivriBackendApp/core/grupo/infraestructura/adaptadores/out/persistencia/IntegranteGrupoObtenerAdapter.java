@@ -42,6 +42,11 @@ public class IntegranteGrupoObtenerAdapter implements IntegranteGrupoObtenerREPO
     }
 
     @Override
+    public List<IntegranteGrupo> obtenerIntegrantesGrupoPorIdGrupo(int idGrupo) {
+        return integranteGrupoRepository.findByGrupoId(idGrupo).stream().map(integranteGrupoMapper::obtenerModelo).collect(Collectors.toList());
+    }
+
+    @Override
     public Page<List<ListarIntegrantesConFiltro>> listarIntegrantesConFiltro(Pageable pageable, String numeroDocumento, LocalDate fechaIngresoo, LocalDate fechaRetiro, Integer idGrupo, String nombreGrupo, String rolGrupo, EstadoIntegranteGrupo estado) {
         String estad= (estado != null) ? estado.toString():null;
 

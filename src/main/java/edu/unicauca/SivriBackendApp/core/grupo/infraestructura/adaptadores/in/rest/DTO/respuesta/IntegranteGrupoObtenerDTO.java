@@ -2,6 +2,7 @@ package edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.r
 
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.EstadoIntegranteGrupo;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.Grupo;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -12,8 +13,8 @@ public class IntegranteGrupoObtenerDTO {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private ObtenerRolesGrupoDTO rolGrupo;
-    //TODO USUSARIO
-    //private Usuario usuario;
-    //private String nombre;
+
+    private Usuario usuario;
+
     private Grupo grupo;
 }

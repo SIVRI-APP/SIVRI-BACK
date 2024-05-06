@@ -9,6 +9,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoIntegra
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroIntegrantesSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarIntegrantesSemilleroxIdSemillero;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -50,6 +51,13 @@ public class IntegranteSemilleroObtenerService implements IntegranteSemilleroObt
             throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.integrantes.semilleros");
         }
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuesta).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Page<List<ListarIntegrantesSemilleroxIdSemillero>>> obtenerIntegrantesSemilleroPorIdSemillero(int pageNo, int pageSize, int idSemillero) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<List<ListarIntegrantesSemilleroxIdSemillero>> respuestaBd=integranteSemilleroObtenerREPO.obtenerIntegrantesSemilleroPorIdSemillero(pageable,idSemillero);
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
     }
 
 

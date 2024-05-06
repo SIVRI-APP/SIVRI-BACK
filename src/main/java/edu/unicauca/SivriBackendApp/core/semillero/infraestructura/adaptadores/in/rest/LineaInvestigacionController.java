@@ -11,13 +11,14 @@ import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.i
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.mapper.LineaInvestigacionDtoMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("lineasInvestigacion")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class LineaInvestigacionController {
     private final LineaInvestigacionCrearCU lineaInvestigacionCrearCU;
     private final LineaInvestigacionObtenerCU lineaInvestigacionObtenerCU;
@@ -51,9 +52,24 @@ public class LineaInvestigacionController {
         respuesta.setData(lineaInvestigacionDtoMapper.obtenerLineasInvestigacion((LineaInvestigacion) respuesta.getData()));
         return ResponseEntity.ok().body(respuesta);
     }
-    @GetMapping("/LineasInvestigacionPorIdSemillero/{id}")
-    public ResponseEntity<Respuesta> obtenerLineasInvestigacionPorSemilleroId(@PathVariable(value = "id") int idSemillero){
-        Respuesta respuesta = lineaInvestigacionObtenerCU.obtenerLineasInvestigacionPorSemilleroId(idSemillero);
+    @GetMapping("/LineasInvestigacionPorIdSemillero")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR', " +
+            "'SEMILLERO:MENTOR',  " +
+            "'FUNCIONARIO:SEMILLEROS')")
+    public ResponseEntity<Respuesta> obtenerLineasInvestigacionPorSemilleroId(@RequestParam(value = "idSemillero",required = true) int idSemillero,
+                                                                              @RequestParam(required = false) int pageNo,
+                                                                              @RequestParam(required = false) int pageSize){
+        Respuesta respuesta = lineaInvestigacionObtenerCU.obtenerLineasInvestigacionPorSemilleroId(pageNo,pageSize,idSemillero);
+       return ResponseEntity.ok().body(respuesta);
+    }
+    @GetMapping("/LineastotInvestigacionPorIdSemillero")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR', " +
+            "'SEMILLERO:MENTOR',  " +
+            "'FUNCIONARIO:SEMILLEROS')")
+    public ResponseEntity<Respuesta> obtenertotLineasInvestigacionPorSemilleroId(@RequestParam(value = "idSemillero",required = true) int idSemillero){
+        Respuesta respuesta = lineaInvestigacionObtenerCU.obtenertotListadoLineasInvestigacion(idSemillero);
         respuesta.setData(((List<LineaInvestigacion>) respuesta.getData()).stream().map(lineaInvestigacionDtoMapper::obtenerLineasInvestigacion).toList());
         return ResponseEntity.ok().body(respuesta);
     }

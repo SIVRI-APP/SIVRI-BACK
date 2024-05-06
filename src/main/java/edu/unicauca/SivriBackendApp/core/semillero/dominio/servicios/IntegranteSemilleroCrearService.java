@@ -33,24 +33,20 @@ public class IntegranteSemilleroCrearService implements IntegranteSemilleroCrear
     @Transactional(readOnly = false)
     @Override
     public Respuesta<Boolean> crear(IntegranteSemillero nuevosIntegranteSemillero) {
+        System.out.println("datos que recibe el service "+nuevosIntegranteSemillero);
+
         nuevosIntegranteSemillero.getSemillero().setId(nuevosIntegranteSemillero.getSemillero().getSemilleroId());
-
         semilleroObtenerCU.existePorId(nuevosIntegranteSemillero.getSemillero().getSemilleroId());
-
         rolesSemilleroObtenerCU.existePorId(nuevosIntegranteSemillero.getRolSemillero().getId());
-//TODO FALTA ARREGLAR LO DE USUARIO
-       // usuarioObtenerCU.existsByTipoDocumentoAndNumeroDocumento(nuevosIntegranteSemillero.getUsuario().getTipoDocumento(),nuevosIntegranteSemillero.getUsuario().getNumeroDocumento());
-        //InformacionDetalladaUsuario usuarioObt=usuarioObtenerCU.validarExistenciaUsuarioSistema(nuevosIntegranteSemillero.getUsuario().getTipoDocumento().toString(),nuevosIntegranteSemillero.getUsuario().getNumeroDocumento()).getData();
-
-        Usuario usuario=new Usuario();
-        //usuario.setId(usuarioObt.getId());
-
-        nuevosIntegranteSemillero.setUsuario(usuario);
         nuevosIntegranteSemillero.setEstado(EstadoIntegranteSemillero.ACTIVO);
         nuevosIntegranteSemillero.setFechaIngreso(LocalDate.now());
-
+        /*System.out.println("id ususario "+nuevosIntegranteSemillero.getUsuario().getId());
+        if (nuevosIntegranteSemillero.getUsuario().getId()==null){
+            //busca el usuario por tipodocumento y documento y devuelve el usuario obtenido
+            System.out.println("entro al if");
+        }*/
+        System.out.println("datos service "+nuevosIntegranteSemillero);
         Boolean respuesta=integranteSemilleroCrearREPO.crear(nuevosIntegranteSemillero);
-
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.creacion.objeto", List.of("Integrante Semillero", "Id", String.valueOf(nuevosIntegranteSemillero.getId())));
         }

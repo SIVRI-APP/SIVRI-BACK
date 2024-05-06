@@ -23,7 +23,7 @@ public class PlanTrabajoController {
     private final PlanTrabajoCrearCU planTrabajoCrearCU;
     private final PlanTrabajoActualizarCU planTrabajoActualizarCU;
     private final PlanTrabajoDtoMapper planTrabajoDtoMapper;
-
+// TODO AHI QUE AGUEGRAR UN CAMPO A LA TABLA PLAN DE TRABAJO ANIO
     public PlanTrabajoController(PlanTrabajoObtenerCU planTrabajoObtenerCU, PlanTrabajoCrearCU planTrabajoCrearCU, PlanTrabajoActualizarCU planTrabajoActualizarCU, PlanTrabajoDtoMapper planTrabajoDtoMapper) {
         this.planTrabajoObtenerCU = planTrabajoObtenerCU;
         this.planTrabajoCrearCU = planTrabajoCrearCU;

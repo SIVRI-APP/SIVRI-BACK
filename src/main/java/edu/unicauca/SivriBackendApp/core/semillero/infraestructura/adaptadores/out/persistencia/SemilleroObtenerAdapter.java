@@ -1,12 +1,11 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia;
 
 import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.SemilleroObtenerREPO;
-import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoIntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroEstado;
-import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroIntegrantesSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroSemilleros;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarSemilleroPorIdMentor;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarSemillerosConFiltroxMentor;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.SemilleroEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.mapper.SemilleroMapper;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.repository.ISemilleroRepository;
@@ -64,14 +63,23 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
         return semilleros;
     }
 
-   /* @Override
-    public List<Semillero> obtenerSemilleroPorNombre(String nombre) {
-        return this.semilleroRepository.findByNombreLikeIgnoreCase(nombre).stream().map(semilleroEntity -> {
+    @Override
+    public List<Semillero> obtenerSemillerosPorIdDirectorGrupo(long idDirector) {
+        List<Semillero> semilleros=semilleroRepository.listarxIdDirectorGrupo(idDirector).stream().map(semilleroEntity ->{
             Semillero semillero=semilleroMapper.obtenerModelo(semilleroEntity);
             return semillero;
         }).collect(Collectors.toList());
+        return semilleros;
+    }
 
-    }*/
+    /* @Override
+     public List<Semillero> obtenerSemilleroPorNombre(String nombre) {
+         return this.semilleroRepository.findByNombreLikeIgnoreCase(nombre).stream().map(semilleroEntity -> {
+             Semillero semillero=semilleroMapper.obtenerModelo(semilleroEntity);
+             return semillero;
+         }).collect(Collectors.toList());
+
+     }*/
     @Override
     public List<Semillero> obtenerSemilleros() {
         List<Semillero> semilleros=semilleroRepository.findAll().stream().map(semilleroEntity -> {
@@ -99,6 +107,13 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
 
         return semilleroRepository.listarSemillerosConFiltro(nombre,correo, estad, pageable);
     }
+
+    @Override
+    public Page<List<ListarSemillerosConFiltroxMentor>> listarSemilleroConFiltroxMentor(Pageable pageable, Integer semilleroId, Long usuarioId, String nombre, SemilleroEstado estado) {
+        String estad= (estado != null) ? estado.toString() : null;
+        return semilleroRepository.listarSemillerosConFiltroxMentor(semilleroId,usuarioId,nombre,estad,pageable);
+    }
+
 
     @Override
     public Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosPorIdMentor(Pageable pageable, int idMentor) {

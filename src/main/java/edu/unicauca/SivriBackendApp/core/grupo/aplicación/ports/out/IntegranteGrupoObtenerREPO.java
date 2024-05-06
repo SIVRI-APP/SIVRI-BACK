@@ -17,5 +17,6 @@ public interface IntegranteGrupoObtenerREPO {
     Optional<IntegranteGrupo> obtenerIntegranteGrupoPorId(int id);
 
     List<IntegranteGrupo> obtenerIntegrantesGrupo();
+    List<IntegranteGrupo> obtenerIntegrantesGrupoPorIdGrupo(int idGrupo);
     Page<List<ListarIntegrantesConFiltro>> listarIntegrantesConFiltro(Pageable pageable, String numeroDocumento, LocalDate fechaIngresoo, LocalDate fechaRetiro, Integer idGrupo, String nombreGrupo, String rolGrupo, EstadoIntegranteGrupo estado);
 }

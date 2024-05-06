@@ -6,5 +6,5 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 public interface SemilleroCrearCU {
 
 
-    Respuesta<Boolean> crear(Semillero semillero, int mentorId);
+    Respuesta<Boolean> crear(Semillero semillero, long mentorId);
 }

@@ -8,7 +8,7 @@ import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
 public interface IntegranteGrupoMapper {
-    //@Mapping(source = "grupo",target = "grupoId")
+    @Mapping(source = "grupo.id",target = "grupo.grupoId")
     IntegranteGrupo obtenerModelo(final IntegranteGrupoEntity integranteGrupoEntity);
 
    @Mappings({

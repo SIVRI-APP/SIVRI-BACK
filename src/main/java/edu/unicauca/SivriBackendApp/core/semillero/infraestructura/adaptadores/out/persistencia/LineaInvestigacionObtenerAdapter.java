@@ -2,9 +2,12 @@ package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.
 
 import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.LineaInvestigacionObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.LineaInvestigacion;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarLineasInvestigacion;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.LineaInvestigacionEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.mapper.LineaInvestigacionMapper;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.repository.ILineaInvestigacionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -32,7 +35,12 @@ public class LineaInvestigacionObtenerAdapter implements LineaInvestigacionObten
     }
 
     @Override
-    public List<LineaInvestigacion> obtenerLineasInvestigacionPorSemilleroId(int idSemillero) {
+    public Page<List<ListarLineasInvestigacion>> obtenerLineasInvestigacionPorSemilleroId(Pageable pageable, int idSemillero) {
+        return lineaInvestigacionRepository.obtenerLineaxSemilleroId(idSemillero,pageable);
+    }
+
+    @Override
+    public List<LineaInvestigacion> obtenertotListadoLineasInvestigacion(int idSemillero) {
         return lineaInvestigacionRepository.findBySemilleroId(idSemillero).stream().map(lineaInvestigacionMapper::obtenerModelo).collect(Collectors.toList());
     }
 

@@ -9,6 +9,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.GrupoDisciplina;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.rest.mapper.GrupoDisciplinaDtoMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,8 +38,11 @@ public class GrupoDisciplinaController {
         respuesta.setData(grupoDisciplinaDtoMapper.obtenerDisciplinasPorGrupoId((GrupoDisciplina) respuesta.getData()));
         return ResponseEntity.ok().body(respuesta);
     }
-    @GetMapping("/grupoDisciplinaPorGrupoId/{id}")
-    public ResponseEntity<Respuesta> obtenerDisciplinasPorGrupoId(@PathVariable(value = "id") int idGrupo){
+    @GetMapping("/grupoDisciplinaPorGrupoId")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR', " +
+            "'GRUPO:DIRECTOR')")
+    public ResponseEntity<Respuesta> obtenerDisciplinasPorGrupoId(@RequestParam(value = "idGrupo",required = true) int idGrupo){
         Respuesta respuesta = grupoDisciplinaObtenerCU.obtenerListadoDisciplinasPorGrupoId(idGrupo);
         respuesta.setData(((List<GrupoDisciplina>) respuesta.getData()).stream().map(grupoDisciplinaDtoMapper::obtenerDisciplinasPorGrupoId).toList());
         return ResponseEntity.ok().body(respuesta);

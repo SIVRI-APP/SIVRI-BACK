@@ -9,6 +9,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSem
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.IntegranteSemilleroActualizarDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.IntegranteSemilleroCrearDTO;
+import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.IntegranteSemilleroCrearMentorDto;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.respuesta.SemilleroObtenerDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.mapper.IntegranteSemilleroDtoMapper;
 import jakarta.validation.Valid;
@@ -52,6 +53,7 @@ public class IntegranteSemilleroController {
      }
      @GetMapping("integrantesPorSemilleroId")
      @PreAuthorize("hasAnyAuthority(" +
+             "'GRUPO:DIRECTOR', " +
              "'FUNCIONARIO:SEMILLEROS')")
      public ResponseEntity<Respuesta> obtenerIntegrantesSemilleroPorIdSemillero(
              @RequestParam(value = "semilleroId",required = true) int semilleroId
@@ -80,6 +82,13 @@ public class IntegranteSemilleroController {
           return ResponseEntity.ok().body(respuesta);
 
      }
+     @PostMapping("/director")
+     @PreAuthorize("hasAnyAuthority("+
+             "'GRUPO:DIRECTOR')")
+     public ResponseEntity<Respuesta> crearMentor(@Valid @RequestBody IntegranteSemilleroCrearMentorDto nuevoIntegranteSemillero){
+          Respuesta respuesta=integranteSemilleroCrearCU.crear(integranteSemilleroDtoMapper.crearMentor(nuevoIntegranteSemillero));
+          return ResponseEntity.ok().body(respuesta);
+     }
 
      @PatchMapping("")
      @PreAuthorize("hasAnyAuthority(" +
@@ -102,9 +111,22 @@ public class IntegranteSemilleroController {
           respuesta.setDeveloperMessage(respuestaCU.getDeveloperMessage());
           return ResponseEntity.ok().body(respuesta);
      }
-
+     @GetMapping("integrantesSemilleroPorSemilleroId")
+     @PreAuthorize("hasAnyAuthority(" +
+             "'GRUPO:DIRECTOR', " +
+             "'SEMILLERO:MENTOR', " +
+             "'FUNCIONARIO:SEMILLEROS')")
+     public ResponseEntity<Respuesta> getIntegrantesSemilleroPorIdSemillero(
+             @RequestParam(value = "semilleroId",required = true) int semilleroId,
+             @RequestParam(required = false) int pageNo,
+             @RequestParam(required = false) int pageSize
+     ) {
+          Respuesta respuesta = integranteSemilleroObtenerCU.obtenerIntegrantesSemilleroPorIdSemillero(pageNo,pageSize,semilleroId);
+          return ResponseEntity.ok().body(respuesta);
+     }
      @GetMapping("listarIntegrantesConFiltro")
      @PreAuthorize("hasAnyAuthority(" +
+             "'SEMILLERO:MENTOR', " +
              "'FUNCIONARIO:SEMILLEROS')")
      public ResponseEntity<Respuesta> listarIntegrantesSemilleroConFiltro(
              @RequestParam(required = false) String numeroDocumento,

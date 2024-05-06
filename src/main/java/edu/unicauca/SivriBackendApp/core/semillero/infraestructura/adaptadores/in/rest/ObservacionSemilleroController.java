@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("observacionSemillero")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class ObservacionSemilleroController {
     private final ObservacionSemilleroCrearCU observacionSemilleroCrearCU;
     private final ObservacionSemilleroActualizarCU observacionSemilleroActualizarCU;
@@ -59,6 +59,7 @@ public class ObservacionSemilleroController {
 
     @GetMapping("/listarObservacionSemilleroPorIdSemillero")
     @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR', " +
             "'SEMILLERO:MENTOR')")
     public ResponseEntity<Respuesta> listarObservacionesSemilleroPorIdSemillero(
             @RequestParam(required = true) int semilleroId,

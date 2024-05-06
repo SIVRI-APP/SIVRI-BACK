@@ -5,6 +5,7 @@ import edu.unicauca.SivriBackendApp.core.academica.aplicación.ports.in.Programa
 import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Programa;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.in.rest.mapper.ProgramaDtoMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,5 +34,6 @@ public class ProgramaController {
         respuesta.setData(((List<Programa>) respuesta.getData()).stream().map(programaDtoMapper::obtenerPrograma).toList());
         return ResponseEntity.ok().body(respuesta);
     }
+
 
 }

@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.rest.DTO.respuesta;
 
-
+import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.in.rest.DTO.respuesta.DepartamentoDTO;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.in.rest.DTO.respuesta.FacultadDTO;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.GrupoEstado;
 import lombok.Data;
@@ -26,6 +26,7 @@ public class ObtenerGruposDTO {
     private String vision;
     private String realizaciones;
     private String perspectivas;
+    private DepartamentoDTO departamento;
     private FacultadDTO facultad;
 
 }

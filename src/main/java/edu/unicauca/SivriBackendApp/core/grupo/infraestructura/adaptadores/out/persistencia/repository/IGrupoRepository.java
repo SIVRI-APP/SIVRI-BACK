@@ -22,9 +22,19 @@ public interface IGrupoRepository extends JpaRepository<GrupoEntity,Integer> {
             "   INNER JOIN organismo_de_investigacion oi ON oi.id=g.grupoId " +
             "WHERE " +
             "   ig.rolGrupoId=1 AND ig.usuarioId=(:idDirector);",nativeQuery = true)
-    Page<List<ListarGruposPorIdDirector>> listarGruposPorIdDirector(
+    Page<List<ListarGruposPorIdDirector>> listarGruposPorIdDirectorPaginado(
             @Param("idDirector") int idDirector,
             @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable
+    );
+
+    @Query(value = "SELECT ig.grupoId,oi.nombre,ig.usuarioId " +
+            "FROM integrante_grupo ig " +
+            "   INNER JOIN grupo g ON ig.grupoId=g.grupoId " +
+            "   INNER JOIN organismo_de_investigacion oi ON oi.id=g.grupoId " +
+            "WHERE " +
+            "   ig.rolGrupoId=1 AND ig.usuarioId=(:idDirector);",nativeQuery = true)
+    List<ListarGruposPorIdDirector> listarGruposPorIdDirector(
+            @Param("idDirector") int idDirector
     );
 
     @Query(value = "SELECT dg.*, du.director " +

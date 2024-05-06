@@ -9,6 +9,7 @@ import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.SemilleroProg
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.in.rest.mapper.SemilleroProgramaDtoMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,8 +38,12 @@ public class SemilleroProgramaController {
         respuesta.setData(semilleroProgramaDtoMapper.obtenerProgramasPorSemilleroId((SemilleroPrograma) respuesta.getData()));
         return ResponseEntity.ok().body(respuesta);
     }
-    @GetMapping("/semilleroProgramaPorSemilleroId/{id}")
-    public ResponseEntity<Respuesta> obtenerProgramasPorSemilleroId(@PathVariable(value = "id") int idSemillero){
+    @GetMapping("/semilleroProgramaPorSemilleroId")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR', " +
+            "'SEMILLERO:MENTOR',  " +
+            "'FUNCIONARIO:SEMILLEROS')")
+    public ResponseEntity<Respuesta> obtenerProgramasPorSemilleroId(@RequestParam(value = "id",required = true) int idSemillero){
         Respuesta respuesta =semilleroProgramaObtenerCU.obtenerListadoProgramasPorSemilleroId(idSemillero);
         respuesta.setData(((List<SemilleroPrograma>) respuesta.getData()).stream().map(semilleroProgramaDtoMapper::obtenerProgramasPorSemilleroId).toList());
         return ResponseEntity.ok().body(respuesta);

@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("grupos")
-@CrossOrigin(origins = "#",allowedHeaders = "#")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class GrupoController {
 
     private final GrupoObtenerCU grupoObtenerCU;
@@ -36,8 +36,11 @@ public class GrupoController {
         this.grupoActualizarCU = grupoActualizarCU;
         this.grupoDtoMapper = grupoDtoMapper;
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<Respuesta> obtenerPorId(@PathVariable(value = "id") int id){
+    @GetMapping("/obtenerxid")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR', " +
+            "'GRUPO:DIRECTOR')")
+    public ResponseEntity<Respuesta> obtenerPorId(@RequestParam(value = "idgrupo",required = true) int id){
         System.out.println("ENTRA A BUSCAR GRUPO POR ID EN CONTROLLER ");
         Respuesta respuesta=grupoObtenerCU.obtenerGrupoPorId(id);
         respuesta.setData(grupoDtoMapper.dtoObtenerGrupo((Grupo) respuesta.getData()));
@@ -90,18 +93,26 @@ public class GrupoController {
         return ResponseEntity.ok().body(respuesta);
     }
 
-    @GetMapping("/listarGruposPorIdDirector")
+    @GetMapping("/listarGruposPorIdDirectorPaginado")
     @PreAuthorize("hasAnyAuthority(" +
             "'GRUPO:DIRECTOR')")
-    public ResponseEntity<Respuesta> listarGruposPorIdDirector(
+    public ResponseEntity<Respuesta> listarGruposPorIdDirectorPaginado(
             @RequestParam(required = true) int idDirector,
             @RequestParam(required = false) int pageNo,
             @RequestParam(required = false) int pageSize
     ){
-        Respuesta respuesta = grupoObtenerCU.obtenerGruposPorIdDirector(pageNo,pageSize,idDirector);
+        Respuesta respuesta = grupoObtenerCU.obtenerGruposPorIdDirectorPaginado(pageNo,pageSize,idDirector);
         return ResponseEntity.ok().body(respuesta);
     }
-
+    @GetMapping("/listarGruposPorIdDirector")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR')")
+    public ResponseEntity<Respuesta> listarGruposPorIdDirector(
+            @RequestParam(required = true) int idDirector
+    ){
+        Respuesta respuesta = grupoObtenerCU.obtenerGruposPorIdDirector(idDirector);
+        return ResponseEntity.ok().body(respuesta);
+    }
     @GetMapping("/listarGruposConFiltro")
     @PreAuthorize("hasAnyAuthority(" +
             "'FUNCIONARIO:GRUPOS')")

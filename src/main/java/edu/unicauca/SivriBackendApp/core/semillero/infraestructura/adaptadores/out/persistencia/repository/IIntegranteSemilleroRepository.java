@@ -1,6 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.repository;
 
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroIntegrantesSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarIntegrantesSemilleroxIdSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.IntegranteSemilleroEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,15 @@ import java.util.List;
 public interface IIntegranteSemilleroRepository extends JpaRepository<IntegranteSemilleroEntity,Integer> {
     //public List<SemilleroEntity> findByusuarioId(String idMentor);
    public List<IntegranteSemilleroEntity> findBySemilleroId(int idSemillero);
+   //TODO falta el programa que no sta includo en el usuario
+   @Query(value = "select u.numeroDocumento,concat(u.nombres,' ',u.apellidos) as nombreCompleto,rs.rolSemillero,ins.estado, ins.fechaIngreso,ins.fechaRetiro " +
+           "from integrante_semillero ins " +
+           "inner join usuario u on u.id=ins.usuarioId " +
+           "inner join rol_semillero rs on rs.id=ins.rolId " +
+           "where ins.semilleroId=(:semilleroId);",nativeQuery = true)
+   Page<List<ListarIntegrantesSemilleroxIdSemillero>> obtenerIntegrantesSemilleroPorIdSemillero(
+           @Param("semilleroId") int semilleroId,
+           @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable);
     // TODO falta agregar el programa no esta en usuario y buscar por programa tambien
     @Query(value = "SELECT u.numeroDocumento,u.nombres,u.apellidos,rs.rolSemillero,intse.estado, intse.fechaIngreso,intse.fechaRetiro " +
             "FROM integrante_semillero intse  " +

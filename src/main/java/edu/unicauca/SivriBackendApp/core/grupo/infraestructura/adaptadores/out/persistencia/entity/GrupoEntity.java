@@ -2,6 +2,7 @@ package edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.entity.DepartamentoEntity;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.entity.FacultadEntity;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.GrupoEstado;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.OrganismoDeInvestigacionEntity;
@@ -46,10 +47,10 @@ public class GrupoEntity extends OrganismoDeInvestigacionEntity {
     @Column(length = 1545)
     private String perspectivas;
 
-    //relacion *a1 con entidad facultad
+    //relacion *a1 con entidad departamento
     @ManyToOne
-    @JoinColumn(name = "facultadId")
-    private FacultadEntity facultad;
+    @JoinColumn(name = "departamentoId")
+    private DepartamentoEntity departamento;
 
     // relacion 1a* con entidad integranteGrupo
     @OneToMany(mappedBy = "grupo", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -79,7 +80,7 @@ public class GrupoEntity extends OrganismoDeInvestigacionEntity {
                 ", centroInvestigaciones='" + centroInvestigaciones + '\'' +
                 ", realizaciones='" + realizaciones + '\'' +
                 ", perspectivas='" + perspectivas + '\'' +
-                ", facultad=" + facultad +
+                ", departamento=" + departamento +
                 '}';
     }
 }

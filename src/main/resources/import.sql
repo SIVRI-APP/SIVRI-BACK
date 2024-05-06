@@ -1,15 +1,44 @@
--- |***** ACADEMICA *****|
+   -- |***** ACADEMICA *****|
 
 -- -- FACULTAD
-INSERT INTO facultad (idFacultad, nombre) VALUES (1, 'Ingeniería Electronica y Telecomunicaciones');
+INSERT INTO facultad (idFacultad, nombre) VALUES (1, 'Facultad de Artes');
+INSERT INTO facultad (idFacultad, nombre) VALUES (2, 'Facultad de Ciencias Agrarias');
+INSERT INTO facultad (idFacultad, nombre) VALUES (3, 'Facultad de Ciencias de la Salud');
+INSERT INTO facultad (idFacultad, nombre) VALUES (4, 'Facultad de Ciencias Contables, Económicas y Administrativas');
+INSERT INTO facultad (idFacultad, nombre) VALUES (5, 'Facultad de Ciencias Humanas y Sociales');
+INSERT INTO facultad (idFacultad, nombre) VALUES (6, 'Facultad de Ciencias Naturales, Exactas y de la Educación');
+INSERT INTO facultad (idFacultad, nombre) VALUES (7, 'Facultad de Derecho, Ciencias Políticas y Sociales');
+INSERT INTO facultad (idFacultad, nombre) VALUES (8, 'Facultad de Ingeniería Civil');
+INSERT INTO facultad (idFacultad, nombre) VALUES (9, 'Facultad de Ingeniería Electrónica y Telecomunicaciones');
+
 
 -- -- DEPARTAMENTO
-INSERT INTO departamento (id, nombre, facultadId) VALUES (1, 'Sistemas', 1);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (1, 'Artes Plásticas', 1);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (2, 'Agroindustria', 2);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (3, 'Biología', 6);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (4, 'Ciencia Política', 7);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (5, 'Ciencias Administrativas', 4);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (6, 'Ciencias Agropecuarias', 2);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (7, 'Ciencias Económicas', 4);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (8, 'Ciencias Fisiológicas', 3);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (9, 'Ciencias Quirúrgicas', 3);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (10, 'Comunicación Social', 7);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (11, 'Derecho Laboral', 7);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (12, 'Derecho Privado', 7);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (13, 'Diseño', 1);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (14, 'Educación Física, Recreación y Deporte', 6);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (15, 'Enfermería', 3);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (16, 'Español y Literatura', 5);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (17, 'Estudios Interculturales', 5);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (18, 'Sistemas', 9);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (19, 'Desarrollo de Vías y Estructuras', 8);
 
 -- -- PROGRAMAS
-INSERT INTO programa (id, nombre, departamentoId) VALUES (1, 'Ingeniería de Sistemas', 1);
+INSERT INTO programa (id, nombre, departamentoId) VALUES (1, 'Ingeniería de Sistemas', 9);
 INSERT INTO programa (id, nombre, departamentoId) VALUES (2, 'Ingeniería civil', 1);
 INSERT INTO programa (id, nombre, departamentoId) VALUES (3, 'Ingeniería Electronica', 1);
+INSERT INTO programa (id, nombre, departamentoId) VALUES (4, 'Artes Plásticas', 1);
+
 
 
 
@@ -93,21 +122,36 @@ INSERT INTO rol_funcionario (id, nombre) VALUES (6, 'PROYECTOS_EXTERNOS');
 INSERT INTO rol_funcionario (id, nombre) VALUES (7, 'VICERRECTOR');
 
 -- USUARIO
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (1, 'mandresmosquera@gmail.com', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'MASCULINO', 'ADMINISTRATIVO', 'Yurani', 'Mosquera', '3225864404' );
+--INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono,cvlac,) VALUES (1, 'mandresmosquera@gmail.com', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
+--INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'MASCULINO', 'ADMINISTRATIVO', 'Yurani', 'Mosquera', '3225864404' );
+--INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (3, 'yurany@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'FEMENINO', 'ADMINISTRATIVO', 'Yurani', 'Guevara', '3225864404' );
+--INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (4, 'susana@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10614', 'FEMENINO', 'ADMINISTRATIVO', 'susana', 'Guevara', '3225864404' );
+--INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (5, 'usu1@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10615', 'MASCULINO', 'ADMINISTRATIVO', 'usuario1', 'Guevara', '3225864404' );
+--INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (6, 'usu2@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10616', 'FEMENINO', 'ADMINISTRATIVO', 'usuario2', 'Guevara', '3225864404' );
+--INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (7, 'usu3@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10617', 'MASCULINO', 'ADMINISTRATIVO', 'usuario3', 'Guevara', '3225864404' );
+--INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (8, 'usu4@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10618', 'FEMENINO', 'ADMINISTRATIVO', 'usuario4', 'Guevara', '3225864404' );
+--INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombres, apellidos, telefono) VALUES (9, 'usu5@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10619', 'MASCULINO', 'ADMINISTRATIVO', 'usuario5', 'Guevara', '3225864404' );
+
 --
 -- -- CREDENCIAL
 INSERT INTO _credencial (id, email, password, usuarioId) VALUES (1, 'mandresmosquera@gmail.com', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 1);
 INSERT INTO _credencial (id, email, password, usuarioId) VALUES (2, 'yurani@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 2);
+--INSERT INTO _credencial (id, email, password, usuarioId) VALUES (3, 'yurany@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 3);
+--INSERT INTO _credencial (id, email, password, usuarioId) VALUES (4, 'susana@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 4);
+--INSERT INTO _credencial (id, email, password, usuarioId) VALUES (5, 'usu5@unicauca.edu.co', '$2a$10$vjVgOf/KeycZ05g7ZCBFOe.QgoGRJe5w0uyODmA18A1r.3fzIgmAa', 9);
+
 --
 -- -- FUNCIONARIO
 INSERT INTO funcionario (id, usuarioId) VALUES (1, 1);
+INSERT INTO funcionario (id, usuarioId) VALUES (2, 2);
+INSERT INTO funcionario (id, usuarioId) VALUES (3, 3);
+INSERT INTO funcionario (id, usuarioId) VALUES (4, 4);
 --
 -- -- ROL ADMINISTRATIVO
 INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (1, 1, 1, true, '2024-01-01');
-INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (2, 1, 2, true, '2024-01-01');
-
-
+INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (2, 2, 4, true, '2024-01-01');
+INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (3, 4, 3, true, '2023-12-08');
+INSERT INTO rol_administrativo (id, funcionarioId, rolFuncionarioId, estado, fechaInicio) VALUES (4, 3, 4, true, '2023-12-08');
 
 
 
@@ -144,6 +188,10 @@ INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mis
 INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (6,'semillero4','2023-03-08','Impulsar el interés', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
 INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (7,'semillero5','2023-03-08','Impulsar el investigativo ', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
 INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (8,'semillero6','2023-03-08','interés investigativo ', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (9,'grupo 2','2023-03-08','interés investigativo ', 'El grupo tiene como propósito crear un nucleo','El grupo SIR');
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (10,'grupo 3','2023-03-08','interés investigativo ', 'El grupo tiene como propósito crear un nucleo','El grupo SIR');
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (11,'grupo 4','2023-03-08','interés investigativo ', 'El grupo tiene como propósito crear un nucleo','El grupo SIR');
+
 
 --AREA DE GRUPO
 INSERT INTO area (idArea, area) VALUES (1, 'Ingenierpia y Tecnología');
@@ -172,6 +220,9 @@ INSERT INTO evidencia_actividad(id,evidencia) VALUES(1,'evidencia');
 
 --grupo
 INSERT INTO grupo (grupoId,facultadId,estado, direccion, telefono, email, sitioWeb, escalafonColciencias, direccionGrupLac, codigoColciencias, centroInvestigaciones, realizaciones, perspectivas) VALUES (1,1,'ACTIVO','Facultad de Ingeniería','2-8209800','jccasas@unicauca.edu.co','No','A','http://scienti.colciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000012079','COL0119567','centro investigacion','Desarrollo y aprobación de 5 trabajos de Pregrado en el Departamento de Ingeniería Ambiental y Sanitaria, Facultad de Ingeniería Civil.','perspectivas del grupo');
+INSERT INTO grupo (grupoId,facultadId,estado, direccion, telefono, email, sitioWeb, escalafonColciencias, direccionGrupLac, codigoColciencias, centroInvestigaciones, realizaciones, perspectivas) VALUES (9,2,'ACTIVO','Facultad de Ingeniería','2-8209800','jccasas@unicauca.edu.co','No','A','http://scienti.colciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000012079','COL0119567','centro investigacion','Desarrollo y aprobación de 5 trabajos de Pregrado en el Departamento de Ingeniería Ambiental y Sanitaria, Facultad de Ingeniería Civil.','perspectivas del grupo');
+INSERT INTO grupo (grupoId,facultadId,estado, direccion, telefono, email, sitioWeb, escalafonColciencias, direccionGrupLac, codigoColciencias, centroInvestigaciones, realizaciones, perspectivas) VALUES (10,1,'ACTIVO','Facultad de Ingeniería','2-8209800','jccasas@unicauca.edu.co','No','A','http://scienti.colciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000012079','COL0119567','centro investigacion','Desarrollo y aprobación de 5 trabajos de Pregrado en el Departamento de Ingeniería Ambiental y Sanitaria, Facultad de Ingeniería Civil.','perspectivas del grupo');
+INSERT INTO grupo (grupoId,facultadId,estado, direccion, telefono, email, sitioWeb, escalafonColciencias, direccionGrupLac, codigoColciencias, centroInvestigaciones, realizaciones, perspectivas) VALUES (11,3,'ACTIVO','Facultad de Ingeniería','2-8209800','jccasas@unicauca.edu.co','No','A','http://scienti.colciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000012079','COL0119567','centro investigacion','Desarrollo y aprobación de 5 trabajos de Pregrado en el Departamento de Ingeniería Ambiental y Sanitaria, Facultad de Ingeniería Civil.','perspectivas del grupo');
 
 --ROL GRUPO
 INSERT INTO rol_grupo(id,rolGrupo) VALUES(1,'DIRECTOR');
@@ -236,6 +287,10 @@ INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objeti
 --INTEGRANTE GRUPO
 INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(1,1,3,1,'Activo','2023-09-07',NULL);
 INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(2,2,2,1,'Activo','2023-09-07',NULL);
+INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(3,3,5,9,'Activo','2023-09-07',NULL);
+INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(4,4,7,10,'Activo','2023-09-07',NULL);
+INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(5,4,8,1,'Activo','2023-09-07',NULL);
+
 
 --observacion grupo
 INSERT INTO observacion_grupo(idObservacion,funcionarioId,grupoId,observacion,fecha)VALUES(1,2,1,'observacion de un grupo','2023-09-08');

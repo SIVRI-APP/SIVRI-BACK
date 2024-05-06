@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.out;
 
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.Grupo;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.GrupoEstado;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.proyecciones.ListarGruposConFiltro;
@@ -17,6 +18,7 @@ public interface GrupoObtenerREPO {
     Optional<Grupo> obtenerGrupoPorId(int id);
     List<Grupo> obtenerGrupos();
     Page<Grupo> obtenerGruposPaginado(PageRequest pageRequest);
-    Page<List<ListarGruposPorIdDirector>> obtenerGruposPorIdDirector(Pageable pageable, int idDirector);
+    List<ListarGruposPorIdDirector> obtenerGruposPorIdDirector(int idDirector);
+    Page<List<ListarGruposPorIdDirector>> obtenerGruposPorIdDirectorPaginado(Pageable pageable, int idDirector);
     Page<List<ListarGruposConFiltro>> obtenerGruposConFiltro(Pageable pageable, String nombre, GrupoEstado estado, String facultad, String director);
 }

@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("integrantes")
@@ -40,6 +41,8 @@ public class IntegranteGrupoController {
         return ResponseEntity.ok().body(respuesta);
     }
     @GetMapping("")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR')")
     public ResponseEntity<Respuesta> obtenerIntegrantesPorGrupo(){
         Respuesta respuesta= integranteGrupoObtenerCU.obtenerIntegrantesGrupo();
 
@@ -50,6 +53,16 @@ public class IntegranteGrupoController {
                         .toList()
         );
         return ResponseEntity.ok().body(respuesta);
+    }
+    @GetMapping("integrantesPorGrupoId")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR')")
+    public ResponseEntity<Respuesta> obtenerIntegrantesGrupoPorIdGrupo(
+            @RequestParam(value = "idGrupo",required = true) int idGrupo
+    ){
+        Respuesta respuesta = integranteGrupoObtenerCU.obtenerIntegranteGrupoPorIdGrupo(idGrupo);
+        respuesta.setData(((List<IntegranteGrupo>) respuesta.getData()).stream().map(integranteGrupoDtoMapper::obtenerIntegranteGrupo).toList());
+      return ResponseEntity.ok().body(respuesta);
     }
     @PostMapping("/asociarGrupo")
     public ResponseEntity<Respuesta> asociarIntegrante(@Valid @RequestBody IntegranteGrupoCrearDTO nuevosDatos){

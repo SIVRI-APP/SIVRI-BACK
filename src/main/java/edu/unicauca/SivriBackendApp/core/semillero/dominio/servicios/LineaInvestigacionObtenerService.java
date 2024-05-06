@@ -6,6 +6,11 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHa
 import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.LineaInvestigacionObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.LineaInvestigacionObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.LineaInvestigacion;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarLineasInvestigacion;
+import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.LineaInvestigacionEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -39,12 +44,22 @@ public class LineaInvestigacionObtenerService implements LineaInvestigacionObten
     }
 
     @Override
-    public Respuesta<List<LineaInvestigacion>> obtenerLineasInvestigacionPorSemilleroId(int idSemillero) {
-        List<LineaInvestigacion> respuestaBd= lineaInvestigacionObtenerREPO.obtenerLineasInvestigacionPorSemilleroId(idSemillero);
+    public Respuesta<Page<List<ListarLineasInvestigacion>>> obtenerLineasInvestigacionPorSemilleroId(int pageNo, int pageSize, int idSemillero) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<List<ListarLineasInvestigacion>> respuestaBd= lineaInvestigacionObtenerREPO.obtenerLineasInvestigacionPorSemilleroId(pageable,idSemillero);
+       /* if (respuestaBd.isEmpty()){
+            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros");
+        }*/
+
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<List<LineaInvestigacion>> obtenertotListadoLineasInvestigacion(int idSemillero) {
+        List<LineaInvestigacion> respuestaBd= lineaInvestigacionObtenerREPO.obtenertotListadoLineasInvestigacion(idSemillero);
         if (respuestaBd.isEmpty()){
             throw new ReglaDeNegocioException("bad.no.se.encontraron.registros");
         }
-
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
     }
 

@@ -12,7 +12,7 @@ import org.mapstruct.Mappings;
 public interface IntegranteGrupoDtoMapper {
 
     IntegranteGrupoObtenerDTO obtenerIntegrantesGrupo(final IntegranteGrupo integrantesGrupo);
-
+    @Mapping(source = "usuario",target = "usuario")
     IntegranteGrupoObtenerDTO obtenerIntegranteGrupo(final IntegranteGrupo integranteGrupo);
     @Mappings({
        // @Mapping(source = "numeroDocumento",target = "usuario.numeroDocumento"),

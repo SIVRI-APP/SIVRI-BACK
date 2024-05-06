@@ -18,12 +18,10 @@ public class FacultadEntity {
     @Column(name = "nombre", length = 80, nullable = false)
     private String nombre;
 
-    //relacion 1a* con entidad grupo
-    @OneToMany(mappedBy = "facultad", fetch = FetchType.LAZY)
-    private List<GrupoEntity> grupos;
 
-    @OneToMany(mappedBy = "facultad", cascade = CascadeType.REMOVE)
-    private List<DepartamentoEntity> departamentos;
+
+    //@OneToMany(mappedBy = "facultad", cascade = CascadeType.REMOVE)
+    //private List<DepartamentoEntity> departamentos;
 
     @Override
     public String toString() {

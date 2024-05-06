@@ -7,12 +7,16 @@ import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.re
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.rest.DTO.respuesta.ObtenerGruposDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring" )
 public interface GrupoDtoMapper {
-    @Mapping(source = "facultad.idFacultad",target = "facultad.id")
+    @Mappings({
+            @Mapping(source = "facultad.idFacultad",target = "facultad.id"),
+            @Mapping(source = "departamento", target = "departamento")
+    })
     ObtenerGruposDTO dtoObtenerGrupo(final Grupo grupo);
 
     List<ObtenerGruposDTO> dtoObtenerGrupos(final List<Grupo> grupos);
