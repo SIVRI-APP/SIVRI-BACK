@@ -39,7 +39,7 @@ public class UsuarioSolicitudController<T> {
     @Operation(summary = "Crear solicitud de usuario", description = "Crea una solicitud para registrar un nuevo usuario en base a un objeto recibido en el cuerpo de la petición")
     @ApiResponse(responseCode = "200", description = "Solicitud de usuario creada exitosamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Respuesta.class)))
     public ResponseEntity<Respuesta> crearSolicitudUsuario(@Parameter(name = "registro", description = "Datos para registrar un nuevo usuario", required = true) @Valid @RequestBody RegistroUsuarioDTO registro) {
-
+        System.out.println(registro);
         Respuesta respuesta = usuarioSolicitudCrearCU.crearSolicitudUsuario(usuarioSolicitudRestMapper.registrarUsuario(registro));
 
         return ResponseEntity.ok().body(respuesta);

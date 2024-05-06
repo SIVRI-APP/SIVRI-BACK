@@ -26,17 +26,17 @@ INSERT INTO documento_convocatoria (id, nombre) VALUES (5, 'PagaFor-28');
 
 
 -- TIPO CONVOCATORIA
-INSERT INTO tipo_convocatoria (id, nombre, tipoFinanciación) VALUES (1, 'Proyectos Internos', 'PROYECTOS_INTERNOS');
+INSERT INTO tipo_convocatoria (id, nombre, tipoFinanciación) VALUES (1, 'Proyectos Internos 2024', 'PROYECTOS_INTERNOS');
 INSERT INTO tipo_convocatoria (id, nombre, tipoFinanciación) VALUES (2, 'Proyectos Externos 2024', 'PROYECTOS_EXTERNOS');
 INSERT INTO tipo_convocatoria (id, nombre, tipoFinanciación) VALUES (3, 'Alcaldía de Popayan', 'PROYECTOS_EXTERNOS');
 
 
 -- LISTADO DE DOCUMENTOS
-INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (1, 1, 1, 'PRE_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
-INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (2, 1, 2, 'EJECUCIÓN', 'DIRECTOR_PROYECTO', 2, true);
-INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (3, 1, 3, 'POST_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
-INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (4, 1, 4, 'POST_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, false);
-INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (5, 1, 4, 'POST_EJECUCIÓN', 'ADMINISTRATIVO', 1, true);
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (1, 1, 1, 'PRE_EJECUCIÓN', 'ORGANISMO_DE_INVESTIGACIÓN', 1, true);
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (2, 1, 2, 'EJECUCIÓN', 'ORGANISMO_DE_INVESTIGACIÓN', 2, true);
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (3, 1, 3, 'POST_EJECUCIÓN', 'VRI', 1, true);
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (4, 1, 4, 'POST_EJECUCIÓN', 'VRI', 1, false);
+INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (5, 1, 4, 'POST_EJECUCIÓN', 'VRI', 1, true);
 
 INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (6, 2, 1, 'PRE_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
 INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (7, 2, 2, 'EJECUCIÓN', 'DIRECTOR_PROYECTO', 2, true);

@@ -1,0 +1,28 @@
+package edu.unicauca.SivriBackendApp.core.convocatoria.aplicación.puertos.entrada;
+
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioSolicitudListarConFiltroProyección;
+import org.springframework.data.domain.Page;
+
+public interface ConvocatoriaObtenerCU {
+    /**
+     * Obtiene una página de solicitudes de usuarios filtradas según los parámetros proporcionados.
+     *
+     * @param pageNo            Número de página.
+     * @param pageSize          Tamaño de página.
+     * @param correo            Filtro por correo del usuario.
+     * @param tipoDocumento     Filtro por tipo de documento del usuario.
+     * @param numeroDocumento   Filtro por número de documento del usuario.
+     * @param nombres           Filtro por nombres del usuario.
+     * @param apellidos         Filtro por apellidos del usuario.
+     * @param tipoUsuario       Filtro por tipo de usuario.
+     * @param estado            Filtro por estado de la solicitud de usuario.
+     * @param organismoDeInvestigacionId           Filtro por identificador de grupo.
+     * @return Respuesta que contiene una página de solicitudes de usuario con proyecciones específicas.
+     */
+    Respuesta<Page<UsuarioSolicitudListarConFiltroProyección>> listarConFiltro(int pageNo, int pageSize, String correo, TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String apellidos, TipoUsuario tipoUsuario, EstadoSolicitudUsuario estado, Integer organismoDeInvestigacionId);
+
+}
