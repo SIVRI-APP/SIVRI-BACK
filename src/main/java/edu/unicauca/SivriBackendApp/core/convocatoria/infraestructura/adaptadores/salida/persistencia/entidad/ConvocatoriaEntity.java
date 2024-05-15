@@ -15,7 +15,7 @@ public class ConvocatoriaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 250    , nullable = false)
+    @Column(length = 250, nullable = false)
     private String nombre;
 
     @Column(length = 250, nullable = false)
