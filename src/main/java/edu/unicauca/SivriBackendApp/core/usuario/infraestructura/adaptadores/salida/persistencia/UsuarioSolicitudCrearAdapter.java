@@ -36,4 +36,15 @@ public class UsuarioSolicitudCrearAdapter implements UsuarioSolicitudCrearREPO {
         return usuarioSolicitudInfraMapper.toModel(usuarioSolicitudRepository.save(usuarioSolicitudInfraMapper.toEntity(usuario)));
     }
 
+    /**
+     * Actualiza una solicitud de usuario en la capa de persistencia.
+     *
+     * @param usuario Solicitud de usuario a actualizar.
+     * @return La solicitud de usuario creada y convertida a modelo.
+     */
+    @Override
+    public UsuarioSolicitud actualizarUsuarioSolicitud(UsuarioSolicitud usuario) {
+        return usuarioSolicitudInfraMapper.toModel(usuarioSolicitudRepository.save(usuarioSolicitudInfraMapper.toEntity(usuario)));
+    }
+
 }

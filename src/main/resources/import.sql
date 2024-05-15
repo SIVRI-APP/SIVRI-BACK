@@ -88,8 +88,8 @@ INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuar
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'MASCULINO', 'ADMINISTRATIVO', 'Yurani', 'Mosquera', '3225864404' );
 
 -- SOLICITUD DE USUARIO
-INSERT INTO usuario_solicitud (id, creadoPorUsuarioId, correo, tipoDocumento, numeroDocumento, sexo, estado, tipoUsuario, nombre, apellido, telefono, nota, organismoDeInvestigacionId, rolGrupoId) VALUES (1, 1, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'MASCULINO', 'FORMULADO_OBSERVACIONES', 'ADMINISTRATIVO', 'Miguel Andres', 'Mosquera', '3225864404', 'no me lo nieguen porfa', 1, 1);
-INSERT INTO usuario_solicitud (id, creadoPorUsuarioId, correo, tipoDocumento, numeroDocumento, sexo, estado, tipoUsuario, nombre, apellido, telefono, nota, organismoDeInvestigacionId, rolGrupoId) VALUES (2, 1, 'angeehin24@gmail.com', 'CEDULA_CIUDADANIA', '10614', 'MASCULINO', 'FORMULADO_OBSERVACIONES', 'ADMINISTRATIVO', 'Angee Vannessa', 'Hincapie', '3225864404', 'no me lo nieguen porfa', 1, 1 );
+INSERT INTO usuario_solicitud (id, creadoPorUsuarioId, correo, tipoDocumento, numeroDocumento, sexo, estado, tipoUsuario, nombre, apellido, telefono, nota, organismoDeInvestigacionId, rolGrupoId) VALUES (1, 1, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'MASCULINO', 'REVISION_VRI', 'ADMINISTRATIVO', 'Miguel Andres', 'Mosquera', '3225864404', 'no me lo nieguen porfa', 1, 1);
+INSERT INTO usuario_solicitud (id, creadoPorUsuarioId, correo, tipoDocumento, numeroDocumento, sexo, estado, tipoUsuario, nombre, apellido, telefono, nota, organismoDeInvestigacionId, rolGrupoId) VALUES (2, 1, 'angeehin24@gmail.com', 'CEDULA_CIUDADANIA', '10614', 'MASCULINO', 'REVISION_VRI', 'ADMINISTRATIVO', 'Angee Vannessa', 'Hincapie', '3225864404', 'no me lo nieguen porfa', 1, 1 );
 
 -- ROL FUNCIONARIO
 INSERT INTO rol_funcionario (id, nombre) VALUES (1, 'SUPER_ADMIN');

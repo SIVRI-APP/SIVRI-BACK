@@ -1,9 +1,11 @@
 package edu.unicauca.SivriBackendApp.common.seguridad.acceso.service;
 
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Funcionario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.FuncionarioEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.UsuarioEntity;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.FuncionarioInfraMapper;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.UsuarioInfraMapper;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.FuncionarioRepository;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioRepository;
@@ -30,6 +32,7 @@ public class ServicioDeIdentificaciónDeUsuario {
     private final UsuarioRepository usuarioRepository;
     private final FuncionarioRepository funcionarioRepository;
     private final UsuarioInfraMapper usuarioInfraMapper;
+    private final FuncionarioInfraMapper funcionarioInfraMapper;
 
     public UsuarioEntity obtenerUsuarioEntity(){
          return usuarioRepository.findByCorreo(obtenerCorreoUsuario()).orElseThrow(
@@ -43,6 +46,10 @@ public class ServicioDeIdentificaciónDeUsuario {
     public FuncionarioEntity obtenerFuncionario(){
         return funcionarioRepository.findByUsuarioId(obtenerUsuario().getId()).orElseThrow(
                 () -> new ReglaDeNegocioException("bad.imposible.obtener.funcionario.autenticado"));
+    }
+
+    public Funcionario obtenerFuncionarioModel(){
+        return funcionarioInfraMapper.toModel(obtenerFuncionario());
     }
 
     /**

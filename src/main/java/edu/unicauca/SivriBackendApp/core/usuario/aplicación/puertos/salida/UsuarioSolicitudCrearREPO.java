@@ -16,4 +16,13 @@ public interface UsuarioSolicitudCrearREPO {
      */
     UsuarioSolicitud crearUsuarioSolicitud(UsuarioSolicitud usuario);
 
+
+    /**
+     * Actualiza solicitud de usuario en el repositorio de persistencia.
+     *
+     * @param usuario Objeto UsuarioSolicitud que contiene la información de la solicitud a actualizar.
+     * @return Objeto UsuarioSolicitud que representa la solicitud de usuario creada.
+     */
+    UsuarioSolicitud actualizarUsuarioSolicitud(UsuarioSolicitud usuario);
+
 }

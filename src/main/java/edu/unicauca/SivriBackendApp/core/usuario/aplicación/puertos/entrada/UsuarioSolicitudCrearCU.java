@@ -2,6 +2,7 @@ package edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada;
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitud;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.entrada.rest.dto.entrada.RechazarSolicitudDTO;
 
 /**
  * La interfaz UsuarioSolicitudCrearCU define los puertos de entrada para la creación, edición,
@@ -24,4 +25,12 @@ public interface UsuarioSolicitudCrearCU {
      * @return Respuesta que indica si la aprobación de la solicitud de usuario fue exitosa o no.
      */
     Respuesta<Boolean> aprobarSolicitudUsuario(long solicitudId);
+
+    /**
+     * Rechaza y agrega una observacion a una solicitud de usuario.
+     *
+     * @param rechazarSolicitud Información necesaria para crear la observacion de la solicitud.
+     * @return Respuesta que indica si la aprobación de la solicitud de usuario fue exitosa o no.
+     */
+    Respuesta<Boolean> rechazarSolicitudUsuario(RechazarSolicitudDTO rechazarSolicitud);
 }

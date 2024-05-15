@@ -5,6 +5,7 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificaciónDeUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioSolicitudCrearCU;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioSolicitudObservacionesCrearCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioSolicitudObservacionesObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioSolicitudObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.UsuarioSolicitudCrearREPO;
@@ -14,6 +15,7 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitu
 
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.validadores.UsuarioSolicitudValidador;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.entrada.rest.dto.entrada.RechazarSolicitudDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,7 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
      */
     private final UsuarioSolicitudObtenerCU usuarioSolicitudObtenerCU;
     private final UsuarioSolicitudObservacionesObtenerCU usuarioSolicitudObservacionesObtenerCU;
+    private final UsuarioSolicitudObservacionesCrearCU usuarioSolicitudObservacionesCrearCU;
 
     /**
      * Servicios
@@ -112,6 +115,16 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
         // Eliminar solicitud
         usuarioSolicitudEliminarREPO.eliminar(solicitudId);
 
-        return new RespuestaHandler<>(200, "ok", "", true).getRespuesta();
+        return new RespuestaHandler<>(200, "ok.solicitud.aprobada", List.of(solicitudUsuario.getTipoDocumento().toString(), solicitudUsuario.getNumeroDocumento(), solicitudUsuario.getCorreo()), "", true).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Boolean> rechazarSolicitudUsuario(RechazarSolicitudDTO rechazarSolicitud) {
+        usuarioSolicitudObservacionesCrearCU.crearObservacionSolicitudUsuario(rechazarSolicitud);
+        UsuarioSolicitud solicitudUsuario = usuarioSolicitudObtenerCU.obtenerSolicitudUsuario(rechazarSolicitud.getUsuarioSolicitudId()).getData();
+        solicitudUsuario.setEstado(EstadoSolicitudUsuario.FORMULADO_OBSERVACIONES);
+
+        usuarioSolicitudCrearREPO.actualizarUsuarioSolicitud(solicitudUsuario);
+        return new RespuestaHandler<>(200, "ok.solicitud.rechazada", "", true).getRespuesta();
     }
 }

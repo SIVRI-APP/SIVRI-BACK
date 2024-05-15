@@ -8,6 +8,7 @@ import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.Usu
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.entrada.rest.dto.entrada.RechazarSolicitudDTO;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.entrada.rest.dto.entrada.RegistroUsuarioDTO;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.entrada.rest.mapper.UsuarioSolicitudRestMapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -92,5 +93,13 @@ public class UsuarioSolicitudController<T> {
         return ResponseEntity.ok().body(respuesta);
     }
 
+    @PostMapping("rechazar")
+    @PreAuthorize("hasAnyAuthority(" + "'FUNCIONARIO:SUPER_ADMIN', " + "'FUNCIONARIO:USUARIOS')")
+    @Operation(summary = "Rechazar solicitud de usuario", description = "Rechaza una solicitud de usuario.")
+    @ApiResponse(responseCode = "200", description = "Solicitud de usuario rechazada con observaciones", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Respuesta.class)))
+    public ResponseEntity<Respuesta> rechazarSolicitudUsuario(@Valid @RequestBody RechazarSolicitudDTO rechazarSolicitudDTO) {
+        Respuesta respuesta = usuarioSolicitudCrearCU.rechazarSolicitudUsuario(rechazarSolicitudDTO);
+        return ResponseEntity.ok().body(respuesta);
+    }
 
 }

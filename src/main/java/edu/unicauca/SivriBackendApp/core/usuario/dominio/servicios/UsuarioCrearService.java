@@ -62,6 +62,8 @@ public class UsuarioCrearService implements UsuarioCrearCU {
         return new RespuestaHandler<>(200, "ok", "", true).getRespuesta();
     }
 
+
+
     /**
      * Envía un correo de bienvenida al nuevo usuario, incluyendo información personalizada
      * como el nombre, tipo de usuario, grupo de investigación, etc.
