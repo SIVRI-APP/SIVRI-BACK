@@ -110,7 +110,7 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
                 .build()
         );
 
-        // TODO: Miguel crear el rol en el grupo
+        // TODO : Miguel crear el rol en el grupo
 
         // Eliminar solicitud
         usuarioSolicitudEliminarREPO.eliminar(solicitudId);

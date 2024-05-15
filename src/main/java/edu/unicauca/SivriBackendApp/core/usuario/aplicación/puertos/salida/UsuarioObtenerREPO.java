@@ -1,6 +1,18 @@
 package edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida;
 
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitud;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioInformaciónDetalladaProyección;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioListarConFiltroProyección;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioSolicitudInformaciónDetalladaProyección;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioSolicitudListarConFiltroProyección;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
 
 
 /**
@@ -18,5 +30,36 @@ public interface UsuarioObtenerREPO {
      * @return True si existe un usuario con los parámetros dados, de lo contrario, False.
      */
     boolean existsByCorreoOrTipoDocumentoAndNumeroDocumento(String correo, TipoDocumento tipoDocumento, String numeroDocumento);
+
+    /**
+     * Obtiene una página de solicitudes de usuarios filtradas según los parámetros proporcionados.
+     *
+     * @param pageable       Objeto Pageable que representa la información de paginación.
+     * @param correo         Filtro por correo del usuario.
+     * @param tipoDocumento  Filtro por tipo de documento del usuario.
+     * @param numeroDocumento Filtro por número de documento del usuario.
+     * @param nombres        Filtro por nombres del usuario.
+     * @param apellidos      Filtro por apellidos del usuario.
+     * @param tipoUsuario    Filtro por tipo de usuario.
+     * @param organismoDeInvestigacionId        Filtro por identificador de grupo.
+     * @return Página que contiene la lista de solicitudes de usuario con proyecciones específicas.
+     */
+    Page<UsuarioListarConFiltroProyección> listarConFiltro(Pageable pageable, String correo, TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String apellidos, TipoUsuario tipoUsuario, Integer organismoDeInvestigacionId);
+
+    /**
+     * Obtiene información detallada de una solicitud de usuario.
+     *
+     * @param usuarioId Identificador único de la solicitud de usuario.
+     * @return Optional que contiene información detallada de la solicitud de usuario si existe, o un Optional vacío si no existe.
+     */
+    Optional<UsuarioInformaciónDetalladaProyección> obtenerUsuarioInformaciónDetallada(long usuarioId);
+
+    /**
+     * Obtiene una solicitud de usuario por su identificador único.
+     *
+     * @param usuarioId Identificador único de la solicitud de usuario.
+     * @return Optional que contiene la solicitud de usuario obtenida si existe, o un Optional vacío si no existe.
+     */
+    Optional<Usuario> obtenerUsuario(long usuarioId);
 
 }
