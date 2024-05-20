@@ -25,6 +25,6 @@ public interface SemilleroObtenerCU {
     Respuesta<Page<Semillero>> obtenerSemillerosPaginado(int pageNo, int pageSize);
     Respuesta<Page<List<ListarConFiltroSemilleros>>> listarSemillerosConfiltro(int pageNo, int pageSize, String nombre, String correo, SemilleroEstado estado);
 
-    Respuesta<Page<List<ListarSemillerosConFiltroxMentor>>> listarSemilleroConFiltroxMentor(int pageNo, int pageSize, Integer semilleroId, Long usuarioId, String nombre, SemilleroEstado estado);
+    Respuesta<Page<List<ListarSemillerosConFiltroxMentor>>> listarSemilleroConFiltroxMentor(int pageNo, int pageSize, Integer semilleroId, String nombre, SemilleroEstado estado);
 
 }

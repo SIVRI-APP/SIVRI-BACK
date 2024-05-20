@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("semillerosProgramas")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class SemilleroProgramaController {
     private final SemilleroProgramaObtenerCU semilleroProgramaObtenerCU;
     private final SemilleroProgramaCrearCU semilleroProgramaCrearCU;
@@ -38,14 +38,17 @@ public class SemilleroProgramaController {
         respuesta.setData(semilleroProgramaDtoMapper.obtenerProgramasPorSemilleroId((SemilleroPrograma) respuesta.getData()));
         return ResponseEntity.ok().body(respuesta);
     }
-    @GetMapping("/semilleroProgramaPorSemilleroId")
+    @GetMapping("/obtenerProgramasPorSemilleroId")
     @PreAuthorize("hasAnyAuthority(" +
             "'GRUPO:DIRECTOR', " +
             "'SEMILLERO:MENTOR',  " +
             "'FUNCIONARIO:SEMILLEROS')")
-    public ResponseEntity<Respuesta> obtenerProgramasPorSemilleroId(@RequestParam(value = "id",required = true) int idSemillero){
-        Respuesta respuesta =semilleroProgramaObtenerCU.obtenerListadoProgramasPorSemilleroId(idSemillero);
-        respuesta.setData(((List<SemilleroPrograma>) respuesta.getData()).stream().map(semilleroProgramaDtoMapper::obtenerProgramasPorSemilleroId).toList());
+    public ResponseEntity<Respuesta> obtenerProgramasPorSemilleroIdPaginado(
+            @RequestParam(value = "semilleroId",required = true) int idSemillero,
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
+    ){
+        Respuesta respuesta =semilleroProgramaObtenerCU.obtenerListadoProgramasPorSemilleroId(pageNo,pageSize,idSemillero);
         return ResponseEntity.ok().body(respuesta);
     }
     @PostMapping("/{id}")

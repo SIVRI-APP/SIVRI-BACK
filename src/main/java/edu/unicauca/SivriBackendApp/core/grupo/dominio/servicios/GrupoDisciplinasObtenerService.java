@@ -7,6 +7,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.in.GrupoDiscipl
 import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.in.GrupoObtenerCU;
 import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.out.GrupoDisciplinaObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.GrupoDisciplina;
+import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.proyecciones.ListarDisciplinasPorGrupoId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -50,5 +51,14 @@ public class GrupoDisciplinasObtenerService implements GrupoDisciplinaObtenerCU 
             throw new ReglaDeNegocioException("bad.no.se.encontraron.registros");
         }
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<List<ListarDisciplinasPorGrupoId>> obtenerDisciplinasxGrupoId(int idGrupo) {
+        List<ListarDisciplinasPorGrupoId> respuestaBd=grupoDisciplinaObtenerREPO.obtenerDisciplinasxGrupoId(idGrupo);
+        if (respuestaBd.isEmpty()){
+            throw new ReglaDeNegocioException("bad.no.se.encontro.registro",List.of(" de disciplinas para el grupo ","Id",String.valueOf(idGrupo)));
+        }
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",respuestaBd).getRespuesta();
     }
 }

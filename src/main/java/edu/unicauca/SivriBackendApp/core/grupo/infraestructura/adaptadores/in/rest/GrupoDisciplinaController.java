@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("gruposDisciplinas")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class GrupoDisciplinaController {
 
     private final GrupoDisciplinaObtenerCU grupoDisciplinaObtenerCU;
@@ -45,6 +45,16 @@ public class GrupoDisciplinaController {
     public ResponseEntity<Respuesta> obtenerDisciplinasPorGrupoId(@RequestParam(value = "idGrupo",required = true) int idGrupo){
         Respuesta respuesta = grupoDisciplinaObtenerCU.obtenerListadoDisciplinasPorGrupoId(idGrupo);
         respuesta.setData(((List<GrupoDisciplina>) respuesta.getData()).stream().map(grupoDisciplinaDtoMapper::obtenerDisciplinasPorGrupoId).toList());
+        return ResponseEntity.ok().body(respuesta);
+    }
+    @GetMapping("/listarDisciplinasxGrupoId")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR', " +
+            "'GRUPO:DIRECTOR')")
+    public ResponseEntity<Respuesta> obtenerDisciplinasxGrupoId(
+            @RequestParam(value = "idGrupo",required = true) int idGrupo
+    ){
+        Respuesta respuesta= grupoDisciplinaObtenerCU.obtenerDisciplinasxGrupoId(idGrupo);
         return ResponseEntity.ok().body(respuesta);
     }
     @PostMapping("/{id}")

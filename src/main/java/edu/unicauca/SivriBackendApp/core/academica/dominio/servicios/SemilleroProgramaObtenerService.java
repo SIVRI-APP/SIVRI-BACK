@@ -6,6 +6,10 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHa
 import edu.unicauca.SivriBackendApp.core.academica.aplicación.ports.in.SemilleroProgramaObtenerCU;
 import edu.unicauca.SivriBackendApp.core.academica.aplicación.ports.out.SemilleroProgramaObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.SemilleroPrograma;
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.proyecciones.ListarProgramas;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -40,8 +44,9 @@ public class SemilleroProgramaObtenerService implements SemilleroProgramaObtener
     }
 
     @Override
-    public Respuesta<List<SemilleroPrograma>> obtenerListadoProgramasPorSemilleroId(int idSemillero) {
-        List<SemilleroPrograma> respuestaBd=semilleroProgramaObtenerREPO.obtenerListadoProgramasPorSemilleroId(idSemillero);
+    public Respuesta<Page<ListarProgramas>> obtenerListadoProgramasPorSemilleroId(int pageNo, int pageSize, int idSemillero) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<ListarProgramas> respuestaBd=semilleroProgramaObtenerREPO.obtenerListadoProgramasPorSemilleroId(pageable, idSemillero);
         if (respuestaBd.isEmpty()){
             throw new ReglaDeNegocioException("bad.no.se.encontraron.registros");
         }

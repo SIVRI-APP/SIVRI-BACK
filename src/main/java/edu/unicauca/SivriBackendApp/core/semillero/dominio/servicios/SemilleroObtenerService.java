@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.semillero.dominio.servicios;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
+import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificaciónDeUsuario;
 import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.SemilleroObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.SemilleroObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
@@ -21,9 +22,11 @@ import java.util.Optional;
 @Component
 public class SemilleroObtenerService implements SemilleroObtenerCU {
     private final SemilleroObtenerREPO semilleroObtenerREPO;
+    private final ServicioDeIdentificaciónDeUsuario servicioDeIdentificaciónDeUsuario;
 
-    public SemilleroObtenerService(SemilleroObtenerREPO semilleroObtenerREPO) {
+    public SemilleroObtenerService(SemilleroObtenerREPO semilleroObtenerREPO, ServicioDeIdentificaciónDeUsuario servicioDeIdentificaciónDeUsuario) {
         this.semilleroObtenerREPO = semilleroObtenerREPO;
+        this.servicioDeIdentificaciónDeUsuario = servicioDeIdentificaciónDeUsuario;
     }
 
     @Override
@@ -104,8 +107,9 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
     }
 
     @Override
-    public Respuesta<Page<List<ListarSemillerosConFiltroxMentor>>> listarSemilleroConFiltroxMentor(int pageNo, int pageSize, Integer semilleroId, Long usuarioId, String nombre, SemilleroEstado estado) {
+    public Respuesta<Page<List<ListarSemillerosConFiltroxMentor>>> listarSemilleroConFiltroxMentor(int pageNo, int pageSize, Integer semilleroId, String nombre, SemilleroEstado estado) {
         System.out.println("lleg al service");
+        Long usuarioId=servicioDeIdentificaciónDeUsuario.obtenerUsuario().getId();
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<List<ListarSemillerosConFiltroxMentor>> respuestaBd= semilleroObtenerREPO.listarSemilleroConFiltroxMentor(pageable,semilleroId,usuarioId,nombre,estado);
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","",respuestaBd).getRespuesta();

@@ -2,6 +2,7 @@ package edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.
 
 import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.out.GrupoDisciplinaObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.GrupoDisciplina;
+import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.proyecciones.ListarDisciplinasPorGrupoId;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.persistencia.entity.GrupoDisciplinaEntity;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.persistencia.mapper.GrupoDisciplinaMapper;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.persistencia.repository.IGrupoDisciplinaRepository;
@@ -35,5 +36,10 @@ public class GrupoDisciplinaObtenerAdapter implements GrupoDisciplinaObtenerREPO
     @Override
     public List<GrupoDisciplina> obtenerListadoDisciplinasPorGrupoId(int idGrupo) {
         return grupoDisciplinaRepository.findByGrupoId(idGrupo).stream().map(grupoDisciplinaMapper::obtenerModelo).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ListarDisciplinasPorGrupoId> obtenerDisciplinasxGrupoId(int idGrupo) {
+        return grupoDisciplinaRepository.obtenerDisciplinasxGrupoId(idGrupo);
     }
 }

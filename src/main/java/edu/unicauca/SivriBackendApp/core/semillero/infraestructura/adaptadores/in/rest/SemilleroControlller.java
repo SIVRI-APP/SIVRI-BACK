@@ -38,15 +38,17 @@ public class SemilleroControlller {
         this.semilleroActualizarCU = semilleroActualizarCU;
         this.semilleroDtoMapper = semilleroDtoMapper;
     }
-    @GetMapping("/{id}")
+    @GetMapping("/obtenerSemillero")
     @PreAuthorize("hasAnyAuthority(" +
             "'FUNCIONARIO:SEMILLEROS'," +
             "'GRUPO:DIRECTOR',  " +
             "'SEMILLERO:MENTOR' )"
             )
-    public ResponseEntity<Respuesta> obtenerSemilleroPorId(@PathVariable(value = "id")int id){
+    public ResponseEntity<Respuesta> obtenerSemilleroPorId(
+            @RequestParam(required = true) Integer semilleroId
+            ){
 
-        Respuesta respuesta=semilleroObtenerCU.obtenerSemilleroPorId(id);
+        Respuesta respuesta=semilleroObtenerCU.obtenerSemilleroPorId(semilleroId);
         respuesta.setData(semilleroDtoMapper.dtoObtenerSemillero((Semillero) respuesta.getData()));
         return ResponseEntity.ok().body(respuesta);
     }
@@ -136,7 +138,7 @@ public class SemilleroControlller {
 
     }
 
-    @PatchMapping("/semilleroPorMentor")
+    @PatchMapping("/actualizarSemilleroxMentor")
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR')")
     public ResponseEntity<Respuesta> actualizarPorMentor(@Valid @RequestBody SemilleroActualizarPorMentorDTO nuevoSemilleroDto){
@@ -162,18 +164,17 @@ public class SemilleroControlller {
             "'SEMILLERO:MENTOR')")
     public ResponseEntity<Respuesta> listarsemillerosConFiltroxMentor(
             @RequestParam(required = false) Integer semilleroId,
-            @RequestParam(required = false) Long usuarioId,
             @RequestParam(required = false) String nombre,
             @RequestParam(required = false) SemilleroEstado estado,
             @RequestParam(required = false) int pageNo,
             @RequestParam(required = false) int pageSize
     ){
         System.out.println("semillero id"+semilleroId);
-        System.out.println("usuario id"+usuarioId);
+
         System.out.println("estado"+estado);
         System.out.println("pagen"+pageNo+"size"+pageSize);
 
-        Respuesta respuesta = semilleroObtenerCU.listarSemilleroConFiltroxMentor(pageNo,pageSize,semilleroId,usuarioId,nombre,estado);
+        Respuesta respuesta = semilleroObtenerCU.listarSemilleroConFiltroxMentor(pageNo,pageSize,semilleroId,nombre,estado);
         return ResponseEntity.ok().body(respuesta);
     }
     // la consulta de listar semillero por idmentor sirve para consultar los semilleros del director tambien

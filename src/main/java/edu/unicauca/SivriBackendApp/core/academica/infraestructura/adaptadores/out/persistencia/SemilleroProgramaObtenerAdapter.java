@@ -2,9 +2,12 @@ package edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.
 
 import edu.unicauca.SivriBackendApp.core.academica.aplicación.ports.out.SemilleroProgramaObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.SemilleroPrograma;
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.proyecciones.ListarProgramas;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.entity.SemilleroProgramaEntity;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.mapper.SemilleroProgramaMapper;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.repository.ISemilleroProgramaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -33,8 +36,8 @@ public class SemilleroProgramaObtenerAdapter implements SemilleroProgramaObtener
     }
 
     @Override
-    public List<SemilleroPrograma> obtenerListadoProgramasPorSemilleroId(int idSemillero) {
-        return semilleroProgramaRepository.findBySemilleroId(idSemillero).stream().map(semilleroProgramaMapper::obtenerModelo).collect(Collectors.toList());
-    }
+    public Page<ListarProgramas> obtenerListadoProgramasPorSemilleroId(Pageable pageable, int idSemillero) {
+        return semilleroProgramaRepository.obtenerProgramasxSemilleroId(idSemillero,pageable);
+        }
 
 }
