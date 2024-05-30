@@ -9,5 +9,6 @@ public class PlanTrabajoObtenerDTO {
     private Integer semilleroId;
     private EstadoPlanTrabajo estado;
     private String nombrePlan;
+    private Integer anio;
 
 }

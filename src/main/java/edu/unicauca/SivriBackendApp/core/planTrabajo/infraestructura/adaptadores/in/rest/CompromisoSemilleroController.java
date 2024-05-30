@@ -5,6 +5,7 @@ import edu.unicauca.SivriBackendApp.core.planTrabajo.aplicación.ports.in.Compro
 import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.CompromisoSemillero;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.in.rest.mapper.CompromisoSemilleroDtoMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,10 @@ public class CompromisoSemilleroController {
         this.compromisoSemilleroDtoMapper = compromisoSemilleroDtoMapper;
     }
 
-    @GetMapping("")
+    @GetMapping("/obtenerCompromisos")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR' )"
+    )
     public ResponseEntity<Respuesta> obtenerCompromisos(){
         Respuesta respuesta =compromisoSemilleroObtenerCU.obtenerListadoCompromisos();
         respuesta.setData(((List<CompromisoSemillero>) respuesta.getData()).stream().map(compromisoSemilleroDtoMapper::obtenerCompromisos).toList());

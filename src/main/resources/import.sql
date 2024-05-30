@@ -213,7 +213,24 @@ INSERT INTO documento_semillero(id, tipo, rutaDocumento, observacion, estado) VA
 INSERT INTO documento_semillero(id, tipo, rutaDocumento, observacion, estado) VALUES(3,'AVAL_DEPARTAMENTO','documento 3','','REVISION');
 
 --compromiso Semillero
-INSERT INTO compromiso_semillero(id,nombre) VALUES(1, 'compromiso 1');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(1, 'BOLETÍN DIVULGATIVO DE RESULTADOS DE INVESTIGACIÓN');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(2, 'CONSULTORÍAS CIENTÍFICO-TECNOLÓGICAS');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(3, 'DOCUMENTO DE TRABAJO (WORKING PAPER)');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(4, 'EVENTOS ARTÍSTICOS');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(5, 'EVENTOS CIENTÍFICOS');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(6, 'NUEVAS SECUENCIAS GENÉTICAS');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(7, 'TALLERES DE CREACIÓN');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(8, 'INFORMES DE INVESTIGACIÓN');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(9, 'INFORMES TÉCNICOS');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(10, 'PROCESO DE APROPIACIÓN SOCIAL DE CONOCIMIENTO PARA EL FORTALECIMIENTO DE CADENAS PRODUCTIVAS');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(11, 'PROCESO DE APROPIACIÓN SOCIAL DE CONOCIMIENTO RESULTADO DEL TRABAJO CONJUNTO ENTRE CENTRO DE CIENCIA Y GRUPO DE INVESTIGACIÓN');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(12, 'PROCESO DE APROPIACIÓN SOCIAL DEL CONOCIMIENTO PARA LA GENERACIÓN DE INSUMOS DE POLÍTICA PÚBLICA Y NORMATIVIDAD');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(13, 'PROCESO DE ASUNTOS DE INTERÉS SOCIAL');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(14, 'LIBROS DE DIVULGACIÓN Y/O COMPILACIÓN DE DIVULGACIÓN');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(15, 'LIBROS DE FORMACIÓN');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(16, 'MANUALES Y GUÍAS ESPECIALIZADAS');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(17, 'DESARROLLOS WEB');
+
 
 --evidencia actividad
 INSERT INTO evidencia_actividad(id,evidencia) VALUES(1,'evidencia');
@@ -237,13 +254,13 @@ INSERT INTO rol_grupo(id,rolGrupo) VALUES(9,'INVESTIGADOR_EXTERNO');
 INSERT INTO rol_grupo(id,rolGrupo) VALUES(10,'JOVEN_INVESTIGADOR');
 
 --semillero
-INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (2,1,'ACTIVO','agora@correo.edu.co','popayan');
-INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (3,1,'ACTIVO','semillero3@correo.edu.co','popayan');
-INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (4,1,'ACTIVO','semillero4@correo.edu.co','popayan');
-INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (5,1,'ACTIVO','agora5@correo.edu.co','popayan');
-INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (6,1,'ACTIVO','agora6@correo.edu.co','popayan');
-INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (7,1,'ACTIVO','agora7@correo.edu.co','popayan');
-INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (8,1,'ACTIVO','agora8@correo.edu.co','popayan');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (2,1,'ACTIVO','agora@correo.edu.co','POPAYAN');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (3,1,'ACTIVO','semillero3@correo.edu.co','POPAYAN');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (4,1,'ACTIVO','semillero4@correo.edu.co','POPAYAN');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (5,1,'ACTIVO','agora5@correo.edu.co','POPAYAN');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (6,1,'ACTIVO','agora6@correo.edu.co','POPAYAN');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (7,1,'ACTIVO','agora7@correo.edu.co','POPAYAN');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (8,1,'ACTIVO','agora8@correo.edu.co','POPAYAN');
 
 --rol semillero
 INSERT INTO rol_semillero(id,rolSemillero) VALUES(1,'COORDINADOR');
@@ -279,7 +296,7 @@ INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,1);
 INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,2);
 
 --plan de trabajo
-INSERT INTO plan_trabajo(id,semilleroId,nombrePlan, estado) VALUES(1,2, 'plan 2023','formulado');
+INSERT INTO plan_trabajo(id,semilleroId,nombrePlan, estado,anio) VALUES(1,2, 'plan 2023','formulado',2023);
 
 --actividad plan de trabajo
 INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId,evidenciaId)VALUES(1,1,1,'obj','act','2023-03-08','2023-08-05',3,1);

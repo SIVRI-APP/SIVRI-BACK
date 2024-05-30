@@ -54,8 +54,19 @@ public class IntegranteGrupoController {
         );
         return ResponseEntity.ok().body(respuesta);
     }
+    @GetMapping("integrantesMentoresPorGrupoId")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR', " +
+            "'GRUPO:DIRECTOR')")
+    public ResponseEntity<Respuesta> obtenerIntegrantesMentoresGrupoPorIdGrupo(
+            @RequestParam(value = "idGrupo",required = true) int idGrupo
+    ){
+        Respuesta respuesta=integranteGrupoObtenerCU.obtenerIntegrantesMentoresxGrupoId(idGrupo);
+        return ResponseEntity.ok().body(respuesta);
+    }
     @GetMapping("integrantesPorGrupoId")
     @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR', " +
             "'GRUPO:DIRECTOR')")
     public ResponseEntity<Respuesta> obtenerIntegrantesGrupoPorIdGrupo(
             @RequestParam(value = "idGrupo",required = true) int idGrupo

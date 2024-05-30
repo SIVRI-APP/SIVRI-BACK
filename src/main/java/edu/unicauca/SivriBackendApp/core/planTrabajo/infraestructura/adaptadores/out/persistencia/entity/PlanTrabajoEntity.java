@@ -7,7 +7,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "plan_trabajo")
+@Table(name = "plan_trabajo", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"semilleroId", "anio"})
+})
 @Data
 public class PlanTrabajoEntity {
     @Id
@@ -23,6 +25,7 @@ public class PlanTrabajoEntity {
     @JsonManagedReference
     @JoinColumn(name = "semilleroId")
     private SemilleroEntity semillero;
+    private Integer anio;
     //relacion 1a* actividadPlanTrabajo
     /*@OneToMany(mappedBy = "planTrabajo", fetch = FetchType.LAZY)
     @JsonBackReference
@@ -36,6 +39,8 @@ public class PlanTrabajoEntity {
                 ", nombrePlan='" + nombrePlan + '\'' +
                 ", estado=" + estado +
                 ", semillero=" + semillero +
+                ", anio=" + anio +
                 '}';
     }
+
 }

@@ -4,6 +4,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.out.IntegranteG
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.EstadoIntegranteGrupo;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.IntegranteGrupo;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.proyecciones.ListarIntegrantesConFiltro;
+import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.proyecciones.ListarIntegrantesxGrupoId;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.persistencia.entity.IntegranteGrupoEntity;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.persistencia.mapper.IntegranteGrupoMapper;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.persistencia.repository.IIntegranteGrupoRepository;
@@ -34,6 +35,11 @@ public class IntegranteGrupoObtenerAdapter implements IntegranteGrupoObtenerREPO
         Optional<IntegranteGrupo> modeloIntegranteGrupo= respuestaJpa.map(integranteGrupoMapper::obtenerModelo);
         //System.out.println("MODELO integrante grupo "+modeloIntegranteGrupo);
         return modeloIntegranteGrupo;
+    }
+
+    @Override
+    public List<ListarIntegrantesxGrupoId> obtenerIntegrantesMentoresxGrupoId(Integer grupoId) {
+        return integranteGrupoRepository.obtenerIntegrantesMentoresxGrupoId(grupoId);
     }
 
     @Override

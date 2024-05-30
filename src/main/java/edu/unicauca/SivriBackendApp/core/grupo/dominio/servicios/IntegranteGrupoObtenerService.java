@@ -8,6 +8,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.out.IntegranteG
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.EstadoIntegranteGrupo;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.IntegranteGrupo;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.proyecciones.ListarIntegrantesConFiltro;
+import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.proyecciones.ListarIntegrantesxGrupoId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +35,15 @@ public class IntegranteGrupoObtenerService implements IntegranteGrupoObtenerCU {
 
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd.get()).getRespuesta();
 
+    }
+
+    @Override
+    public Respuesta<List<ListarIntegrantesxGrupoId>> obtenerIntegrantesMentoresxGrupoId(Integer grupoId) {
+        List<ListarIntegrantesxGrupoId> respuesta= integranteGrupoObtenerREPO.obtenerIntegrantesMentoresxGrupoId(grupoId);
+        if (respuesta.isEmpty()){
+            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros");
+        }
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso", respuesta).getRespuesta();
     }
 
     @Override

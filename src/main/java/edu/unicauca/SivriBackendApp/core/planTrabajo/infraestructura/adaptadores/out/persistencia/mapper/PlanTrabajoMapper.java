@@ -3,11 +3,13 @@ package edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadore
 import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.PlanTrabajo;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.out.persistencia.entity.PlanTrabajoEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface PlanTrabajoMapper {
-    PlanTrabajo obtenerModelo(final PlanTrabajoEntity planTrabajoEntity);
 
+    PlanTrabajo obtenerModelo(final PlanTrabajoEntity planTrabajoEntity);
+    @Mapping(source = "anio",target = "anio")
     PlanTrabajoEntity obtenerEntity(final PlanTrabajo planTrabajo);
 
 }

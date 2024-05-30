@@ -9,5 +9,5 @@ public class PlanTrabajo {
     private String nombrePlan;
     private EstadoPlanTrabajo estado;
     private Semillero semillero;
-
+    private Integer anio;
 }

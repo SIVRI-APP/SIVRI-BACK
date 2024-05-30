@@ -4,5 +4,6 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.PlanTrabajo;
 
 public interface PlanTrabajoCrearCU {
-    Respuesta<Boolean> crear(int idSemillero, PlanTrabajo nuevoPlan);
+    Respuesta<Boolean> crear( PlanTrabajo nuevoPlan);
+
 }

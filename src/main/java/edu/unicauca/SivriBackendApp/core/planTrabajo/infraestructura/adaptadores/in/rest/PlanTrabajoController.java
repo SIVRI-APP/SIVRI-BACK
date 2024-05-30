@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -23,15 +24,20 @@ public class PlanTrabajoController {
     private final PlanTrabajoCrearCU planTrabajoCrearCU;
     private final PlanTrabajoActualizarCU planTrabajoActualizarCU;
     private final PlanTrabajoDtoMapper planTrabajoDtoMapper;
-// TODO AHI QUE AGUEGRAR UN CAMPO A LA TABLA PLAN DE TRABAJO ANIO
+// TODO AHI QUE AGUEGAR UN CAMPO A LA TABLA PLAN DE TRABAJO ANIO
     public PlanTrabajoController(PlanTrabajoObtenerCU planTrabajoObtenerCU, PlanTrabajoCrearCU planTrabajoCrearCU, PlanTrabajoActualizarCU planTrabajoActualizarCU, PlanTrabajoDtoMapper planTrabajoDtoMapper) {
         this.planTrabajoObtenerCU = planTrabajoObtenerCU;
         this.planTrabajoCrearCU = planTrabajoCrearCU;
         this.planTrabajoActualizarCU = planTrabajoActualizarCU;
         this.planTrabajoDtoMapper = planTrabajoDtoMapper;
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<Respuesta> obtenerPlanTrabajoPorId(@PathVariable(value = "id") int id){
+    @GetMapping("/obtenerPlanxId")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:SEMILLEROS' )"
+    )
+    public ResponseEntity<Respuesta> obtenerPlanTrabajoPorId(
+            @RequestParam(required = true) Integer id
+            ){
         Respuesta respuesta = planTrabajoObtenerCU.obtenerPorId(id);
         respuesta.setData(planTrabajoDtoMapper.obtenerPlanTrabajo((PlanTrabajo) respuesta.getData()));
         return ResponseEntity.ok().body(respuesta);
@@ -45,19 +51,45 @@ public class PlanTrabajoController {
         respuesta.setData(((List<PlanTrabajo>) respuesta.getData()).stream().map(planTrabajoDtoMapper::obtenerPlanTrabajo).toList());
         return ResponseEntity.ok().body(respuesta);
     }
+    @GetMapping("/obtenerPlanTrabajoxAnioySemilleroId")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR' )"
+    )
+    public ResponseEntity<Respuesta> obtenerPlanTrabajoPorIdSemilleroyAnio(
+            @RequestParam(value = "id") int idSemillero,
+            @RequestParam(value = "anio") int anio){
+        Respuesta respuesta = planTrabajoObtenerCU.existePorIdSemilleroyAnio(idSemillero,anio);
+        return ResponseEntity.ok().body(respuesta);
+    }
+
+    @GetMapping("/obtenerPlanTrabajoxAnio")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR' )"
+    )
+    public ResponseEntity<Respuesta> obtenerPlanTrabajoxAnio(
+            @RequestParam(required = true) Integer anio,
+            @RequestParam(required = true) Integer idSemillero,
+            @RequestParam(required = false) LocalDate fechaInicio,
+            @RequestParam(required = false) LocalDate fechaFin,
+            @RequestParam(required = false) int pageNo,
+            @RequestParam(required = false) int pageSize
+    ){
+        Respuesta respuesta= planTrabajoObtenerCU.obtenerPlanTrabajoxAnio(pageNo, pageSize, anio,idSemillero, fechaInicio, fechaFin);
+        return ResponseEntity.ok().body(respuesta);
+    }
     @GetMapping("")
     public ResponseEntity<Respuesta> obtenerPlanesTrabajo(){
         Respuesta respuesta = planTrabajoObtenerCU.obtenerListadoPlanes();
         respuesta.setData(((List<PlanTrabajo>) respuesta.getData()).stream().map(planTrabajoDtoMapper::obtenerPlanTrabajo).toList());
         return ResponseEntity.ok().body(respuesta);
     }
-    @PostMapping("/crearPlanTrabajo/{id}")
+    @PostMapping("/crearPlanTrabajo")
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR' )"
     )
-    public ResponseEntity<Respuesta> crear(@PathVariable(value = "id") int idSemillero,@Valid @RequestBody PlanTrabajoCrearDTO nuevoPlan){
-        System.out.println("DATOS QUE LLEGAN al controller "+idSemillero+" dto "+nuevoPlan);
-        Respuesta respuesta = planTrabajoCrearCU.crear(idSemillero,planTrabajoDtoMapper.crear(nuevoPlan));
+    public ResponseEntity<Respuesta> crear(@Valid @RequestBody PlanTrabajoCrearDTO nuevoPlan){
+        System.out.println("DATOS QUE LLEGAN al controller "+nuevoPlan.getIdSemillero()+" dto "+nuevoPlan);
+        Respuesta respuesta = planTrabajoCrearCU.crear(planTrabajoDtoMapper.crear(nuevoPlan));
         System.out.println("respuesta "+respuesta);
         return ResponseEntity.ok().body(respuesta);
 
