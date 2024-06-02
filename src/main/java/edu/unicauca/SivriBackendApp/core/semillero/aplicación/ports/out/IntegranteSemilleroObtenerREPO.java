@@ -20,7 +20,7 @@ public interface IntegranteSemilleroObtenerREPO {
     Page<IntegranteSemillero> obtenerListadoIntegrantesSemilleroPaginado(PageRequest pageRequest);
 
     List<IntegranteSemillero> obtenerIntegranteSemilleroPorIdSemillero(int idSemillero);
-    Page<List<ListarIntegrantesSemilleroxIdSemillero>> obtenerIntegrantesSemilleroPorIdSemillero(Pageable pageable, int idSemillero);
+    Page<List<ListarIntegrantesSemilleroxIdSemillero>> obtenerIntegrantesSemilleroPorIdSemillero(Pageable pageable, int idSemillero, String numeroDocumento, String rolSemillero, EstadoIntegranteSemillero estado);
 
     List<Semillero> obtenerSemillerosPorIdMentor(String idMentor);
     Page<List<ListarConFiltroIntegrantesSemillero>> listarIntegrantesSemilleroConFiltro(Pageable pageable, String numeroDocumento, String rolSemillero, EstadoIntegranteSemillero estado/*, String programa*/);

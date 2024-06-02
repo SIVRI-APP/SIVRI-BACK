@@ -6,6 +6,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.RolSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.respuesta.RolesSemilleroObtenerDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.mapper.RolSemilleroDtoMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +28,10 @@ public class RolSemilleroController {
         respuesta.setData(rolSemilleroDtoMapper.dtoObtenerRolSemillero((RolSemillero) respuesta.getData()));
         return ResponseEntity.ok().body(respuesta);
     }
-    @GetMapping("")
+    @GetMapping("obtenerRoles")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR', " +
+            "'FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> obtenerRolesSemillero(){
         Respuesta<List<RolSemillero>> respuestaCU=rolesSemilleroObtenerCU.obtenerRolesSemillero();
 

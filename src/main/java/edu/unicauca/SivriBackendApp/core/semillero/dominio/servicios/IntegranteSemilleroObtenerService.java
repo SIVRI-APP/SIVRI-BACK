@@ -54,9 +54,9 @@ public class IntegranteSemilleroObtenerService implements IntegranteSemilleroObt
     }
 
     @Override
-    public Respuesta<Page<List<ListarIntegrantesSemilleroxIdSemillero>>> obtenerIntegrantesSemilleroPorIdSemillero(int pageNo, int pageSize, int idSemillero) {
+    public Respuesta<Page<List<ListarIntegrantesSemilleroxIdSemillero>>> obtenerIntegrantesSemilleroPorIdSemillero(int pageNo, int pageSize, int idSemillero, String numeroDocumento, String rolSemillero, EstadoIntegranteSemillero estado) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<List<ListarIntegrantesSemilleroxIdSemillero>> respuestaBd=integranteSemilleroObtenerREPO.obtenerIntegrantesSemilleroPorIdSemillero(pageable,idSemillero);
+        Page<List<ListarIntegrantesSemilleroxIdSemillero>> respuestaBd=integranteSemilleroObtenerREPO.obtenerIntegrantesSemilleroPorIdSemillero(pageable,idSemillero,numeroDocumento,rolSemillero,estado);
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
     }
 

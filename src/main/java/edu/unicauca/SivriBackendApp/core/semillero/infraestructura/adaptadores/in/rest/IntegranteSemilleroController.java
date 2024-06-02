@@ -111,17 +111,20 @@ public class IntegranteSemilleroController {
           respuesta.setDeveloperMessage(respuestaCU.getDeveloperMessage());
           return ResponseEntity.ok().body(respuesta);
      }
-     @GetMapping("integrantesSemilleroPorSemilleroId")
+     @GetMapping("listarIntegrantesSemilleroPorSemilleroId")
      @PreAuthorize("hasAnyAuthority(" +
              "'GRUPO:DIRECTOR', " +
              "'SEMILLERO:MENTOR', " +
              "'FUNCIONARIO:SEMILLEROS')")
-     public ResponseEntity<Respuesta> getIntegrantesSemilleroPorIdSemillero(
+     public ResponseEntity<Respuesta> listarIntegrantesSemilleroPorIdSemillero(
              @RequestParam(value = "semilleroId",required = true) int semilleroId,
+             @RequestParam(value = "numeroDocumento",required = false) String numeroDocumento,
+             @RequestParam(value = "estado",required = false) EstadoIntegranteSemillero estado,
+             @RequestParam(value = "rolSemillero",required = false) String rolSemillero,
              @RequestParam(required = false) int pageNo,
              @RequestParam(required = false) int pageSize
      ) {
-          Respuesta respuesta = integranteSemilleroObtenerCU.obtenerIntegrantesSemilleroPorIdSemillero(pageNo,pageSize,semilleroId);
+          Respuesta respuesta = integranteSemilleroObtenerCU.obtenerIntegrantesSemilleroPorIdSemillero(pageNo,pageSize,semilleroId,numeroDocumento,rolSemillero,estado);
           return ResponseEntity.ok().body(respuesta);
      }
      @GetMapping("listarIntegrantesConFiltro")
