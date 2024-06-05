@@ -11,10 +11,10 @@ import lombok.Data;
 public class RechazarSolicitudDTO {
 
     /**
-     * Observación sobre el rechazo de la solicitud.
+     * observacion sobre el rechazo de la solicitud.
      * Debe contener entre 8 y 1000 caracteres.
      */
-    @Size(min = 8, max = 1000, message = "La Observación debe contener mínimo 8 y máximo 1000 caracteres")
+    @Size(min = 8, max = 1000, message = "La observacion debe contener mínimo 8 y máximo 1000 caracteres")
     private String observacion;
 
     /**

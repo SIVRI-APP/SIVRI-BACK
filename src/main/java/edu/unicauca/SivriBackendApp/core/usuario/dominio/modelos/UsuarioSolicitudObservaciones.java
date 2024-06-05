@@ -16,29 +16,29 @@ import java.util.Set;
 @NoArgsConstructor
 public class UsuarioSolicitudObservaciones {
 
-    /** Identificador único de la observación asociada a la solicitud de usuario */
+    /** Identificador único de la observacion asociada a la solicitud de usuario */
     private Long id;
 
-    /** Solicitud de usuario a la que está asociada la observación. Es un campo obligatorio */
+    /** Solicitud de usuario a la que está asociada la observacion. Es un campo obligatorio */
     private UsuarioSolicitud solicitudUsuario;
 
-    /** Funcionario que realiza la observación. Es un campo obligatorio */
+    /** Funcionario que realiza la observacion. Es un campo obligatorio */
     private Funcionario funcionario;
 
-    /** Conversaciones entórno a esta observación */
+    /** Conversaciones entórno a esta observacion */
     private Set<UsuarioSolicitudConversacion> conversacion;
 
-    /** Texto de la observación. Tiene una longitud máxima de 1000 caracteres y es un campo obligatorio */
-    private String observación;
+    /** Texto de la observacion. Tiene una longitud máxima de 1000 caracteres y es un campo obligatorio */
+    private String observacion;
 
-    /** Fecha en que se realiza la observación. Debe ser una fecha presente o futura */
-    private LocalDate fechaObservación;
+    /** Fecha en que se realiza la observacion. Debe ser una fecha presente o futura */
+    private LocalDate fechaObservacion;
 
-    /** Indica si la observación ha sido resuelta o no */
+    /** Indica si la observacion ha sido resuelta o no */
     private Boolean resuelta;
 
-    /** Indica si se ha enviado una notificación de vencimiento asociada a esta observación */
-    private Boolean notificaciónDeVencimiento;
+    /** Indica si se ha enviado una notificación de vencimiento asociada a esta observacion */
+    private Boolean notificacionDeVencimiento;
 
     @Override
     public boolean equals(Object o) {

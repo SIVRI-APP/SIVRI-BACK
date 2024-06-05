@@ -136,8 +136,8 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
             UsuarioSolicitudObservaciones nuevaObservacion = UsuarioSolicitudObservaciones.builder()
                                     .solicitudUsuario(solicitud)
                                     .funcionario(servicioDeIdentificacionDeUsuario.obtenerFuncionarioModel())
-                                    .observación(rechazarSolicitudDTO.getObservacion())
-                                    .fechaObservación(LocalDate.now())
+                                    .observacion(rechazarSolicitudDTO.getObservacion())
+                                    .fechaObservacion(LocalDate.now())
                                     .resuelta(false)
                                     .build();
             // Creamos la observacion
@@ -171,7 +171,7 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
         enviarNotificacionElectronica(solicitud.getCreadoPor().getCorreo(),
                 "La solicitud para la creación del usuario " + solicitud.getNombre() + " " + solicitud.getApellido()
                         + " " + solicitud.getTipoDocumento() + ": " + solicitud.getNumeroDocumento()
-                        + " ha sido devuelta con observaciones con la siguiente observación: <strong>"+ rechazarSolicitudDTO.getObservacion() + ".</strong> Ingresa al apartado de Usuarios > Listar Solicitudes de Usuario en SIVRI para mas detalles."
+                        + " ha sido devuelta con observaciones con la siguiente observacion: <strong>"+ rechazarSolicitudDTO.getObservacion() + ".</strong> Ingresa al apartado de Usuarios > Listar Solicitudes de Usuario en SIVRI para mas detalles."
         );
 
         return new RespuestaHandler<>(200, "ok.solicitud.observacion.agregada", "", true).getRespuesta();

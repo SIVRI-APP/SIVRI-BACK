@@ -24,16 +24,16 @@ public interface UsuarioSolicitudInformacionDetalladaProyeccion {
     String getCvLac();
     EstadoSolicitudUsuario getEstado();
     String getNota();
-    Set<UsuarioSolicitudObservacionesProyección> getObservaciones();
+    UsuarioSolicitudObservacionesProyeccion getObservaciones();
 
-    interface UsuarioSolicitudObservacionesProyección {
+    interface UsuarioSolicitudObservacionesProyeccion {
 
         Long getId();
         funcionarioProyeccion getFuncionario();
-        LocalDate getFechaObservación();
+        LocalDate getfechaObservacion();
         Boolean getResuelta();
-        String getObservación();
-        Set<UsuarioSolicitudObservacionesConversacionProyección> getConversacion();
+        String getobservacion();
+        Set<UsuarioSolicitudObservacionesConversacionProyeccion> getConversacion();
 
         interface funcionarioProyeccion {
             funcionarioUsuario getUsuario();
@@ -44,7 +44,7 @@ public interface UsuarioSolicitudInformacionDetalladaProyeccion {
             }
         }
 
-        interface UsuarioSolicitudObservacionesConversacionProyección {
+        interface UsuarioSolicitudObservacionesConversacionProyeccion {
             Long getId();
             String getAutor();
             LocalDateTime getFechaMensaje();

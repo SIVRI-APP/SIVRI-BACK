@@ -1,7 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -20,37 +19,37 @@ import java.util.Set;
 @NoArgsConstructor
 public class UsuarioSolicitudObservacionesEntity {
 
-    /** Identificador único de la observación asociada a la solicitud de usuario */
+    /** Identificador único de la observacion asociada a la solicitud de usuario */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /** Solicitud de usuario a la que está asociada la observación. Es un campo obligatorio */
+    /** Solicitud de usuario a la que está asociada la observacion. Es un campo obligatorio */
     @OneToOne(optional = false)
     @JoinColumn(name = "solicitudUsuarioId")
     private UsuarioSolicitudEntity solicitudUsuario;
 
-    /** Funcionario que realiza la observación. Es un campo obligatorio */
+    /** Funcionario que realiza la observacion. Es un campo obligatorio */
     @ManyToOne(optional = false)
     @JoinColumn(name = "funcionarioId", referencedColumnName = "id")
     private FuncionarioEntity funcionario;
 
-    /** Conversaciones entórno a esta observación */
+    /** Conversaciones entórno a esta observacion */
     @OneToMany(mappedBy = "usuarioSolicitudObservaciones", cascade = CascadeType.REMOVE)
     private Set<UsuarioSolicitudConversacionEntity> conversacion;
 
-    /** Texto de la observación. Tiene una longitud máxima de 1000 caracteres y es un campo obligatorio */
+    /** Texto de la observacion. Tiene una longitud máxima de 1000 caracteres y es un campo obligatorio */
     @Column(length = 1000, nullable = false)
-    private String observación;
+    private String observacion;
 
-    /** Fecha en que se realiza la observación. Debe ser una fecha presente o futura */
-    private LocalDate fechaObservación;
+    /** Fecha en que se realiza la observacion. Debe ser una fecha presente o futura */
+    private LocalDate fechaObservacion;
 
-    /** Indica si la observación ha sido resuelta o no */
+    /** Indica si la observacion ha sido resuelta o no */
     private Boolean resuelta;
 
-    /** Indica si se ha enviado una notificación de vencimiento asociada a esta observación */
-    private Boolean notificaciónDeVencimiento;
+    /** Indica si se ha enviado una notificación de vencimiento asociada a esta observacion */
+    private Boolean notificacionDeVencimiento;
 
 
     @Override

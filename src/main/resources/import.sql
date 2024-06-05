@@ -104,11 +104,11 @@ INSERT INTO credencial (id, email, password, userId) VALUES (2, 'yurani@unicauca
 INSERT INTO funcionario (id, usuarioId, rolId, estado, fechaInicio) VALUES (1, 1, 1, true, '2024-01-01');
 
 -- SOLICITUD DE USUARIO
-INSERT INTO usuario_solicitud (id, creadoPorUsuarioId, programaId, correo, tipoDocumento, numeroDocumento, sexo, estado, tipoUsuario, nombre, apellido, telefono, nota) VALUES (1, 1, 1, 'test@unicauca.edu.co', 'CEDULA_CIUDADANIA', '1061', 'MASCULINO', 'REVISION_VRI', 'ADMINISTRATIVO', 'Miguel Andres', 'Mosquera', '3225864404', 'no me lo nieguen porfa');
+INSERT INTO usuario_solicitud (id, creadoPorUsuarioId, programaId, correo, tipoDocumento, numeroDocumento, sexo, estado, tipoUsuario, nombre, apellido, telefono, nota) VALUES (1, 1, 1, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '1061', 'MASCULINO', 'REVISION_VRI', 'ADMINISTRATIVO', 'Miguel Andres', 'Mosquera', '3225864404', 'no me lo nieguen porfa');
 INSERT INTO usuario_solicitud (id, creadoPorUsuarioId, programaId, correo, tipoDocumento, numeroDocumento, sexo, estado, tipoUsuario, nombre, apellido, telefono, nota) VALUES (2, 1, 1, 'angeehin24@gmail.com', 'CEDULA_CIUDADANIA', '1062', 'MASCULINO', 'REVISION_VRI', 'ADMINISTRATIVO', 'Angee Vannessa', 'Hincapie', '3225864404', 'no me lo nieguen porfa');
 
 -- SOLICITUD DE USUARIO OBSERVACIONES
-INSERT INTO usuario_solicitud_observaciones(id, solicitudUsuarioId, funcionarioId, observación, fechaObservación, resuelta, notificaciónDeVencimiento) VALUES (1, 1, 1, 'Porfavor no nieguen esta solicitud', '2024-01-01', false, false);
+INSERT INTO usuario_solicitud_observaciones(id, solicitudUsuarioId, funcionarioId, observacion, fechaObservacion, resuelta, notificacionDeVencimiento) VALUES (1, 1, 1, 'Porfavor no nieguen esta solicitud', '2024-01-01', false, false);
 
 -- SOLICITUD DE USUARIO OBSERVACIONES CONVERSACIÓN
 INSERT INTO usuario_solicitud_conversacion(id, usuarioSolicitudObservacionesId, autor, mensaje, fechaMensaje) VALUES (1, 1, 'Miguel Mosquera', 'Me parece injusta la observaciones', '2024-01-01');
