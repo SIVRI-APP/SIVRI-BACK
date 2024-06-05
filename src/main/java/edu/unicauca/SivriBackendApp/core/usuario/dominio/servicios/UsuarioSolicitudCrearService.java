@@ -1,24 +1,28 @@
 package edu.unicauca.SivriBackendApp.core.usuario.dominio.servicios;
 
-import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
+import edu.unicauca.SivriBackendApp.common.email.dto.MetaData;
+import edu.unicauca.SivriBackendApp.common.email.dto.SendRequest;
+import edu.unicauca.SivriBackendApp.common.email.service.SendMessageService;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
-import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificaciónDeUsuario;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioSolicitudCrearCU;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioSolicitudObservacionesCrearCU;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioSolicitudObservacionesObtenerCU;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioSolicitudObtenerCU;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.UsuarioSolicitudCrearREPO;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.UsuarioSolicitudEliminarREPO;
+import edu.unicauca.SivriBackendApp.common.seguridad.acceso.dto.CreateCredentialDTORequest;
+import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.Credencial;
+import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.CredentialService;
+import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificacionDeUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.entrada.UsuarioSolicitudCrearCU;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.UsuarioCrearREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.UsuarioSolicitudCrearREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.UsuarioSolicitudEliminarREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.UsuarioSolicitudObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitud;
-
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.validadores.UsuarioSolicitudValidador;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.entrada.rest.dto.entrada.RechazarSolicitudDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,101 +34,116 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
-    /**
-     * CU
-     */
-    private final UsuarioSolicitudObtenerCU usuarioSolicitudObtenerCU;
-    private final UsuarioSolicitudObservacionesObtenerCU usuarioSolicitudObservacionesObtenerCU;
-    private final UsuarioSolicitudObservacionesCrearCU usuarioSolicitudObservacionesCrearCU;
 
-    /**
-     * Servicios
-     */
-    private final ServicioDeIdentificaciónDeUsuario servicioDeIdentificaciónDeUsuario;
-    private final UsuarioCrearService usuarioCrearService;
+    /** Servicios */
+    private final ServicioDeIdentificacionDeUsuario servicioDeIdentificacionDeUsuario;
+    private final CredentialService credentialService;
+    private final SendMessageService sendMessageService;
 
-    /**
-     * Adaptadores a la base de datos
-     */
+    /** Puertos de Salida */
     private final UsuarioSolicitudCrearREPO usuarioSolicitudCrearREPO;
     private final UsuarioSolicitudEliminarREPO usuarioSolicitudEliminarREPO;
+    private final UsuarioCrearREPO usuarioCrearREPO;
+    private final UsuarioSolicitudObtenerREPO usuarioSolicitudObtenerREPO;
 
-    /**
-     * Validadores
-     */
+    /** Validadores */
     private final UsuarioSolicitudValidador usuarioSolicitudValidador;
 
 
     /**
-     * Crea una solicitud de usuario en el sistema.
-     *
-     * @param usuario Información del usuario a solicitar.
-     * @return Respuesta que indica el éxito de la operación.
-     * @throws ReglaDeNegocioException Si se viola alguna regla de negocio.
+     * @see UsuarioSolicitudCrearCU#crearSolicitudUsuario(UsuarioSolicitud)
      */
     @Override
     public Respuesta<Boolean> crearSolicitudUsuario(UsuarioSolicitud usuario) {
 
-        // Valida que no existan duplicados en la creación de solicitudes de usuario y que se tiene el acceso correcta para realizar la solicitud.
+        // Valída que no existan duplicados en la creación de solicitudes de usuario y que se tiene el acceso corrécta para realizar la solicitud.
         usuarioSolicitudValidador.validarLaCreacionDeUnaSolicitudDeUsuario(usuario);
 
-        // Fijamos el usuario que esta ejecutando la acción
-        usuario.setCreadoPor(servicioDeIdentificaciónDeUsuario.obtenerUsuario());
+        // Fijamos el usuario que está ejecutando la acción
+        usuario.setCreadoPor(servicioDeIdentificacionDeUsuario.obtenerUsuario());
 
         // Al crear la solicitud el estado del usuario debe ser REVISION_VRI
         usuario.setEstado(EstadoSolicitudUsuario.REVISION_VRI);
 
         // Enviar el registro a la Base de datos
-        usuarioSolicitudCrearREPO.crearUsuarioSolicitud(usuario);
+        usuarioSolicitudCrearREPO.crearSolicitudUsuario(usuario);
 
         return new RespuestaHandler<>(200, "ok.usuario.solicitud.creación", List.of(usuario.getTipoDocumento().toString(), usuario.getNumeroDocumento(), usuario.getCorreo()), "", true).getRespuesta();
     }
 
     /**
-     * Aprueba una solicitud de usuario en el sistema.
-     *
-     * @param solicitudId Identificador de la solicitud de usuario.
-     * @return Respuesta que indica el éxito de la operación.
-     * @throws ReglaDeNegocioException Sí existen observaciones pendientes para la solicitud.
+     * @see UsuarioSolicitudCrearCU#aprobarSolicitudUsuario(Long)
      */
     @Override
-    public Respuesta<Boolean> aprobarSolicitudUsuario(long solicitudId) {
-        UsuarioSolicitud solicitudUsuario = usuarioSolicitudObtenerCU.obtenerSolicitudUsuario(solicitudId).getData();
+    public Respuesta<Boolean> aprobarSolicitudUsuario(Long solicitudUsuarioId) {
 
-        if (usuarioSolicitudObservacionesObtenerCU.solicitudConObservacionesPendientes(solicitudId).getData() > 0) {
-            throw new ReglaDeNegocioException("bad.no.se.puede.aprobar.solicitud.observaciones.pendientes");
-        }
+        // Válida que la aprobacion puede llevarse a cabo.
+        usuarioSolicitudValidador.validarAprobacionDeUnaSolicitudDeUsuario(solicitudUsuarioId);
 
-        // Crear usuario
-        usuarioCrearService.crearUsuario(Usuario
-                .builder()
-                .correo(solicitudUsuario.getCorreo())
-                .tipoDocumento(solicitudUsuario.getTipoDocumento())
-                .numeroDocumento(solicitudUsuario.getNumeroDocumento())
-                .sexo(solicitudUsuario.getSexo())
-                .tipoUsuario(solicitudUsuario.getTipoUsuario())
-                .nombre(solicitudUsuario.getNombre())
-                .apellido(solicitudUsuario.getApellido())
-                .telefono(solicitudUsuario.getTelefono())
-                .cvLac(solicitudUsuario.getCvLac())
-                .build()
+        // Obtener los datos del usuario a crear
+        UsuarioSolicitud solicitudUsuario = usuarioSolicitudObtenerREPO.obtenerSolicitudUsuarioPorId(solicitudUsuarioId).orElseThrow();
+
+        // Se elimina la solicitud de usuario
+        usuarioSolicitudEliminarREPO.eliminarSolicitudUsuario(solicitudUsuarioId);
+
+        // Se crea el usuario en el sistema
+        Usuario nuevoUsuario = usuarioCrearREPO.crearUsuario(
+                Usuario.builder()
+                        .correo(solicitudUsuario.getCorreo())
+                        .tipoDocumento(solicitudUsuario.getTipoDocumento())
+                        .numeroDocumento(solicitudUsuario.getNumeroDocumento())
+                        .sexo(solicitudUsuario.getSexo())
+                        .tipoUsuario(solicitudUsuario.getTipoUsuario())
+                        .nombre(solicitudUsuario.getNombre())
+                        .apellido(solicitudUsuario.getApellido())
+                        .telefono(solicitudUsuario.getTelefono())
+                        .cvLac(solicitudUsuario.getCvLac())
+                        .build()
         );
 
-        // TODO : Miguel crear el rol en el grupo
+        // Si es Docente o Administrativo se crean credenciales
+        if (nuevoUsuario.getTipoUsuario().equals(TipoUsuario.DOCENTE) || nuevoUsuario.getTipoUsuario().equals(TipoUsuario.ADMINISTRATIVO)) {
+            Credencial credencial = credentialService.createCredential(
+                    CreateCredentialDTORequest.builder()
+                    .userId(nuevoUsuario.getId())
+                    .email(nuevoUsuario.getCorreo())
+                    .password(nuevoUsuario.getNumeroDocumento())
+                    .build()
+            );
 
-        // Eliminar solicitud
-        usuarioSolicitudEliminarREPO.eliminar(solicitudId);
+            // Enviar Correo de Bienvenida
+            enviarCorreo(nuevoUsuario.getCorreo(), nuevoUsuario.getNombre() + " " + nuevoUsuario.getApellido(), credencial.getPasswordRecoveryCode());
+        }
 
-        return new RespuestaHandler<>(200, "ok.solicitud.aprobada", List.of(solicitudUsuario.getTipoDocumento().toString(), solicitudUsuario.getNumeroDocumento(), solicitudUsuario.getCorreo()), "", true).getRespuesta();
+        return new RespuestaHandler<>(200, "ok.solicitud.aprobada", List.of(nuevoUsuario.getTipoDocumento().toString(), nuevoUsuario.getNumeroDocumento(), nuevoUsuario.getCorreo()), "", true).getRespuesta();
     }
 
-    @Override
-    public Respuesta<Boolean> rechazarSolicitudUsuario(RechazarSolicitudDTO rechazarSolicitud) {
-        usuarioSolicitudObservacionesCrearCU.crearObservacionSolicitudUsuario(rechazarSolicitud);
-        UsuarioSolicitud solicitudUsuario = usuarioSolicitudObtenerCU.obtenerSolicitudUsuario(rechazarSolicitud.getUsuarioSolicitudId()).getData();
-        solicitudUsuario.setEstado(EstadoSolicitudUsuario.FORMULADO_OBSERVACIONES);
 
-        usuarioSolicitudCrearREPO.actualizarUsuarioSolicitud(solicitudUsuario);
-        return new RespuestaHandler<>(200, "ok.solicitud.rechazada", "", true).getRespuesta();
+    /**
+     * Envía un correo de bienvenida al nuevo usuario, incluyendo información personalizada
+     * como el nombre, tipo de usuario, grupo de investigación, etc.
+     *
+     * @param emailDestino      Correo de destino
+     * @param nombreCompleto    Nombre del Usuario Creado
+     * @param passwordCode      Código de seguridad para la asignación de password
+     */
+    private void enviarCorreo(String emailDestino, String nombreCompleto, String passwordCode) {
+        List<MetaData> metaData = new ArrayList<>();
+        metaData.add(MetaData.builder()
+                .key("nombreCompleto")
+                .value(nombreCompleto)
+                .build());
+        metaData.add(MetaData.builder()
+                .key("passwordCode")
+                .value(passwordCode)
+                .build());
+
+        sendMessageService.sendMessage(SendRequest.builder()
+                .to(emailDestino)
+                .subject("Te damos la bienvenida a SIVRI")
+                .template(1)
+                .metaData(metaData)
+                .build());
     }
+
 }

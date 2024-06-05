@@ -40,12 +40,6 @@ public class RegistroUsuarioDTO {
 
     private Integer programaId;
 
-    @NotNull(message = "EL usuario debe estar asociado a un grupo")
-    private Integer organismoDeInvestigacionId;
-
-    @NotNull(message = "Se debe asignar un rol al usuario")
-    private Integer rolGrupoId;
-
     @Size(max = 1000, message = "La nota no puede exceder los 1000 caracteres")
     private String nota;
 }

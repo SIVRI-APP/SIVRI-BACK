@@ -4,16 +4,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface TokenRepository extends JpaRepository<Token, Integer> {
 
-  @Query(value = """
-      select t from Token t inner join Credencial u\s
-      on t.credencial.id = u.id\s
-      where u.id = :id and (t.expired = false or t.revoked = false)\s
-      """)
-  List<Token> findAllValidTokenByUser(Integer id);
+  @Query( "SELECT t " +
+          "FROM Token t " +
+          "INNER JOIN Credencial cred ON cred.id = t.credencial.id " +
+          "WHERE cred.id = :credentialId")
+  List<Token> findAllValidTokenByUser(Integer credentialId);
 
-  Optional<Token> findByToken(String token);
 }

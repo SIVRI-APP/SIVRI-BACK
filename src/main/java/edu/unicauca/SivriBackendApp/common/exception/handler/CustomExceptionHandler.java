@@ -40,7 +40,7 @@ public class CustomExceptionHandler{
     @ExceptionHandler(CredencialIncorrectaException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Respuesta<Map<String, String>>> usuarioSinCredencialesException(final HttpServletRequest req,
-                                                                                 final ReglaDeNegocioException ex, final Locale locale) {
+                                                                                          final ReglaDeNegocioException ex, final Locale locale) {
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
 
@@ -50,7 +50,7 @@ public class CustomExceptionHandler{
     @ExceptionHandler(ReglaDeNegocioException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Respuesta<Map<String, String>>> handleGenericException(final HttpServletRequest req,
-                                                                                final ReglaDeNegocioException ex, final Locale locale) {
+                                                                                 final ReglaDeNegocioException ex, final Locale locale) {
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
 

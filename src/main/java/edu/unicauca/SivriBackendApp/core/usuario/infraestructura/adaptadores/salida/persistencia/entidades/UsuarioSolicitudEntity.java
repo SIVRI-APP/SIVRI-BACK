@@ -6,117 +6,95 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.Sexo;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * Representa la entidad de persistencia para las solicitudes de usuarios en el sistema.
  */
 @Entity
-@Data
 @Table(name = "usuario_solicitud")
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UsuarioSolicitudEntity {
 
-    /**
-     * Identificador único de la solicitud de usuario.
-     */
+    /** Identificador único de la solicitud de usuario */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * Identifica al usuario que creo la solicitud.
-     */
+    /** Identifica al usuario que creo la solicitud */
     @ManyToOne(optional = false)
     @JoinColumn(name = "creadoPorUsuarioId")
     private UsuarioEntity creadoPor;
 
-    /**
-     * Correo electrónico de la solicitud de usuario. Es un campo obligatorio, único y tiene una longitud máxima de 60 caracteres.
-     */
-    @Column(name = "correo", length = 100, nullable = false, unique = true)
-    private String correo;
-
-    /**
-     * Tipo de documento de la solicitud de usuario.
-     */
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TipoDocumento tipoDocumento;
-
-    /**
-     * Número de documento de la solicitud de usuario. Tiene una longitud máxima de 45 caracteres.
-     */
-    @Column(name = "numeroDocumento", length = 100)
-    private String numeroDocumento;
-
-    /**
-     * Género o sexo de la solicitud de usuario.
-     */
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Sexo sexo;
-
-    /**
-     * Estado de la solicitud de usuario (pendiente, aprobada, rechazada, etc.).
-     */
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private EstadoSolicitudUsuario estado;
-
-    /**
-     * Tipo de usuario de la solicitud (administrativo, docente, pregrado, etc.).
-     */
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TipoUsuario tipoUsuario;
-
-    /**
-     * Nombres de la solicitud de usuario. Es un campo obligatorio y tiene una longitud máxima de 100 caracteres.
-     */
-    @Column(name = "nombre", length = 100, nullable = false)
-    private String nombre;
-
-    /**
-     * Apellidos de la solicitud de usuario. Es un campo obligatorio y tiene una longitud máxima de 100 caracteres.
-     */
-    @Column(name = "apellido", length = 100, nullable = false)
-    private String apellido;
-
-    /**
-     * Número de teléfono de la solicitud de usuario. Es un campo obligatorio y tiene una longitud máxima de 45 caracteres.
-     */
-    @Column(name = "telefono", length = 100, nullable = false)
-    private String telefono;
-
-    /**
-     * Enlace al Curriculum Vitae de la solicitud de usuario. Tiene una longitud máxima de 150 caracteres.
-     */
-    @Column(name = "cvLac", length = 100)
-    private String cvLac;
-
-    /**
-     * Identificador del programa al que pertenece la solicitud de usuario.
-     */
+    /** Identificador del programa al que pertenece la solicitud de usuario */
     @ManyToOne()
     @JoinColumn(name = "programaId")
     private ProgramaEntity programa;
 
-    /**
-     * Identificador del organismo de Investigación al que se relaciona la solicitud de usuario. Es un campo obligatorio.
-     */
-    @Column(nullable = false)
-    private Integer organismoDeInvestigacionId;
+    /** Observaciones de la Solicitud */
+    @OneToMany(mappedBy = "solicitudUsuario")
+    private Set<UsuarioSolicitudObservacionesEntity> observaciones;
 
-    /**
-     * Identificador del rol del organismo de Investigación asociado a la solicitud de usuario. Es un campo obligatorio.
-     */
-    @Column(nullable = false)
-    private Integer rolGrupoId;
+    /** Correo electrónico de la solicitud de usuario. Es un campo obligatorio, único y tiene una longitud máxima de 60 caracteres */
+    @Column(name = "correo", length = 100, nullable = false, unique = true)
+    private String correo;
 
-    /**
-     * Nota asociada a la solicitud de usuario. Tiene una longitud máxima de 1000 caracteres.
-     */
+    /** Tipo de documento de la solicitud de usuario */
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoDocumento tipoDocumento;
+
+    /** Número de documento de la solicitud de usuario. Tiene una longitud máxima de 45 caracteres */
+    @Column(name = "numeroDocumento", length = 100)
+    private String numeroDocumento;
+
+    /** Género o sexo de la solicitud de usuario */
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Sexo sexo;
+
+    /** Estado de la solicitud de usuario (pendiente, aprobada, rechazada, etc.) */
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EstadoSolicitudUsuario estado;
+
+    /** Tipo de usuario de la solicitud (administrativo, docente, pregrado, etc.) */
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoUsuario tipoUsuario;
+
+    /** Nombres de la solicitud de usuario. Es un campo obligatorio y tiene una longitud máxima de 100 caracteres */
+    @Column(name = "nombre", length = 100, nullable = false)
+    private String nombre;
+
+    /** Apellidos de la solicitud de usuario. Es un campo obligatorio y tiene una longitud máxima de 100 caracteres */
+    @Column(name = "apellido", length = 100, nullable = false)
+    private String apellido;
+
+    /** Número de teléfono de la solicitud de usuario. Es un campo obligatorio y tiene una longitud máxima de 45 caracteres */
+    @Column(name = "telefono", length = 100, nullable = false)
+    private String telefono;
+
+    /** Enlace al Curriculum Vitae de la solicitud de usuario. Tiene una longitud máxima de 150 caracteres */
+    @Column(name = "cvLac", length = 100)
+    private String cvLac;
+
+    /** Nota asociada a la solicitud de usuario. Tiene una longitud máxima de 1000 caracteres */
     @Column(length = 1000)
     private String nota;
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
 }
 

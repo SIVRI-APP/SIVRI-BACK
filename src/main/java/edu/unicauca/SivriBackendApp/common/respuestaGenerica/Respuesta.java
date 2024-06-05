@@ -3,25 +3,22 @@ package edu.unicauca.SivriBackendApp.common.respuestaGenerica;
 import lombok.*;
 
 /**
- * Class that defines a generic DTO for the responses of requests to Rest services.
- * This encapsulates the result of the consumption of APIs and adds control attributes
+ * Datos genéricos de respuesta para ser transmitidos en todos los servicios REST.
  *
- * @param <T> Response object for the transactions carried out in each API
- *
- * @version 1.0
+ * @param <T> Objeto de respuesta para las transacciones realizadas en cada API.
  */
 @Getter @Setter @ToString
 public class Respuesta<T> {
 
-    /** Indicates the http status of the transaction */
+    /** Indica el estado HTTP de la transacción */
     private int status;
 
-    /** Information message for the user */
+    /** Mensaje informativo para el usuario */
     private String userMessage;
 
-    /** Informational message for developers */
+    /** Mensaje informativo para los desarrolladores */
     private String developerMessage;
 
-    /** Object with the transaction response */
+    /** Objeto con la respuesta de la transacción */
     private T data;
 }

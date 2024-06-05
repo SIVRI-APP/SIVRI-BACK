@@ -2,34 +2,36 @@ package edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.token;
 
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.Credencial;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+/**
+ * Clase que representa un token en el sistema.
+ */
+@Entity
+@Table
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "_token")
 public class Token {
 
+  /** Identificador único del token */
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public Integer id;
+  private Integer id;
 
-  @Column(unique = true)
-  public String token;
-
-  @Enumerated(EnumType.STRING)
-  public TokenType tokenType = TokenType.BEARER;
-
-  public boolean revoked;
-
-  public boolean expired;
-
-  @ManyToOne(fetch = FetchType.LAZY)
+  /** Relación muchos a uno con la entidad Credential */
+  @ManyToOne
   @JoinColumn(name = "credencialId")
-  public Credencial credencial;
+  private Credencial credencial;
+
+  /** Valor único del token */
+  @Column(unique = true)
+  private String token;
+
+  /** Tipo de token, por defecto es 'BEARER' */
+  @Enumerated(EnumType.STRING)
+  private TokenType tokenType;
+
 }

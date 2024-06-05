@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.common.configuración;
 
-import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.RepositorioCredencial;
+import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.CredencialRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ import org.springframework.web.filter.CorsFilter;
 @RequiredArgsConstructor
 public class ConfiguraciónDeAplicación {
 
-  private final RepositorioCredencial repository;
+  private final CredencialRepository repository;
 
   @Bean
   public UserDetailsService userDetailsService() {

@@ -4,10 +4,7 @@ import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.token.T
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.UsuarioEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,36 +12,62 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
-@Data
+/**
+ * Entidad con la información correspondiente a las credenciales de un usuario
+ */
+@Entity
+@Table
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "_credencial")
 public class Credencial implements UserDetails {
 
+  /** Identificador único de la credencial */
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
+  /**
+   * Relación uno a uno con la entidad Usuario.
+   * Se realiza un join con la columna 'usuarioId' en la tabla 'UsuarioEntity'.
+   */
+  @OneToOne(optional = false)
+  @JoinColumn(name = "userId")
+  private UsuarioEntity user;
+
+  /**
+   * Relación uno a muchos con la entidad Token.
+   * La relación se mapea por la propiedad 'credencial' en la entidad 'Token'.
+   */
+  @OneToMany(mappedBy = "credencial", cascade = CascadeType.ALL)
+  private List<Token> tokens;
+
+  /**
+   * Correo electrónico del usuario, debe ser único y no puede ser nulo.
+   */
   @Column(unique = true, nullable = false)
   private String email;
 
+  /**
+   * Contraseña del usuario, no puede ser nula y tiene una longitud máxima de 245 caracteres.
+   */
   @Column(length = 245, nullable = false)
   private String password;
 
-  @Column(columnDefinition = "INT DEFAULT 0")
-  private int recuperarContraseña;
+  /**
+   * Código para la recuperación de la contraseña.
+   */
+  private String passwordRecoveryCode;
 
+  /**
+   * Fecha en la que se solicitó la recuperación de la contraseña.
+   * Debe ser una fecha futura o presente.
+   */
   @FutureOrPresent
-  private LocalDate recuperarContraseñaFechaCreacion;
+  private LocalDate recoverPasswordRequestedDate;
 
-  @OneToMany(mappedBy = "credencial")
-  private List<Token> tokens;
-
-  @OneToOne(cascade = CascadeType.ALL, optional = false)
-  @JoinColumn(name = "usuarioId", referencedColumnName = "id")
-  private UsuarioEntity usuario;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

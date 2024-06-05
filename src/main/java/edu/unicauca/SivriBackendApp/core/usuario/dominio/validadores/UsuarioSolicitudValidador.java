@@ -2,7 +2,7 @@ package edu.unicauca.SivriBackendApp.core.usuario.dominio.validadores;
 
 
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
-import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.RepositorioCredencial;
+import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.CredencialRepository;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitud;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioRepository;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioSolicitudRepository;
@@ -19,18 +19,20 @@ import java.util.List;
 @AllArgsConstructor
 public class UsuarioSolicitudValidador {
 
-    private final RepositorioCredencial repositorioCredencial;
+    /** Repositorio de Credenciales */
+    private final CredencialRepository credencialRepository;
+
+    /** Puertos de salida */
     private final UsuarioSolicitudRepository usuarioSolicitudRepository;
     private final UsuarioRepository usuarioRepository;
 
     /**
-     * Valida que no existan duplicados en la creación de solicitudes de usuario y que se tiene el acceso correcta para realizar la solicitud.
+     * Valída que no existan duplicados en la creación de solicitudes de usuario y que se tiene el acceso correctá para realizar la solicitud.
      *
-     * @param usuario Solicitud de usuario a validar.
-     * @return true si la validación es exitosa.
-     * @throws ReglaDeNegocioException Si se encuentran duplicados en la solicitud de usuario.
+     * @param usuario {@link UsuarioSolicitud}
+     * @throws ReglaDeNegocioException Sí se encuentran duplicados en la solicitud de usuario.
      */
-    public boolean validarLaCreacionDeUnaSolicitudDeUsuario(UsuarioSolicitud usuario) {
+    public void validarLaCreacionDeUnaSolicitudDeUsuario(UsuarioSolicitud usuario) {
         boolean respuesta;
 
         // Verificar si la solicitud ya existe
@@ -46,18 +48,28 @@ public class UsuarioSolicitudValidador {
         }
 
         // Verificar si las credenciales ya existen
-        respuesta = repositorioCredencial.existsByEmail(usuario.getCorreo());
+        respuesta = credencialRepository.existsByEmail(usuario.getCorreo());
         if (respuesta) {
             throw new ReglaDeNegocioException("bad.creación.credenciales.ya.existen", List.of(usuario.getTipoDocumento().name(), usuario.getNumeroDocumento(), usuario.getCorreo()));
         }
+    }
 
-        // TODO MIGUEL: Validar si usuario.grupoId es válido y el usuario no pertenece ya a ese grupo
+    /**
+     * Valída que no existan duplicados en la creación de solicitudes de usuario y que se tiene el acceso correctá para realizar la solicitud.
+     *
+     * @param solicitudUsuarioId Id de la solicitud de usuario a validar para su aprobación
+     * @throws ReglaDeNegocioException Sí se encuentran duplicados en la solicitud de usuario.
+     */
+    public void validarAprobacionDeUnaSolicitudDeUsuario(Long solicitudUsuarioId){
+        // Verifica que la solicitud exista
+        if (!usuarioSolicitudRepository.existsById(solicitudUsuarioId)){
+            throw new ReglaDeNegocioException("bad.solicitud.no.existe", List.of(String.valueOf(solicitudUsuarioId)));
+        }
 
-        // TODO MIGUEL: Validar si usuario.rolGrupoId es válido y el usuario no tiene ya ese rol asignado dentro del grupo
-
-        // TODO MIGUEL: Validar que el usuario autenticado tenga permiso para crear este usuario en este organismo de investigacion en este rol
-
-        return true;
+        // Verifica que no se tengan observaciones pendientes por resolver
+        if(usuarioSolicitudRepository.contarObservacionesPendientesDeUnaSolicitudDeUsuario(solicitudUsuarioId) != 0){
+            throw new ReglaDeNegocioException("bad.no.se.puede.aprobar.solicitud.observaciones.pendientes");
+        }
     }
 }
 

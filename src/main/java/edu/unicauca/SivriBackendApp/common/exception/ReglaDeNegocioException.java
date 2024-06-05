@@ -13,7 +13,7 @@ public class ReglaDeNegocioException extends BaseException{
         super(key);
     }
 
-    public ReglaDeNegocioException(String key, List args) {
+    public ReglaDeNegocioException(String key, List<String> args) {
         super(key, args);
     }
 

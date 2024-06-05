@@ -2,7 +2,7 @@ package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.sa
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -11,45 +11,37 @@ import java.time.LocalDate;
  */
 @Entity
 @Table(name = "funcionario")
-@Data
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class FuncionarioEntity {
 
-    /**
-     * Identificador único del funcionario.
-     */
+    /** Identificador único del funcionario */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * Usuario asociado al funcionario.
-     */
+    /** Usuario asociado al funcionario */
     @ManyToOne(optional = false)
     @JoinColumn(name = "usuarioId")
     private UsuarioEntity usuario;
 
-    /**
-     * Rol del funcionario asociado al rol administrativo.
-     */
+    /** Rol del funcionario asociado al rol administrativo */
     @ManyToOne(optional = false)
     @JoinColumn(name = "rolId")
     private RolFuncionarioEntity rolFuncionario;
 
-    /**
-     * Estado del rol administrativo.
-     */
+    /** Estado del rol administrativo */
     @Column(nullable = false)
     private Boolean estado;
 
-    /**
-     * Fecha de inicio del rol administrativo. Debe ser una fecha presente o futura.
-     */
+    /** Fecha de inicio del rol administrativo. Debe ser una fecha presente o futura */
     @FutureOrPresent
     private LocalDate fechaInicio;
 
-    /**
-     * Fecha de finalización del rol administrativo. Debe ser una fecha presente o futura.
-     */
+    /** Fecha de finalización del rol administrativo. Debe ser una fecha presente o futura */
     @FutureOrPresent
     private LocalDate fechaFin;
 

@@ -1,9 +1,8 @@
 package edu.unicauca.SivriBackendApp.common.seguridad.config;
 
 import edu.unicauca.SivriBackendApp.common.exception.CredencialIncorrectaException;
-import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.RepositorioCredencial;
+import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.CredencialRepository;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.IGetAuthorities;
-import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.token.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,8 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtService jwtService;
   private final UserDetailsService userDetailsService;
-  private final TokenRepository tokenRepository;
-  private final RepositorioCredencial repositorioCredencial;
+  private final CredencialRepository credencialRepository;
 
   /**
    * Obtiene las autoridades (roles) asociadas al usuario con el correo electrónico proporcionado.
@@ -50,7 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     //Semillero
     //Proyecto
     // Funcionario
-    List<IGetAuthorities> userAuthorities = repositorioCredencial.getAuthoritiesFuncionario(userEmail);
+    List<IGetAuthorities> userAuthorities = credencialRepository.getAuthoritiesFuncionario(userEmail);
     for (IGetAuthorities auth: userAuthorities) {
       authorities.add(new SimpleGrantedAuthority(auth.getAuthorities()));
     }
@@ -61,11 +59,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   /**
    * Procesa las solicitudes HTTP para validar y autenticar los tokens JWT en el encabezado 'Authorization'.
    *
-   * @param request     La solicitud HTTP actual
-   * @param response    La respuesta HTTP actual
-   * @param filterChain Cadena de filtros para continuar con el procesamiento de la solicitud
-   * @throws ServletException Si ocurre una excepción en el servlet
-   * @throws IOException      Si ocurre una excepción de entrada/salida
+   * @param request           La solicitud HTTP actual
+   * @param response          La respuesta HTTP actual
+   * @param filterChain       Cadena de filtros para continuar con el procesamiento de la solicitud
+   * @throws ServletException Sí ocurre una excepción en el servlet
+   * @throws IOException      Sí ocurre una excepción de entrada/salida
    */
   @Override
   protected void doFilterInternal(
@@ -74,7 +72,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       @NonNull FilterChain filterChain
   ) throws ServletException, IOException, CredencialIncorrectaException {
 
-    if (request.getServletPath().contains("/v1/acceso")) {
+    if (request.getServletPath().contains("/v1/access")) {
       filterChain.doFilter(request, response);
       return;
     }
@@ -90,12 +88,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     jwt = authHeader.substring(7);
     userEmail = jwtService.extractUsername(jwt);
+
     if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-      var isTokenValid = tokenRepository.findByToken(jwt)
-          .map(t -> !t.isExpired() && !t.isRevoked())
-          .orElse(false);
-      if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
+
+      if (jwtService.isTokenValid(jwt, userDetails)) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
             userDetails,
             null,
@@ -106,6 +103,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         );
         SecurityContextHolder.getContext().setAuthentication(authToken);
       }
+
     }
 
     filterChain.doFilter(request, response);
