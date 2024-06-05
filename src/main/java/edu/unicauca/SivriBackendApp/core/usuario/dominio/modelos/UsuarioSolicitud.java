@@ -7,10 +7,10 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocum
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import lombok.*;
 
-import java.util.Set;
+import java.util.Objects;
 
 /**
- * Representa la entidad de persistencia para las solicitudes de usuarios en el sistema.
+ * Representa la entidad para las solicitudes de usuarios en el sistema.
  */
 @Getter
 @Setter
@@ -30,7 +30,7 @@ public class UsuarioSolicitud {
     private Programa programa;
 
     /** Observaciones de la Solicitud */
-    private Set<UsuarioSolicitudObservaciones> observaciones;
+    private UsuarioSolicitudObservaciones observaciones;
 
     /** Correo electrónico de la solicitud de usuario. Es un campo obligatorio, único y tiene una longitud máxima de 60 caracteres */
     private String correo;
@@ -65,5 +65,17 @@ public class UsuarioSolicitud {
     /** Nota asociada a la solicitud de usuario. Tiene una longitud máxima de 1000 caracteres */
     private String nota;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UsuarioSolicitud that = (UsuarioSolicitud) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
 

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * Representa la entidad de persistencia para las observaciones asociadas a las solicitudes de usuarios en el sistema.
+ * Representa la entidad de las conversaciones asociadas a las observaciones asociadas a las solicitudes de usuarios en el sistema.
  */
 @Getter
 @Setter
@@ -31,9 +31,16 @@ public class UsuarioSolicitudConversacion {
     private LocalDateTime fechaMensaje;
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UsuarioSolicitudConversacion that = (UsuarioSolicitudConversacion) o;
+        return Objects.equals(id, that.id);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
 

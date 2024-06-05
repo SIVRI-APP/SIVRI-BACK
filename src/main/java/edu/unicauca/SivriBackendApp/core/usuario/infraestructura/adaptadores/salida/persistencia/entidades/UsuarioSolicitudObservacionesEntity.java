@@ -26,7 +26,7 @@ public class UsuarioSolicitudObservacionesEntity {
     private Long id;
 
     /** Solicitud de usuario a la que está asociada la observación. Es un campo obligatorio */
-    @ManyToOne(optional = false)
+    @OneToOne(optional = false)
     @JoinColumn(name = "solicitudUsuarioId")
     private UsuarioSolicitudEntity solicitudUsuario;
 
@@ -36,7 +36,7 @@ public class UsuarioSolicitudObservacionesEntity {
     private FuncionarioEntity funcionario;
 
     /** Conversaciones entórno a esta observación */
-    @OneToMany(mappedBy = "usuarioSolicitudObservaciones")
+    @OneToMany(mappedBy = "usuarioSolicitudObservaciones", cascade = CascadeType.REMOVE)
     private Set<UsuarioSolicitudConversacionEntity> conversacion;
 
     /** Texto de la observación. Tiene una longitud máxima de 1000 caracteres y es un campo obligatorio */
@@ -44,7 +44,6 @@ public class UsuarioSolicitudObservacionesEntity {
     private String observación;
 
     /** Fecha en que se realiza la observación. Debe ser una fecha presente o futura */
-    @FutureOrPresent
     private LocalDate fechaObservación;
 
     /** Indica si la observación ha sido resuelta o no */

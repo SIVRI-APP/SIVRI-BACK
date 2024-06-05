@@ -2,12 +2,15 @@ package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.en
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.entrada.UsuarioSolicitudCrearCU;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.entrada.UsuarioSolicitudObservacionCrearCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.entrada.UsuarioSolicitudObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioSolicitudInformacionDetalladaProyeccion;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioSolicitudListarConFiltroProyeccion;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.entrada.rest.dto.entrada.EnviarParaRevisionDTO;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.entrada.rest.dto.entrada.RechazarSolicitudDTO;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.entrada.rest.dto.entrada.RegistroUsuarioDTO;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.entrada.rest.mapper.UsuarioSolicitudRestMapper;
 import jakarta.validation.Valid;
@@ -26,6 +29,7 @@ public class UsuarioSolicitudController {
     /** Puertos de Entrada */
     private final UsuarioSolicitudCrearCU usuarioSolicitudCrearCU;
     private final UsuarioSolicitudObtenerCU usuarioSolicitudObtenerCU;
+    private final UsuarioSolicitudObservacionCrearCU usuarioSolicitudObservacionCrearCU;
 
     /** Mapper */
     private final UsuarioSolicitudRestMapper usuarioSolicitudRestMapper;
@@ -132,6 +136,51 @@ public class UsuarioSolicitudController {
             @RequestParam @Min(value = 0, message = "El valor de solicitudUsuarioId debe ser positivo") long solicitudUsuarioId)
     {
         Respuesta<Boolean> respuesta = usuarioSolicitudCrearCU.aprobarSolicitudUsuario(solicitudUsuarioId);
+        return ResponseEntity.ok().body(respuesta);
+    }
+
+    /**
+     * Rechaza una solicitud de usuario.
+     *
+     * @param rechazarSolicitudDTO {@link RechazarSolicitudDTO}
+     * @return {@link Respuesta}
+     */
+    @PostMapping("rechazar")
+    @PreAuthorize("hasAnyAuthority('FUNCIONARIO:SUPER_ADMIN', 'FUNCIONARIO:USUARIOS')")
+    public ResponseEntity<Respuesta<Boolean>> rechazarSolicitudUsuario(
+            @Valid @RequestBody RechazarSolicitudDTO rechazarSolicitudDTO)
+    {
+        Respuesta<Boolean> respuesta = usuarioSolicitudCrearCU.rechazarSolicitudUsuario(rechazarSolicitudDTO);
+        return ResponseEntity.ok().body(respuesta);
+    }
+
+    /**
+     * Resuelve las observaciones de una solicitud
+     *
+     * @param observacionId {@link RechazarSolicitudDTO}
+     * @return {@link Respuesta}
+     */
+    @PostMapping("resolverObservacion")
+    @PreAuthorize("hasAnyAuthority('FUNCIONARIO:SUPER_ADMIN', 'FUNCIONARIO:USUARIOS')")
+    public ResponseEntity<Respuesta<Boolean>> resolverObservacion(
+            @RequestParam Long observacionId)
+    {
+        Respuesta<Boolean> respuesta = usuarioSolicitudObservacionCrearCU.resolverObservacion(observacionId);
+        return ResponseEntity.ok().body(respuesta);
+    }
+
+    /**
+     * EnvÍa la solicitud a revision VRI.
+     *
+     * @param enviarParaRevisionDTO {@link EnviarParaRevisionDTO}
+     * @return {@link Respuesta}
+     */
+    @PostMapping("enviarParaRevision")
+    @PreAuthorize("hasAnyAuthority('FUNCIONARIO:SUPER_ADMIN', 'FUNCIONARIO:USUARIOS')")
+    public ResponseEntity<Respuesta<Boolean>> enviarParaRevision(
+            @Valid @RequestBody EnviarParaRevisionDTO enviarParaRevisionDTO)
+    {
+        Respuesta<Boolean> respuesta = usuarioSolicitudCrearCU.enviarParaRevision(enviarParaRevisionDTO);
         return ResponseEntity.ok().body(respuesta);
     }
 

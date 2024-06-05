@@ -6,6 +6,8 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.Sexo;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 public interface UsuarioSolicitudInformacionDetalladaProyeccion {
@@ -27,13 +29,28 @@ public interface UsuarioSolicitudInformacionDetalladaProyeccion {
     interface UsuarioSolicitudObservacionesProyección {
 
         Long getId();
+        funcionarioProyeccion getFuncionario();
+        LocalDate getFechaObservación();
+        Boolean getResuelta();
         String getObservación();
         Set<UsuarioSolicitudObservacionesConversacionProyección> getConversacion();
 
+        interface funcionarioProyeccion {
+            funcionarioUsuario getUsuario();
+
+            interface funcionarioUsuario {
+                String getNombre();
+                String getApellido();
+            }
+        }
+
         interface UsuarioSolicitudObservacionesConversacionProyección {
             Long getId();
+            String getAutor();
+            LocalDateTime getFechaMensaje();
             String getMensaje();
         }
+
     }
 
 }

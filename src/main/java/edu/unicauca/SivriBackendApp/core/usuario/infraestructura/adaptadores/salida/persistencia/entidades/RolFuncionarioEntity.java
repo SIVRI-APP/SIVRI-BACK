@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.sa
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -30,4 +31,16 @@ public class RolFuncionarioEntity {
     @Column(nullable = false, length = 100)
     private String nombre;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RolFuncionarioEntity that = (RolFuncionarioEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }

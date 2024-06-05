@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.common.seguridad.config;
 import edu.unicauca.SivriBackendApp.common.exception.CredencialIncorrectaException;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.CredencialRepository;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.IGetAuthorities;
+import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.token.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,6 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   private final JwtService jwtService;
   private final UserDetailsService userDetailsService;
   private final CredencialRepository credencialRepository;
+  private final TokenRepository tokenRepository;
 
   /**
    * Obtiene las autoridades (roles) asociadas al usuario con el correo electrónico proporcionado.
@@ -92,7 +94,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
 
-      if (jwtService.isTokenValid(jwt, userDetails)) {
+//     todo miguel quitar esto boolean tokenExists = tokenRepository.findByToken(jwt).isPresent();
+      boolean tokenExists = true;
+
+      if (jwtService.isTokenValid(jwt, userDetails) && tokenExists) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
             userDetails,
             null,

@@ -7,6 +7,8 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuar
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
+
 /**
  * Representa la entidad de persistencia para los usuarios en el sistema.
  */
@@ -68,5 +70,17 @@ public class UsuarioEntity {
     @Column(length = 100)
     private String cvLac;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UsuarioEntity that = (UsuarioEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
 

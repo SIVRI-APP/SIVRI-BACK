@@ -34,4 +34,5 @@ public class Funcionario {
     /** Fecha de finalización del rol administrativo. Debe ser una fecha presente o futura */
     private LocalDate fechaFin;
 
+
 }

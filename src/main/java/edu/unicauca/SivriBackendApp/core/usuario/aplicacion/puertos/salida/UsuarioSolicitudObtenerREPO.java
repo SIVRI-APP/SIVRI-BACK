@@ -30,7 +30,7 @@ public interface UsuarioSolicitudObtenerREPO {
      * @param tipoUsuario           Filtro por tipo de usuario.
      * @param estado                Filtro por estado de la solicitud de usuario.
      * @param creadoPorUsuarioId    Filtro solo las solicitudes creadas por un usuario
-     * @return Página que contiene la lista de solicitudes de usuario con proyecciones específicas.
+     * @return {@link UsuarioSolicitud}
      */
     Page<UsuarioSolicitudListarConFiltroProyeccion> listarConFiltro(Pageable pageable, String correo, TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String apellidos, TipoUsuario tipoUsuario, EstadoSolicitudUsuario estado, Long creadoPorUsuarioId);
 
@@ -38,7 +38,7 @@ public interface UsuarioSolicitudObtenerREPO {
      * Obtiene información detallada de una solicitud de usuario.
      *
      * @param solicitudUsuarioId Identificador único de la solicitud de usuario.
-     * @return Optional que contiene información detallada de la solicitud de usuario si existe, o un Optional vacío si no existe.
+     * @return {@link UsuarioSolicitud}
      */
     Optional<UsuarioSolicitudInformacionDetalladaProyeccion> obtenerSolicitudUsuarioInformacionDetallada(long solicitudUsuarioId);
 
@@ -46,8 +46,15 @@ public interface UsuarioSolicitudObtenerREPO {
      * Obtiene la solicitud de usuario por Id.
      *
      * @param solicitudUsuarioId Identificador único de la solicitud de usuario.
-     * @return Optional que contiene información detallada de la solicitud de usuario si existe, o un Optional vacío si no existe.
+     * @return {@link UsuarioSolicitud}
      */
     Optional<UsuarioSolicitud> obtenerSolicitudUsuarioPorId(Long solicitudUsuarioId);
 
+    /**
+     * Valida si una solicitud de usuario contiene observaciones
+     *
+     * @param solicitudUsuarioId Id de la solicitud de usuario a consultar
+     * @return true si existe una observacion para esta solicitud
+     */
+    Boolean solicitudTieneObservaciones(Long solicitudUsuarioId);
 }

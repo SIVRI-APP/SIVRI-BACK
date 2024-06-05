@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida;
 
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 
 /**
@@ -11,8 +12,8 @@ public interface UsuarioCrearREPO {
     /**
      * Crea una nueva solicitud de usuario en el repositorio de persistencia.
      *
-     * @param usuario Objeto UsuarioSolicitud que contiene la información de la nueva solicitud.
-     * @return Objeto UsuarioSolicitud que representa la solicitud de usuario creada.
+     * @param usuario {@link Usuario}
+     * @return {@link Respuesta}
      */
     Usuario crearUsuario(Usuario usuario);
 

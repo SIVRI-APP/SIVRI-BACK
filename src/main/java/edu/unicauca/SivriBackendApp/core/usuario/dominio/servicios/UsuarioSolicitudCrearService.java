@@ -10,20 +10,24 @@ import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credenc
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.CredentialService;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificacionDeUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.entrada.UsuarioSolicitudCrearCU;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.UsuarioCrearREPO;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.UsuarioSolicitudCrearREPO;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.UsuarioSolicitudEliminarREPO;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.UsuarioSolicitudObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.*;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitud;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitudConversacion;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitudObservaciones;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.validadores.UsuarioSolicitudValidador;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.entrada.rest.dto.entrada.EnviarParaRevisionDTO;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.entrada.rest.dto.entrada.RechazarSolicitudDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -41,10 +45,12 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
     private final SendMessageService sendMessageService;
 
     /** Puertos de Salida */
-    private final UsuarioSolicitudCrearREPO usuarioSolicitudCrearREPO;
-    private final UsuarioSolicitudEliminarREPO usuarioSolicitudEliminarREPO;
-    private final UsuarioCrearREPO usuarioCrearREPO;
     private final UsuarioSolicitudObtenerREPO usuarioSolicitudObtenerREPO;
+    private final UsuarioSolicitudCrearREPO usuarioSolicitudCrearREPO;
+    private final UsuarioCrearREPO usuarioCrearREPO;
+    private final UsuarioSolicitudObservacionCrearREPO usuarioSolicitudObservacionCrearREPO;
+    private final UsuarioSolicitudConversacionCrearREPO usuarioSolicitudConversacionCrearREPO;
+    private final UsuarioSolicitudEliminarREPO usuarioSolicitudEliminarREPO;
 
     /** Validadores */
     private final UsuarioSolicitudValidador usuarioSolicitudValidador;
@@ -112,10 +118,91 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
             );
 
             // Enviar Correo de Bienvenida
-            enviarCorreo(nuevoUsuario.getCorreo(), nuevoUsuario.getNombre() + " " + nuevoUsuario.getApellido(), credencial.getPasswordRecoveryCode());
+            enviarCorreoBienvenidaSivri(nuevoUsuario.getCorreo(), nuevoUsuario.getNombre() + " " + nuevoUsuario.getApellido(), credencial.getPasswordRecoveryCode());
         }
 
         return new RespuestaHandler<>(200, "ok.solicitud.aprobada", List.of(nuevoUsuario.getTipoDocumento().toString(), nuevoUsuario.getNumeroDocumento(), nuevoUsuario.getCorreo()), "", true).getRespuesta();
+    }
+
+    /**
+     * @see UsuarioSolicitudCrearCU#rechazarSolicitudUsuario(RechazarSolicitudDTO)
+     */
+    @Override
+    public Respuesta<Boolean> rechazarSolicitudUsuario(RechazarSolicitudDTO rechazarSolicitudDTO) {
+        UsuarioSolicitud solicitud =  usuarioSolicitudObtenerREPO.obtenerSolicitudUsuarioPorId(rechazarSolicitudDTO.getUsuarioSolicitudId()).orElseThrow();
+
+        // Si se crea una observacion por primera vez
+        if (!usuarioSolicitudObtenerREPO.solicitudTieneObservaciones(rechazarSolicitudDTO.getUsuarioSolicitudId())){
+            UsuarioSolicitudObservaciones nuevaObservacion = UsuarioSolicitudObservaciones.builder()
+                                    .solicitudUsuario(solicitud)
+                                    .funcionario(servicioDeIdentificacionDeUsuario.obtenerFuncionarioModel())
+                                    .observación(rechazarSolicitudDTO.getObservacion())
+                                    .fechaObservación(LocalDate.now())
+                                    .resuelta(false)
+                                    .build();
+            // Creamos la observacion
+            usuarioSolicitudObservacionCrearREPO.crearObservacion(nuevaObservacion);
+        }else{
+            // Si ya hay una observacion lo demás son mensajes parte de una conversacion
+            Usuario usuarioAutenticado = servicioDeIdentificacionDeUsuario.obtenerUsuario();
+            // Obtenemos la Observacion de la Solicitud
+            UsuarioSolicitudObservaciones observacion = solicitud.getObservaciones();
+
+            // Si la Observacion estaba resuelta, revertir a no resuelta
+            if (observacion.getResuelta()){
+                usuarioSolicitudObservacionCrearREPO.cambiarEstado(rechazarSolicitudDTO.getUsuarioSolicitudId());
+            }
+
+            // Creamos una nueva conversacion
+            UsuarioSolicitudConversacion usuarioSolicitudConversacion = UsuarioSolicitudConversacion.builder()
+                            .usuarioSolicitudObservaciones(observacion)
+                            .autor(usuarioAutenticado.getNombre() + " " + usuarioAutenticado.getApellido())
+                            .mensaje(rechazarSolicitudDTO.getObservacion())
+                            .fechaMensaje(LocalDateTime.now())
+                            .build();
+            // Añadimos una conversacion
+            usuarioSolicitudConversacionCrearREPO.agregarConversacion(usuarioSolicitudConversacion);
+        }
+
+        //Actualizamos el estado de la Solicitud
+        usuarioSolicitudCrearREPO.cambiarEstado(rechazarSolicitudDTO.getUsuarioSolicitudId(), EstadoSolicitudUsuario.FORMULADO_OBSERVACIONES);
+
+        // Enviamos alerta por correo electrónico
+        enviarNotificacionElectronica(solicitud.getCreadoPor().getCorreo(),
+                "La solicitud para la creación del usuario " + solicitud.getNombre() + " " + solicitud.getApellido()
+                        + " " + solicitud.getTipoDocumento() + ": " + solicitud.getNumeroDocumento()
+                        + " ha sido devuelta con observaciones con la siguiente observación: <strong>"+ rechazarSolicitudDTO.getObservacion() + ".</strong> Ingresa al apartado de Usuarios > Listar Solicitudes de Usuario en SIVRI para mas detalles."
+        );
+
+        return new RespuestaHandler<>(200, "ok.solicitud.observacion.agregada", "", true).getRespuesta();
+    }
+
+    /**
+     * @see UsuarioSolicitudCrearCU#enviarParaRevision(EnviarParaRevisionDTO)
+     */
+    @Override
+    public Respuesta<Boolean> enviarParaRevision(EnviarParaRevisionDTO enviarParaRevisionDTO) {
+        Usuario usuarioAutenticado = servicioDeIdentificacionDeUsuario.obtenerUsuario();
+        UsuarioSolicitud usuarioSolicitud = usuarioSolicitudObtenerREPO.obtenerSolicitudUsuarioPorId(enviarParaRevisionDTO.getUsuarioSolicitudId()).orElseThrow();
+
+        // Si tiene observaciones la revision va con comentarios
+        if (Objects.nonNull(usuarioSolicitud.getObservaciones())){
+
+            usuarioSolicitudConversacionCrearREPO.agregarConversacion(
+                    UsuarioSolicitudConversacion.builder()
+                    .fechaMensaje(LocalDateTime.now())
+                    .mensaje(enviarParaRevisionDTO.getObservacion())
+                    .usuarioSolicitudObservaciones(usuarioSolicitud.getObservaciones())
+                    .autor(usuarioAutenticado.getNombre() + " " + usuarioAutenticado.getApellido())
+                    .build()
+            );
+        }else{
+            // Si no simplemente cambiamos el estado de la solicitud
+            usuarioSolicitudCrearREPO.cambiarEstado(usuarioSolicitud.getId(), EstadoSolicitudUsuario.REVISION_VRI);
+        }
+
+
+        return new RespuestaHandler<>(200, "ok.solicitud.observacion.revision", "", true).getRespuesta();
     }
 
 
@@ -127,7 +214,7 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
      * @param nombreCompleto    Nombre del Usuario Creado
      * @param passwordCode      Código de seguridad para la asignación de password
      */
-    private void enviarCorreo(String emailDestino, String nombreCompleto, String passwordCode) {
+    private void enviarCorreoBienvenidaSivri(String emailDestino, String nombreCompleto, String passwordCode) {
         List<MetaData> metaData = new ArrayList<>();
         metaData.add(MetaData.builder()
                 .key("nombreCompleto")
@@ -142,6 +229,27 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
                 .to(emailDestino)
                 .subject("Te damos la bienvenida a SIVRI")
                 .template(1)
+                .metaData(metaData)
+                .build());
+    }
+
+    /**
+     * Envía por correo sobre una notificacion sobre un proceso
+     *
+     * @param emailDestino      Correo de destino
+     * @param mensaje           Nombre del Usuario Creado
+     */
+    private void enviarNotificacionElectronica(String emailDestino, String mensaje){
+        List<MetaData> metaData = new ArrayList<>();
+        metaData.add(MetaData.builder()
+                .key("mensaje")
+                .value(mensaje)
+                .build());
+
+        sendMessageService.sendMessage(SendRequest.builder()
+                .to(emailDestino)
+                .subject("Notificación de SIVRI")
+                .template(3)
                 .metaData(metaData)
                 .build());
     }

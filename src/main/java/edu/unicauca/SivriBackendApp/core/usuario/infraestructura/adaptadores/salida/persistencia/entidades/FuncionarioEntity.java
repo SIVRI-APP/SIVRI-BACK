@@ -5,6 +5,7 @@ import jakarta.validation.constraints.FutureOrPresent;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Representa la entidad de persistencia para los funcionarios del sistema.
@@ -45,4 +46,16 @@ public class FuncionarioEntity {
     @FutureOrPresent
     private LocalDate fechaFin;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FuncionarioEntity that = (FuncionarioEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }

@@ -64,7 +64,7 @@ public interface UsuarioSolicitudRepository extends JpaRepository<UsuarioSolicit
     @Query(" SELECT COUNT(obs.id) " +
             "FROM UsuarioSolicitudEntity usuario " +
             "JOIN usuario.observaciones obs " +
-            "WHERE usuario.id = :solicitudUsuarioId"
+            "WHERE usuario.id = :solicitudUsuarioId AND obs.resuelta = false "
     )
     Integer contarObservacionesPendientesDeUnaSolicitudDeUsuario(@Param("solicitudUsuarioId") long solicitudUsuarioId);
 

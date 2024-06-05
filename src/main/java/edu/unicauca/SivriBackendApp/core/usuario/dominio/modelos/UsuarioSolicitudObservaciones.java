@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Representa la entidad de persistencia para las observaciones asociadas a las solicitudes de usuarios en el sistema.
+ * Representa la entidad para las observaciones asociadas a las solicitudes de usuarios en el sistema.
  */
 @Getter
 @Setter
@@ -41,9 +41,16 @@ public class UsuarioSolicitudObservaciones {
     private Boolean notificaciónDeVencimiento;
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UsuarioSolicitudObservaciones that = (UsuarioSolicitudObservaciones) o;
+        return Objects.equals(id, that.id);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
 

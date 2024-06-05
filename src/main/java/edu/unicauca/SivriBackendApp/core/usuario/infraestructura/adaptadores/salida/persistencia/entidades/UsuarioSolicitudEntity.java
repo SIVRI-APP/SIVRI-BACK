@@ -9,7 +9,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Representa la entidad de persistencia para las solicitudes de usuarios en el sistema.
@@ -39,8 +38,8 @@ public class UsuarioSolicitudEntity {
     private ProgramaEntity programa;
 
     /** Observaciones de la Solicitud */
-    @OneToMany(mappedBy = "solicitudUsuario")
-    private Set<UsuarioSolicitudObservacionesEntity> observaciones;
+    @OneToOne(mappedBy = "solicitudUsuario", cascade = CascadeType.REMOVE)
+    private UsuarioSolicitudObservacionesEntity observaciones;
 
     /** Correo electrónico de la solicitud de usuario. Es un campo obligatorio, único y tiene una longitud máxima de 60 caracteres */
     @Column(name = "correo", length = 100, nullable = false, unique = true)

@@ -38,7 +38,6 @@ public class UsuarioSolicitudConversacionEntity {
     private String mensaje;
 
     /** Fecha en que se realiza la observación. Debe ser una fecha presente o futura */
-    @FutureOrPresent
     private LocalDateTime fechaMensaje;
 
 

@@ -6,6 +6,8 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocum
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import lombok.*;
 
+import java.util.Objects;
+
 /**
  * Representa la entidad de persistencia para los usuarios en el sistema.
  */
@@ -49,5 +51,17 @@ public class Usuario {
     /** Enlace al Curriculum Vitae de la solicitud de usuario. Tiene una longitud máxima de 150 caracteres */
     private String cvLac;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id, usuario.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
 

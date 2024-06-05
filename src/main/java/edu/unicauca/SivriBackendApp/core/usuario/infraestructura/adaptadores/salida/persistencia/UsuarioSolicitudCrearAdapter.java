@@ -2,6 +2,8 @@ package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.sa
 
 import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.UsuarioSolicitudCrearREPO;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitud;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.UsuarioSolicitudEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.UsuarioSolicitudInfraMapper;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioSolicitudRepository;
 import lombok.AllArgsConstructor;
@@ -27,6 +29,13 @@ public class UsuarioSolicitudCrearAdapter implements UsuarioSolicitudCrearREPO {
     @Override
     public UsuarioSolicitud crearSolicitudUsuario(UsuarioSolicitud usuario) {
         return usuarioSolicitudInfraMapper.toModel(usuarioSolicitudRepository.save(usuarioSolicitudInfraMapper.toEntity(usuario)));
+    }
+
+    @Override
+    public void cambiarEstado(Long solicitudId, EstadoSolicitudUsuario estado) {
+        UsuarioSolicitudEntity solicitud = usuarioSolicitudRepository.findById(solicitudId).orElseThrow();
+        solicitud.setEstado(estado);
+        usuarioSolicitudRepository.save(solicitud);
     }
 
 }

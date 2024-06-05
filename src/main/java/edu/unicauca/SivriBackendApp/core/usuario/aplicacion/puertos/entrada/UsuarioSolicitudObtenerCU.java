@@ -26,7 +26,7 @@ public interface UsuarioSolicitudObtenerCU {
      * @param apellidos         Filtro por apellidos del usuario.
      * @param tipoUsuario       Filtro por tipo de usuario.
      * @param estado            Filtro por estado de la solicitud de usuario.
-     * @return Respuesta que contiene una página de solicitudes de usuario con proyecciones específicas.
+     * @return {@link Respuesta}
      */
     Respuesta<Page<UsuarioSolicitudListarConFiltroProyeccion>> listarConFiltro(int pageNo, int pageSize, String correo, TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String apellidos, TipoUsuario tipoUsuario, EstadoSolicitudUsuario estado);
 
@@ -34,7 +34,7 @@ public interface UsuarioSolicitudObtenerCU {
      * Obtiene información detallada de una solicitud de usuario.
      *
      * @param solicitudUsuarioId Identificador único de la solicitud de usuario.
-     * @return Respuesta que contiene información detallada de la solicitud de usuario.
+     * @return {@link Respuesta}
      */
     Respuesta<UsuarioSolicitudInformacionDetalladaProyeccion> obtenerSolicitudUsuarioInformacionDetallada(long solicitudUsuarioId);
 

@@ -9,6 +9,7 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioSol
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioSolicitudListarConFiltroProyeccion;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.UsuarioSolicitudEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.UsuarioSolicitudInfraMapper;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioSolicitudObservacionesRepository;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioSolicitudRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,6 +31,7 @@ public class UsuarioSolicitudObtenerAdapter implements UsuarioSolicitudObtenerRE
      * Repositorio de UsuarioSolicitud que proporciona el acceso a la capa de persistencia.
      */
     private final UsuarioSolicitudRepository usuarioSolicitudRepository;
+    private final UsuarioSolicitudObservacionesRepository usuarioSolicitudObservacionesRepository;
 
     /**
      * Mapper
@@ -60,6 +62,9 @@ public class UsuarioSolicitudObtenerAdapter implements UsuarioSolicitudObtenerRE
         return usuarioSolicitudRepository.obtenerSolicitudUsuarioInformacionDetallada(solicitudUsuarioId);
     }
 
+    /**
+     * @see UsuarioSolicitudObtenerREPO#obtenerSolicitudUsuarioPorId(Long)
+     */
     @Override
     public Optional<UsuarioSolicitud> obtenerSolicitudUsuarioPorId(Long solicitudUsuarioId) {
         Optional<UsuarioSolicitud> respuesta = Optional.empty();
@@ -70,6 +75,14 @@ public class UsuarioSolicitudObtenerAdapter implements UsuarioSolicitudObtenerRE
         }
 
         return respuesta;
+    }
+
+    /**
+     * @see UsuarioSolicitudObtenerREPO#solicitudTieneObservaciones(Long)
+     */
+    @Override
+    public Boolean solicitudTieneObservaciones(Long solicitudUsuarioId) {
+        return usuarioSolicitudObservacionesRepository.existsBySolicitudUsuarioId(solicitudUsuarioId);
     }
 
 }

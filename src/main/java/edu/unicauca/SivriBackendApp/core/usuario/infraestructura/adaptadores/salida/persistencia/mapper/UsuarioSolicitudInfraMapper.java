@@ -9,15 +9,12 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring")
 public interface UsuarioSolicitudInfraMapper {
 
-    @Mappings({
-        @Mapping(source = "programa.id" , target = "programa.id"),
-        @Mapping(target = "programa.departamento", ignore = true)
-    })
+
     UsuarioSolicitudEntity toEntity(UsuarioSolicitud usuario);
 
     @Mappings({
-            @Mapping(source = "programa.id" , target = "programa.id"),
-            @Mapping(target = "programa.departamento", ignore = true)
+            @Mapping(target = "observaciones.solicitudUsuario", ignore = true),
+            @Mapping(target = "observaciones.conversacion", ignore = true),
     })
     UsuarioSolicitud toModel(UsuarioSolicitudEntity usuario);
 }
