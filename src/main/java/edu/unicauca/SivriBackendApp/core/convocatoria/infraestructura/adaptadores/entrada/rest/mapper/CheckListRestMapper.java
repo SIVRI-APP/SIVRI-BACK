@@ -17,6 +17,8 @@ public interface CheckListRestMapper {
 
     @Named("crearConvocatoriaFromDtoToModel")
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "completado", ignore = true)
+    @Mapping(target = "convocatoria", ignore = true)
     @Mapping(target = "documentoConvocatoria.id", source = "documentoId")
     @Mapping(target = "etapaDocumento", source = "etapaDocumento")
     @Mapping(target = "responsableDocumento", source = "responsableDocumento")
