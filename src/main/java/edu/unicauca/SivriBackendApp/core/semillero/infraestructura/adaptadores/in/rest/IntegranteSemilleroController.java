@@ -64,16 +64,18 @@ public class IntegranteSemilleroController {
      }
 
 
-     @GetMapping("/{id}")
+     @GetMapping("/obtenerxId")
      @PreAuthorize("hasAnyAuthority(" +
              "'FUNCIONARIO:SEMILLEROS', " +
              "'SEMILLERO:MENTOR')")
-     public ResponseEntity<Respuesta> obtenerIntegranteSemilleroPorId(@PathVariable(value = "id") int id) {
+     public ResponseEntity<Respuesta> obtenerIntegranteSemilleroPorId(
+             @RequestParam(value = "idIntegrante") int id
+     ){
           Respuesta respuesta=integranteSemilleroObtenerCU.obtenerPorId(id);
           respuesta.setData(integranteSemilleroDtoMapper.obtenerDtoIntegranteSemillero((IntegranteSemillero) respuesta.getData()));
           return ResponseEntity.ok().body(respuesta);
      }
-     @PostMapping("")
+     @PostMapping("/agregarintegrante")
      @PreAuthorize("hasAnyAuthority(" +
              "'FUNCIONARIO:SEMILLEROS', " +
              "'SEMILLERO:MENTOR')")
@@ -90,7 +92,7 @@ public class IntegranteSemilleroController {
           return ResponseEntity.ok().body(respuesta);
      }
 
-     @PatchMapping("")
+     @PatchMapping("/actualizarIntegrante")
      @PreAuthorize("hasAnyAuthority(" +
              "'FUNCIONARIO:SEMILLEROS', " +
              "'SEMILLERO:MENTOR')")

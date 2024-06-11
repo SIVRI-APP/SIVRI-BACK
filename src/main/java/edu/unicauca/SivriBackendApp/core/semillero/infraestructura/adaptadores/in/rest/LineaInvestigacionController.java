@@ -34,12 +34,17 @@ public class LineaInvestigacionController {
         this.lineaInvestigacionDtoMapper = lineaInvestigacionDtoMapper;
     }
 
-    @PostMapping("/asociarLinea/{id}")
-    public ResponseEntity<Respuesta> crear(@PathVariable(value = "id") int idSemillero,@Valid @RequestBody LineaInvestigacionCrearDTO nuevosDatos){
-        Respuesta respuesta =lineaInvestigacionCrearCU.crear(idSemillero,lineaInvestigacionDtoMapper.asociarLineaASemillero(nuevosDatos));
+    @PostMapping("/asociarLinea")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR',  " +
+            "'FUNCIONARIO:SEMILLEROS')")
+    public ResponseEntity<Respuesta> crear(@Valid @RequestBody LineaInvestigacionCrearDTO nuevosDatos){
+        Respuesta respuesta =lineaInvestigacionCrearCU.crear(lineaInvestigacionDtoMapper.asociarLineaASemillero(nuevosDatos));
         return ResponseEntity.ok().body(respuesta);
     }
     @PatchMapping("/actualizarLinea/{id}")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR')")
     public ResponseEntity<Respuesta> actualizarLinea(
             @PathVariable(value = "id") int idLinea,
             @Valid @RequestBody LineaInvestigacionActualizarDTO lineaInvestigacionActualizarDTO){
@@ -47,6 +52,8 @@ public class LineaInvestigacionController {
         return ResponseEntity.ok().body(respuesta);
     }
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR')")
     public ResponseEntity<Respuesta> obtenerLineasInvestigacionPorId(@PathVariable(value = "id") int id){
         Respuesta respuesta = lineaInvestigacionObtenerCU.obtenerPorId(id);
         respuesta.setData(lineaInvestigacionDtoMapper.obtenerLineasInvestigacion((LineaInvestigacion) respuesta.getData()));
