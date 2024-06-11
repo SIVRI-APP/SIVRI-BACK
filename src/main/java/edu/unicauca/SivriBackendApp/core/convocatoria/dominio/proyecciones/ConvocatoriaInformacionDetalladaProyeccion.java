@@ -1,4 +1,4 @@
-package edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.proyecciones;
+package edu.unicauca.SivriBackendApp.core.convocatoria.dominio.proyecciones;
 
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.ConvocatoriaEstado;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.EtapaDocumento;

@@ -7,6 +7,7 @@ import edu.unicauca.SivriBackendApp.core.convocatoria.aplicacion.puertos.salida.
 import edu.unicauca.SivriBackendApp.core.convocatoria.aplicacion.puertos.salida.ConvocatoriaCrearREPO;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.Checklist;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.Convocatoria;
+import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.ConvocatoriaEstado;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.validadores.ChecklistValidator;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.validadores.ConvocatoriaValidator;
 import lombok.AllArgsConstructor;
@@ -38,10 +39,12 @@ public class ConvocatoriaCrearService implements ConvocatoriaCrearCU {
         checklistValidator.validarCreacionDeConvocatoria(checklists);
 
         // Persistir Convocatoria
+        convocatoria.setEstado(ConvocatoriaEstado.PROGRAMADA);
         Convocatoria nuevaConvocatoria = convocatoriaCrearREPO.crearConvocatoria(convocatoria);
 
         // Persistir Checklists
         for (Checklist checklist : checklists) {
+            checklist.setCompletado(false);
             checklist.setConvocatoria(nuevaConvocatoria);
             checklistCrearREPO.crearChecklist(checklist);
         }

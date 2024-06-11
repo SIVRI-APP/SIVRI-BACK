@@ -54,12 +54,7 @@ INSERT INTO documento_convocatoria (id, nombre) VALUES (10, 'Acta de nacimiento 
 
 
 -- CONVOCATORIA
--- INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin, estado, tipoConvocatoriaId) VALUES (1, 'Internos 2023', 'Ayudar a la investigación de la U 2023', 'Universidad del Cauca', '2023-01-01', '2023-12-31', 'CERRADA', 1);
--- INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin, estado, tipoConvocatoriaId) VALUES (2, 'Internos 2024', 'Ayudar a la investigación de la U 2024', 'Universidad del Cauca', '2024-01-01', '2024-12-31', 'ABIERTA', 1);
--- INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin, estado, tipoConvocatoriaId) VALUES (3, 'Externo Gobernación del Cauca', 'Plan para mejorar el sistema de producción', 'Licorería del Cauca', '2024-01-01', '2024-12-31', 'ABIERTA', 2);
--- INSERT INTO convocatoria (id, nombre, objetivos, oferente, fechaInicio, fechaFin, estado, tipoConvocatoriaId) VALUES (4, 'Externo Alcaldía de Popayan', 'Plan para mejorar el sistema de producción', 'Licorería del Cauca', '2024-01-01', '2024-12-31', 'ABIERTA', 3);
-
-
+INSERT INTO convocatoria (fechaFin, fechaInicio, id, nombre, oferente, descripcion, objetivos, estado, tipoFinanciacion) VALUES('2024-12-31', '2024-09-01', 1, 'Convocatoria de Innovación Tecnológica', 'Ministerio de Energía y Minas', 'Convocatoria destinada a financiar proyectos de innovación tecnológica en el sector de las energías renovables.', 'Fomentar la investigación y desarrollo en tecnologías limpias y sostenibles.', 'ABIERTA', 'PROYECTOS_INTERNOS');
 
 
 

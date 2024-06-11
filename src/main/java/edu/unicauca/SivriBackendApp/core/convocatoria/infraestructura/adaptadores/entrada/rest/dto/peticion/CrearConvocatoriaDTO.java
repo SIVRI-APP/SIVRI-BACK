@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.entrada.rest.dto.peticion;
 
-import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.ConvocatoriaEstado;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
@@ -30,9 +29,6 @@ public class CrearConvocatoriaDTO {
 
     @FutureOrPresent(message = "La fecha de fin no puede ser en el pasado")
     private LocalDate fechaFin;
-
-    @NotNull(message = "El estado de la convocatoria no puede ser nulo")
-    private ConvocatoriaEstado estado;
 
     @NotNull(message = "El Tipo de Financiacion no puede ser nulo")
     private TipoFinanciacion tipoFinanciacion;

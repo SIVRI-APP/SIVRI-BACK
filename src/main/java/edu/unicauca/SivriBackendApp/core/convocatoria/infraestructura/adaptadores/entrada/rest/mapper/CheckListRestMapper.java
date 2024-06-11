@@ -22,6 +22,5 @@ public interface CheckListRestMapper {
     @Mapping(target = "responsableDocumento", source = "responsableDocumento")
     @Mapping(target = "cantidad", source = "cantidad")
     @Mapping(target = "obligatorio", source = "obligatorio")
-    @Mapping(target = "completado", expression = "java(false)")
     Checklist crearConvocatoriaFromDtoToModel(ChecklistDTO dto);
 }
