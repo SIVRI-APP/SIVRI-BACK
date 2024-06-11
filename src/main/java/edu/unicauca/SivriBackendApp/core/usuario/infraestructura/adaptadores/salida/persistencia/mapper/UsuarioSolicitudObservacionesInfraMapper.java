@@ -1,16 +1,13 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper;
 
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitudObservaciones;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidad.UsuarioSolicitudObservacionesEntity;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.UsuarioSolicitudObservacionesEntity;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {FuncionarioInfraMapper.class})
+@Mapper(componentModel = "spring")
 public interface UsuarioSolicitudObservacionesInfraMapper {
 
-    @Mapping(source = "funcionario", target = "funcionario", qualifiedByName = "toEntity")
-    UsuarioSolicitudObservacionesEntity toEntity(UsuarioSolicitudObservaciones observación);
+    UsuarioSolicitudObservacionesEntity toEntity(UsuarioSolicitudObservaciones usuario);
 
-    @Mapping(source = "funcionario", target = "funcionario", qualifiedByName = "toModel")
-    UsuarioSolicitudObservaciones toModel(UsuarioSolicitudObservacionesEntity observación);
+    UsuarioSolicitudObservaciones toModel(UsuarioSolicitudObservacionesEntity usuario);
 }

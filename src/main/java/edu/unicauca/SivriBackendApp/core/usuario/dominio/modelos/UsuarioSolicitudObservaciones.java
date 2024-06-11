@@ -1,53 +1,56 @@
 package edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Set;
 
 /**
- * La clase UsuarioSolicitudObservaciones representa las observaciones realizadas a una solicitud de usuario por parte de un funcionario.
+ * Representa la entidad para las observaciones asociadas a las solicitudes de usuarios en el sistema.
  */
-@Data
+@Getter
+@Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class UsuarioSolicitudObservaciones {
 
-    /**
-     * Identificador único de la observación.
-     */
+    /** Identificador único de la observacion asociada a la solicitud de usuario */
     private Long id;
 
-    /**
-     * Solicitud de usuario a la que se asocia la observación.
-     */
+    /** Solicitud de usuario a la que está asociada la observacion. Es un campo obligatorio */
     private UsuarioSolicitud solicitudUsuario;
 
-    /**
-     * Funcionario que realiza la observación.
-     */
+    /** Funcionario que realiza la observacion. Es un campo obligatorio */
     private Funcionario funcionario;
 
-    /**
-     * Observación realizada al solicitante.
-     */
-    private String observación;
+    /** Conversaciones entórno a esta observacion */
+    private Set<UsuarioSolicitudConversacion> conversacion;
 
-    /**
-     * Fecha en la que se realiza la observación.
-     */
-    private LocalDate fechaObservación;
+    /** Texto de la observacion. Tiene una longitud máxima de 1000 caracteres y es un campo obligatorio */
+    private String observacion;
 
-    /**
-     * Indica si la observación ha sido resuelta.
-     */
+    /** Fecha en que se realiza la observacion. Debe ser una fecha presente o futura */
+    private LocalDate fechaObservacion;
+
+    /** Indica si la observacion ha sido resuelta o no */
     private Boolean resuelta;
 
-    /**
-     * Indica si se ha enviado una notificación de vencimiento de la observación.
-     */
-    private Boolean notificaciónDeVencimiento;
+    /** Indica si se ha enviado una notificación de vencimiento asociada a esta observacion */
+    private Boolean notificacionDeVencimiento;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UsuarioSolicitudObservaciones that = (UsuarioSolicitudObservaciones) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
+

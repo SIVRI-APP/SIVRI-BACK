@@ -1,84 +1,67 @@
 package edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos;
 
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Programa;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.Sexo;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.Objects;
 
 /**
- * La clase Usuario representa a un usuario en el sistema.
+ * Representa la entidad de persistencia para los usuarios en el sistema.
  */
-@Data
+@Getter
+@Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
 
-    /**
-     * Identificador único del usuario.
-     */
+    /** Identificador único de la solicitud de usuario */
     private Long id;
 
-    /**
-     * Correo electrónico del usuario.
-     */
+    /** Identificador del programa al que pertenece la solicitud de usuario */
+    private Programa programa;
+
+    /** Correo electrónico de la solicitud de usuario. Es un campo obligatorio, único y tiene una longitud máxima de 60 caracteres */
     private String correo;
 
-    /**
-     * Tipo de documento de identificación del usuario.
-     */
+    /** Tipo de documento de la solicitud de usuario */
     private TipoDocumento tipoDocumento;
 
-    /**
-     * Número de documento de identificación del usuario.
-     */
+    /** Número de documento de la solicitud de usuario. Tiene una longitud máxima de 45 caracteres */
     private String numeroDocumento;
 
-    /**
-     * Género o sexo del usuario.
-     */
+    /** Género o sexo de la solicitud de usuario */
     private Sexo sexo;
 
-    /**
-     * Tipo de usuario en el sistema.
-     */
+    /** Tipo de usuario de la solicitud (administrativo, docente, pregrado, etc.) */
     private TipoUsuario tipoUsuario;
 
-    /**
-     * Nombres del usuario.
-     */
-    private String nombres;
+    /** Nombres de la solicitud de usuario. Es un campo obligatorio y tiene una longitud máxima de 100 caracteres */
+    private String nombre;
 
-    /**
-     * Apellidos del usuario.
-     */
-    private String apellidos;
+    /** Apellidos de la solicitud de usuario. Es un campo obligatorio y tiene una longitud máxima de 100 caracteres */
+    private String apellido;
 
-    /**
-     * Número de teléfono del usuario.
-     */
+    /** Número de teléfono de la solicitud de usuario. Es un campo obligatorio y tiene una longitud máxima de 45 caracteres */
     private String telefono;
 
-    /**
-     * Enlace al Curriculum Vitae LAC del usuario.
-     */
+    /** Enlace al Curriculum Vitae de la solicitud de usuario. Tiene una longitud máxima de 150 caracteres */
     private String cvLac;
 
-    /**
-     * Identificador único de la facultad a la que pertenece el usuario.
-     */
-    private Long facultadId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id, usuario.id);
+    }
 
-    /**
-     * Identificador único del departamento al que pertenece el usuario.
-     */
-    private Long departamentoId;
-
-    /**
-     * Identificador único del programa académico al que pertenece el usuario.
-     */
-    private Long programaId;
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
+

@@ -4,5 +4,4 @@ public enum ConvocatoriaEstado {
     ABIERTA,
     CERRADA,
     PROGRAMADA
-
 }

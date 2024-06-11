@@ -50,7 +50,7 @@ public class SendMessageService {
 		}
 	}
 
-	public Respuesta sendMessage(SendRequest sendRequest) {
+	public Respuesta<Boolean> sendMessage(SendRequest sendRequest) {
 		try {
 			if (validarCorreo(sendRequest.getTo())) {
 				String messageContent = buildMessage(sendRequest);
@@ -67,7 +67,7 @@ public class SendMessageService {
 			}
 
 		} catch (NotAcceptableStatusException e1) {
-			throw new ReglaDeNegocioException("bad.metadata", List.of(e1));
+			throw new ReglaDeNegocioException("bad.metadata", List.of(String.valueOf(e1)));
 		} catch (MessagingException e) {
 			throw new ReglaDeNegocioException("bad.to.recipient3");
 		}
@@ -86,7 +86,7 @@ public class SendMessageService {
 				}
 				String finalMessage = templateContent.get();
 
-				//Set metadata
+				//Set MetadataService
 				for (MetaData meta : sendRequest.getMetaData()) {
 					if(template.get().getVars().contains(meta.getKey())) {
 						finalMessage = finalMessage.replace("$[{" + meta.getKey() + "}]", meta.getValue());

@@ -15,7 +15,7 @@ public class BaseException extends RuntimeException {
         super(BundleMessage.getExceptionMessage(key));
     }
 
-    BaseException(String key, List args) {
+    BaseException(String key, List<String> args) {
         super(BundleMessage.getExceptionMessage(key, args));
     }
 

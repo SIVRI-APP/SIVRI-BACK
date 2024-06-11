@@ -3,12 +3,13 @@ package edu.unicauca.SivriBackendApp.core.usuario.dominio.servicios;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.entrada.UsuarioObtenerCU;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.UsuarioObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
-import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioListarConFiltroProyección;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.entrada.UsuarioObtenerCU;
-import edu.unicauca.SivriBackendApp.core.usuario.aplicación.puertos.salida.UsuarioObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioInformacionDetalladaProyeccion;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioListarConFiltroProyeccion;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,9 +20,8 @@ import java.util.List;
 
 
 /**
- * El servicio UsuarioObtenerService implementa la lógica para obtener información de usuarios
- * desde el repositorio de persistencia, incluyendo la recuperación de un usuario por su ID
- * y la obtención de una lista paginada de usuarios filtrados.
+ * El servicio UsuarioSolicitudObtenerService implementa la lógica de negocio para la obtención
+ * y filtrado de solicitudes de usuario.
  */
 @Service
 @AllArgsConstructor
@@ -30,40 +30,49 @@ public class UsuarioObtenerService implements UsuarioObtenerCU {
     private final UsuarioObtenerREPO usuarioObtenerREPO;
 
     /**
-     * Obtiene un usuario por su ID.
+     * Lista las solicitudes de usuario filtradas y paginadas.
      *
-     * @param usuarioId Identificador único del usuario.
-     * @return Respuesta que contiene el usuario obtenido.
-     * @throws ReglaDeNegocioException Si no se encuentra el usuario con el ID especificado.
+     * @param pageNo            Número de la página.
+     * @param pageSize          Tamaño de la página.
+     * @param correo            Correo del usuario.
+     * @param tipoDocumento     Tipo de documento del usuario.
+     * @param numeroDocumento   Número de documento del usuario.
+     * @param nombre            Nombres del usuario.
+     * @param apellido          Apellidos del usuario.
+     * @param tipoUsuario       Tipo de usuario.
+     * @param organismoDeInvestigacionId           Identificador del grupo.
+     * @return Respuesta que contiene la lista paginada de solicitudes de usuario filtradas.
      */
     @Override
-    public Respuesta<Usuario> obtenerUsuario(long usuarioId) {
-        Usuario respuestaBd = usuarioObtenerREPO.obtenerUsuario(usuarioId).orElseThrow(
-                () -> new ReglaDeNegocioException("bad.no.se.encontró.usuario.id", List.of(Long.toString(usuarioId))));
+    public Respuesta<Page<UsuarioListarConFiltroProyeccion>> listarConFiltro(int pageNo, int pageSize, String correo, TipoDocumento tipoDocumento, String numeroDocumento, String nombre, String apellido, TipoUsuario tipoUsuario, Integer organismoDeInvestigacionId) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+
+        Page<UsuarioListarConFiltroProyeccion> respuestaBd = usuarioObtenerREPO.listarConFiltro(pageable, correo, tipoDocumento, numeroDocumento, nombre, apellido, tipoUsuario, organismoDeInvestigacionId);
+        return new RespuestaHandler<>(200, "ok", "", respuestaBd).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<UsuarioInformacionDetalladaProyeccion> obtenerUsuarioInformacionDetallada(long usuarioId) {
+        UsuarioInformacionDetalladaProyeccion respuestaBd = usuarioObtenerREPO.obtenerUsuarioInformacionDetallada(usuarioId).orElseThrow(
+                () -> new ReglaDeNegocioException("bad.usuarios.no.existe", List.of(Long.toString(usuarioId))));
 
         return new RespuestaHandler<>(200, "ok", "", respuestaBd).getRespuesta();
     }
 
     /**
-     * Lista usuarios de forma paginada y filtrada según los parámetros especificados.
+     * Obtiene una solicitud de usuario por su identificador.
      *
-     * @param pageNo          Número de página.
-     * @param pageSize        Tamaño de la página.
-     * @param correo          Correo electrónico del usuario.
-     * @param tipoDocumento   Tipo de documento del usuario.
-     * @param numeroDocumento Número de documento del usuario.
-     * @param nombres         Nombres del usuario.
-     * @param apellidos       Apellidos del usuario.
-     * @param tipoUsuario     Tipo de usuario.
-     * @return Respuesta que contiene la lista paginada de usuarios según los filtros aplicados.
+     * @param usuarioId Identificador de la solicitud de usuario.
+     * @return Respuesta que contiene la solicitud de usuario.
+     * @throws ReglaDeNegocioException Si la solicitud de usuario no existe.
      */
     @Override
-    public Respuesta<Page<List<UsuarioListarConFiltroProyección>>> listarConFiltro(int pageNo, int pageSize, String correo, TipoDocumento tipoDocumento, String numeroDocumento, String nombres, String apellidos, TipoUsuario tipoUsuario) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-
-        Page<List<UsuarioListarConFiltroProyección>> respuestaBd = usuarioObtenerREPO.listarConFiltro(pageable, correo, tipoDocumento, numeroDocumento, nombres, apellidos, tipoUsuario);
+    public Respuesta<Usuario> obtenerUsuario(long usuarioId) {
+        Usuario respuestaBd = usuarioObtenerREPO.obtenerUsuario(usuarioId).orElseThrow(
+                () -> new ReglaDeNegocioException("bad.usuarios.no.existe", List.of(Long.toString(usuarioId))));
 
         return new RespuestaHandler<>(200, "ok", "", respuestaBd).getRespuesta();
     }
+
 }
 

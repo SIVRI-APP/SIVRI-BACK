@@ -11,8 +11,8 @@ public class CadenaAleatoria {
 
         for (int i = 0; i < longitud; i++) {
             int index = random.nextInt(CARACTERES_PERMITIDOS.length());
-            char caracterAleatorio = CARACTERES_PERMITIDOS.charAt(index);
-            sb.append(caracterAleatorio);
+            char randomCharacter = CARACTERES_PERMITIDOS.charAt(index);
+            sb.append(randomCharacter);
         }
 
         return sb.toString();

@@ -8,10 +8,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -21,33 +19,26 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
-    private static final String[] WHITE_LIST_URL = {"/v1/acceso/**",
-            "/v1/metadata/**",
-            "/v2/api-docs",
-            "/v3/api-docs",
-            "/v3/api-docs/**",
+    private static final String[] WHITE_LIST_URL = {
+            "/v1/access/**",
             "/swagger-resources",
             "/swagger-resources/**",
-            "/configuration/ui",
-            "/configuration/security",
             "/swagger-ui/**",
-            "/webjars/**",
-            "/swagger-ui.html"};
+            "/swagger-ui.html"
+    };
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
-    private final LogoutHandler logoutHandler;
 
     /**
      * Configuración del filtro de seguridad para Spring Security.
-     *
      * Este método define y configura el filtro de seguridad para controlar el acceso a las solicitudes HTTP.
      * La configuración incluye la desactivación de CSRF, la definición de reglas de autorización, la gestión de sesiones,
      * la provisión de un proveedor de autenticación, la adición de un filtro JWT y la configuración de la gestión de cierre de sesión.
      *
      * @param http Objeto HttpSecurity proporcionado por Spring Security para configurar las reglas de seguridad.
      * @return Una cadena de filtros de seguridad configurada.
-     * @throws Exception Si ocurre una excepción al configurar el filtro de seguridad.
+     * @throws Exception Sí ocurre una excepción al configurar el filtro de seguridad.
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -72,12 +63,6 @@ public class SecurityConfiguration {
                 // Agregar el filtro de autenticación JWT antes del filtro de nombre de usuario y contraseña
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 
-                // Configurar la gestión de cierre de sesión
-                .logout(logout ->
-                        logout.logoutUrl("/api/v1/auth/logout")
-                                .addLogoutHandler(logoutHandler)
-                                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-                )
                 .cors()
         ;
 

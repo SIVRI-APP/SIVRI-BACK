@@ -13,7 +13,7 @@ public class CredencialIncorrectaException extends BaseException{
         super(key);
     }
 
-    public CredencialIncorrectaException(String key, List args) {
+    public CredencialIncorrectaException(String key, List<String> args) {
         super(key, args);
     }
 }
