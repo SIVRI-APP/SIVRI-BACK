@@ -17,6 +17,8 @@ import java.util.Optional;
 @Repository
 public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
 
+    Boolean existsByNombre(String nombre);
+
     @Query("SELECT proyecto " +
             "FROM ProyectoEntity proyecto " +
             "LEFT JOIN FETCH proyecto.convocatoria " +
@@ -28,20 +30,19 @@ public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
     Optional<ProyectoInformacionDetalladaProyeccion> obtenerProyectoInformacionDetallada(@Param("proyectoId") long proyectoId);
 
     @Query(value = "select " +
-            " c.id, " +
-            " c.nombre, " +
-            " c.estado, " +
+            " p.id, " +
+            " p.nombre, " +
+            " p.estado, " +
             " c.tipoFinanciacion " +
             "from " +
-            " convocatoria c  " +
+            " proyecto p " +
+            " left join convocatoria c ON p.convocatoriaId = c.id " +
             "where  " +
-            " (:id IS NULL OR LOWER(c.id) LIKE LOWER(CONCAT('%', :id, '%'))) AND " +
-            " (:nombre IS NULL OR LOWER(c.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))) AND " +
-            " (:estado IS NULL OR LOWER(c.estado) LIKE LOWER(CONCAT('%', :estado, '%'))) AND " +
-            " (:tipoFinanciacion IS NULL OR LOWER(c.tipoFinanciacion) LIKE LOWER(CONCAT('%', :tipoFinanciacion, '%'))) "
+            " (:id IS NULL OR LOWER(p.id) LIKE LOWER(CONCAT('%', :id, '%'))) AND " +
+            " (:nombre IS NULL OR LOWER(p.nombre) LIKE LOWER(CONCAT('%', :nombre, '%')))"
             , nativeQuery = true)
     Page<ProyectoListarConFiltroProyeccion> listarConFiltro(
             @Param("id") String id,
             @Param("nombre") String nombre,
-            @PageableDefault(sort = "nombre") Pageable pageable);
+            @PageableDefault(sort = "id") Pageable pageable);
 }

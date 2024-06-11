@@ -5,6 +5,7 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.convocatoria.aplicacion.puertos.entrada.ConvocatoriaObtenerCU;
 import edu.unicauca.SivriBackendApp.core.convocatoria.aplicacion.puertos.salida.ConvocatoriaObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.Convocatoria;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.ConvocatoriaEstado;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.proyecciones.ConvocatoriaInformacionDetalladaProyeccion;
@@ -46,5 +47,17 @@ public class ConvocatoriaObtenerService implements ConvocatoriaObtenerCU {
         Page<ConvocatoriaListarConFiltroProyeccion> respuesta = convocatoriaObtenerREPO.listarConFiltro(pageable, id, nombre, estado, tipoFinanciacion);
 
         return new RespuestaHandler<>(200, "ok", "", respuesta).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Convocatoria> obtenerConvocatoria(long convocatoriaId) {
+
+        Optional<Convocatoria> convocatoria = convocatoriaObtenerREPO.obtenerConvocatoria(convocatoriaId);
+
+        if (convocatoria.isEmpty()){
+            throw new ReglaDeNegocioException("bad.convocatorioNoExiste", List.of(String.valueOf(convocatoriaId)));
+        }
+
+        return new RespuestaHandler<>(200, "ok", "", convocatoria.get()).getRespuesta();
     }
 }

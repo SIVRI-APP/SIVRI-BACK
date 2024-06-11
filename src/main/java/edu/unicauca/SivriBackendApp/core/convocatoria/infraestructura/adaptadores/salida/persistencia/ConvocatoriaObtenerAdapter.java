@@ -1,10 +1,13 @@
 package edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.salida.persistencia;
 
 import edu.unicauca.SivriBackendApp.core.convocatoria.aplicacion.puertos.salida.ConvocatoriaObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.Convocatoria;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.ConvocatoriaEstado;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.proyecciones.ConvocatoriaInformacionDetalladaProyeccion;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.proyecciones.ConvocatoriaListarConFiltroProyeccion;
+import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.salida.persistencia.entidad.ConvocatoriaEntity;
+import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.salida.persistencia.mapper.ConvocatoriaInfraMapper;
 import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.salida.persistencia.repositorio.ConvocatoriaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,6 +22,8 @@ public class ConvocatoriaObtenerAdapter implements ConvocatoriaObtenerREPO {
 
     private final ConvocatoriaRepository convocatoriaRepository;
 
+    private final ConvocatoriaInfraMapper convocatoriaInfraMapper;
+
     @Override
     public Optional<ConvocatoriaInformacionDetalladaProyeccion> obtenerConvocatoriaInformacionDetallada(long convocatoriaId) {
         return convocatoriaRepository.obtenerConvocatoriaInformacionDetallada(convocatoriaId);
@@ -30,5 +35,12 @@ public class ConvocatoriaObtenerAdapter implements ConvocatoriaObtenerREPO {
         String tipoFinanciacionString = (tipoFinanciacion != null) ? tipoFinanciacion.toString() : null;
 
         return convocatoriaRepository.listarConFiltro(id, nombre, estadoString, tipoFinanciacionString, page);
+    }
+
+    @Override
+    public Optional<Convocatoria> obtenerConvocatoria(long convocatoriaId) {
+        Optional<ConvocatoriaEntity> convocatoria = convocatoriaRepository.findById(convocatoriaId);
+
+        return convocatoria.map(convocatoriaInfraMapper::toDto);
     }
 }
