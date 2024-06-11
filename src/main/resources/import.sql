@@ -32,12 +32,18 @@ INSERT INTO programa (id, nombre, departamentoId) VALUES (3, 'Ingeniería Electr
 
 
 -- LISTADO DE DOCUMENTOS
--- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (1, 1, 1, 'PRE_EJECUCIÓN', 'ORGANISMO_DE_INVESTIGACIÓN', 1, true);
--- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (2, 1, 2, 'EJECUCIÓN', 'ORGANISMO_DE_INVESTIGACIÓN', 2, true);
--- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (3, 1, 3, 'POST_EJECUCIÓN', 'VRI', 1, true);
--- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (4, 1, 4, 'POST_EJECUCIÓN', 'VRI', 1, false);
--- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (5, 1, 4, 'POST_EJECUCIÓN', 'VRI', 1, true);
---
+INSERT INTO documento_convocatoria (id, nombre) VALUES (1, 'Planilla de Seguridad Social');
+INSERT INTO documento_convocatoria (id, nombre) VALUES (2, 'FOR-2');
+INSERT INTO documento_convocatoria (id, nombre) VALUES (3, 'FOR-3');
+INSERT INTO documento_convocatoria (id, nombre) VALUES (4, 'FOR-4');
+INSERT INTO documento_convocatoria (id, nombre) VALUES (5, 'FOR-5');
+INSERT INTO documento_convocatoria (id, nombre) VALUES (6, 'FOR-14');
+INSERT INTO documento_convocatoria (id, nombre) VALUES (7, 'FOR-15');
+INSERT INTO documento_convocatoria (id, nombre) VALUES (8, 'FOR-24');
+INSERT INTO documento_convocatoria (id, nombre) VALUES (9, 'Registro civil de nacimiento');
+INSERT INTO documento_convocatoria (id, nombre) VALUES (10, 'Acta de nacimiento del Proyecto');
+
+
 -- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (6, 2, 1, 'PRE_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
 -- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (7, 2, 2, 'EJECUCIÓN', 'DIRECTOR_PROYECTO', 2, true);
 -- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (8, 2, 3, 'POST_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
