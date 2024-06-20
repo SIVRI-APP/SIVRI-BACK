@@ -55,12 +55,7 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
 
     @Override
     public List<Semillero> obtenerSemillerosPorIdGrupo(int idGrupo) {
-
-        List<Semillero> semilleros=semilleroRepository.findByGrupoId(idGrupo).stream().map(semilleroEntity->{
-            Semillero semillero=semilleroMapper.obtenerModelo(semilleroEntity);
-            return semillero;
-        }).collect(Collectors.toList());
-        return semilleros;
+        return semilleroRepository.findByGrupoId(idGrupo).stream().map(semilleroMapper::obtenerModelo).collect(Collectors.toList());
     }
 
     @Override

@@ -87,6 +87,8 @@ public class LineaInvestigacionController {
         return ResponseEntity.ok().body(respuesta);
     }
     @DeleteMapping("/eliminarLinea/{id}")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR')")
     public ResponseEntity<Respuesta> eliminarLinea(@PathVariable(value = "id") int idLinea){
         Respuesta respuesta = lineaInvestigacionEliminarCU.eliminadoFisico(idLinea);
         return ResponseEntity.ok().body(respuesta);
