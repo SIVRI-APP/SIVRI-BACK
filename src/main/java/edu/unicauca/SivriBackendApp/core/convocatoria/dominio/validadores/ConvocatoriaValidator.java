@@ -24,6 +24,16 @@ public class ConvocatoriaValidator {
             throw new ReglaDeNegocioException("bad.convocatoriaYaExiste", List.of(String.valueOf(convocatoria.getNombre())));
         }
 
+        // Fecha de Fin y Fecha de Inicio no pueden ser Iguales
+        if (convocatoria.getFechaFin().isEqual(convocatoria.getFechaInicio())){
+            throw new ReglaDeNegocioException("bad.fechaFin");
+        }
+
+        // Fecha Fin antes de Fecha Inicio
+        if (convocatoria.getFechaFin().isBefore(convocatoria.getFechaInicio())){
+            throw new ReglaDeNegocioException("bad.fechaInicio");
+        }
+
         // No puedes crear una convocatoria de externos si no tienes el ROL para eso
         List<String> roles = servicioDeIdentificacionDeUsuario.obtenerRoles();
 

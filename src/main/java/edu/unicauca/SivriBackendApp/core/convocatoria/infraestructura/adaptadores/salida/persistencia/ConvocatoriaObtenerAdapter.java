@@ -9,6 +9,7 @@ import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.proyecciones.Convo
 import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.salida.persistencia.entidad.ConvocatoriaEntity;
 import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.salida.persistencia.mapper.ConvocatoriaInfraMapper;
 import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.salida.persistencia.repositorio.ConvocatoriaRepository;
+
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,8 +40,13 @@ public class ConvocatoriaObtenerAdapter implements ConvocatoriaObtenerREPO {
 
     @Override
     public Optional<Convocatoria> obtenerConvocatoria(long convocatoriaId) {
-        Optional<ConvocatoriaEntity> convocatoria = convocatoriaRepository.findById(convocatoriaId);
+        Optional<Convocatoria> respuesta = Optional.empty();
+        Optional<ConvocatoriaEntity> respuestaBD = convocatoriaRepository.findById(convocatoriaId);
 
-        return convocatoria.map(convocatoriaInfraMapper::toDto);
+        if (respuestaBD.isPresent()){
+            respuesta = Optional.of(convocatoriaInfraMapper.toDto(respuestaBD.get()));
+        }
+
+        return respuesta;
     }
 }

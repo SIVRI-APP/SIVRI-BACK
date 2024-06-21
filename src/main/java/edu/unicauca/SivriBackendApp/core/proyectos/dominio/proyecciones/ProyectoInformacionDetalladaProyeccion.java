@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.dominio.proyecciones;
 
+import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
 
 import java.time.LocalDate;
@@ -47,5 +48,7 @@ public interface ProyectoInformacionDetalladaProyeccion {
     interface ConvocatoriaProjection {
         // Define los campos necesarios de ConvocatoriaEntity
         Long getId();
+        String getNombre();
+        TipoFinanciacion getTipoFinanciacion();
     }
 }

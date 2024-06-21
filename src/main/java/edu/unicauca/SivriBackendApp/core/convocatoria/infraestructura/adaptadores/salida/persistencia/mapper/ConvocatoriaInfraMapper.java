@@ -10,4 +10,5 @@ public interface ConvocatoriaInfraMapper {
     ConvocatoriaEntity toEntity (Convocatoria modelo);
 
     Convocatoria toDto (ConvocatoriaEntity entidad);
+
 }
