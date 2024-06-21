@@ -47,8 +47,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 
     //Grupo
+    List<IGetAuthorities> grupoUserAuthorities = credencialRepository.getAuthoritiesGrupo(userEmail);
+    for (IGetAuthorities auth: grupoUserAuthorities) {
+      authorities.add(new SimpleGrantedAuthority(auth.getAuthorities()));
+    }
     //Semillero
+    List<IGetAuthorities> semilleroUserAuthorities = credencialRepository.getAuthoritiesSemillero(userEmail);
+    for (IGetAuthorities auth: semilleroUserAuthorities) {
+      authorities.add(new SimpleGrantedAuthority(auth.getAuthorities()));
+    }
+
     //Proyecto
+
     // Funcionario
     List<IGetAuthorities> userAuthorities = credencialRepository.getAuthoritiesFuncionario(userEmail);
     for (IGetAuthorities auth: userAuthorities) {

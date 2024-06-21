@@ -45,4 +45,8 @@ public interface UsuarioObtenerCU {
      * @return Respuesta que contiene la solicitud de usuario obtenida.
      */
     Respuesta<Usuario> obtenerUsuario(long usuarioId);
+
+    /**
+     * todo miguel ObtenerUsuarioPorNumeroDeDocumentos
+     */
 }

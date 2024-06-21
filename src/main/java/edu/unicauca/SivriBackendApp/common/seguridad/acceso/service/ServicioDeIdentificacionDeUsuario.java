@@ -62,7 +62,7 @@ public class ServicioDeIdentificacionDeUsuario {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<String> userRunTimeRoles = new ArrayList<>();
 
-        // Obtener los roles del usuario
+         // Obtener los roles del usuario
         for (GrantedAuthority authority : authentication.getAuthorities()) {
             String rol = authority.getAuthority();
             userRunTimeRoles.add(rol);

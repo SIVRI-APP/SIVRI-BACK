@@ -1,15 +1,44 @@
--- |***** ACADÉMICA *****|
+-- |***** ACADEMICA *****|
 
 -- -- FACULTAD
-INSERT INTO facultad (idFacultad, nombre) VALUES (1, 'Ingeniería Electronica y Telecomunicaciones');
+INSERT INTO facultad (idFacultad, nombre) VALUES (1, 'Facultad de Artes');
+INSERT INTO facultad (idFacultad, nombre) VALUES (2, 'Facultad de Ciencias Agrarias');
+INSERT INTO facultad (idFacultad, nombre) VALUES (3, 'Facultad de Ciencias de la Salud');
+INSERT INTO facultad (idFacultad, nombre) VALUES (4, 'Facultad de Ciencias Contables, Económicas y Administrativas');
+INSERT INTO facultad (idFacultad, nombre) VALUES (5, 'Facultad de Ciencias Humanas y Sociales');
+INSERT INTO facultad (idFacultad, nombre) VALUES (6, 'Facultad de Ciencias Naturales, Exactas y de la Educación');
+INSERT INTO facultad (idFacultad, nombre) VALUES (7, 'Facultad de Derecho, Ciencias Políticas y Sociales');
+INSERT INTO facultad (idFacultad, nombre) VALUES (8, 'Facultad de Ingeniería Civil');
+INSERT INTO facultad (idFacultad, nombre) VALUES (9, 'Facultad de Ingeniería Electrónica y Telecomunicaciones');
+
 
 -- -- DEPARTAMENTO
-INSERT INTO departamento (id, nombre, facultadId) VALUES (1, 'Sistemas', 1);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (1, 'Artes Plásticas', 1);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (2, 'Agroindustria', 2);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (3, 'Biología', 6);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (4, 'Ciencia Política', 7);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (5, 'Ciencias Administrativas', 4);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (6, 'Ciencias Agropecuarias', 2);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (7, 'Ciencias Económicas', 4);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (8, 'Ciencias Fisiológicas', 3);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (9, 'Ciencias Quirúrgicas', 3);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (10, 'Comunicación Social', 7);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (11, 'Derecho Laboral', 7);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (12, 'Derecho Privado', 7);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (13, 'Diseño', 1);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (14, 'Educación Física, Recreación y Deporte', 6);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (15, 'Enfermería', 3);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (16, 'Español y Literatura', 5);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (17, 'Estudios Interculturales', 5);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (18, 'Sistemas', 9);
+INSERT INTO departamento (id, nombre, facultadId) VALUES (19, 'Desarrollo de Vías y Estructuras', 8);
 
 -- -- PROGRAMAS
-INSERT INTO programa (id, nombre, departamentoId) VALUES (1, 'Ingeniería de Sistemas', 1);
+INSERT INTO programa (id, nombre, departamentoId) VALUES (1, 'Ingeniería de Sistemas', 9);
 INSERT INTO programa (id, nombre, departamentoId) VALUES (2, 'Ingeniería civil', 1);
 INSERT INTO programa (id, nombre, departamentoId) VALUES (3, 'Ingeniería Electronica', 1);
+INSERT INTO programa (id, nombre, departamentoId) VALUES (4, 'Artes Plásticas', 1);
+
 
 
 
