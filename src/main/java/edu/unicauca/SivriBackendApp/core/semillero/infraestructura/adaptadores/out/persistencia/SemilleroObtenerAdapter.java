@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia;
 
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.SemilleroObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.SemilleroObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroEstado;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroSemilleros;

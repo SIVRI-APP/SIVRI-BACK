@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia;
 
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.LineaInvestigacionEliminarREPO;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.LineaInvestigacionEliminarREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.LineaInvestigacion;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.mapper.LineaInvestigacionMapper;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.repository.ILineaInvestigacionRepository;

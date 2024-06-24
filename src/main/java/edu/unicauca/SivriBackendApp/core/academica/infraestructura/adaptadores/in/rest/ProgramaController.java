@@ -1,9 +1,10 @@
 package edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.in.rest;
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
-import edu.unicauca.SivriBackendApp.core.academica.aplicación.ports.in.ProgramaObtenerCU;
+import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.in.ProgramaObtenerCU;
 import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Programa;
-import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.in.rest.mapper.ProgramaDtoMapper;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarProgramas;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,26 +14,30 @@ import java.util.List;
 @RestController
 @RequestMapping("programas")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@AllArgsConstructor
 public class ProgramaController {
     private final ProgramaObtenerCU programaObtenerCU;
-    private final ProgramaDtoMapper programaDtoMapper;
 
-    public ProgramaController(ProgramaObtenerCU programaObtenerCU, ProgramaDtoMapper programaDtoMapper) {
-        this.programaObtenerCU = programaObtenerCU;
-        this.programaDtoMapper = programaDtoMapper;
-    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Respuesta> obtenerProgramaPorId(@PathVariable(value = "id") int id){
-        Respuesta respuesta =programaObtenerCU.obtenerPorId(id);
-        respuesta.setData(programaDtoMapper.obtenerPrograma((Programa) respuesta.getData()));
-        return ResponseEntity.ok().body(respuesta);
+    public ResponseEntity<Respuesta<Programa>> obtenerProgramaPorId(@PathVariable(value = "id") int id){
+        Respuesta<Programa> respuesta = programaObtenerCU.obtenerPorId(id);
+       return ResponseEntity.ok().body(respuesta);
     }
 
     @GetMapping("")
-    public ResponseEntity<Respuesta> obtenerListadoProgramas(){
-        Respuesta respuesta =programaObtenerCU.obtenerProgramas();
-        respuesta.setData(((List<Programa>) respuesta.getData()).stream().map(programaDtoMapper::obtenerPrograma).toList());
+    public ResponseEntity<Respuesta<List<Programa>>> obtenerListadoProgramas(){
+        Respuesta<List<Programa>> respuesta =programaObtenerCU.obtenerProgramas();
         return ResponseEntity.ok().body(respuesta);
+    }
+
+    @GetMapping("/obtenerProgramasxdepartamento")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR')")
+    public ResponseEntity<Respuesta<List<ListarProgramas>>> obtenerProgramasxdepartamento(
+            @RequestParam() Integer semilleroId
+    ){
+        return ResponseEntity.ok().body(programaObtenerCU.obtenerProgramasxdepatamento(semilleroId));
     }
 
 

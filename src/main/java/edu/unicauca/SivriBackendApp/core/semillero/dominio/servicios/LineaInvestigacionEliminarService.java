@@ -3,9 +3,9 @@ package edu.unicauca.SivriBackendApp.core.semillero.dominio.servicios;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.LineaInvestigacionEliminarCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.LineaInvestigacionObtenerCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.LineaInvestigacionEliminarREPO;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.LineaInvestigacionEliminarCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.LineaInvestigacionObtenerCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.LineaInvestigacionEliminarREPO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

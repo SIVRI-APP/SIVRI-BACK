@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia;
 
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.RolesSemilleroObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.RolesSemilleroObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.RolSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.RolSemilleroEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.mapper.RolSemilleroMapper;

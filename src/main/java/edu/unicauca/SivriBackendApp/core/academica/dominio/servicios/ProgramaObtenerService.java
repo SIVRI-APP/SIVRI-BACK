@@ -4,9 +4,10 @@ package edu.unicauca.SivriBackendApp.core.academica.dominio.servicios;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
-import edu.unicauca.SivriBackendApp.core.academica.aplicación.ports.in.ProgramaObtenerCU;
-import edu.unicauca.SivriBackendApp.core.academica.aplicación.ports.out.ProgramaObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.in.ProgramaObtenerCU;
+import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.out.ProgramaObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Programa;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarProgramas;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -55,5 +56,14 @@ public class ProgramaObtenerService implements ProgramaObtenerCU {
             throw new ReglaDeNegocioException("bad.no.se.encontraron.registros");
         }
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<List<ListarProgramas>> obtenerProgramasxdepatamento(Integer semilleroId) {
+        List<ListarProgramas> respuesta=programaObtenerREPO.obtenerProgramasxdepartamento(semilleroId);
+        if (respuesta.isEmpty()){
+            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.programas");
+        }
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuesta).getRespuesta();
     }
 }

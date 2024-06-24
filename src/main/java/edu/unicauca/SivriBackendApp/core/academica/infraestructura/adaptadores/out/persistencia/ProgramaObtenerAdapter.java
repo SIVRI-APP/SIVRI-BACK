@@ -1,10 +1,11 @@
 package edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia;
 
-import edu.unicauca.SivriBackendApp.core.academica.aplicación.ports.out.ProgramaObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.out.ProgramaObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Programa;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.entity.ProgramaEntity;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.mapper.ProgramaMapper;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.repository.ProgramaRepository;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarProgramas;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -39,5 +40,11 @@ public class ProgramaObtenerAdapter implements ProgramaObtenerREPO {
     @Override
     public List<Programa> obtenerProgramas() {
         return programaRepository.findAll().stream().map(programaMapper::obtenerModelo).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ListarProgramas> obtenerProgramasxdepartamento(Integer semilleroId) {
+
+        return programaRepository.listarProgramaxDepartamento(semilleroId);
     }
 }

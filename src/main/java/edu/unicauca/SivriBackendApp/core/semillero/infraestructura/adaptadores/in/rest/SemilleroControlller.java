@@ -1,9 +1,9 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest;
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.SemilleroActualizarCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.SemilleroCrearCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.SemilleroObtenerCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.SemilleroActualizarCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.SemilleroCrearCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.SemilleroObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroEstado;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.SemilleroActualizarEstadoDTO;

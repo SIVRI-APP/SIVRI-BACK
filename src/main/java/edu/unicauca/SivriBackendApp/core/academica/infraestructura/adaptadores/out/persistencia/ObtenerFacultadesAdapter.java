@@ -1,7 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia;
 
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
-import edu.unicauca.SivriBackendApp.core.academica.aplicación.ports.out.FacultadObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.out.FacultadObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Facultad;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.entity.FacultadEntity;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.mapper.FacultadMapper;

@@ -55,15 +55,15 @@ public interface RepositorioCredencial extends JpaRepository<Credencial, Integer
           " and _cre.recuperarContraseña != 0",
           nativeQuery = true)
   int validarCodigoRecuperarContraseña(String email, int codigoRecuperarContraseña);
-  @Query(value = "SELECT CONCAT('SEMILLERO:', rol_sem.rolSemillero) AS authorities " +
-          "FROM usuario usu " +
-          "INNER JOIN integrante_semillero int_sem ON usu.id = int_sem.usuarioId " +
-          "INNER JOIN rol_semillero rol_sem ON rol_sem.id = int_sem.rolId " +
-          "WHERE usu.id IN (SELECT usu.id " +
-          "FROM _credencial _cre " +
-          "INNER JOIN usuario usu ON _cre.usuarioId = usu.id " +
-          "INNER JOIN funcionario fun ON fun.usuarioId = usu.id "  +
-          "WHERE _cre.email = :email)"
+  @Query(value = "SELECT CONCAT('SEMILLERO:', rol_sem.rolSemillero) AS authorities \n" +
+          "          FROM usuario usu\n" +
+          "          INNER JOIN integrante_semillero int_sem ON usu.id = int_sem.usuarioId \n" +
+          "          INNER JOIN rol_semillero rol_sem ON rol_sem.id = int_sem.rolId \n" +
+          "          WHERE usu.id IN (SELECT usu.id \n" +
+          "          FROM credencial cre \n" +
+          "          INNER JOIN usuario usu ON cre.userId = usu.id \n" +
+          "          INNER JOIN funcionario fun ON fun.usuarioId = usu.id \n" +
+          "          WHERE cre.email = :email)"
           , nativeQuery = true)
   List<IGetAuthorities> getAuthoritiesSemillero (@Param("email") String email);
 
