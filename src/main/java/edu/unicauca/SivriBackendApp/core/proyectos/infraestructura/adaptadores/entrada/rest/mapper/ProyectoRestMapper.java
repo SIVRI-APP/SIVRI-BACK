@@ -9,12 +9,11 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ProyectoRestMapper {
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "estado", ignore = true)
     @Mapping(target = "lineasDeInvestigacion", ignore = true)
     @Mapping(target = "integrantes", ignore = true)
     @Mapping(target = "enfoquesDiferenciales", ignore = true)
     @Mapping(target = "convocatoria", ignore = true)
+    @Mapping(target = "eliminadoLogico", ignore = true)
     Proyecto formalizarProyectoDto(FormalizarProyectoDTO dto);
 
 }

@@ -33,10 +33,17 @@ public class IntegranteValidator {
             }
         }
 
+        // Si es Co Investigador debe ser de tipo Docente
+        if (rol.getId() == 2){
+            if (!usuario.getTipoUsuario().equals(TipoUsuario.DOCENTE)){
+                throw new ReglaDeNegocioException("bad.TipoCoInvestigador", List.of(proyecto.getNombre()));
+            }
+        }
+
         // Validar que el usuario no tenga el mismo rol en el mismo Proyecto
-        List<IntegranteProyectoEntity> cooperaciones = integranteRepository.findAllByUsuarioIdAndProyectoIdAndRolProyectoId(usuario.getId(), proyecto.getId(), rol.getId());
-        if (!cooperaciones.isEmpty()){
-            throw new ReglaDeNegocioException("bad.UsuarioYaTieneElRol", List.of(usuario.getNombre(), rol.getNombre(), proyecto.getNombre()));
+        List<IntegranteProyectoEntity> integrantes = integranteRepository.findAllByUsuarioIdAndProyectoIdAndRolProyectoId(usuario.getId(), proyecto.getId(), rol.getId());
+        if (!integrantes.isEmpty()){
+            throw new ReglaDeNegocioException("bad.UsuarioYaTieneElRol", List.of(usuario.getNombre(), rol.getNombre().toString(), proyecto.getNombre()));
         }
     }
 }

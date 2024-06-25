@@ -90,6 +90,12 @@ public class UsuarioSolicitudEntity {
     @Column(length = 1000)
     private String nota;
 
+    private String organismoDeInvestigacion;
+
+    private Integer organismoDeInvestigacionId;
+
+    private Integer rolId;
+
 
     @Override
     public int hashCode() {

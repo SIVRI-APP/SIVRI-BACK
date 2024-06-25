@@ -1,11 +1,15 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada;
 
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
 public class FormalizarProyectoDTO {
+
+    @Positive(message = "El Id del Proyecto no es valido")
+    private Long id;
 
     private String nombre;
 
@@ -33,5 +37,4 @@ public class FormalizarProyectoDTO {
 
     private String consideraciones;
 
-    private boolean eliminadoLogico;
 }

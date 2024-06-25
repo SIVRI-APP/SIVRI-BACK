@@ -72,7 +72,13 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
         usuario.setEstado(EstadoSolicitudUsuario.REVISION_VRI);
 
         // Enviar el registro a la Base de datos
-        usuarioSolicitudCrearREPO.crearSolicitudUsuario(usuario);
+        UsuarioSolicitud usuarioSolicitudCreado = usuarioSolicitudCrearREPO.crearSolicitudUsuario(usuario);
+
+        if (servicioDeIdentificacionDeUsuario.esFuncionario()){
+            aprobarSolicitudUsuario(usuarioSolicitudCreado.getId());
+
+            return new RespuestaHandler<>(200, "ok.solicitud.aprobada", List.of(usuarioSolicitudCreado.getTipoDocumento().toString(), usuarioSolicitudCreado.getNumeroDocumento(), usuarioSolicitudCreado.getCorreo()), "", true).getRespuesta();
+        }
 
         return new RespuestaHandler<>(200, "ok.usuario.solicitud.creación", List.of(usuario.getTipoDocumento().toString(), usuario.getNumeroDocumento(), usuario.getCorreo()), "", true).getRespuesta();
     }

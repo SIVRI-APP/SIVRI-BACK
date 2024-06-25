@@ -67,7 +67,6 @@ public class ProyectoEntity {
     private Set<LineaDeInvestigacionProyectoEntity> lineasDeInvestigacion;
 
     @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    @JsonManagedReference
     private Set<IntegranteProyectoEntity> integrantes;
 
     @OneToMany(mappedBy = "proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)

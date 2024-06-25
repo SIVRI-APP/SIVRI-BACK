@@ -65,6 +65,12 @@ public class UsuarioSolicitud {
     /** Nota asociada a la solicitud de usuario. Tiene una longitud máxima de 1000 caracteres */
     private String nota;
 
+    private String organismoDeInvestigacion;
+
+    private Integer organismoDeInvestigacionId;
+
+    private Integer rolId;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

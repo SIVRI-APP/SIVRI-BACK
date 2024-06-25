@@ -42,4 +42,10 @@ public class RegistroUsuarioDTO {
 
     @Size(max = 1000, message = "La nota no puede exceder los 1000 caracteres")
     private String nota;
+
+    private String organismoDeInvestigacion;
+
+    private Integer organismoDeInvestigacionId;
+
+    private Integer rolId;
 }

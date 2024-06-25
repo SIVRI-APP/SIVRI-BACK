@@ -11,6 +11,7 @@ import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.e
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -45,17 +46,32 @@ public class ProyectoController {
         return ResponseEntity.ok().body(respuesta);
     }
 
-    // Todo miguel terminar
     @PostMapping("formalizar")
     @PreAuthorize("hasAnyAuthority(" +
+            "'PROYECTO:DIRECTOR',  " +
             "'FUNCIONARIO:VICERRECTOR',  " +
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
             "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
-    public ResponseEntity<Respuesta<Boolean>> crearConvocatoria(@Valid @RequestBody FormalizarProyectoDTO proyecto){
-//        Respuesta<Boolean> respuesta = proyectoCrearCU.crearProyecto(proyectoRestMapper.formalizarProyectoDto(proyecto));
-//        return ResponseEntity.ok().body(respuesta);
-        return null;
+    public ResponseEntity<Respuesta<Boolean>> formalizarConvocatoria(@Valid @RequestBody FormalizarProyectoDTO proyecto){
+        Respuesta<Boolean> respuesta = proyectoCrearCU.formalizarProyecto(proyectoRestMapper.formalizarProyectoDto(proyecto));
+        return ResponseEntity.ok().body(respuesta);
+    }
+
+    @PostMapping("agregarIntegrante")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'PROYECTO:DIRECTOR',  " +
+            "'FUNCIONARIO:VICERRECTOR',  " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
+            "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
+    public ResponseEntity<Respuesta<Boolean>> agregarIntegrante(
+            @Valid @RequestParam @Positive(message = "Proyecto Id no valido") Long proyectoId,
+            @Valid @RequestParam @Positive(message = "Usuario Id no valido")Long usuarioId,
+            @Valid @RequestParam @Positive(message = "Rol Id no valido")Integer rolId
+    ){
+        Respuesta<Boolean> respuesta = proyectoCrearCU.agregarIntegrante(proyectoId, usuarioId, rolId);
+        return ResponseEntity.ok().body(respuesta);
     }
 
     @PostMapping("asociarConvocatoria")

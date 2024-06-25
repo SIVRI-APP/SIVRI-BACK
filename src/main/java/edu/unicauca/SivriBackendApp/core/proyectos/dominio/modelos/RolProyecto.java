@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos;
 
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.RolProyectoEnum;
 import lombok.*;
 
 import java.util.Set;
@@ -9,7 +10,7 @@ public class RolProyecto {
 
     private Integer id;
 
-    private String nombre;
+    private RolProyectoEnum nombre;
 
     private Set<IntegranteProyecto> integrantesProyectos;
 }
