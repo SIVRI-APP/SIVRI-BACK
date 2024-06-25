@@ -56,7 +56,7 @@ public class ConvocatoriaController {
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
             "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
-    public ResponseEntity<Respuesta<ConvocatoriaInformacionDetalladaProyeccion>> crearConvocatoria(@Valid @RequestParam @PositiveOrZero(message = "El Id de la convocatoria debe ser positivo") long convocatoriaId){
+    public ResponseEntity<Respuesta<ConvocatoriaInformacionDetalladaProyeccion>> obtenerInformacionDetallada(@Valid @RequestParam @PositiveOrZero(message = "El Id de la convocatoria debe ser positivo") long convocatoriaId){
         Respuesta<ConvocatoriaInformacionDetalladaProyeccion> respuesta = convocatoriaObtenerCU.obtenerConvocatoriaInformacionDetallada(convocatoriaId);
         return ResponseEntity.ok().body(respuesta);
     }
