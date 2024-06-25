@@ -8,11 +8,13 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.ObservacionSe
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.ObservacionSemilleroCrearDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.mapper.ObservacionSemilleroDtoMapper;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("observacionSemillero")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class ObservacionSemilleroController {
@@ -21,12 +23,6 @@ public class ObservacionSemilleroController {
     private final ObservacionSemilleroObtenerCU observacionSemilleroObtenerCU;
     private final ObservacionSemilleroDtoMapper observacionSemilleroDtoMapper;
 
-    public ObservacionSemilleroController(ObservacionSemilleroCrearCU observacionSemilleroCrearCU, ObservacionSemilleroActualizarCU observacionSemilleroActualizarCU, ObservacionSemilleroObtenerCU observacionSemilleroObtenerCU, ObservacionSemilleroDtoMapper observacionSemilleroDtoMapper) {
-        this.observacionSemilleroCrearCU = observacionSemilleroCrearCU;
-        this.observacionSemilleroActualizarCU = observacionSemilleroActualizarCU;
-        this.observacionSemilleroObtenerCU = observacionSemilleroObtenerCU;
-        this.observacionSemilleroDtoMapper = observacionSemilleroDtoMapper;
-    }
     @PostMapping("/asociarObservacion/{idSemillero}/{idFuncionario}")
     @PreAuthorize("hasAnyAuthority(" +
             "'FUNCIONARIO:SEMILLEROS')")

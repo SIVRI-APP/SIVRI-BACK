@@ -34,7 +34,7 @@ public interface IGrupoRepository extends JpaRepository<GrupoEntity,Integer> {
             "WHERE " +
             "   ig.rolGrupoId=1 AND ig.usuarioId=(:idDirector);",nativeQuery = true)
     List<ListarGruposPorIdDirector> listarGruposPorIdDirector(
-            @Param("idDirector") int idDirector
+            @Param("idDirector") Long idDirector
     );
 
     @Query(value = "SELECT dg.*, du.director " +

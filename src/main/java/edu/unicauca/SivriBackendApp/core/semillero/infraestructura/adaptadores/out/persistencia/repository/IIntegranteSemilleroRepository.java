@@ -18,7 +18,7 @@ public interface IIntegranteSemilleroRepository extends JpaRepository<Integrante
    //TODO falta el programa que no sta includo en el usuario
    @Query(value = "SELECT ins.idIntegranteSemillero,\n" +
            "       u.numeroDocumento,\n" +
-           "       CONCAT(u.nombres, ' ', u.apellidos) AS nombreCompleto,\n" +
+           "       CONCAT(u.nombre, ' ', u.apellido) AS nombreCompleto,\n" +
            "       rs.rolSemillero,\n" +
            "       ins.estado,\n" +
            "       ins.fechaIngreso\n" +
@@ -36,7 +36,7 @@ public interface IIntegranteSemilleroRepository extends JpaRepository<Integrante
            @Param("estado") String estado,
            @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable);
     // TODO falta agregar el programa no esta en usuario y buscar por programa tambien
-    @Query(value = "SELECT u.numeroDocumento,u.nombres,u.apellidos,rs.rolSemillero,intse.estado, intse.fechaIngreso,intse.fechaRetiro " +
+    @Query(value = "SELECT u.numeroDocumento,u.nombre,u.apellido,rs.rolSemillero,intse.estado, intse.fechaIngreso,intse.fechaRetiro " +
             "FROM integrante_semillero intse  " +
             "    INNER JOIN usuario u ON intse.usuarioId=u.id " +
             "    INNER JOIN rol_semillero rs ON rs.id=intse.rolId " +

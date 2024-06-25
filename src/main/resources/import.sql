@@ -135,7 +135,7 @@ INSERT INTO credencial (id, email, password, userId) VALUES (3, 'yurany@unicauca
 
 -- -- FUNCIONARIO
 INSERT INTO funcionario (id, usuarioId, rolId, estado, fechaInicio) VALUES (1, 1, 1, true, '2024-01-01');
---INSERT INTO funcionario (id, usuarioId, rolId, estado, fechaInicio) VALUES (2, 3, 4, true, '2024-01-01');
+INSERT INTO funcionario (id, usuarioId, rolId, estado, fechaInicio) VALUES (2, 3, 4, true, '2024-01-01');
 
 -- SOLICITUD DE USUARIO
 INSERT INTO usuario_solicitud (id, creadoPorUsuarioId, programaId, correo, tipoDocumento, numeroDocumento, sexo, estado, tipoUsuario, nombre, apellido, telefono, nota) VALUES (1, 1, 1, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '1061', 'MASCULINO', 'REVISION_VRI', 'ADMINISTRATIVO', 'Miguel Andres', 'Mosquera', '3225864404', 'no me lo nieguen porfa');
@@ -201,5 +201,8 @@ INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (6,1,'ACTI
 INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (7,1,'ACTIVO','agora7@correo.edu.co','POPAYAN');
 INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (8,1,'ACTIVO','agora8@correo.edu.co','POPAYAN');
 
--- integrantesemillero
+-- integrante semillero
 INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(1,2,3,2, 'activo', '2023-09-04',NULL);
+
+--integrante grupo
+INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(1,1,3,1,'Activo','2023-09-07',NULL);

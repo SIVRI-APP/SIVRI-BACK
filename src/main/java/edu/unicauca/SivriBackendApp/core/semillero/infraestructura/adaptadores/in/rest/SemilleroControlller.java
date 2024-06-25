@@ -126,7 +126,7 @@ public class SemilleroControlller {
         return ResponseEntity.ok().body(respuesta);
 
     }
-    @PostMapping("")
+    @PostMapping("/crearSemillero")
     @PreAuthorize("hasAnyAuthority(" +
             "'GRUPO:DIRECTOR')")
     public ResponseEntity<Respuesta> crear(@Valid @RequestBody SemilleroCrearDTO nuevoSemillero){

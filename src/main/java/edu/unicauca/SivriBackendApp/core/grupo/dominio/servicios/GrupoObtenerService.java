@@ -3,12 +3,14 @@ package edu.unicauca.SivriBackendApp.core.grupo.dominio.servicios;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
+import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificacionDeUsuario;
 import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.in.GrupoObtenerCU;
 import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.out.GrupoObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.Grupo;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.GrupoEstado;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.proyecciones.ListarGruposConFiltro;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.proyecciones.ListarGruposPorIdDirector;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,14 +20,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@AllArgsConstructor
 public class GrupoObtenerService implements GrupoObtenerCU {
 
     private final GrupoObtenerREPO grupoObtenerREPO;
-
-    public GrupoObtenerService(GrupoObtenerREPO grupoObtenerREPO) {
-        this.grupoObtenerREPO = grupoObtenerREPO;
-    }
-
+    private final ServicioDeIdentificacionDeUsuario servicioDeIdentificacionDeUsuario;
     @Override
     public Respuesta<Boolean> existePorId(int id) {
         Boolean respuesta = grupoObtenerREPO.existePorId(id);
@@ -76,9 +75,9 @@ public class GrupoObtenerService implements GrupoObtenerCU {
     }
 
     @Override
-    public Respuesta<List<ListarGruposPorIdDirector>> obtenerGruposPorIdDirector(int idDirector) {
+    public Respuesta<List<ListarGruposPorIdDirector>> obtenerGruposPorIdDirector() {
 
-        List<ListarGruposPorIdDirector> respuestaBd= grupoObtenerREPO.obtenerGruposPorIdDirector(idDirector);
+        List<ListarGruposPorIdDirector> respuestaBd= grupoObtenerREPO.obtenerGruposPorIdDirector(servicioDeIdentificacionDeUsuario.obtenerUsuario().getId());
         if (respuestaBd.isEmpty()) {
             throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.grupos.director ");
         }

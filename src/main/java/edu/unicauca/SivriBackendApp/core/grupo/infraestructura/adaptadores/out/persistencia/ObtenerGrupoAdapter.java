@@ -65,7 +65,7 @@ public class ObtenerGrupoAdapter implements GrupoObtenerREPO {
     }
 
     @Override
-    public List<ListarGruposPorIdDirector> obtenerGruposPorIdDirector(int idDirector) {
+    public List<ListarGruposPorIdDirector> obtenerGruposPorIdDirector(Long idDirector) {
         List<ListarGruposPorIdDirector> grupos=grupoRepository.listarGruposPorIdDirector(idDirector);
         System.out.println("grupos "+grupos);
         return grupos;

@@ -18,7 +18,7 @@ public interface GrupoObtenerREPO {
     Optional<Grupo> obtenerGrupoPorId(int id);
     List<Grupo> obtenerGrupos();
     Page<Grupo> obtenerGruposPaginado(PageRequest pageRequest);
-    List<ListarGruposPorIdDirector> obtenerGruposPorIdDirector(int idDirector);
+    List<ListarGruposPorIdDirector> obtenerGruposPorIdDirector(Long idDirector);
     Page<List<ListarGruposPorIdDirector>> obtenerGruposPorIdDirectorPaginado(Pageable pageable, int idDirector);
     Page<List<ListarGruposConFiltro>> obtenerGruposConFiltro(Pageable pageable, String nombre, GrupoEstado estado, String facultad, String director);
 }

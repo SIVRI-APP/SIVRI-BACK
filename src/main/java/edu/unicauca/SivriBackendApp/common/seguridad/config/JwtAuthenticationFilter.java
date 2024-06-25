@@ -56,7 +56,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     for (IGetAuthorities auth: semilleroUserAuthorities) {
       authorities.add(new SimpleGrantedAuthority(auth.getAuthorities()));
     }
-
     //Proyecto
 
     // Funcionario
