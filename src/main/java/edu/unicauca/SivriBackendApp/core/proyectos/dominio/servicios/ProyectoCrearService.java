@@ -4,12 +4,15 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.convocatoria.aplicacion.puertos.entrada.ConvocatoriaObtenerCU;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.Convocatoria;
-import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoCrearCU;
-import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoObtenerCU;
+import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.OrganismoDeInvestigacion;
+import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.*;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoCrearREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.RolProyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.validadores.ProyectoValidators;
+import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.CrearProyectoDTO;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.entrada.UsuarioObtenerCU;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,18 +39,37 @@ public class ProyectoCrearService implements ProyectoCrearCU {
      */
     private final ProyectoObtenerCU proyectoObtenerCU;
     private final ConvocatoriaObtenerCU convocatoriaObtenerCU;
+    private final CooperacionCrearCU cooperacionCrearCU;
+    private final RolObtenerCU rolObtenerCU;
+    private final IntegranteCrearCU integranteCrearCU;
+    private final UsuarioObtenerCU usuarioObtenerCU;
 
+    @Transactional
     @Override
-    public Respuesta<Boolean> crearProyecto(Proyecto proyecto) {
+    public Respuesta<Boolean> crearProyecto(CrearProyectoDTO proyecto) {
 
         // Validaciones
-        proyectoValidators.validarCreacionDeProyecto(proyecto);
+        proyectoValidators.validarCreacionDeProyecto(proyecto.getNombre());
 
-        // Persistir Proyecto
-        proyecto.setEstado(EstadoProyecto.FORMULADO);
-        Proyecto nuevoProyecto = proyectoCrearREPO.crearProyecto(proyecto);
+        // Crear Proyecto
+        Proyecto nuevoProyecto = new Proyecto();
+        nuevoProyecto.setNombre(proyecto.getNombre());
+        Proyecto proyectoCreado = proyectoCrearREPO.crearProyecto(nuevoProyecto);
+        Proyecto pro = proyectoObtenerCU.obtenerProyecto(proyectoCreado.getId()).getData();
 
-        return new RespuestaHandler<>(200, "ok.ProyectoCreado", List.of(nuevoProyecto.getNombre()), "", true).getRespuesta();
+        // Todo miguel Obtener Organismo de Investigacion
+        OrganismoDeInvestigacion organismoDeInvestigacion = new OrganismoDeInvestigacion();
+
+        // Crear Cooperación
+        cooperacionCrearCU.crearCooperacion(pro, organismoDeInvestigacion, true);
+
+        // Obtener Rol Proyecto
+        RolProyecto rol = rolObtenerCU.obtenerRolPorId(1).getData();
+
+        // Crear Integrante Proyecto
+        integranteCrearCU.crear(usuarioObtenerCU.obtenerUsuario(proyecto.getDirectorDeProyectoId()).getData(), pro, rol);
+
+        return new RespuestaHandler<>(200, "ok.ProyectoCreado", List.of(pro.getNombre()), "", true).getRespuesta();
     }
 
     @Override

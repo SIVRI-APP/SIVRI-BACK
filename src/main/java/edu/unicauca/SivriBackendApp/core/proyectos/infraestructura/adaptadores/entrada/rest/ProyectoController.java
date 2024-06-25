@@ -6,6 +6,7 @@ import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.Pr
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.proyecciones.ProyectoInformacionDetalladaProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.proyecciones.ProyectoListarConFiltroProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.CrearProyectoDTO;
+import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.FormalizarProyectoDTO;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.mapper.ProyectoRestMapper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -40,8 +41,21 @@ public class ProyectoController {
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
             "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
     public ResponseEntity<Respuesta<Boolean>> crearConvocatoria(@Valid @RequestBody CrearProyectoDTO proyecto){
-        Respuesta<Boolean> respuesta = proyectoCrearCU.crearProyecto(proyectoRestMapper.crearConvocatoriaDTO(proyecto));
+        Respuesta<Boolean> respuesta = proyectoCrearCU.crearProyecto(proyecto);
         return ResponseEntity.ok().body(respuesta);
+    }
+
+    // Todo miguel terminar
+    @PostMapping("formalizar")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:VICERRECTOR',  " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
+            "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
+    public ResponseEntity<Respuesta<Boolean>> crearConvocatoria(@Valid @RequestBody FormalizarProyectoDTO proyecto){
+//        Respuesta<Boolean> respuesta = proyectoCrearCU.crearProyecto(proyectoRestMapper.formalizarProyectoDto(proyecto));
+//        return ResponseEntity.ok().body(respuesta);
+        return null;
     }
 
     @PostMapping("asociarConvocatoria")

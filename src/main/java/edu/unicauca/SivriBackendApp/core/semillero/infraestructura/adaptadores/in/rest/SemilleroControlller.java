@@ -80,6 +80,8 @@ public class SemilleroControlller {
     }
     @GetMapping("")
     @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:VICERRECTOR',  " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> obtenerSemilleros(){
         Respuesta<List<Semillero>> respuestaCU=semilleroObtenerCU.obtenerSemilleros();
@@ -112,6 +114,8 @@ public class SemilleroControlller {
 
     @GetMapping("paginado")
     @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:VICERRECTOR',  " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> obtenerListadoSemillerosPaginado(
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,

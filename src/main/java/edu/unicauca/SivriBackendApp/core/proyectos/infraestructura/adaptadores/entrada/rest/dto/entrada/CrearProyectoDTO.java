@@ -2,36 +2,14 @@ package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.
 
 import lombok.Data;
 
-import java.time.LocalDate;
 
 @Data
 public class CrearProyectoDTO {
 
     private String nombre;
 
-    private LocalDate fechaInicio;
+    private Integer organismoDeInvestigacionId;
 
-    private LocalDate fechaFin;
+    private Long directorDeProyectoId;
 
-    private String planteamiento;
-
-    private String objetivoGeneral;
-
-    private String objetivosEspecificos;
-
-    private String justificacion;
-
-    private String enfoqueMetodologico;
-
-    private String aspectosEticosLegales;
-
-    private String confidencialidadDeInformacion;
-
-    private String efectosAdversos;
-
-    private String impactosResultadosEsperados;
-
-    private String consideraciones;
-
-    private boolean eliminadoLogico;
 }

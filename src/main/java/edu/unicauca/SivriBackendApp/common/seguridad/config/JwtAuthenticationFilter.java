@@ -51,6 +51,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     for (IGetAuthorities auth: grupoUserAuthorities) {
       authorities.add(new SimpleGrantedAuthority(auth.getAuthorities()));
     }
+
     //Semillero
     List<IGetAuthorities> semilleroUserAuthorities = credencialRepository.getAuthoritiesSemillero(userEmail);
     for (IGetAuthorities auth: semilleroUserAuthorities) {

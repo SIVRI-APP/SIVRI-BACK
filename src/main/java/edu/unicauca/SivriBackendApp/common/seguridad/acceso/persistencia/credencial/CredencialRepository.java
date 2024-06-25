@@ -42,7 +42,7 @@ public interface CredencialRepository extends JpaRepository<Credencial, Integer>
   List<IGetAuthorities> getAuthoritiesSemillero (@Param("email") String email);
 
   @Query(value = "select " +
-          " CONCAT('SEMILLERO:', rg.rolGrupo) as authorities " +
+          " CONCAT('GRUPO:', rg.rolGrupo) as authorities " +
           "from " +
           " credencial cre " +
           "INNER JOIN usuario usu ON cre.userId = usu.id " +

@@ -6,11 +6,7 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocum
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioInformacionDetalladaProyeccion;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones.UsuarioListarConFiltroProyeccion;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
@@ -31,36 +27,32 @@ public class UsuarioController {
     private final UsuarioObtenerCU usuarioObtenerCU;
 
     @GetMapping("listarTodoConFiltro")
-    @PreAuthorize("hasAnyAuthority(" + "'GRUPO:DIRECTOR', " + "'FUNCIONARIO:SUPER_ADMIN', " + "'FUNCIONARIO:USUARIOS')")
-    @Operation(summary = "Listar todas las solicitudes con filtro", description = "Lista todas las solicitudes aplicando filtros opcionales.")
-    @ApiResponse(responseCode = "200", description = "Solicitudes listadas exitosamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Respuesta.class)))
-    public ResponseEntity<Respuesta<Page<UsuarioListarConFiltroProyeccion>>> listarTodoConFiltro(@Parameter(name = "correo", description = "Correo del solicitante") @RequestParam(required = false) String correo,
-
-                                                                                                 @Parameter(name = "tipoDocumento", description = "Tipo de documento del solicitante") @RequestParam(required = false) TipoDocumento tipoDocumento,
-
-                                                                                                 @Parameter(name = "numeroDocumento", description = "Número de documento del solicitante") @RequestParam(required = false) String numeroDocumento,
-
-                                                                                                 @Parameter(name = "nombre", description = "Nombres del solicitante") @RequestParam(required = false) String nombre,
-
-                                                                                                 @Parameter(name = "apellido", description = "Apellidos del solicitante") @RequestParam(required = false) String apellido,
-
-                                                                                                 @Parameter(name = "tipoUsuario", description = "Tipo de usuario solicitante") @RequestParam(required = false) TipoUsuario tipoUsuario,
-
-                                                                                                 @Parameter(name = "organismoDeInvestigacionId", description = "ID del grupo asociado a la solicitud") @RequestParam(required = false) Integer organismoDeInvestigacionId,
-
-                                                                                                 @Parameter(name = "pageNo", description = "Número de página", required = true) @RequestParam @Min(value = 0, message = "El valor de pageNo debe ser positivo") int pageNo,
-
-                                                                                                 @Parameter(name = "pageSize", description = "Tamaño de la página", required = true) @RequestParam @Min(value = 0, message = "El valor de pageSize debe ser positivo") int pageSize) {
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR', " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:USUARIOS')")
+    public ResponseEntity<Respuesta<Page<UsuarioListarConFiltroProyeccion>>> listarTodoConFiltro(@RequestParam(required = false) String correo,
+                                                                                                 @RequestParam(required = false) TipoDocumento tipoDocumento,
+                                                                                                 @RequestParam(required = false) String numeroDocumento,
+                                                                                                 @RequestParam(required = false) String nombre,
+                                                                                                 @RequestParam(required = false) String apellido,
+                                                                                                 @RequestParam(required = false) TipoUsuario tipoUsuario,
+                                                                                                 @RequestParam(required = false) Integer organismoDeInvestigacionId,
+                                                                                                 @RequestParam @Min(value = 0, message = "El valor de pageNo debe ser positivo") int pageNo,
+                                                                                                 @RequestParam @Min(value = 0, message = "El valor de pageSize debe ser positivo") int pageSize) {
         Respuesta<Page<UsuarioListarConFiltroProyeccion>> respuesta = usuarioObtenerCU.listarConFiltro(pageNo, pageSize, correo, tipoDocumento, numeroDocumento, nombre, apellido, tipoUsuario, organismoDeInvestigacionId);
         return ResponseEntity.ok().body(respuesta);
     }
 
 
     @GetMapping("obtenerUsuario")
-    @PreAuthorize("hasAnyAuthority(" + "'GRUPO:DIRECTOR', " + "'FUNCIONARIO:SUPER_ADMIN', " + "'FUNCIONARIO:USUARIOS')")
-    @Operation(summary = "Obtener información detallada de solicitud de usuario", description = "Obtiene información detallada de una solicitud de usuario por su ID.")
-    @ApiResponse(responseCode = "200", description = "Información detallada de solicitud de usuario obtenida exitosamente", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Respuesta.class)))
-    public ResponseEntity<Respuesta<UsuarioInformacionDetalladaProyeccion>> obtenerSolicitudUsuario(@Parameter(name = "usuarioId", description = "ID del usuario a obtener", required = true) @RequestParam @Min(value = 0, message = "El valor de usuarioId debe ser positivo") long usuarioId) {
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR', " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:USUARIOS')")
+    public ResponseEntity<Respuesta<UsuarioInformacionDetalladaProyeccion>> obtenerUsuario(
+            @RequestParam @Min(value = 0, message = "El valor de usuarioId debe ser positivo") long usuarioId
+    ) {
         Respuesta<UsuarioInformacionDetalladaProyeccion> respuesta = usuarioObtenerCU.obtenerUsuarioInformacionDetallada(usuarioId);
         return ResponseEntity.ok().body(respuesta);
     }

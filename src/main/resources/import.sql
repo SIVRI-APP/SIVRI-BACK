@@ -11,7 +11,6 @@ INSERT INTO facultad (idFacultad, nombre) VALUES (7, 'Facultad de Derecho, Cienc
 INSERT INTO facultad (idFacultad, nombre) VALUES (8, 'Facultad de Ingeniería Civil');
 INSERT INTO facultad (idFacultad, nombre) VALUES (9, 'Facultad de Ingeniería Electrónica y Telecomunicaciones');
 
-
 -- -- DEPARTAMENTO
 INSERT INTO departamento (id, nombre, facultadId) VALUES (1, 'Artes Plásticas', 1);
 INSERT INTO departamento (id, nombre, facultadId) VALUES (2, 'Agroindustria', 2);
@@ -46,20 +45,6 @@ INSERT INTO programa (id, nombre, departamentoId) VALUES (4, 'Artes Plásticas',
 
 -- |***** CONVOCATORIA *****|
 
--- DOCUMENTO CONVOCATORIA
--- INSERT INTO documento_convocatoria (id, nombre) VALUES (1, 'PagaFor-24');
--- INSERT INTO documento_convocatoria (id, nombre) VALUES (2, 'PagaFor-25');
--- INSERT INTO documento_convocatoria (id, nombre) VALUES (3, 'PagaFor-26');
--- INSERT INTO documento_convocatoria (id, nombre) VALUES (4, 'PagaFor-27');
--- INSERT INTO documento_convocatoria (id, nombre) VALUES (5, 'PagaFor-28');
-
-
--- TIPO CONVOCATORIA
--- INSERT INTO tipo_convocatoria (id, nombre, tipoFinanciación) VALUES (1, 'Proyectos Internos 2024', 'PROYECTOS_INTERNOS');
--- INSERT INTO tipo_convocatoria (id, nombre, tipoFinanciación) VALUES (2, 'Proyectos Externos 2024', 'PROYECTOS_EXTERNOS');
--- INSERT INTO tipo_convocatoria (id, nombre, tipoFinanciación) VALUES (3, 'Alcaldía de Popayan', 'PROYECTOS_EXTERNOS');
-
-
 -- LISTADO DE DOCUMENTOS
 INSERT INTO documento_convocatoria (id, nombre) VALUES (1, 'Planilla de Seguridad Social');
 INSERT INTO documento_convocatoria (id, nombre) VALUES (2, 'FOR-2');
@@ -72,40 +57,8 @@ INSERT INTO documento_convocatoria (id, nombre) VALUES (8, 'FOR-24');
 INSERT INTO documento_convocatoria (id, nombre) VALUES (9, 'Registro civil de nacimiento');
 INSERT INTO documento_convocatoria (id, nombre) VALUES (10, 'Acta de nacimiento del Proyecto');
 
-
--- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (6, 2, 1, 'PRE_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
--- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (7, 2, 2, 'EJECUCIÓN', 'DIRECTOR_PROYECTO', 2, true);
--- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (8, 2, 3, 'POST_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
---
--- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (9, 3, 3, 'PRE_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
--- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (10, 3, 4, 'EJECUCIÓN', 'DIRECTOR_PROYECTO', 2, true);
--- INSERT INTO listado_de_documentos (id, tipoConvocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio) VALUES (11, 3, 5, 'POST_EJECUCIÓN', 'DIRECTOR_PROYECTO', 1, true);
-
-
 -- CONVOCATORIA
 INSERT INTO convocatoria (fechaFin, fechaInicio, id, nombre, oferente, descripcion, objetivos, estado, tipoFinanciacion) VALUES('2024-12-31', '2024-09-01', 1, 'Convocatoria de Innovación Tecnológica', 'Ministerio de Energía y Minas', 'Convocatoria destinada a financiar proyectos de innovación tecnológica en el sector de las energías renovables.', 'Fomentar la investigación y desarrollo en tecnologías limpias y sostenibles.', 'ABIERTA', 'PROYECTOS_INTERNOS');
-
-
-
--- |***** PROYECTO *****|
-
--- PROYECTO
--- INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, eliminadoLogico, convocatoriaId) VALUES (1, 'Proyecto Internos 2023', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 0, 1);
--- INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, eliminadoLogico, convocatoriaId) VALUES (2, 'Proyecto Internos 2022', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 0, 2);
--- INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, eliminadoLogico, convocatoriaId) VALUES (3, 'Proyecto Internos 2024', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 0, 3);
--- INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, eliminadoLogico, convocatoriaId) VALUES (4, 'Proyecto Externo Gobernacion del Cauca', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 0, 4);
-
--- ENFOQUE DIFERENCIAL
--- INSERT INTO enfoque_diferencial (id, nombre) VALUES (1, 'Comunidad Afro');
--- INSERT INTO enfoque_diferencial (id, nombre) VALUES (2, 'Comunidad Palenquera');
--- INSERT INTO enfoque_diferencial (id, nombre) VALUES (3, 'Comunidad Indigena');
--- INSERT INTO enfoque_diferencial (id, nombre) VALUES (4, 'Comunidad LGBTIQ+');
-
--- ENFOQUE DIFERENCIAL PROYECTO
--- INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (1, 1, 1);
--- INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (2, 2, 1);
--- INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (3, 3, 1);
--- INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (4, 4, 2);
 
 
 
@@ -147,9 +100,68 @@ INSERT INTO usuario_solicitud_conversacion(id, usuarioSolicitudObservacionesId, 
 
 
 
+
+-- |***** PROYECTO *****|
+
+INSERT INTO rol_proyecto(id, nombre) VALUES (0, 'DIRECTOR');
+INSERT INTO rol_proyecto(id, nombre) VALUES (0, 'CO_INVESTIGADOR');
+
+-- PROYECTO
+-- INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, eliminadoLogico, convocatoriaId) VALUES (1, 'Proyecto Internos 2023', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 0, 1);
+-- INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, eliminadoLogico, convocatoriaId) VALUES (2, 'Proyecto Internos 2022', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 0, 2);
+-- INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, eliminadoLogico, convocatoriaId) VALUES (3, 'Proyecto Internos 2024', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 0, 3);
+-- INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, eliminadoLogico, convocatoriaId) VALUES (4, 'Proyecto Externo Gobernacion del Cauca', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 0, 4);
+
+-- ENFOQUE DIFERENCIAL
+-- INSERT INTO enfoque_diferencial (id, nombre) VALUES (1, 'Comunidad Afro');
+-- INSERT INTO enfoque_diferencial (id, nombre) VALUES (2, 'Comunidad Palenquera');
+-- INSERT INTO enfoque_diferencial (id, nombre) VALUES (3, 'Comunidad Indigena');
+-- INSERT INTO enfoque_diferencial (id, nombre) VALUES (4, 'Comunidad LGBTIQ+');
+
+-- ENFOQUE DIFERENCIAL PROYECTO
+-- INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (1, 1, 1);
+-- INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (2, 2, 1);
+-- INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (3, 3, 1);
+-- INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (4, 4, 2);
+
+
+
+
+
+
+
+
+
+
 -- |***** UTILIDADES *****|
 
 -- MAIL TEMPLATE
 INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (1, 'bienvenidoSIVRI.html', 'Correo para crear credenciales de Usuario', 'nombreCompleto, passwordCode');
 INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (2, 'recuperarContraseña.html', 'Correo para recuperar la contraseña de un usuario', 'correo,codigo');
 INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (3, 'notificacionSIVRI.html', 'Notificacion generica de SIVRI', 'mensaje');
+
+
+
+
+-- BORRAR
+-- organismo de investigacion
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (1,'GRUPO DE CIENCIA','2023-03-08','Desarrollar investigación científica ','mision del grupo','El grupo GCISA-TSEJK tiene');
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (2,'ÁGORA - INVESTIGACION POLITICA','2023-03-08','Impulsar el interés investigativo ', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (3,'semillero1','2023-03-08','Impulsar el interés investigativo ', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (4,'semillero2','2023-03-08','Impulsar  ', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (5,'semillero3','2023-03-08','Impulsar el ', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (6,'semillero4','2023-03-08','Impulsar el interés', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (7,'semillero5','2023-03-08','Impulsar el investigativo ', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (8,'semillero6','2023-03-08','interés investigativo ', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
+
+--grupo
+INSERT INTO grupo (grupoId,departamentoId,estado, direccion, telefono, email, sitioWeb, escalafonColciencias, direccionGrupLac, codigoColciencias, centroInvestigaciones, realizaciones, perspectivas) VALUES (1,1,'ACTIVO','Facultad de Ingeniería','2-8209800','jccasas@unicauca.edu.co','No','A','http://scienti.colciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000012079','COL0119567','centro investigacion','Desarrollo y aprobación de 5 trabajos de Pregrado en el Departamento de Ingeniería Ambiental y Sanitaria, Facultad de Ingeniería Civil.','perspectivas del grupo');
+
+--semillero
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (2,1,'ACTIVO','agora@correo.edu.co','popayan');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (3,1,'ACTIVO','semillero3@correo.edu.co','popayan');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (4,1,'ACTIVO','semillero4@correo.edu.co','popayan');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (5,1,'ACTIVO','agora5@correo.edu.co','popayan');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (6,1,'ACTIVO','agora6@correo.edu.co','popayan');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (7,1,'ACTIVO','agora7@correo.edu.co','popayan');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (8,1,'ACTIVO','agora8@correo.edu.co','popayan');

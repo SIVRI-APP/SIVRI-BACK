@@ -1,13 +1,15 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.mapper;
 
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
-import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring")
-public interface ProyectoInfraMapper {
+@Component
+public class ProyectoInfraMapper {
 
-    ProyectoEntity toEntity (Proyecto modelo);
+    public ProyectoEntity fromModelToEntityUsingIdOnly(Long id){
+        ProyectoEntity entity = new ProyectoEntity();
+        entity.setId(id);
 
-    Proyecto toDto (ProyectoEntity entidad);
+        return entity;
+    }
 }
