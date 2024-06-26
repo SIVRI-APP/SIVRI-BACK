@@ -8,6 +8,7 @@ import jakarta.validation.constraints.FutureOrPresent;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -63,18 +64,15 @@ public class ProyectoEntity {
     private boolean eliminadoLogico;
 
     @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    @JsonManagedReference
     private Set<LineaDeInvestigacionProyectoEntity> lineasDeInvestigacion;
 
     @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private Set<IntegranteProyectoEntity> integrantes;
+    private List<IntegranteProyectoEntity> integrantes;
 
     @OneToMany(mappedBy = "proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    @JsonManagedReference
     private Set<EnfoqueDiferencialListadoEntity> enfoquesDiferenciales;
 
     @ManyToOne()
     @JoinColumn(name = "convocatoriaId")
-    @JsonManagedReference
     private ConvocatoriaEntity convocatoria;
 }

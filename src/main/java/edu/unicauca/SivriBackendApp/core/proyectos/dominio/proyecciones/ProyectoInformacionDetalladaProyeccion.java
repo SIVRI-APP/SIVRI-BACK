@@ -2,8 +2,10 @@ package edu.unicauca.SivriBackendApp.core.proyectos.dominio.proyecciones;
 
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.RolProyectoEnum;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 public interface ProyectoInformacionDetalladaProyeccion {
@@ -26,7 +28,7 @@ public interface ProyectoInformacionDetalladaProyeccion {
 
     // Proyecciones para las relaciones
     Set<LineaDeInvestigacionProyectoProjection> getLineasDeInvestigacion();
-    Set<IntegranteProyectoProjection> getIntegrantes();
+    List<IntegranteProyectoProyeccion> getIntegrantes();
     Set<EnfoqueDiferencialListadoProjection> getEnfoquesDiferenciales();
     ConvocatoriaProjection getConvocatoria();
 
@@ -35,9 +37,21 @@ public interface ProyectoInformacionDetalladaProyeccion {
         Integer getId();
     }
 
-    interface IntegranteProyectoProjection {
+    interface IntegranteProyectoProyeccion {
         // Define los campos necesarios de IntegranteProyectoEntity
         Integer getId();
+        IntegranteUsuarioProyeccion getUsuario();
+        IntegranteRolProyeccion getRolProyecto();
+
+        interface IntegranteUsuarioProyeccion {
+            Long getId();
+            String getNombre();
+            String getApellido();
+        }
+        interface IntegranteRolProyeccion {
+            Integer getId();
+            RolProyectoEnum getNombre();
+        }
     }
 
     interface EnfoqueDiferencialListadoProjection {

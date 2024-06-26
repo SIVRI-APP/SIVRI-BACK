@@ -33,16 +33,35 @@ public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
             " p.id, " +
             " p.nombre, " +
             " p.estado, " +
-            " c.tipoFinanciacion " +
+            " p.fechaInicio, " +
+            " p.fechaFin, " +
+            " c.tipoFinanciacion, " +
+            " org.nombre as 'organismoNombre' " +
             "from " +
             " proyecto p " +
-            " left join convocatoria c ON p.convocatoriaId = c.id " +
-            "where  " +
-            " (:id IS NULL OR LOWER(p.id) LIKE LOWER(CONCAT('%', :id, '%'))) AND " +
-            " (:nombre IS NULL OR LOWER(p.nombre) LIKE LOWER(CONCAT('%', :nombre, '%')))"
+            "left join convocatoria c on p.convocatoriaId = c.id " +
+            "left join cooperacion cop on cop.proyectoId = p.id " +
+            "left join organismo_de_investigacion org on org.id = cop.organismoDeInvestigacionId " +
+            "left join integrante_proyecto ip on ip.proyectoId = p.id " +
+            "where " +
+            " (:id is null or LOWER(p.id) like LOWER(CONCAT('%', :id, '%')))   " +
+            "    and (:nombre is null or LOWER(p.nombre) like LOWER(CONCAT('%', :nombre, '%'))) " +
+            "    and (:estado is null or LOWER(p.estado) like LOWER(CONCAT('%', :estado, '%'))) " +
+            "    and (:fechaInicio is null or LOWER(p.fechaInicio) like LOWER(CONCAT('%', :fechaInicio, '%'))) " +
+            "    and (:fechaFin is null or LOWER(p.fechaFin) like LOWER(CONCAT('%', :fechaFin, '%'))) " +
+            "    and (:organismoDeInvestigacionId is null or LOWER(org.id) like LOWER(CONCAT('%', :organismoDeInvestigacionId, '%'))) " +
+            "    and (:tipoFinanciacion is null or LOWER(c.tipoFinanciacion) like LOWER(CONCAT('%', :tipoFinanciacion, '%'))) " +
+            "    and (:usuarioAutenticadoId is null or LOWER(ip.usuarioId) like LOWER(CONCAT('%', :usuarioAutenticadoId, '%')))"
             , nativeQuery = true)
     Page<ProyectoListarConFiltroProyeccion> listarConFiltro(
             @Param("id") String id,
             @Param("nombre") String nombre,
-            @PageableDefault(sort = "id") Pageable pageable);
+            @Param("estado") String estado,
+            @Param("fechaInicio") String fechaInicio,
+            @Param("fechaFin") String fechaFin,
+            @Param("organismoDeInvestigacionId") Integer organismoDeInvestigacionId,
+            @Param("tipoFinanciacion") String tipoFinanciacion,
+            @Param("usuarioAutenticadoId") Long usuarioAutenticadoId,
+            @PageableDefault(sort = "id") Pageable pageable
+    );
 }

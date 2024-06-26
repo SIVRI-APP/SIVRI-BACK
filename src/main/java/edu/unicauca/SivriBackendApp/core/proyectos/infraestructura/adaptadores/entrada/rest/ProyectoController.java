@@ -1,8 +1,10 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest;
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
+import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoCrearCU;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoObtenerCU;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.proyecciones.ProyectoInformacionDetalladaProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.proyecciones.ProyectoListarConFiltroProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.CrearProyectoDTO;
@@ -18,6 +20,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/proyecto")
@@ -111,6 +115,11 @@ public class ProyectoController {
     public ResponseEntity<Respuesta<Page<ProyectoListarConFiltroProyeccion>>> listarTodoConFiltro(
             @RequestParam(required = false) String id,
             @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) EstadoProyecto estado,
+            @RequestParam(required = false) LocalDate fechaInicio,
+            @RequestParam(required = false) LocalDate fechaFin,
+            @RequestParam(required = false) Integer organismoDeInvestigacionId,
+            @RequestParam(required = false) TipoFinanciacion tipoFinanciacion,
             @RequestParam @Min(value = 0, message = "El valor de pageNo debe ser positivo") int pageNo,
             @RequestParam @Min(value = 0, message = "El valor de pageSize debe ser positivo") int pageSize
     ) {
@@ -118,7 +127,12 @@ public class ProyectoController {
                 pageNo,
                 pageSize,
                 id,
-                nombre
+                nombre,
+                estado,
+                fechaInicio,
+                fechaFin,
+                organismoDeInvestigacionId,
+                tipoFinanciacion
         );
         return ResponseEntity.ok().body(respuesta);
     }
