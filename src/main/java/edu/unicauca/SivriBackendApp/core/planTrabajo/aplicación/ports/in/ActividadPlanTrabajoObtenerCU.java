@@ -13,5 +13,5 @@ public interface ActividadPlanTrabajoObtenerCU {
     Respuesta<ActividadPlanTrabajo> obtenerPorId(int id);
     Respuesta<List<ActividadPlanTrabajo>> obtenerActividadesPorIdPlanTrabajo(int idPlan);
     Respuesta<List<ActividadPlanTrabajo>> obtenerListadoActividadesPlan();
-    Respuesta<Page<List<ListarActividadesConFiltro>>> ListarActividadesConFiltro(int pageNo, int pageSize, LocalDate fechaInicio,LocalDate fechaFin);
+    Respuesta<Page<List<ListarActividadesConFiltro>>> ListarActividadesConFiltro(int pageNo, int pageSize,Integer idPlan, LocalDate fechaInicio,LocalDate fechaFin);
 }

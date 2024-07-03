@@ -48,9 +48,9 @@ public class ActividadPlanTrabajoObtenerAdapter implements ActividadPlanTrabajoO
     }
 
     @Override
-    public Page<List<ListarActividadesConFiltro>> listarActividadesConFiltro(Pageable pageable, LocalDate fechaInicio, LocalDate fechaFin) {
+    public Page<List<ListarActividadesConFiltro>> listarActividadesConFiltro(Pageable pageable,Integer idPlan, LocalDate fechaInicio, LocalDate fechaFin) {
 
-        return actividadPlanTrabajoRepository.listarActividadesConFiltro(fechaInicio,fechaFin,pageable);
+        return actividadPlanTrabajoRepository.listarActividadesConFiltro(idPlan,fechaInicio,fechaFin,pageable);
     }
 
 }

@@ -18,6 +18,7 @@ public class PlanTrabajoActualizarAdapter implements PlanTrabajoActualizarREPO {
 
     @Override
     public Boolean actualizar(PlanTrabajo nuevoPlanTrabajo) {
+        System.out.println("plan de trabajo"+ nuevoPlanTrabajo);
         planTrabajoRepository.save(planTrabajoMapper.obtenerEntity(nuevoPlanTrabajo));
         return true;
     }

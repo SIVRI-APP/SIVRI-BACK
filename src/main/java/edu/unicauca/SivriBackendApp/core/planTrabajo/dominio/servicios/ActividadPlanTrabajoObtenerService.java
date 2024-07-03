@@ -61,9 +61,9 @@ public class ActividadPlanTrabajoObtenerService implements ActividadPlanTrabajoO
     }
 
     @Override
-    public Respuesta<Page<List<ListarActividadesConFiltro>>> ListarActividadesConFiltro(int pageNo, int pageSize, LocalDate fechaInicio, LocalDate fechaFin) {
+    public Respuesta<Page<List<ListarActividadesConFiltro>>> ListarActividadesConFiltro(int pageNo, int pageSize,Integer idPlan, LocalDate fechaInicio, LocalDate fechaFin) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<List<ListarActividadesConFiltro>> respuestaBd= actividadPlanTrabajoObtenerREPO.listarActividadesConFiltro(pageable,fechaInicio,fechaFin);
+        Page<List<ListarActividadesConFiltro>> respuestaBd= actividadPlanTrabajoObtenerREPO.listarActividadesConFiltro(pageable,idPlan,fechaInicio,fechaFin);
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
     }
 

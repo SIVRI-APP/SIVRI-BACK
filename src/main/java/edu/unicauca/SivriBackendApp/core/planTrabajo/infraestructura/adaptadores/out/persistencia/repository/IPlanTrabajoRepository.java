@@ -1,6 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.out.persistencia.repository;
 
-import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.proyecciones.ObtenerPlanTrabajoxanio;
+import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.proyecciones.ListarPlanTrabajo;
+import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.proyecciones.ObtenerActividadPlanTrabajoxanio;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.out.persistencia.entity.PlanTrabajoEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,11 +34,22 @@ public interface IPlanTrabajoRepository extends JpaRepository<PlanTrabajoEntity,
             "                   ((apt.fechaInicio >= (:fechaInicio) AND apt.fechaFin <= (:fechaFin)) " +
             "                   OR (:fechaInicio is null or :fechaFin is null)) " +
             "                   AND pt.anio=(:anio) AND pt.semilleroId=(:idSemillero);", nativeQuery = true)
-    public Page<List<ObtenerPlanTrabajoxanio>> obtenerPlanxAnio(
+    public Page<List<ObtenerActividadPlanTrabajoxanio>> obtenerActividadPlanxAnio(
             @Param("anio") Integer anio,
             @Param("idSemillero") Integer idSemillero,
             @Param("fechaInicio") LocalDate fechaInicio,
             @Param("fechaFin") LocalDate fechaFin,
+            @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable
+    );
+    @Query(value = "SELECT pt.id,pt.nombrePlan,pt.anio,pt.estado " +
+            "FROM plan_trabajo pt " +
+            "WHERE pt.semilleroId=(:idSemillero) " +
+            "AND (pt.anio = :anio OR :anio IS NULL) " +
+            "AND (LOWER(pt.estado) = COALESCE(LOWER(:estado),LOWER(pt.estado)) OR :estado IS NULL);",nativeQuery = true)
+    public Page<List<ListarPlanTrabajo>> listarPlanTrabajoxFiltro(
+            @Param("anio") Integer anio,
+            @Param("idSemillero") Integer idSemillero,
+            @Param("estado") String estado,
             @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable
     );
 }

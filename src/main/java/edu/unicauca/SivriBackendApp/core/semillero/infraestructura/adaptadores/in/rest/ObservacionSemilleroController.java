@@ -58,9 +58,9 @@ public class ObservacionSemilleroController {
             "'GRUPO:DIRECTOR', " +
             "'SEMILLERO:MENTOR')")
     public ResponseEntity<Respuesta> listarObservacionesSemilleroPorIdSemillero(
-            @RequestParam(required = true) int semilleroId,
-            @RequestParam(required = false) int pageNo,
-            @RequestParam(required = false) int pageSize
+            @RequestParam(required = true) Integer semilleroId,
+            @RequestParam() int pageNo,
+            @RequestParam() int pageSize
     ){
         Respuesta respuesta = observacionSemilleroObtenerCU.listarObservacionesPorIdSemillero(pageNo,pageSize,semilleroId);
         return ResponseEntity.ok().body(respuesta);

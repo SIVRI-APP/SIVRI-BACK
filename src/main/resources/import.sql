@@ -206,3 +206,23 @@ INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rol
 
 --integrante grupo
 INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(1,1,3,1,'Activo','2023-09-07',NULL);
+
+--compromiso Semillero
+INSERT INTO compromiso_semillero(id,nombre) VALUES(1, 'compromiso 1');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(2, 'compromiso 2');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(3, 'compromiso 3');
+
+
+--evidencia actividad
+INSERT INTO evidencia_actividad(id,evidencia) VALUES(1,'evidencia');
+INSERT INTO evidencia_actividad(id,evidencia) VALUES(2,'evidencia');
+
+--plan de trabajo
+INSERT INTO plan_trabajo(id,semilleroId,nombrePlan,anio, estado) VALUES(1,2, 'plan', 2023,'FINALIZADO');
+INSERT INTO plan_trabajo(id,semilleroId,nombrePlan,anio, estado) VALUES(2,2, 'plan de trabajo', 2024, 'FORMULADO');
+
+--actividad plan de trabajo
+INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId,evidenciaId)VALUES(1,1,1,'obj','act','2023-03-08','2023-08-05',3,1);
+INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId,evidenciaId)VALUES(2,1,2,'obj','act','2023-03-08','2023-08-05',3,2);
+INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId,evidenciaId)VALUES(3,2,3,'obj','act','2023-03-08','2023-08-05',3,null);
+

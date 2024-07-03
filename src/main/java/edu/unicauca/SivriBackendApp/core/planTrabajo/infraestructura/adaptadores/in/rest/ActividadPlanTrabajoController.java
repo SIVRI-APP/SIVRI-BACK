@@ -10,6 +10,7 @@ import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.in.rest.DTO.petición.ActividadPlanTrabajoCrearDTO;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.in.rest.mapper.ActividadPlanTrabajoDtoMapper;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("actividadesPlanTrabajo")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ActividadPlanTrabajoController {
@@ -27,13 +29,7 @@ public class ActividadPlanTrabajoController {
     private final ActividadPlanTrabajoEliminarCU actividadPlanTrabajoEliminarCU;
     private final ActividadPlanTrabajoDtoMapper actividadPlanTrabajoDtoMapper;
 
-    public ActividadPlanTrabajoController(ActividadPlanTrabajoObtenerCU actividadPlanTrabajoObtenerCU, ActividadPlanTrabajoCrearCU actividadPlanTrabajoCrearCU, ActividadPlanTrabajoActualizarCU actividadPlanTrabajoActualizarCU, ActividadPlanTrabajoEliminarCU actividadPlanTrabajoEliminarCU, ActividadPlanTrabajoDtoMapper actividadPlanTrabajoDtoMapper) {
-        this.actividadPlanTrabajoObtenerCU = actividadPlanTrabajoObtenerCU;
-        this.actividadPlanTrabajoCrearCU = actividadPlanTrabajoCrearCU;
-        this.actividadPlanTrabajoActualizarCU = actividadPlanTrabajoActualizarCU;
-        this.actividadPlanTrabajoEliminarCU = actividadPlanTrabajoEliminarCU;
-        this.actividadPlanTrabajoDtoMapper = actividadPlanTrabajoDtoMapper;
-    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Respuesta> obtenerActividadPlanTrabajoPorId(@PathVariable(value = "id") int id){
@@ -89,14 +85,15 @@ public class ActividadPlanTrabajoController {
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR' )"
     )
-    public ResponseEntity<Respuesta> listarActividadesPlanSemilleroConFIltro(
+    public ResponseEntity<Respuesta> listarActividadesxidPlanSemilleroConFIltro(
+            @RequestParam(value = "idPlan") Integer idPlan,
             @RequestParam(required = false) LocalDate fechaInicio,
             @RequestParam(required = false) LocalDate fechaFin,
             @RequestParam(required = false) int pageNo,
             @RequestParam(required = false) int pageSize
     ){
         System.out.println("fecha inicio "+fechaInicio+" fecha fin "+fechaFin);
-        Respuesta respuesta = actividadPlanTrabajoObtenerCU.ListarActividadesConFiltro(pageNo,pageSize,fechaInicio,fechaFin);
+        Respuesta respuesta = actividadPlanTrabajoObtenerCU.ListarActividadesConFiltro(pageNo,pageSize,idPlan,fechaInicio,fechaFin);
         return ResponseEntity.ok().body(respuesta);
     }
 }

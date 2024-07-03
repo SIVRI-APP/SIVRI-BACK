@@ -4,7 +4,7 @@ import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.EstadoPlanT
 
 import java.time.LocalDate;
 
-public interface ObtenerPlanTrabajoxanio {
+public interface ObtenerActividadPlanTrabajoxanio {
     Integer getId();
     Integer getIdPlan();
     Integer getEvidenciaId();
