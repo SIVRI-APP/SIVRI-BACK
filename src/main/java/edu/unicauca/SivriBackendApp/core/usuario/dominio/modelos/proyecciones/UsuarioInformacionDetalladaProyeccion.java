@@ -1,4 +1,4 @@
-package edu.unicauca.SivriBackendApp.core.usuario.dominio.proyecciones;
+package edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones;
 
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.Sexo;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;

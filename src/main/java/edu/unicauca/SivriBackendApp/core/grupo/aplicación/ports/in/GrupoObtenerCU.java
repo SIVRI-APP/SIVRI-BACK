@@ -19,4 +19,6 @@ public interface GrupoObtenerCU {
     Respuesta<List<ListarGruposPorIdDirector>> obtenerGruposPorIdDirector(int idDirector);
     Respuesta<Page<List<ListarGruposPorIdDirector>>> obtenerGruposPorIdDirectorPaginado(int pageNo, int pageSize, int idDirector);
     Respuesta<Page<List<ListarGruposConFiltro>>> obtenerGruposConFiltro(int pageNo, int pageSize, String nombre, GrupoEstado estado, String facultad, String director);
+
+
 }

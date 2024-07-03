@@ -1,4 +1,4 @@
-package edu.unicauca.SivriBackendApp.core.proyectos.dominio.proyecciones;
+package edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones;
 
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;

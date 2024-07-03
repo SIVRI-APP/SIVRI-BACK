@@ -5,7 +5,7 @@ import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.Int
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.IntegranteProyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.RolProyecto;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.validadores.IntegranteValidator;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.servicios.validadores.IntegranteValidator;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

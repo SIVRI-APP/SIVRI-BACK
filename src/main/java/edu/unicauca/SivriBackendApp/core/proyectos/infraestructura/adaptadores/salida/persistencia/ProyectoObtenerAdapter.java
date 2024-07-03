@@ -4,8 +4,8 @@ import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.Tipo
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.proyecciones.ProyectoInformacionDetalladaProyeccion;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.proyecciones.ProyectoListarConFiltroProyeccion;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoInformacionDetalladaProyeccion;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoListarConFiltroProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.mapper.ProyectoInfraMapperStruct;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios.ProyectoRepository;
@@ -43,8 +43,13 @@ public class ProyectoObtenerAdapter implements ProyectoObtenerREPO {
 
     @Override
     public Optional<Proyecto> obtenerProyecto(long proyectoId) {
-        Optional<ProyectoEntity> proyecto = proyectoRepository.findById(proyectoId);
+        Optional<Proyecto> respuesta = Optional.empty();
+        Optional<ProyectoEntity> respuestaBD = proyectoRepository.findById(proyectoId);
 
-        return proyecto.map(proyectoInfraMapperStruct::toDto);
+        if (respuestaBD.isPresent()){
+            respuesta = Optional.of(proyectoInfraMapperStruct.toDto(respuestaBD.get()));
+        }
+
+        return respuesta;
     }
 }

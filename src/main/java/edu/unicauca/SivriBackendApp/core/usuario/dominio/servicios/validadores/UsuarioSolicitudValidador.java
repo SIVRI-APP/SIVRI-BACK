@@ -1,4 +1,4 @@
-package edu.unicauca.SivriBackendApp.core.usuario.dominio.validadores;
+package edu.unicauca.SivriBackendApp.core.usuario.dominio.servicios.validadores;
 
 
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;

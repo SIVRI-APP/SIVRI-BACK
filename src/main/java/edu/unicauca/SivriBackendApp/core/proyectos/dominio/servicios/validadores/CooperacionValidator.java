@@ -1,4 +1,4 @@
-package edu.unicauca.SivriBackendApp.core.proyectos.dominio.validadores;
+package edu.unicauca.SivriBackendApp.core.proyectos.dominio.servicios.validadores;
 
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.OrganismoDeInvestigacion;

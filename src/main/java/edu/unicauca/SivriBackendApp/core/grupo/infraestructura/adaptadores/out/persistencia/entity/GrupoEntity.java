@@ -55,7 +55,7 @@ public class GrupoEntity extends OrganismoDeInvestigacionEntity {
     // relacion 1a* con entidad integranteGrupo
     @OneToMany(mappedBy = "grupo", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<IntegranteGrupoEntity> integrantesGrupo;
+    private List<IntegranteGrupoEntity> integrantes;
 
     // relacion 1a* con entidad observacionGrupo
     @OneToMany(mappedBy = "grupo", fetch = FetchType.LAZY)
