@@ -99,8 +99,7 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
 
     @Override
     public Respuesta<Page<List<ListarConFiltroSemilleros>>> listarSemillerosConfiltro(int pageNo, int pageSize, String nombre, String correo, SemilleroEstado estado) {
-
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
+       Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<List<ListarConFiltroSemilleros>> respuestaBd= semilleroObtenerREPO.listarSemillerosConfiltro(pageable, nombre, correo, estado);
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
     }
@@ -116,6 +115,17 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
 
     @Override
     public Respuesta<Page<List<ListarSemilleroPorIdMentor>>> obtenerSemillerosPorIdMentor(int pageNo, int pageSize, int idMentor) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        //TODO falta verificar que el id que ingresa tenga el rol de mentor o director
+        Page<List<ListarSemilleroPorIdMentor>> respuestaBd=semilleroObtenerREPO.obtenerSemillerosPorIdMentor(pageable,idMentor);
+        if (respuestaBd.isEmpty()){
+            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.semilleros.mentor");
+        }
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Page<List<ListarSemilleroPorIdMentor>>> obtenerSemillerosPorIdDirector(int pageNo, int pageSize, int idMentor) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         //TODO falta verificar que el id que ingresa tenga el rol de mentor o director
         Page<List<ListarSemilleroPorIdMentor>> respuestaBd=semilleroObtenerREPO.obtenerSemillerosPorIdMentor(pageable,idMentor);

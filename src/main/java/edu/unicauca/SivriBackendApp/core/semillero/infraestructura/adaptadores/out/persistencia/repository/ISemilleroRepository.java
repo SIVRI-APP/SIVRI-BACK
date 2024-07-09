@@ -38,6 +38,13 @@ public interface ISemilleroRepository extends JpaRepository<SemilleroEntity, Int
             "   (LOWER(oi.nombre) LIKE %:nombre% OR LOWER(oi.nombre) = COALESCE(LOWER(:nombre),LOWER(oi.nombre) ) OR :nombre IS NULL) "  +
             "   AND (LOWER(s.correo) = COALESCE(LOWER(:correo),LOWER(s.correo)) OR :correo IS NULL) " +
             "   AND (LOWER(s.estado) = COALESCE(LOWER(:estado),LOWER(s.estado)) OR :estado IS NULL);",nativeQuery = true)
+    /*@Query(value = "SELECT s.semilleroId, oi.nombre, s.correo, oi.fechaCreacion, s.estado \n" +
+            "FROM semillero s \n" +
+            "LEFT JOIN organismo_de_investigacion oi ON s.semilleroId = oi.id \n" +
+            "WHERE \n" +
+            "    (LOWER(oi.nombre) LIKE '%' || LOWER(:nombre) || '%' OR LOWER(oi.nombre) = COALESCE(LOWER(:nombre), LOWER(oi.nombre)) OR :nombre IS NULL OR :nombre = '')\n" +
+            "    AND (LOWER(s.correo) LIKE '%' || LOWER(:correo) || '%' OR LOWER(s.correo) = COALESCE(LOWER(:correo), LOWER(s.correo)) OR :correo IS NULL OR :correo = '')\n" +
+            "    AND (LOWER(s.estado) = COALESCE(LOWER(:estado), LOWER(s.estado)) OR :estado IS NULL);",nativeQuery = true)*/
     Page<List<ListarConFiltroSemilleros>> listarSemillerosConFiltro(
             @Param("nombre") String nombre,
             @Param("correo") String correo,
@@ -78,5 +85,24 @@ public interface ISemilleroRepository extends JpaRepository<SemilleroEntity, Int
             @Param("idMentor") int idMentor,
             @PageableDefault(size = 10,page = 0,sort = "id")Pageable pageable);
 
+    @Query(value = "select s.semilleroId,oi.nombre,s.estado,ig.usuarioId " +
+            "from semillero s " +
+            "inner join organismo_de_investigacion oi on oi.id=s.semilleroId " +
+            "inner join grupo g on g.grupoId=s.grupoId " +
+            "inner join integrante_grupo ig on g.grupoId=ig.grupoId " +
+            "where ig.rolGrupoId=1 and ig.usuarioId=(:idDirector);",nativeQuery = true)
+    /*@Query(value = "select s.semilleroId,oi.nombre,s.estado,ig.usuarioId " +
+            " from semillero s " +
+            "      inner join organismo_de_investigacion oi on oi.id=s.semilleroId " +
+            "      inner join grupo g on g.grupoId=s.grupoId " +
+            "      inner join integrante_grupo ig on g.grupoId=ig.grupoId " +
+            "      where " +
+            "      (LOWER(oi.nombre) LIKE %:nombre% OR LOWER(oi.nombre) = COALESCE(LOWER(:nombre),LOWER(oi.nombre) ) OR :nombre IS NULL) " +
+            "      AND (LOWER(s.estado) = COALESCE(LOWER(:estado),LOWER(s.estado)) OR :estado IS NULL) " +
+            "      AND ((s.semilleroId) like (:semilleroId) or (s.semilleroId)= coalesce((:semilleroId),(s.semilleroId)) or (:semilleroId) IS NULL) " +
+            "      AND ig.rolGrupoId=1 and ig.usuarioId=(:idDirector);",nativeQuery = true)*/
+    Page<List<ListarSemilleroPorIdMentor>> listarxFiltroSemilleroPorIdDirector(
+            @Param("idDirector") int idDirector,
+            @PageableDefault(size = 10,page = 0,sort = "id")Pageable pageable);
 
 }

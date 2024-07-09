@@ -5,5 +5,5 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.ObservacionSe
 
 
 public interface ObservacionSemilleroCrearCU {
-    Respuesta<Boolean> crear(Long funcionarioId, int semilleroId, ObservacionSemillero observacion);
+    Respuesta<Boolean> crear( int semilleroId, ObservacionSemillero observacion);
 }

@@ -192,4 +192,18 @@ public class SemilleroControlller {
         return ResponseEntity.ok().body(respuesta);
     }
 
+    @GetMapping("/listarSemilleroPorIdDirector")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR',  " +
+            "'SEMILLERO:MENTOR')")
+    public ResponseEntity<Respuesta> listarSemilleroPorIdDirector(
+            @RequestParam(required = true) int idDirector,
+            @RequestParam(required = false) int pageNo,
+            @RequestParam(required = false) int pageSize
+    ){
+        System.out.println(idDirector+" "+pageNo+" "+pageSize);
+        Respuesta respuesta = semilleroObtenerCU.obtenerSemillerosPorIdMentor(pageNo,pageSize,idDirector);
+        return ResponseEntity.ok().body(respuesta);
+    }
+
 }

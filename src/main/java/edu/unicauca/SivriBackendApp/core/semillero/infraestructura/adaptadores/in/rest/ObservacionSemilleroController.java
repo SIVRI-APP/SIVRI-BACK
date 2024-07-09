@@ -23,16 +23,15 @@ public class ObservacionSemilleroController {
     private final ObservacionSemilleroObtenerCU observacionSemilleroObtenerCU;
     private final ObservacionSemilleroDtoMapper observacionSemilleroDtoMapper;
 
-    @PostMapping("/asociarObservacion/{idSemillero}/{idFuncionario}")
+    @PostMapping("/asociarObservacion/{idSemillero}")
     @PreAuthorize("hasAnyAuthority(" +
             "'FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> crear(
             @PathVariable(value = "idSemillero") int idSemillero,
-            @PathVariable(value = "idFuncionario") Long idFuncionario,
             @Valid @RequestBody ObservacionSemilleroCrearDTO nuevaObservacion
             ){
 
-        Respuesta respuesta =observacionSemilleroCrearCU.crear(idFuncionario,idSemillero,observacionSemilleroDtoMapper.asociarObservacion(nuevaObservacion));
+        Respuesta respuesta =observacionSemilleroCrearCU.crear(idSemillero,observacionSemilleroDtoMapper.asociarObservacion(nuevaObservacion));
         return ResponseEntity.ok().body(respuesta);
     }
 
@@ -60,7 +59,9 @@ public class ObservacionSemilleroController {
     public ResponseEntity<Respuesta> listarObservacionesSemilleroPorIdSemillero(
             @RequestParam(required = true) Integer semilleroId,
             @RequestParam() int pageNo,
-            @RequestParam() int pageSize
+            @RequestParam(
+
+            ) int pageSize
     ){
         Respuesta respuesta = observacionSemilleroObtenerCU.listarObservacionesPorIdSemillero(pageNo,pageSize,semilleroId);
         return ResponseEntity.ok().body(respuesta);

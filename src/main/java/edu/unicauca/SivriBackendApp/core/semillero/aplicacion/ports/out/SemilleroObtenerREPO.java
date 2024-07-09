@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out;
 
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroEstado;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroSemilleros;
@@ -24,6 +25,7 @@ public interface SemilleroObtenerREPO {
     List<Semillero> obtenerSemillerosPorIdDirectorGrupo(long idDirector);
 
     Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosPorIdMentor(Pageable pageable, int idMentor);
+    Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosPorIdDirector(Pageable pageable, int idDirector);
     List<Semillero> obtenerSemilleros();
     Page<Semillero> obtenerListadoSemilleroPaginado(PageRequest pageRequest);
     Page<List<ListarConFiltroSemilleros>> listarSemillerosConfiltro(Pageable pageable, String nombre, String correo, SemilleroEstado estado);

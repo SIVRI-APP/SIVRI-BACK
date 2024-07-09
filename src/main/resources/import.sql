@@ -117,6 +117,9 @@ INSERT INTO convocatoria (fechaFin, fechaInicio, id, nombre, oferente, descripci
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (1, 'mandresmosquera@gmail.com', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'MASCULINO', 'ADMINISTRATIVO', 'Yurani', 'Guevara', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (3, 'yurany@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'FEMENINO', 'ADMINISTRATIVO', 'yurany', 'guevara', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (4, 'andrea@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10614', 'FEMENINO', 'ADMINISTRATIVO', 'andrea', 'robles', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (5, 'maicol@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10615', 'FEMENINO', 'ADMINISTRATIVO', 'maicol', 'paredes', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (6, 'sebastian@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10616', 'MASCULINO', 'ADMINISTRATIVO', 'sebastian', 'perez', '3225864404' );
 
 
 -- ROL FUNCIONARIO
@@ -194,7 +197,7 @@ INSERT INTO grupo (grupoId,departamentoId,estado, direccion, telefono, email, si
 
 --semillero
 INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (2,1,'ACTIVO','agora@correo.edu.co','POPAYAN');
-INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (3,1,'ACTIVO','semillero3@correo.edu.co','POPAYAN');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (3,1,'FORMULADO','semillero3@correo.edu.co','POPAYAN');
 INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (4,1,'ACTIVO','semillero4@correo.edu.co','POPAYAN');
 INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (5,1,'ACTIVO','agora5@correo.edu.co','POPAYAN');
 INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (6,1,'ACTIVO','agora6@correo.edu.co','POPAYAN');
@@ -203,6 +206,10 @@ INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (8,1,'ACTI
 
 -- integrante semillero
 INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(1,2,3,2, 'activo', '2023-09-04',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(2,2,4,1, 'activo', '2023-09-04',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(3,2,5,6, 'activo', '2023-09-04',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(4,2,6,6, 'activo', '2023-09-04',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(5,3,3,2, 'activo', '2023-09-05',NULL);
 
 --integrante grupo
 INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(1,1,3,1,'Activo','2023-09-07',NULL);
@@ -226,3 +233,13 @@ INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objeti
 INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId,evidenciaId)VALUES(2,1,2,'obj','act','2023-03-08','2023-08-05',3,2);
 INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId,evidenciaId)VALUES(3,2,3,'obj','act','2023-03-08','2023-08-05',3,null);
 
+--linea de investigacion
+INSERT INTO linea_investigacion(id,semilleroId,linea) VALUES(1,2,'calidad de procesos');
+INSERT INTO linea_investigacion(id,semilleroId,linea) VALUES(2,2,'calidad de sotware');
+
+--semillero programa
+INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,1);
+INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,2);
+
+--observacion semillero
+INSERT INTO observacion_semillero(id,semilleroId,funcionarioId,observacion,fecha) VALUES (1,2,1,'revisando el semillero se encuentra que no ha subido los documentos','2023-09-04');

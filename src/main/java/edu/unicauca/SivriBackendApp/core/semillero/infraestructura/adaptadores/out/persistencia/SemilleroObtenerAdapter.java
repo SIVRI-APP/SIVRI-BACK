@@ -97,9 +97,8 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
 
     @Override
     public Page<List<ListarConFiltroSemilleros>> listarSemillerosConfiltro(Pageable pageable, String nombre, String correo, SemilleroEstado estado) {
-
+        System.out.println("ingresa datos al adpter "+nombre+correo+estado);
         String estad= (estado != null) ? estado.toString() : null;
-
         return semilleroRepository.listarSemillerosConFiltro(nombre,correo, estad, pageable);
     }
 
@@ -115,15 +114,9 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
         return semilleroRepository.listarSemilleroPorIdMentor(idMentor,pageable);
     }
 
-    /*@Override
-    public List<Semillero> obtenerSemillerosPorIdMentor(String idMentor) {
-       *//* List<Semillero> semilleros=semilleroRepository.findByusuarioNumeroDocumento(idMentor).stream().map(semilleroEntity -> {
-            Semillero semillero= semilleroMapper.obtenerModelo(semilleroEntity);
-            return semillero;
-        }).collect(Collectors.toList());
-        return semilleros;
-   *//*
-    return null;
-    }*/
+    @Override
+    public Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosPorIdDirector(Pageable pageable, int idDirector) {
+        return semilleroRepository.listarxFiltroSemilleroPorIdDirector(idDirector,pageable);
+    }
 
 }
