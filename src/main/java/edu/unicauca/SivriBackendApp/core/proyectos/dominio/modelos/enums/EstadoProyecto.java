@@ -4,5 +4,6 @@ public enum EstadoProyecto {
     FORMULADO,
     FORMULADO_OBSERVACIONES,
     REVISION_VRI,
-    APROBADO
+    APROBADO,
+    EJECUCION
 }

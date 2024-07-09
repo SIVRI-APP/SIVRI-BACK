@@ -5,4 +5,6 @@ import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 public interface ProyectoCrearREPO {
 
     Proyecto crearProyecto(Proyecto proyecto);
+
+    boolean formalizarProyecto(Proyecto proyecto);
 }

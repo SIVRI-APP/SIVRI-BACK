@@ -7,6 +7,7 @@ import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.Convocator
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.OrganismoDeInvestigacion;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.*;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoCrearREPO;
+import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.RolProyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
@@ -36,6 +37,7 @@ public class ProyectoCrearService implements ProyectoCrearCU {
      * Adaptadores
      */
     private final ProyectoCrearREPO proyectoCrearREPO;
+    private final ProyectoObtenerREPO proyectoObtenerREPO;
 
     /**
      *
@@ -103,10 +105,7 @@ public class ProyectoCrearService implements ProyectoCrearCU {
         // Validaciones
         proyectoValidators.validarFormalizarProyecto(proyecto);
 
-        // Crear Proyecto
-        proyecto.setEstado(EstadoProyecto.FORMULADO);
-
-        proyectoCrearREPO.crearProyecto(proyecto);
+        proyectoCrearREPO.formalizarProyecto(proyecto);
 
         return new RespuestaHandler<>(200, "ok.detallesDelProyectoActualizadoCorrectamente", List.of(proyecto.getNombre()), "", true).getRespuesta();
     }

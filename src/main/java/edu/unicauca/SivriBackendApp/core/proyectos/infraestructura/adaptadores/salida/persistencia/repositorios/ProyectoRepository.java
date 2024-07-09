@@ -21,7 +21,7 @@ public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
 
     @Query("SELECT proyecto " +
             "FROM ProyectoEntity proyecto " +
-            "LEFT JOIN FETCH proyecto.convocatoria " +
+            "LEFT JOIN FETCH proyecto.convocatoria convocatoria " +
             "LEFT JOIN FETCH proyecto.enfoquesDiferenciales " +
             "LEFT JOIN FETCH proyecto.integrantes " +
             "LEFT JOIN FETCH proyecto.lineasDeInvestigacion " +

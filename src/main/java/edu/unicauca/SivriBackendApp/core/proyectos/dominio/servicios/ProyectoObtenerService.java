@@ -45,7 +45,26 @@ public class ProyectoObtenerService implements ProyectoObtenerCU {
             throw new ReglaDeNegocioException("bad.proyectoNoExiste", List.of(String.valueOf(proyectoId)));
         }
 
-        return new RespuestaHandler<>(200, "ok", "", respuesta.get()).getRespuesta();
+        // Cambios en el comportamiento según el estado del proyecto
+        String accionesPermitidas = accionesPermitidasSegunEstadoDelProyecto(respuesta.get());
+
+        return new RespuestaHandler<>(200, "ok", accionesPermitidas, respuesta.get()).getRespuesta();
+    }
+
+    private String accionesPermitidasSegunEstadoDelProyecto(ProyectoInformacionDetalladaProyeccion proyecto){
+        String accionesPermitidas = "";
+
+        if (servicioDeIdentificacionDeUsuario.esFuncionario()){
+            accionesPermitidas = "edicion";
+        }else{
+            if (!proyecto.getEstado().equals(EstadoProyecto.FORMULADO) || !proyecto.getEstado().equals(EstadoProyecto.FORMULADO_OBSERVACIONES)){
+                accionesPermitidas = "lectura";
+            }else {
+                accionesPermitidas = "edicion";
+            }
+        }
+
+        return accionesPermitidas;
     }
 
     @Override
