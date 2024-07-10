@@ -173,7 +173,7 @@ public class SemilleroControlller {
         Respuesta respuesta = semilleroObtenerCU.listarSemilleroConFiltroxMentor(pageNo,pageSize,semilleroId,nombre,estado);
         return ResponseEntity.ok().body(respuesta);
     }
-    @GetMapping("/listarSemilleroPorIdDirector")
+    @GetMapping("/listarSemilleroConFiltroPorIdDirector")
     @PreAuthorize("hasAnyAuthority(" +
             "'GRUPO:DIRECTOR',  " +
             "'SEMILLERO:MENTOR')")
