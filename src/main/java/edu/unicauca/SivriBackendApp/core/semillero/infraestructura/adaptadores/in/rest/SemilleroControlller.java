@@ -169,15 +169,25 @@ public class SemilleroControlller {
             @RequestParam(required = false) int pageNo,
             @RequestParam(required = false) int pageSize
     ){
-        System.out.println("semillero id"+semilleroId);
-
-        System.out.println("estado"+estado);
-        System.out.println("pagen"+pageNo+"size"+pageSize);
 
         Respuesta respuesta = semilleroObtenerCU.listarSemilleroConFiltroxMentor(pageNo,pageSize,semilleroId,nombre,estado);
         return ResponseEntity.ok().body(respuesta);
     }
-    // la consulta de listar semillero por idmentor sirve para consultar los semilleros del director tambien
+    @GetMapping("/listarSemilleroPorIdDirector")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR',  " +
+            "'SEMILLERO:MENTOR')")
+    public ResponseEntity<Respuesta> listarSemilleroPorIdDirector(
+            @RequestParam(required = false) Integer semilleroId,
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) SemilleroEstado estado,
+            @RequestParam(required = false) int pageNo,
+            @RequestParam(required = false) int pageSize
+    ){
+
+        Respuesta respuesta = semilleroObtenerCU.obtenerSemillerosConFiltroxIdDirector(pageNo,pageSize,semilleroId,nombre,estado);
+        return ResponseEntity.ok().body(respuesta);
+    }
     @GetMapping("/listarSemilleroPorIdMentor")
     @PreAuthorize("hasAnyAuthority(" +
             "'GRUPO:DIRECTOR',  " +
@@ -189,20 +199,6 @@ public class SemilleroControlller {
     ){
         System.out.println(idMentor+" "+pageNo+" "+pageSize);
         Respuesta respuesta = semilleroObtenerCU.obtenerSemillerosPorIdMentor(pageNo,pageSize,idMentor);
-        return ResponseEntity.ok().body(respuesta);
-    }
-
-    @GetMapping("/listarSemilleroPorIdDirector")
-    @PreAuthorize("hasAnyAuthority(" +
-            "'GRUPO:DIRECTOR',  " +
-            "'SEMILLERO:MENTOR')")
-    public ResponseEntity<Respuesta> listarSemilleroPorIdDirector(
-            @RequestParam(required = true) int idDirector,
-            @RequestParam(required = false) int pageNo,
-            @RequestParam(required = false) int pageSize
-    ){
-        System.out.println(idDirector+" "+pageNo+" "+pageSize);
-        Respuesta respuesta = semilleroObtenerCU.obtenerSemillerosPorIdMentor(pageNo,pageSize,idDirector);
         return ResponseEntity.ok().body(respuesta);
     }
 

@@ -108,6 +108,12 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
         return semilleroRepository.listarSemillerosConFiltroxMentor(semilleroId,usuarioId,nombre,estad,pageable);
     }
 
+    @Override
+    public Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosConFiltroxIdDirector(Pageable pageable, Integer semilleroId, Long usuarioId, String nombre, SemilleroEstado estado) {
+        String estad= (estado != null) ? estado.toString() : null;
+        return semilleroRepository.listarxFiltroSemilleroPorIdDirector(usuarioId,semilleroId,nombre,estad,pageable);
+    }
+
 
     @Override
     public Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosPorIdMentor(Pageable pageable, int idMentor) {
@@ -115,8 +121,8 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
     }
 
     @Override
-    public Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosPorIdDirector(Pageable pageable, int idDirector) {
-        return semilleroRepository.listarxFiltroSemilleroPorIdDirector(idDirector,pageable);
+    public Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosPorIdDirector(Pageable pageable, Long idDirector) {
+        return semilleroRepository.listarSemilleroPorIdDirector(idDirector,pageable);
     }
 
 }

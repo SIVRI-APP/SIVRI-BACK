@@ -112,7 +112,17 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
         Page<List<ListarSemillerosConFiltroxMentor>> respuestaBd= semilleroObtenerREPO.listarSemilleroConFiltroxMentor(pageable,semilleroId,usuarioId,nombre,estado);
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","",respuestaBd).getRespuesta();
     }
+    @Override
+    public Respuesta<Page<List<ListarSemilleroPorIdMentor>>> obtenerSemillerosConFiltroxIdDirector(int pageNo, int pageSize, Integer semilleroId, String nombre, SemilleroEstado estado) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Long usuarioId=servicioDeIdentificacionDeUsuario.obtenerUsuario().getId();
 
+        Page<List<ListarSemilleroPorIdMentor>> respuestaBd=semilleroObtenerREPO.obtenerSemillerosConFiltroxIdDirector(pageable,semilleroId,usuarioId,nombre,estado);
+        if (respuestaBd.isEmpty()){
+            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.semilleros.mentor");
+        }
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
+    }
     @Override
     public Respuesta<Page<List<ListarSemilleroPorIdMentor>>> obtenerSemillerosPorIdMentor(int pageNo, int pageSize, int idMentor) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
@@ -124,16 +134,7 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
     }
 
-    @Override
-    public Respuesta<Page<List<ListarSemilleroPorIdMentor>>> obtenerSemillerosPorIdDirector(int pageNo, int pageSize, int idMentor) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-        //TODO falta verificar que el id que ingresa tenga el rol de mentor o director
-        Page<List<ListarSemilleroPorIdMentor>> respuestaBd=semilleroObtenerREPO.obtenerSemillerosPorIdMentor(pageable,idMentor);
-        if (respuestaBd.isEmpty()){
-            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.semilleros.mentor");
-        }
-        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
-    }
+
 
     /*@Override
     public Respuesta<List<Semillero>> obtenerSemillerosPorIdMentor(String idMentor) {

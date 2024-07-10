@@ -25,11 +25,12 @@ public interface SemilleroObtenerREPO {
     List<Semillero> obtenerSemillerosPorIdDirectorGrupo(long idDirector);
 
     Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosPorIdMentor(Pageable pageable, int idMentor);
-    Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosPorIdDirector(Pageable pageable, int idDirector);
+    Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosPorIdDirector(Pageable pageable, Long idDirector);
     List<Semillero> obtenerSemilleros();
     Page<Semillero> obtenerListadoSemilleroPaginado(PageRequest pageRequest);
     Page<List<ListarConFiltroSemilleros>> listarSemillerosConfiltro(Pageable pageable, String nombre, String correo, SemilleroEstado estado);
     Page<List<ListarSemillerosConFiltroxMentor>> listarSemilleroConFiltroxMentor(Pageable pageable, Integer semilleroId, Long usuarioId, String nombre, SemilleroEstado estado);
+    Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosConFiltroxIdDirector(Pageable pageable, Integer semilleroId, Long usuarioId, String nombre, SemilleroEstado estado);
 
 
 }

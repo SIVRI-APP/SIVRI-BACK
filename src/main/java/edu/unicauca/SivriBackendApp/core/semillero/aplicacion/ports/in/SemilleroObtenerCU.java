@@ -21,12 +21,13 @@ public interface SemilleroObtenerCU {
     Respuesta<List<Semillero>> obtenerSemillerosPorIdGrupo(int idGrupo);
     Respuesta<List<Semillero>> obtenerSemillerosPorIdDirectorGrupo(long idDirector);
     Respuesta<Page<List<ListarSemilleroPorIdMentor>>> obtenerSemillerosPorIdMentor(int pageNo, int pageSize, int idMentor);
-    Respuesta<Page<List<ListarSemilleroPorIdMentor>>> obtenerSemillerosPorIdDirector(int pageNo, int pageSize, int idMentor);
+   // Respuesta<Page<List<ListarSemilleroPorIdMentor>>> obtenerSemillerosPorIdDirector(int pageNo, int pageSize, int idMentor);
 
     Respuesta<List<Semillero>> obtenerSemilleros();
     Respuesta<Page<Semillero>> obtenerSemillerosPaginado(int pageNo, int pageSize);
     Respuesta<Page<List<ListarConFiltroSemilleros>>> listarSemillerosConfiltro(int pageNo, int pageSize, String nombre, String correo, SemilleroEstado estado);
 
     Respuesta<Page<List<ListarSemillerosConFiltroxMentor>>> listarSemilleroConFiltroxMentor(int pageNo, int pageSize, Integer semilleroId, String nombre, SemilleroEstado estado);
+    Respuesta<Page<List<ListarSemilleroPorIdMentor>>> obtenerSemillerosConFiltroxIdDirector(int pageNo, int pageSize, Integer semilleroId, String nombre, SemilleroEstado estado);
 
 }
