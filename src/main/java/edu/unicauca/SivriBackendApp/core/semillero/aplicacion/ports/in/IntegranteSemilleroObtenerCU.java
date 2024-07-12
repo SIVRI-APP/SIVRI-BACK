@@ -6,6 +6,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSem
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroIntegrantesSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarIntegrantesSemilleroxIdSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarTodosIntegrantesConFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,7 @@ public interface IntegranteSemilleroObtenerCU {
     Respuesta<List<Semillero>> obtenerSemillerosPorIdMentor(String idMentor);
     Respuesta<Page<List<ListarConFiltroIntegrantesSemillero>>> listarIntegrantesSemilleroConFiltro(int pageNo, int pageSize, String numeroDocumento, String rolSemillero, EstadoIntegranteSemillero estado/*,String programa*/);
     //Respuesta<Page<List<>>>
+    Respuesta<Page<List<ListarTodosIntegrantesConFiltro>>> listarTodosIntegrantesSemilleroConFiltro(int pageNo, int pageSize, String numeroDocumento,String nombres, Integer semilleroId,  String nombreSemillero, String rolSemillero, EstadoIntegranteSemillero estado/*,String programa, String facultad*/);
 
 
 }

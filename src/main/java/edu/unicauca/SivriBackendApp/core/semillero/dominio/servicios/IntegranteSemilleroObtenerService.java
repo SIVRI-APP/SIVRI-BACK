@@ -10,6 +10,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSem
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroIntegrantesSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarIntegrantesSemilleroxIdSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarTodosIntegrantesConFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -78,6 +79,14 @@ public class IntegranteSemilleroObtenerService implements IntegranteSemilleroObt
     public Respuesta<Page<List<ListarConFiltroIntegrantesSemillero>>> listarIntegrantesSemilleroConFiltro(int pageNo, int pageSize, String numeroDocumento, String rolSemillero, EstadoIntegranteSemillero estado/*, String programa*/) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<List<ListarConFiltroIntegrantesSemillero>> respuestaBd= integranteSemilleroObtenerREPO.listarIntegrantesSemilleroConFiltro(pageable,numeroDocumento,rolSemillero,estado);
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Page<List<ListarTodosIntegrantesConFiltro>>> listarTodosIntegrantesSemilleroConFiltro(int pageNo, int pageSize, String numeroDocumento, String nombres, Integer semilleroId, String nombreSemillero, String rolSemillero, EstadoIntegranteSemillero estado) {
+        System.out.println("service parametros num doc "+numeroDocumento+"nombr"+nombres+"semilleroid "+semilleroId+ "nom semil "+nombreSemillero+"rol "+rolSemillero+"estado "+estado);
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<List<ListarTodosIntegrantesConFiltro>> respuestaBd = integranteSemilleroObtenerREPO.listarTodosIntegrantesSemilleroConFiltro(pageable,numeroDocumento,nombres, semilleroId, nombreSemillero,rolSemillero, estado);
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
     }
 

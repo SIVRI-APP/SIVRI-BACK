@@ -6,6 +6,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSem
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroIntegrantesSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarIntegrantesSemilleroxIdSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarTodosIntegrantesConFiltro;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.IntegranteSemilleroEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.mapper.IntegranteSemilleroMapper;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.repository.IIntegranteSemilleroRepository;
@@ -56,6 +57,16 @@ public class IntegranteSemilleroObtenerAdapter implements IntegranteSemilleroObt
 
         String estad= (estado != null) ? estado.toString() : null;
         return integranteSemilleroRepository.listarIntegranteSemilleroConFiltro(numeroDocumento,rolSemillero,estad,pageable);
+    }
+
+    @Override
+    public Page<List<ListarTodosIntegrantesConFiltro>> listarTodosIntegrantesSemilleroConFiltro(Pageable pageable, String numeroDocumento, String nombres, Integer semilleroId, String nombreSemillero, String rolSemillero, EstadoIntegranteSemillero estado) {
+        System.out.println("adapter parametros num doc "+numeroDocumento+"nombr"+nombres+"semilleroid "+semilleroId+ "nom semil "+nombreSemillero+"rol "+rolSemillero+"estado "+estado);
+
+        String estad= (estado != null) ? estado.toString() : null;
+        Page<List<ListarTodosIntegrantesConFiltro>> respuestaAdapter=integranteSemilleroRepository.listarTodosIntegranteSemilleroConFiltro(numeroDocumento,nombres,semilleroId,nombreSemillero,rolSemillero,estad,pageable);
+        System.out.println("respuesta adapter "+respuestaAdapter);
+        return respuestaAdapter;
     }
 
 

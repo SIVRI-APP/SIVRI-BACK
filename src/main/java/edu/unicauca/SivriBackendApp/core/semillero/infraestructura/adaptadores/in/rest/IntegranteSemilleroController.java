@@ -7,6 +7,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.Integrant
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoIntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarTodosIntegrantesConFiltro;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.IntegranteSemilleroActualizarDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.IntegranteSemilleroCrearDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.IntegranteSemilleroCrearMentorDto;
@@ -143,6 +144,23 @@ public class IntegranteSemilleroController {
           Respuesta respuesta = integranteSemilleroObtenerCU.listarIntegrantesSemilleroConFiltro(pageNo,pageSize,numeroDocumento,rolSemillero,estado);
           return ResponseEntity.ok().body(respuesta);
      }
-
+     @GetMapping("listarTodosIntegrantesConFiltro")
+     @PreAuthorize("hasAnyAuthority(" +
+             "'SEMILLERO:MENTOR', " +
+             "'FUNCIONARIO:SEMILLEROS')")
+     public ResponseEntity<Respuesta<Page<List<ListarTodosIntegrantesConFiltro>>>> listarTodosIntegrantesSemilleroConFiltro(
+             @RequestParam(required = false) String numeroDocumento,
+             @RequestParam(required = false) String nombres,
+             @RequestParam(required = false) Integer semilleroId,
+             @RequestParam(required = false) String nombreSemillero,
+             @RequestParam(required = false) String rolSemillero,
+             @RequestParam(required = false) EstadoIntegranteSemillero estado,
+             @RequestParam(required = false) int pageNo,
+             @RequestParam(required = false) int pageSize
+     ){
+          System.out.println("parametros "+numeroDocumento+" "+nombres+" "+semilleroId+" "+nombreSemillero+" "+rolSemillero+" "+estado);
+          Respuesta<Page<List<ListarTodosIntegrantesConFiltro>>> respuesta = integranteSemilleroObtenerCU.listarTodosIntegrantesSemilleroConFiltro(pageNo,pageSize,numeroDocumento, nombres, semilleroId, nombreSemillero, rolSemillero, estado);
+          return ResponseEntity.ok().body(respuesta);
+     }
 
 }
