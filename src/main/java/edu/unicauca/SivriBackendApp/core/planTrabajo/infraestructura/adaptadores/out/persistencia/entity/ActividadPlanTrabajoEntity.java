@@ -19,9 +19,9 @@ public class ActividadPlanTrabajoEntity {
     private String objetivo;
     @Column(length = 145)
     private String actividad;
-    @FutureOrPresent
+    //@FutureOrPresent
     private LocalDate fechaInicio;
-    @FutureOrPresent
+    //@FutureOrPresent
     private LocalDate fechaFin;
     //relacion *a1 plantrabajo
     @ManyToOne

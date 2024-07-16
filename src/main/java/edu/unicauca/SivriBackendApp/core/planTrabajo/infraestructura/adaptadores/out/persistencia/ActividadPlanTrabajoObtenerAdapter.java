@@ -33,7 +33,6 @@ public class ActividadPlanTrabajoObtenerAdapter implements ActividadPlanTrabajoO
     @Override
     public Optional<ActividadPlanTrabajo> obtenerPorId(int id) {
         Optional<ActividadPlanTrabajoEntity> respuestaJpa=actividadPlanTrabajoRepository.findById(id);
-
         return respuestaJpa.map(actividadPlanTrabajoMapper::obtenerModelo);
     }
 

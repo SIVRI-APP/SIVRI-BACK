@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos;
 
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -15,6 +16,6 @@ public class ActividadPlanTrabajo {
     private EvidenciaActividad evidenciaActividad;
     private CompromisoSemillero compromiso;
     //TODO SE DEBE CAMBIAR PORELMODELO
-    private String responsableUsuarioId;
+    private Long responsableUsuarioId;
 
 }

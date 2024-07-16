@@ -26,13 +26,12 @@ public class ActividadPlanTrabajoCrearService implements ActividadPlanTrabajoCre
 
     @Override
     public Respuesta<Boolean> crear(int idPlan, ActividadPlanTrabajo nuevaActividad) {
-        System.out.println("id plan"+idPlan+" DATOS nueva actividad "+nuevaActividad);
+        //System.out.println("service: idplan "+idPlan+" DATOS nueva actividad "+nuevaActividad);
         planTrabajoObtenerCU.existePorId(idPlan);
         compromisoSemilleroObtenerCU.existePorId(nuevaActividad.getCompromiso().getId());
         PlanTrabajo plan=planTrabajoObtenerCU.obtenerPorId(idPlan).getData();
         nuevaActividad.setPlanTrabajo(plan);
-        System.out.println(" NUEVA ACTIVIDAD "+nuevaActividad);
-        System.out.println("compromiso id "+nuevaActividad.getCompromiso().getId());
+        //System.out.println(" NUEVA ACTIVIDAD "+nuevaActividad);
         Boolean respuesta= actividadPlanTrabajoCrearREPO.crear(nuevaActividad);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.creacion.objeto", List.of("Actividad Plan Trabajo", "Id", String.valueOf(nuevaActividad.getId())));

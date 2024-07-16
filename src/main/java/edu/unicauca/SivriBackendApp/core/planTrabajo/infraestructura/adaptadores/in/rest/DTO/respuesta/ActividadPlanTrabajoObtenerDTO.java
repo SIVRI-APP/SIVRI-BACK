@@ -17,5 +17,5 @@ public class ActividadPlanTrabajoObtenerDTO {
     private EvidenciaActividad evidenciaActividad;
     private CompromisoSemillero compromiso;
     //TODO DEBE MOSTRAR EL NOMBRE DEL RESPONSABLE DE LA ACTIVIDAD
-//    private UsuarioEntity responsableUsuario;
+    private Long responsableUsuarioId;
 }

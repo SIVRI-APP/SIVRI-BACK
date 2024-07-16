@@ -10,6 +10,7 @@ import edu.unicauca.SivriBackendApp.core.planTrabajo.aplicación.ports.out.Activ
 import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.ActividadPlanTrabajo;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -31,6 +32,9 @@ public class ActividadPlanTrabajoActualizarService implements ActividadPlanTraba
         compromisoSemilleroObtenerCU.existePorId(nuevosDatosActividad.getCompromiso().getId());
         //TODO falta validar el usuario
         ActividadPlanTrabajo objActividadActualizar=actividadPlanTrabajoObtenerCU.obtenerPorId(idActividad).getData();
+        System.out.println("actividad de la bd "+objActividadActualizar);
+        System.out.println("fecha inicio de la bd "+objActividadActualizar.getFechaInicio()+" fecha fin de bd "+objActividadActualizar.getFechaFin());
+
         objActividadActualizar.setObjetivo(nuevosDatosActividad.getObjetivo());
         objActividadActualizar.setActividad(nuevosDatosActividad.getActividad());
         objActividadActualizar.setCompromiso(nuevosDatosActividad.getCompromiso());
