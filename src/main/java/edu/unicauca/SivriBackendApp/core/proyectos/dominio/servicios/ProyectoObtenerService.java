@@ -39,6 +39,7 @@ public class ProyectoObtenerService implements ProyectoObtenerCU {
 
     @Override
     public Respuesta<ProyectoInformacionDetalladaProyeccion> obtenerProyectoInformacionDetallada(long proyectoId) {
+
         Optional<ProyectoInformacionDetalladaProyeccion> respuesta = proyectoObtenerREPO.obtenerProyectoInformacionDetallada(proyectoId);
 
         if (respuesta.isEmpty()){
