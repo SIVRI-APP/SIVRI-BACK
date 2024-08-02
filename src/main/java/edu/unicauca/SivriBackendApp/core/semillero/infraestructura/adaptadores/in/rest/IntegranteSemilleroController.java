@@ -1,12 +1,13 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest;
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.IntegranteSemilleroActualizarCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.IntegranteSemilleroCrearCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.IntegranteSemilleroObtenerCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.IntegranteSemilleroActualizarCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.IntegranteSemilleroCrearCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.IntegranteSemilleroObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoIntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarTodosIntegrantesConFiltro;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.IntegranteSemilleroActualizarDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.IntegranteSemilleroCrearDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.IntegranteSemilleroCrearMentorDto;
@@ -103,9 +104,7 @@ public class IntegranteSemilleroController {
 
      @GetMapping("/semillerosPorMentorId/{id}")
      public ResponseEntity<Respuesta> obtenerSemillerosPorIdMentor(@PathVariable(value = "id")String idMentor){
-          System.out.println("ENTRA A CONTROLLER CON DATOS: "+idMentor);
           Respuesta<List<Semillero>> respuestaCU=integranteSemilleroObtenerCU.obtenerSemillerosPorIdMentor(idMentor);
-          //System.out.println("RESPUESTA CU DE CONTROLLER "+respuestaCU);
           Respuesta<List<SemilleroObtenerDTO>> respuesta=new Respuesta<>();
           respuesta.setData(respuestaCU.getData().stream().map(integranteSemilleroDtoMapper::dtoObtenerSemillero).toList());
           respuesta.setStatus(respuestaCU.getStatus());
@@ -143,6 +142,22 @@ public class IntegranteSemilleroController {
           Respuesta respuesta = integranteSemilleroObtenerCU.listarIntegrantesSemilleroConFiltro(pageNo,pageSize,numeroDocumento,rolSemillero,estado);
           return ResponseEntity.ok().body(respuesta);
      }
-
+     @GetMapping("listarTodosIntegrantesConFiltro")
+     @PreAuthorize("hasAnyAuthority(" +
+             "'SEMILLERO:MENTOR', " +
+             "'FUNCIONARIO:SEMILLEROS')")
+     public ResponseEntity<Respuesta<Page<List<ListarTodosIntegrantesConFiltro>>>> listarTodosIntegrantesSemilleroConFiltro(
+             @RequestParam(required = false) String numeroDocumento,
+             @RequestParam(required = false) String nombres,
+             @RequestParam(required = false) Integer semilleroId,
+             @RequestParam(required = false) String nombreSemillero,
+             @RequestParam(required = false) String rolSemillero,
+             @RequestParam(required = false) EstadoIntegranteSemillero estado,
+             @RequestParam(required = false) int pageNo,
+             @RequestParam(required = false) int pageSize
+     ){
+          Respuesta<Page<List<ListarTodosIntegrantesConFiltro>>> respuesta = integranteSemilleroObtenerCU.listarTodosIntegrantesSemilleroConFiltro(pageNo,pageSize,numeroDocumento, nombres, semilleroId, nombreSemillero, rolSemillero, estado);
+          return ResponseEntity.ok().body(respuesta);
+     }
 
 }

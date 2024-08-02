@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface IIntegranteGrupoRepository extends JpaRepository<IntegranteGrupoEntity,Integer> {
     //TODO para la consulta de los mentores falta LA CONDICION QUE EL USUARIO SEA PROFE
-    @Query(value = "SELECT u.id,concat(u.nombres,' ', u.apellidos) AS nombres " +
+    @Query(value = "SELECT u.id,concat(u.nombre,' ', u.apellido) AS nombres " +
             "FROM integrante_grupo ig " +
             "INNER JOIN usuario u ON u.id=ig.usuarioId " +
             "WHERE ig.grupoId=(:grupoId);",nativeQuery = true)

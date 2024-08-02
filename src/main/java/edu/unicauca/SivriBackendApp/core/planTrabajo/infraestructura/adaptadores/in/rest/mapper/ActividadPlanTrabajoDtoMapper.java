@@ -6,6 +6,7 @@ import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.in.rest.DTO.respuesta.ActividadPlanTrabajoObtenerDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
 public interface ActividadPlanTrabajoDtoMapper {
@@ -13,7 +14,11 @@ public interface ActividadPlanTrabajoDtoMapper {
     ActividadPlanTrabajo crear(final ActividadPlanTrabajoCrearDTO nuevoPlan);
     @Mapping(source = "idCompromiso",target = "compromiso.id")
     ActividadPlanTrabajo actualizar(final ActividadPlanTrabajoActualizarDTO datosActividadModel);
-    @Mapping(source = "planTrabajo.id",target = "planTrabajoId")
+    @Mappings(
+            {@Mapping(source = "planTrabajo.id",target = "planTrabajoId"),
+            @Mapping(source = "responsableUsuarioId",target = "responsableUsuarioId")}
+    )
+
     ActividadPlanTrabajoObtenerDTO obtenerActividadPlanTrabajo(final ActividadPlanTrabajo obtenerModelo);
 
 }

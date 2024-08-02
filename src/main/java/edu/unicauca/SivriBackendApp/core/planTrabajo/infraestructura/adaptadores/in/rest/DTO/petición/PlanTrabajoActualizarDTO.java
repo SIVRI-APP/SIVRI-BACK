@@ -16,4 +16,5 @@ public class PlanTrabajoActualizarDTO {
     @NotEmpty(message = "el estado no puede ser nulo.")
     @Enumerated
     private String estado;
+    private Integer anio;
 }

@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia;
 
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.SemilleroObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.SemilleroObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroEstado;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroSemilleros;
@@ -41,13 +41,9 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
     @Override
     public Optional<Semillero> obtenerSemilleroPorId(int id) {
         Optional<SemilleroEntity> respuestaJpa=semilleroRepository.findById(id);
-        System.out.println("respuestaJpa:"+ respuestaJpa);
         if (respuestaJpa.isPresent()){
-            System.out.println("coore: "+respuestaJpa.get());
             Semillero semilleromap=semilleroMapper.obtenerModelo(respuestaJpa.get());
-            System.out.println("correo: "+semilleromap.getCorreo());
             Optional<Semillero> resp= Optional.of(semilleromap);
-            //System.out.println("DATOS DESPUES DEL MAPEO: "+resp);
             return resp;
         }
         return Optional.empty();
@@ -78,14 +74,11 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
     @Override
     public List<Semillero> obtenerSemilleros() {
         List<Semillero> semilleros=semilleroRepository.findAll().stream().map(semilleroEntity -> {
-            Semillero semillero=semilleroMapper.obtenerModelo(semilleroEntity);
-            //System.out.println("DATOS SEMILLEROS: "+semillero);
-            return semillero;
+            Semillero semillero=semilleroMapper.obtenerModelo(semilleroEntity);return semillero;
         }).collect(Collectors.toList());
         return semilleros;
         /*return this.semilleroRepository.findAll().stream().map(semilleroEntity -> {
             Semillero semillero=semilleroMapper.obtenerModelo(semilleroEntity);
-            //System.out.println("DATOS SEMILLEROS: "+semillero);
             return semillero;
                 }).collect(Collectors.toList());*/
     }
@@ -97,9 +90,7 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
 
     @Override
     public Page<List<ListarConFiltroSemilleros>> listarSemillerosConfiltro(Pageable pageable, String nombre, String correo, SemilleroEstado estado) {
-
         String estad= (estado != null) ? estado.toString() : null;
-
         return semilleroRepository.listarSemillerosConFiltro(nombre,correo, estad, pageable);
     }
 
@@ -109,21 +100,21 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
         return semilleroRepository.listarSemillerosConFiltroxMentor(semilleroId,usuarioId,nombre,estad,pageable);
     }
 
+    @Override
+    public Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosConFiltroxIdDirector(Pageable pageable, Integer semilleroId, Long usuarioId, String nombre, SemilleroEstado estado) {
+        String estad= (estado != null) ? estado.toString() : null;
+        return semilleroRepository.listarxFiltroSemilleroPorIdDirector(usuarioId,semilleroId,nombre,estad,pageable);
+    }
+
 
     @Override
     public Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosPorIdMentor(Pageable pageable, int idMentor) {
         return semilleroRepository.listarSemilleroPorIdMentor(idMentor,pageable);
     }
 
-    /*@Override
-    public List<Semillero> obtenerSemillerosPorIdMentor(String idMentor) {
-       *//* List<Semillero> semilleros=semilleroRepository.findByusuarioNumeroDocumento(idMentor).stream().map(semilleroEntity -> {
-            Semillero semillero= semilleroMapper.obtenerModelo(semilleroEntity);
-            return semillero;
-        }).collect(Collectors.toList());
-        return semilleros;
-   *//*
-    return null;
-    }*/
+    @Override
+    public Page<List<ListarSemilleroPorIdMentor>> obtenerSemillerosPorIdDirector(Pageable pageable, Long idDirector) {
+        return semilleroRepository.listarSemilleroPorIdDirector(idDirector,pageable);
+    }
 
 }

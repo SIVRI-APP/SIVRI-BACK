@@ -57,7 +57,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     for (IGetAuthorities auth: semilleroUserAuthorities) {
       authorities.add(new SimpleGrantedAuthority(auth.getAuthorities()));
     }
-
     //Proyecto
     List<IGetAuthorities> proyectoUserAuthorities = credencialRepository.getAuthoritiesProyecto(userEmail);
     for (IGetAuthorities auth: proyectoUserAuthorities) {

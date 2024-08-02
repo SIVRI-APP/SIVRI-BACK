@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 public interface IObservacionSemilleroRepository extends JpaRepository<ObservacionSemilleroEntity, Integer> {
-    @Query(value = "SELECT os.id,os.observacion, CONCAT_WS(' ', u.nombres, u.apellidos) AS usuario, os.fecha " +
+    @Query(value = "SELECT os.id,os.observacion, CONCAT_WS(' ', u.nombre, u.apellido) AS usuario, os.fecha " +
             "FROM observacion_semillero os " +
             "       INNER JOIN funcionario f ON f.id = os.funcionarioId " +
             "       INNER JOIN usuario u ON u.id = f.usuarioId " +

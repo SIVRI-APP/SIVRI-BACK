@@ -12,6 +12,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.re
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.rest.DTO.respuesta.ObtenerGruposDTO;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.rest.mapper.GrupoDtoMapper;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("grupos")
+@AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class GrupoController {
 
@@ -30,18 +32,12 @@ public class GrupoController {
     private final GrupoCrearCU grupoCrearCU;
     private final GrupoActualizarCU grupoActualizarCU;
     private final GrupoDtoMapper grupoDtoMapper;
-    public GrupoController(GrupoObtenerCU grupoObtenerCU, GrupoCrearCU grupoCrearCU, GrupoDtoMapper grupoDtoMapper, GrupoActualizarCU grupoActualizarCU) {
-        this.grupoObtenerCU = grupoObtenerCU;
-        this.grupoCrearCU = grupoCrearCU;
-        this.grupoActualizarCU = grupoActualizarCU;
-        this.grupoDtoMapper = grupoDtoMapper;
-    }
+
     @GetMapping("/obtenerxid")
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR', " +
             "'GRUPO:DIRECTOR')")
     public ResponseEntity<Respuesta> obtenerPorId(@RequestParam(value = "idgrupo",required = true) int id){
-        System.out.println("ENTRA A BUSCAR GRUPO POR ID EN CONTROLLER ");
         Respuesta respuesta=grupoObtenerCU.obtenerGrupoPorId(id);
         respuesta.setData(grupoDtoMapper.dtoObtenerGrupo((Grupo) respuesta.getData()));
         return ResponseEntity.ok().body(respuesta);
@@ -74,7 +70,6 @@ public class GrupoController {
     @PreAuthorize("hasAnyAuthority(" +
             "'FUNCIONARIO:GRUPOS')")
     public ResponseEntity<Respuesta> crear(@Valid @RequestBody GrupoCrearDTO nuevoGrupo){
-        //System.out.println("datos que llegan al controlador por parametro del grupo "+ nuevoGrupo);
         Respuesta respuesta= grupoCrearCU.crear(grupoDtoMapper.crear(nuevoGrupo));
         return ResponseEntity.ok().body(respuesta);
     }
@@ -104,13 +99,14 @@ public class GrupoController {
         Respuesta respuesta = grupoObtenerCU.obtenerGruposPorIdDirectorPaginado(pageNo,pageSize,idDirector);
         return ResponseEntity.ok().body(respuesta);
     }
+
     @GetMapping("/listarGruposPorIdDirector")
     @PreAuthorize("hasAnyAuthority(" +
             "'GRUPO:DIRECTOR')")
     public ResponseEntity<Respuesta> listarGruposPorIdDirector(
-            @RequestParam(required = true) int idDirector
+         //   @RequestParam(required = true) int idDirector
     ){
-        Respuesta respuesta = grupoObtenerCU.obtenerGruposPorIdDirector(idDirector);
+        Respuesta respuesta = grupoObtenerCU.obtenerGruposPorIdDirector();
         return ResponseEntity.ok().body(respuesta);
     }
     @GetMapping("/listarGruposConFiltro")

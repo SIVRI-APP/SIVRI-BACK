@@ -3,13 +3,14 @@ package edu.unicauca.SivriBackendApp.core.semillero.dominio.servicios;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.IntegranteSemilleroObtenerCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.IntegranteSemilleroObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.IntegranteSemilleroObtenerCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.IntegranteSemilleroObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoIntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroIntegrantesSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarIntegrantesSemilleroxIdSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarTodosIntegrantesConFiltro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -63,9 +64,7 @@ public class IntegranteSemilleroObtenerService implements IntegranteSemilleroObt
 
     @Override
     public Respuesta<List<Semillero>> obtenerSemillerosPorIdMentor(String idMentor) {
-        System.out.println("ENTRA A SERVICE ");
-        List<Semillero> respuesta=integranteSemilleroObtenerREPO.obtenerSemillerosPorIdMentor(idMentor);
-        //System.out.println("respuesta de service "+respuesta);
+       List<Semillero> respuesta=integranteSemilleroObtenerREPO.obtenerSemillerosPorIdMentor(idMentor);
         if (respuesta.isEmpty()){
             throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.semilleros.mentor");
         }
@@ -78,6 +77,13 @@ public class IntegranteSemilleroObtenerService implements IntegranteSemilleroObt
     public Respuesta<Page<List<ListarConFiltroIntegrantesSemillero>>> listarIntegrantesSemilleroConFiltro(int pageNo, int pageSize, String numeroDocumento, String rolSemillero, EstadoIntegranteSemillero estado/*, String programa*/) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<List<ListarConFiltroIntegrantesSemillero>> respuestaBd= integranteSemilleroObtenerREPO.listarIntegrantesSemilleroConFiltro(pageable,numeroDocumento,rolSemillero,estado);
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Page<List<ListarTodosIntegrantesConFiltro>>> listarTodosIntegrantesSemilleroConFiltro(int pageNo, int pageSize, String numeroDocumento, String nombres, Integer semilleroId, String nombreSemillero, String rolSemillero, EstadoIntegranteSemillero estado) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<List<ListarTodosIntegrantesConFiltro>> respuestaBd = integranteSemilleroObtenerREPO.listarTodosIntegrantesSemilleroConFiltro(pageable,numeroDocumento,nombres, semilleroId, nombreSemillero,rolSemillero, estado);
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
     }
 

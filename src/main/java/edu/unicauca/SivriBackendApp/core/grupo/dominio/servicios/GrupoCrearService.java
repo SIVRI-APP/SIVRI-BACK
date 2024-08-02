@@ -27,7 +27,6 @@ public class GrupoCrearService implements GrupoCrearCU {
     @Transactional
     @Override
     public Respuesta<Boolean> crear(Grupo nuevoGrupo) {
-        //System.out.println("datos que llegan al service: "+nuevoGrupo);
         grupoObtenerCU.existePorNombre(nuevoGrupo.getNombre());
         nuevoGrupo.setEstado(GrupoEstado.FORMULADO);
         Boolean respuesta=grupoCrearREPO.crear(nuevoGrupo);

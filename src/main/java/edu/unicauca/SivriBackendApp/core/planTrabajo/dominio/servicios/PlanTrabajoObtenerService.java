@@ -5,8 +5,10 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.aplicación.ports.in.PlanTrabajoObtenerCU;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.aplicación.ports.out.PlanTrabajoObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.EstadoPlanTrabajo;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.PlanTrabajo;
-import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.proyecciones.ObtenerPlanTrabajoxanio;
+import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.proyecciones.ListarPlanTrabajo;
+import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.proyecciones.ObtenerActividadPlanTrabajoxanio;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -66,10 +68,17 @@ public class PlanTrabajoObtenerService implements PlanTrabajoObtenerCU {
     }
 
     @Override
-    public Respuesta<Page<List<ObtenerPlanTrabajoxanio>>> obtenerPlanTrabajoxAnio(int pageNo, int pageSize, Integer anio,Integer idSemillero, LocalDate fechaInicio, LocalDate fechaFin) {
+    public Respuesta<Page<List<ObtenerActividadPlanTrabajoxanio>>> obtenerActividadPlanTrabajoxAnio(int pageNo, int pageSize, Integer anio, Integer idSemillero, LocalDate fechaInicio, LocalDate fechaFin) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<List<ObtenerPlanTrabajoxanio>> respuestaBd= planTrabajoObtenerREPO.obtenerPlanTrabajoxAnio(pageable, anio,idSemillero, fechaInicio, fechaFin);
+        Page<List<ObtenerActividadPlanTrabajoxanio>> respuestaBd= planTrabajoObtenerREPO.obtenerActividadPlanTrabajoxAnio(pageable, anio,idSemillero, fechaInicio, fechaFin);
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Page<List<ListarPlanTrabajo>>> listarPlanTrabajoxfiltro(int pageNo, int pageSize, Integer anio, Integer idSemillero, EstadoPlanTrabajo estado) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<List<ListarPlanTrabajo>> respuestaBd= planTrabajoObtenerREPO.listarPlanTrabajoxfiltro(pageable,anio,idSemillero,estado);
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
     }
 
     @Override

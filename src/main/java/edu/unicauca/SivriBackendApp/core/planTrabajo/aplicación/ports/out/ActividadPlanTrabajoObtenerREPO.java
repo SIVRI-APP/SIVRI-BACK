@@ -15,6 +15,6 @@ public interface ActividadPlanTrabajoObtenerREPO {
     Optional<ActividadPlanTrabajo> obtenerPorId(int id);
     List<ActividadPlanTrabajo> obtenerActividadesPorIdPlanTrabajo(int idPlan);
     List<ActividadPlanTrabajo> obtenerListadoActividadesPlan();
-    Page<List<ListarActividadesConFiltro>> listarActividadesConFiltro(Pageable pageable, LocalDate fechaInicio, LocalDate fechaFin);
+    Page<List<ListarActividadesConFiltro>> listarActividadesConFiltro(Pageable pageable,Integer idPlan, LocalDate fechaInicio, LocalDate fechaFin);
 
 }

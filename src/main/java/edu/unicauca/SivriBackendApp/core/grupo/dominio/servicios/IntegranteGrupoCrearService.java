@@ -29,15 +29,11 @@ public class IntegranteGrupoCrearService implements IntegranteGrupoCrearCU {
     @Transactional
     @Override
     public Respuesta<Boolean> asociarIntegranteGrupo(IntegranteGrupo nuevosDatos) {
-        //System.out.println("ingreso al service de asociar grupo");
-       // System.out.println(" que datosd trae: "+grupoObtenerCU.existePorId(nuevosDatos.getGrupo().getGrupoId()));
         // TODO validar si el integrante existe en ususarios
         rolesGrupoObtenerCU.existePorId(nuevosDatos.getRolGrupo().getId());
         nuevosDatos.setEstado(EstadoIntegranteGrupo.ACTIVO);
         nuevosDatos.setFechaInicio(LocalDate.now());
-        //System.out.println("datos que se enviar desde el service al asociar integrante del repo: "+nuevosDatos);
         Boolean respuesta=integranteGrupoCrearREPO.asociarIntegranteGrupo(nuevosDatos);
-        //System.out.println("RESPUESTA "+respuesta);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.creacion.objeto", List.of("Integrante Grupo", "Id", String.valueOf(nuevosDatos.getId())));
         }

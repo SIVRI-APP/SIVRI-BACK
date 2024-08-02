@@ -3,10 +3,10 @@ package edu.unicauca.SivriBackendApp.core.semillero.dominio.servicios;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.IntegranteSemilleroCrearCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.RolesSemilleroObtenerCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.SemilleroObtenerCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.IntegranteSemilleroCrearREPO;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.IntegranteSemilleroCrearCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.RolesSemilleroObtenerCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.SemilleroObtenerCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.IntegranteSemilleroCrearREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoIntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.entrada.UsuarioObtenerCU;
@@ -28,8 +28,6 @@ public class IntegranteSemilleroCrearService implements IntegranteSemilleroCrear
     @Transactional(readOnly = false)
     @Override
     public Respuesta<Boolean> crear(IntegranteSemillero nuevosIntegranteSemillero) {
-        System.out.println("datos que recibe el service "+nuevosIntegranteSemillero);
-
         nuevosIntegranteSemillero.getSemillero().setId(nuevosIntegranteSemillero.getSemillero().getSemilleroId());
         semilleroObtenerCU.existePorId(nuevosIntegranteSemillero.getSemillero().getSemilleroId());
         rolesSemilleroObtenerCU.existePorId(nuevosIntegranteSemillero.getRolSemillero().getId());
@@ -40,7 +38,6 @@ public class IntegranteSemilleroCrearService implements IntegranteSemilleroCrear
             //busca el usuario por tipodocumento y documento y devuelve el usuario obtenido
             System.out.println("entro al if");
         }*/
-        System.out.println("datos service "+nuevosIntegranteSemillero);
         Boolean respuesta=integranteSemilleroCrearREPO.crear(nuevosIntegranteSemillero);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.creacion.objeto", List.of("Integrante Semillero", "Id", String.valueOf(nuevosIntegranteSemillero.getId())));

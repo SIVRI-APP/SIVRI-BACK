@@ -1,7 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.in.rest;
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
-import edu.unicauca.SivriBackendApp.core.academica.aplicación.ports.in.FacultadObtenerCU;
+import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.in.FacultadObtenerCU;
 import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Facultad;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.in.rest.DTO.respuesta.FacultadDTO;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.in.rest.mapper.FacultadDtoMapper;

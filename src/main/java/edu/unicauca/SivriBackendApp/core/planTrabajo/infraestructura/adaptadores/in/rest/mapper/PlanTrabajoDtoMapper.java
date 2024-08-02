@@ -20,5 +20,6 @@ public interface PlanTrabajoDtoMapper {
             @Mapping(source = "estado",target = "estado")
     })
     PlanTrabajo crear(final PlanTrabajoCrearDTO nuevoPlan);
+    @Mapping(source = "anio",target = "anio")
     PlanTrabajo actualizar(final PlanTrabajoActualizarDTO nuevoPlan);
 }

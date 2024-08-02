@@ -27,17 +27,13 @@ public class ObtenerSubAreaAdapter implements SubAreaObtenerREPO {
 
     @Override
     public List<Disciplina> obtenerDisciplinaPorIdSubArea(int idSubArea) {
-        System.out.println("entro metodo");
         Optional<SubAreaEntity> respuestaJpa=subAreaRepository.findById(idSubArea);
         List<Disciplina> listaDisciplinas=new LinkedList<>();
 
         if (respuestaJpa.isPresent()){
             SubAreaEntity objSubAreaObtenida=respuestaJpa.get();
             List<DisciplinaEntity> disciplinas=objSubAreaObtenida.getDisciplinas();
-            System.out.println("datos111 "+disciplinas);
             listaDisciplinas=disciplinaMapper.obtenerModelo(disciplinas);
-            System.out.println("despues del mapeo "+listaDisciplinas);
-
         }
         return listaDisciplinas;
     }

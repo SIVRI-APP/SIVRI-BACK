@@ -1,10 +1,10 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest;
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.LineaInvestigacionActualizarCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.LineaInvestigacionCrearCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.LineaInvestigacionEliminarCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.LineaInvestigacionObtenerCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.LineaInvestigacionActualizarCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.LineaInvestigacionCrearCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.LineaInvestigacionEliminarCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.LineaInvestigacionObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.LineaInvestigacion;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.LineaInvestigacionActualizarDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.LineaInvestigacionCrearDTO;

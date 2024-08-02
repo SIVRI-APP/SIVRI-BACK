@@ -1,9 +1,9 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest;
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.SemilleroActualizarCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.SemilleroCrearCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.SemilleroObtenerCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.SemilleroActualizarCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.SemilleroCrearCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.SemilleroObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroEstado;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.SemilleroActualizarEstadoDTO;
@@ -85,7 +85,6 @@ public class SemilleroControlller {
             "'FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> obtenerSemilleros(){
         Respuesta<List<Semillero>> respuestaCU=semilleroObtenerCU.obtenerSemilleros();
-        //System.out.println("LISSTADO RESPUESTA: "+respuestaCU);
         Respuesta<List<SemilleroObtenerDTO>> respuesta=new Respuesta<>();
         respuesta.setData(respuestaCU.getData().stream().map(semilleroDtoMapper::dtoObtenerSemillero).toList());
         respuesta.setStatus(respuestaCU.getStatus());
@@ -98,9 +97,7 @@ public class SemilleroControlller {
     @PreAuthorize("hasAnyAuthority(" +
             "'FUNCIONARIO:SEMILLEROS')")
    public ResponseEntity<Respuesta> actualizarEstadoSemillero(@PathVariable(value = "id") int idSemillero, @Valid @RequestBody SemilleroActualizarEstadoDTO semilleroActualizarEstadoDTO){
-        System.out.println("IDSemillero controller "+idSemillero+" datosque recibe delDto "+semilleroActualizarEstadoDTO);
         Respuesta respuesta=semilleroActualizarCU.actualizarEstadoSemillero(idSemillero,semilleroDtoMapper.actualizarEstadoSemillero(semilleroActualizarEstadoDTO));
-        System.out.println("RESPUESTA DELCONTROLLER "+respuesta);
         return ResponseEntity.ok().body(respuesta);
    }
 
@@ -130,14 +127,12 @@ public class SemilleroControlller {
         return ResponseEntity.ok().body(respuesta);
 
     }
-    @PostMapping("")
+    @PostMapping("/crearSemillero")
     @PreAuthorize("hasAnyAuthority(" +
             "'GRUPO:DIRECTOR')")
     public ResponseEntity<Respuesta> crear(@Valid @RequestBody SemilleroCrearDTO nuevoSemillero){
-        System.out.println("DATOS QUE RECIBE SEMILLERO PARA CREAR "+nuevoSemillero);
 
         Respuesta respuesta= semilleroCrearCU.crear(semilleroDtoMapper.crear(nuevoSemillero), nuevoSemillero.getMentorId());
-        //System.out.println("DATOS RESPUESTA DE CONTROLLER: "+respuesta);
         return ResponseEntity.ok().body(respuesta);
 
     }
@@ -173,15 +168,25 @@ public class SemilleroControlller {
             @RequestParam(required = false) int pageNo,
             @RequestParam(required = false) int pageSize
     ){
-        System.out.println("semillero id"+semilleroId);
-
-        System.out.println("estado"+estado);
-        System.out.println("pagen"+pageNo+"size"+pageSize);
 
         Respuesta respuesta = semilleroObtenerCU.listarSemilleroConFiltroxMentor(pageNo,pageSize,semilleroId,nombre,estado);
         return ResponseEntity.ok().body(respuesta);
     }
-    // la consulta de listar semillero por idmentor sirve para consultar los semilleros del director tambien
+    @GetMapping("/listarSemilleroConFiltroPorIdDirector")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR',  " +
+            "'SEMILLERO:MENTOR')")
+    public ResponseEntity<Respuesta> listarSemilleroPorIdDirector(
+            @RequestParam(required = false) Integer semilleroId,
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) SemilleroEstado estado,
+            @RequestParam(required = false) int pageNo,
+            @RequestParam(required = false) int pageSize
+    ){
+
+        Respuesta respuesta = semilleroObtenerCU.obtenerSemillerosConFiltroxIdDirector(pageNo,pageSize,semilleroId,nombre,estado);
+        return ResponseEntity.ok().body(respuesta);
+    }
     @GetMapping("/listarSemilleroPorIdMentor")
     @PreAuthorize("hasAnyAuthority(" +
             "'GRUPO:DIRECTOR',  " +
@@ -191,8 +196,7 @@ public class SemilleroControlller {
             @RequestParam(required = false) int pageNo,
             @RequestParam(required = false) int pageSize
     ){
-        System.out.println(idMentor+" "+pageNo+" "+pageSize);
-        Respuesta respuesta = semilleroObtenerCU.obtenerSemillerosPorIdMentor(pageNo,pageSize,idMentor);
+       Respuesta respuesta = semilleroObtenerCU.obtenerSemillerosPorIdMentor(pageNo,pageSize,idMentor);
         return ResponseEntity.ok().body(respuesta);
     }
 

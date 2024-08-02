@@ -39,10 +39,11 @@ public class ObetenerAreasAdapter implements AreasObtenerREPO {
         //de grupo
        Optional<GrupoEntity> respuestaJpagrupo=grupoRepository.findById(id);
         if (respuestaJpagrupo.isPresent()){
-            System.out.println("datos de un grupo: "+respuestaJpagrupo.get());
+        //    System.out.println("datos de un grupo: "+respuestaJpagrupo.get());
         }
         else{
-            System.out.println("grupo");}
+         //   System.out.println("grupo");
+        }
 
         //degrupo
         Optional<AreaEntity> respuestaJpa=areaRepository.findById(id);

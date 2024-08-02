@@ -3,8 +3,8 @@ package edu.unicauca.SivriBackendApp.core.semillero.dominio.servicios;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.LineaInvestigacionCrearCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.LineaInvestigacionCrearREPO;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.LineaInvestigacionCrearCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.LineaInvestigacionCrearREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.LineaInvestigacion;
 import org.springframework.stereotype.Component;
 
@@ -20,9 +20,7 @@ public class LineaInvestigacionCrearService implements LineaInvestigacionCrearCU
 
     @Override
     public Respuesta<Boolean> crear(LineaInvestigacion nuevaLinea) {
-        System.out.println("datosdelservice idsemillero "+nuevaLinea.getSemilleroId()+" nuevalinea "+nuevaLinea);
       //  nuevaLinea.setSemilleroId(idSemillero);
-        System.out.println("nuevaLinea "+nuevaLinea);
         Boolean respuesta= lineaInvestigacionCrearREPO.crear(nuevaLinea);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.creacion.objeto", List.of("Linea Investigacion", "Id", String.valueOf(nuevaLinea.getId())));

@@ -2,6 +2,7 @@ package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.
 
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroIntegrantesSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarIntegrantesSemilleroxIdSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarTodosIntegrantesConFiltro;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.IntegranteSemilleroEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +19,7 @@ public interface IIntegranteSemilleroRepository extends JpaRepository<Integrante
    //TODO falta el programa que no sta includo en el usuario
    @Query(value = "SELECT ins.idIntegranteSemillero,\n" +
            "       u.numeroDocumento,\n" +
-           "       CONCAT(u.nombres, ' ', u.apellidos) AS nombreCompleto,\n" +
+           "       CONCAT(u.nombre, ' ', u.apellido) AS nombreCompleto,\n" +
            "       rs.rolSemillero,\n" +
            "       ins.estado,\n" +
            "       ins.fechaIngreso\n" +
@@ -36,7 +37,7 @@ public interface IIntegranteSemilleroRepository extends JpaRepository<Integrante
            @Param("estado") String estado,
            @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable);
     // TODO falta agregar el programa no esta en usuario y buscar por programa tambien
-    @Query(value = "SELECT u.numeroDocumento,u.nombres,u.apellidos,rs.rolSemillero,intse.estado, intse.fechaIngreso,intse.fechaRetiro " +
+    @Query(value = "SELECT u.numeroDocumento,u.nombre,u.apellido,rs.rolSemillero,intse.estado, intse.fechaIngreso,intse.fechaRetiro " +
             "FROM integrante_semillero intse  " +
             "    INNER JOIN usuario u ON intse.usuarioId=u.id " +
             "    INNER JOIN rol_semillero rs ON rs.id=intse.rolId " +
@@ -49,6 +50,38 @@ public interface IIntegranteSemilleroRepository extends JpaRepository<Integrante
             @Param("rolSemillero") String rolSemillero,
             @Param("estado") String estado,
             /*@Param("nombrePrograma") String nombrePrograma,*/
+            @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable);
+
+    @Query(value = "SELECT  " +
+            "    u.numeroDocumento, " +
+            "    CONCAT(u.nombre, ' ', u.apellido) AS nombres, " +
+            "    s.semilleroId, " +
+            "    odi.nombre AS nombreSemillero, " +
+            "    rs.rolSemillero, " +
+            "    is2.estado, " +
+            "    u.programaId " +
+            "FROM " +
+            "    integrante_semillero AS is2 " +
+            "    INNER JOIN rol_semillero AS rs ON rs.id = is2.rolId " +
+            "    INNER JOIN semillero AS s ON s.semilleroId = is2.semilleroId " +
+            "    INNER JOIN organismo_de_investigacion AS odi ON odi.id = s.semilleroId " +
+            "    INNER JOIN usuario AS u ON u.id = is2.usuarioId " +
+            "WHERE " +
+            "    (LOWER(u.numeroDocumento) LIKE CONCAT('%', LOWER(:numeroDocumento), '%') OR :numeroDocumento IS NULL OR :numeroDocumento = '') " +
+            "    AND (LOWER(CONCAT(u.nombre, ' ', u.apellido)) LIKE CONCAT('%', LOWER(:nombres), '%') OR :nombres IS NULL OR :nombres = '') " +
+            "    AND (s.semilleroId LIKE CONCAT('%', :semilleroId, '%') OR :semilleroId IS NULL OR :semilleroId = '') " +
+            "    AND (LOWER(odi.nombre) LIKE CONCAT('%', LOWER(:nombreSemillero), '%') OR :nombreSemillero IS NULL OR :nombreSemillero = '') " +
+            "    AND (LOWER(rs.rolSemillero) = LOWER(:rolSemillero) OR :rolSemillero IS NULL OR :rolSemillero = '') " +
+            "    AND (LOWER(is2.estado) = LOWER(:estado) OR :estado IS NULL OR :estado = '');",nativeQuery = true)
+    Page<List<ListarTodosIntegrantesConFiltro>> listarTodosIntegranteSemilleroConFiltro(
+            @Param("numeroDocumento") String numeroDocumento,
+            @Param("nombres") String nombres,
+            @Param("semilleroId") Integer semilleroId,
+            @Param("nombreSemillero") String nombreSemillero,
+            @Param("rolSemillero") String rolSemillero,
+            @Param("estado") String estado,
+            /*@Param("nombrePrograma") String nombrePrograma,*/
+            /*@Param("facultad") String facultad*/
             @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable);
 
 }

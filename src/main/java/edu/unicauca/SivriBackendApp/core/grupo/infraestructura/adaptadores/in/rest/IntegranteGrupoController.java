@@ -9,6 +9,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.re
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.rest.DTO.petición.IntegranteGrupoCrearDTO;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.rest.mapper.IntegranteGrupoDtoMapper;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("integrantes")
 @CrossOrigin(origins = "*",allowedHeaders = "*")
 public class IntegranteGrupoController {
@@ -26,13 +28,6 @@ public class IntegranteGrupoController {
     private final IntegranteGrupoCrearCU integranteGrupoCrearCU;
     private final IntegranteGrupoActualizarCU integranteGrupoActualizarCU;
 
-    public IntegranteGrupoController(IntegranteGrupoObtenerCU integranteGrupoObtenerCU, IntegranteGrupoDtoMapper integranteGrupoDtoMapper, IntegranteGrupoCrearCU integranteGrupoCrearCU, IntegranteGrupoActualizarCU integranteGrupoActualizarCU) {
-        this.integranteGrupoObtenerCU = integranteGrupoObtenerCU;
-        this.integranteGrupoDtoMapper = integranteGrupoDtoMapper;
-        this.integranteGrupoCrearCU = integranteGrupoCrearCU;
-        this.integranteGrupoActualizarCU = integranteGrupoActualizarCU;
-
-    }
     @GetMapping("/{id}")
     public ResponseEntity<Respuesta> obtenerInfoPorId(@PathVariable(value = "id") int id){
         Respuesta respuesta= integranteGrupoObtenerCU.obtenerIntegrantePorId(id);

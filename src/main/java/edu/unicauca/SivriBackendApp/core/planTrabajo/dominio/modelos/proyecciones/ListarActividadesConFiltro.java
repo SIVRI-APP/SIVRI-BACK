@@ -3,7 +3,8 @@ package edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.proyeccion
 import java.time.LocalDate;
 
 public interface ListarActividadesConFiltro {
-    String getObjetivo();
+    Integer getId();
+    //String getObjetivo();
     String getActividad();
     String getCompromiso();
     LocalDate getFechaInicio();

@@ -1,8 +1,10 @@
 package edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.out.persistencia;
 
 import edu.unicauca.SivriBackendApp.core.planTrabajo.aplicación.ports.out.PlanTrabajoObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.EstadoPlanTrabajo;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.PlanTrabajo;
-import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.proyecciones.ObtenerPlanTrabajoxanio;
+import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.proyecciones.ListarPlanTrabajo;
+import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.proyecciones.ObtenerActividadPlanTrabajoxanio;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.out.persistencia.entity.PlanTrabajoEntity;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.out.persistencia.mapper.PlanTrabajoMapper;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.out.persistencia.repository.IPlanTrabajoRepository;
@@ -47,8 +49,14 @@ public class PlanTrabajoObtenerAdapter implements PlanTrabajoObtenerREPO {
     }
 
     @Override
-    public Page<List<ObtenerPlanTrabajoxanio>> obtenerPlanTrabajoxAnio(Pageable pageable, Integer anio, Integer idSemillero, LocalDate fechaInicio, LocalDate fechaFin) {
-        return planTrabajoRepository.obtenerPlanxAnio(anio,idSemillero, fechaInicio, fechaFin,pageable);
+    public Page<List<ObtenerActividadPlanTrabajoxanio>> obtenerActividadPlanTrabajoxAnio(Pageable pageable, Integer anio, Integer idSemillero, LocalDate fechaInicio, LocalDate fechaFin) {
+        return planTrabajoRepository.obtenerActividadPlanxAnio(anio,idSemillero, fechaInicio, fechaFin,pageable);
+    }
+
+    @Override
+    public Page<List<ListarPlanTrabajo>> listarPlanTrabajoxfiltro(Pageable pageable, Integer anio, Integer idSemillero, EstadoPlanTrabajo estado) {
+        String estad= (estado != null) ? estado.toString() : null;
+        return planTrabajoRepository.listarPlanTrabajoxFiltro(anio,idSemillero,estad,pageable);
     }
 
     @Override

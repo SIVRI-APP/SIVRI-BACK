@@ -1,11 +1,12 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia;
 
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.IntegranteSemilleroObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.IntegranteSemilleroObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoIntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroIntegrantesSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarIntegrantesSemilleroxIdSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarTodosIntegrantesConFiltro;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.IntegranteSemilleroEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.mapper.IntegranteSemilleroMapper;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.repository.IIntegranteSemilleroRepository;
@@ -58,6 +59,14 @@ public class IntegranteSemilleroObtenerAdapter implements IntegranteSemilleroObt
         return integranteSemilleroRepository.listarIntegranteSemilleroConFiltro(numeroDocumento,rolSemillero,estad,pageable);
     }
 
+    @Override
+    public Page<List<ListarTodosIntegrantesConFiltro>> listarTodosIntegrantesSemilleroConFiltro(Pageable pageable, String numeroDocumento, String nombres, Integer semilleroId, String nombreSemillero, String rolSemillero, EstadoIntegranteSemillero estado) {
+
+        String estad= (estado != null) ? estado.toString() : null;
+        Page<List<ListarTodosIntegrantesConFiltro>> respuestaAdapter=integranteSemilleroRepository.listarTodosIntegranteSemilleroConFiltro(numeroDocumento,nombres,semilleroId,nombreSemillero,rolSemillero,estad,pageable);
+        return respuestaAdapter;
+    }
+
 
     /*@Override
     public List<IntegranteSemillero> obtenerIntegrantesSemillero() {
@@ -69,7 +78,6 @@ public class IntegranteSemilleroObtenerAdapter implements IntegranteSemilleroObt
 */
     @Override
     public List<Semillero> obtenerSemillerosPorIdMentor(String idMentor) {
-        System.out.println("entra al adapter ");
         //Optional<UsuarioEntity> objUsuario=usuarioRepository.findById(idMentor);
         //System.out.println("OBJ USUARIO: "+objUsuario);
 

@@ -4,6 +4,7 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.aplicación.ports.in.PlanTrabajoActualizarCU;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.aplicación.ports.in.PlanTrabajoCrearCU;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.aplicación.ports.in.PlanTrabajoObtenerCU;
+import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.EstadoPlanTrabajo;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.PlanTrabajo;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.in.rest.DTO.petición.PlanTrabajoActualizarDTO;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.in.rest.DTO.petición.PlanTrabajoCrearDTO;
@@ -24,7 +25,6 @@ public class PlanTrabajoController {
     private final PlanTrabajoCrearCU planTrabajoCrearCU;
     private final PlanTrabajoActualizarCU planTrabajoActualizarCU;
     private final PlanTrabajoDtoMapper planTrabajoDtoMapper;
-// TODO AHI QUE AGUEGAR UN CAMPO A LA TABLA PLAN DE TRABAJO ANIO
     public PlanTrabajoController(PlanTrabajoObtenerCU planTrabajoObtenerCU, PlanTrabajoCrearCU planTrabajoCrearCU, PlanTrabajoActualizarCU planTrabajoActualizarCU, PlanTrabajoDtoMapper planTrabajoDtoMapper) {
         this.planTrabajoObtenerCU = planTrabajoObtenerCU;
         this.planTrabajoCrearCU = planTrabajoCrearCU;
@@ -66,7 +66,7 @@ public class PlanTrabajoController {
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR' )"
     )
-    public ResponseEntity<Respuesta> obtenerPlanTrabajoxAnio(
+    public ResponseEntity<Respuesta> obtenerActividadPlanTrabajoxAnio(
             @RequestParam(required = true) Integer anio,
             @RequestParam(required = true) Integer idSemillero,
             @RequestParam(required = false) LocalDate fechaInicio,
@@ -74,8 +74,23 @@ public class PlanTrabajoController {
             @RequestParam(required = false) int pageNo,
             @RequestParam(required = false) int pageSize
     ){
-        Respuesta respuesta= planTrabajoObtenerCU.obtenerPlanTrabajoxAnio(pageNo, pageSize, anio,idSemillero, fechaInicio, fechaFin);
+        Respuesta respuesta= planTrabajoObtenerCU.obtenerActividadPlanTrabajoxAnio(pageNo, pageSize, anio,idSemillero, fechaInicio, fechaFin);
         return ResponseEntity.ok().body(respuesta);
+    }
+    @GetMapping("/listarPlanes")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS' )"
+    )
+    public ResponseEntity<Respuesta> listarPlanTrabajoxfiltro(
+            @RequestParam(required = false) Integer anio,
+            @RequestParam(required = true) Integer idSemillero,
+            @RequestParam(required= false) EstadoPlanTrabajo estado,
+            @RequestParam() int pageNo,
+            @RequestParam() int pageSize
+    ){
+        Respuesta respuesta= planTrabajoObtenerCU.listarPlanTrabajoxfiltro(pageNo,pageSize,anio,idSemillero,estado);
+        return ResponseEntity.ok().body(respuesta);
+
     }
     @GetMapping("")
     public ResponseEntity<Respuesta> obtenerPlanesTrabajo(){
@@ -88,9 +103,7 @@ public class PlanTrabajoController {
             "'SEMILLERO:MENTOR' )"
     )
     public ResponseEntity<Respuesta> crear(@Valid @RequestBody PlanTrabajoCrearDTO nuevoPlan){
-        System.out.println("DATOS QUE LLEGAN al controller "+nuevoPlan.getIdSemillero()+" dto "+nuevoPlan);
         Respuesta respuesta = planTrabajoCrearCU.crear(planTrabajoDtoMapper.crear(nuevoPlan));
-        System.out.println("respuesta "+respuesta);
         return ResponseEntity.ok().body(respuesta);
 
     }

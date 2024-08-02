@@ -10,6 +10,7 @@ import edu.unicauca.SivriBackendApp.core.planTrabajo.aplicación.ports.out.Activ
 import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.ActividadPlanTrabajo;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -26,18 +27,16 @@ public class ActividadPlanTrabajoActualizarService implements ActividadPlanTraba
 
     @Override
     public Respuesta<Boolean> actualizar(int idActividad, ActividadPlanTrabajo nuevosDatosActividad) {
-        System.out.println("mentor "+nuevosDatosActividad.getResponsableUsuarioId());
-        System.out.println("id actividad "+idActividad+" DATOS llegan "+nuevosDatosActividad);
-        compromisoSemilleroObtenerCU.existePorId(nuevosDatosActividad.getCompromiso().getId());
+      compromisoSemilleroObtenerCU.existePorId(nuevosDatosActividad.getCompromiso().getId());
         //TODO falta validar el usuario
         ActividadPlanTrabajo objActividadActualizar=actividadPlanTrabajoObtenerCU.obtenerPorId(idActividad).getData();
+
         objActividadActualizar.setObjetivo(nuevosDatosActividad.getObjetivo());
         objActividadActualizar.setActividad(nuevosDatosActividad.getActividad());
         objActividadActualizar.setCompromiso(nuevosDatosActividad.getCompromiso());
         objActividadActualizar.setResponsableUsuarioId(nuevosDatosActividad.getResponsableUsuarioId());
         objActividadActualizar.setFechaInicio(nuevosDatosActividad.getFechaInicio());
         objActividadActualizar.setFechaFin(nuevosDatosActividad.getFechaFin());
-        System.out.println("datos editados en service "+objActividadActualizar);
         boolean respuesta =actividadPlanTrabajoREPO.actualizar(objActividadActualizar);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Actividad Plan Trabajo", "Id", String.valueOf(idActividad)));

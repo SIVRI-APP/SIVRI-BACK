@@ -1,18 +1,20 @@
 package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest;
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.ObservacionSemilleroActualizarCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.ObservacionSemilleroCrearCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.ObservacionSemilleroObtenerCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.ObservacionSemilleroActualizarCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.ObservacionSemilleroCrearCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.ObservacionSemilleroObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.ObservacionSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.ObservacionSemilleroCrearDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.mapper.ObservacionSemilleroDtoMapper;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("observacionSemillero")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class ObservacionSemilleroController {
@@ -21,22 +23,15 @@ public class ObservacionSemilleroController {
     private final ObservacionSemilleroObtenerCU observacionSemilleroObtenerCU;
     private final ObservacionSemilleroDtoMapper observacionSemilleroDtoMapper;
 
-    public ObservacionSemilleroController(ObservacionSemilleroCrearCU observacionSemilleroCrearCU, ObservacionSemilleroActualizarCU observacionSemilleroActualizarCU, ObservacionSemilleroObtenerCU observacionSemilleroObtenerCU, ObservacionSemilleroDtoMapper observacionSemilleroDtoMapper) {
-        this.observacionSemilleroCrearCU = observacionSemilleroCrearCU;
-        this.observacionSemilleroActualizarCU = observacionSemilleroActualizarCU;
-        this.observacionSemilleroObtenerCU = observacionSemilleroObtenerCU;
-        this.observacionSemilleroDtoMapper = observacionSemilleroDtoMapper;
-    }
-    @PostMapping("/asociarObservacion/{idSemillero}/{idFuncionario}")
+    @PostMapping("/asociarObservacion/{idSemillero}")
     @PreAuthorize("hasAnyAuthority(" +
             "'FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> crear(
             @PathVariable(value = "idSemillero") int idSemillero,
-            @PathVariable(value = "idFuncionario") Long idFuncionario,
             @Valid @RequestBody ObservacionSemilleroCrearDTO nuevaObservacion
             ){
 
-        Respuesta respuesta =observacionSemilleroCrearCU.crear(idFuncionario,idSemillero,observacionSemilleroDtoMapper.asociarObservacion(nuevaObservacion));
+        Respuesta respuesta =observacionSemilleroCrearCU.crear(idSemillero,observacionSemilleroDtoMapper.asociarObservacion(nuevaObservacion));
         return ResponseEntity.ok().body(respuesta);
     }
 
@@ -62,9 +57,11 @@ public class ObservacionSemilleroController {
             "'GRUPO:DIRECTOR', " +
             "'SEMILLERO:MENTOR')")
     public ResponseEntity<Respuesta> listarObservacionesSemilleroPorIdSemillero(
-            @RequestParam(required = true) int semilleroId,
-            @RequestParam(required = false) int pageNo,
-            @RequestParam(required = false) int pageSize
+            @RequestParam(required = true) Integer semilleroId,
+            @RequestParam() int pageNo,
+            @RequestParam(
+
+            ) int pageSize
     ){
         Respuesta respuesta = observacionSemilleroObtenerCU.listarObservacionesPorIdSemillero(pageNo,pageSize,semilleroId);
         return ResponseEntity.ok().body(respuesta);

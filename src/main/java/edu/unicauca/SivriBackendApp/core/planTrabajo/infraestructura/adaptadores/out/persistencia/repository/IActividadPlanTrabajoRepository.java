@@ -25,14 +25,16 @@ public interface IActividadPlanTrabajoRepository extends JpaRepository<Actividad
             "       and (lower(concat_ws(' ' , u.nombres, u.apellidos)) like %:nombre% or lower(concat_ws(' ' , u.nombres, u.apellidos)) = " +
             "       coalesce(lower(concat_ws(' ' , nombres, apellidos)), lower(concat_ws( ' ' , u.nombres,u.apellidos) )) or  (concat_ws(' ' , nombres, apellidos) is null));
     * */
-    @Query(value = "SELECT apt.objetivo, apt.actividad,cs.nombre as compromiso,apt.fechaInicio,apt.fechaFin, concat_ws(' ' , u.nombres, u.apellidos) as responsable " +
+    @Query(value = "SELECT apt.id,apt.objetivo, apt.actividad,cs.nombre as compromiso,apt.fechaInicio,apt.fechaFin, concat_ws(' ' , u.nombre, u.apellido) as responsable " +
             "   FROM actividad_plan_trabajo apt " +
             "   INNER JOIN compromiso_semillero cs ON apt.compromisoSemilleroId=cs.id " +
             "   INNER JOIN usuario u ON u.id=apt.responsableId " +
             "   WHERE " +
             "       ((apt.fechaInicio >= :fechaInicio AND apt.fechaFin <= :fechaFin) " +
-            "       OR (:fechaInicio is null or :fechaFin is null));",nativeQuery = true)
+            "       OR (:fechaInicio is null or :fechaFin is null))" +
+            "       AND apt.planTrabajoId=(:idPlan);",nativeQuery = true)
     Page<List<ListarActividadesConFiltro>> listarActividadesConFiltro(
+            @Param("idPlan") Integer idPlan,
             @Param("fechaInicio") LocalDate fechaInicio,
             @Param("fechaFin") LocalDate fechaFin,
             @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable

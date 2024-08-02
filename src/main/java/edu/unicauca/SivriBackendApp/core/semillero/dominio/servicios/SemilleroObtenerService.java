@@ -4,8 +4,8 @@ import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificacionDeUsuario;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.in.SemilleroObtenerCU;
-import edu.unicauca.SivriBackendApp.core.semillero.aplicación.ports.out.SemilleroObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.SemilleroObtenerCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.SemilleroObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroEstado;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroSemilleros;
@@ -99,21 +99,29 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
 
     @Override
     public Respuesta<Page<List<ListarConFiltroSemilleros>>> listarSemillerosConfiltro(int pageNo, int pageSize, String nombre, String correo, SemilleroEstado estado) {
-
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
+       Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<List<ListarConFiltroSemilleros>> respuestaBd= semilleroObtenerREPO.listarSemillerosConfiltro(pageable, nombre, correo, estado);
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
     }
 
     @Override
     public Respuesta<Page<List<ListarSemillerosConFiltroxMentor>>> listarSemilleroConFiltroxMentor(int pageNo, int pageSize, Integer semilleroId, String nombre, SemilleroEstado estado) {
-        System.out.println("lleg al service");
-        Long usuarioId=servicioDeIdentificacionDeUsuario.obtenerUsuario().getId();
+       Long usuarioId=servicioDeIdentificacionDeUsuario.obtenerUsuario().getId();
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<List<ListarSemillerosConFiltroxMentor>> respuestaBd= semilleroObtenerREPO.listarSemilleroConFiltroxMentor(pageable,semilleroId,usuarioId,nombre,estado);
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","",respuestaBd).getRespuesta();
     }
+    @Override
+    public Respuesta<Page<List<ListarSemilleroPorIdMentor>>> obtenerSemillerosConFiltroxIdDirector(int pageNo, int pageSize, Integer semilleroId, String nombre, SemilleroEstado estado) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Long usuarioId=servicioDeIdentificacionDeUsuario.obtenerUsuario().getId();
 
+        Page<List<ListarSemilleroPorIdMentor>> respuestaBd=semilleroObtenerREPO.obtenerSemillerosConFiltroxIdDirector(pageable,semilleroId,usuarioId,nombre,estado);
+        if (respuestaBd.isEmpty()){
+            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.semilleros.mentor");
+        }
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
+    }
     @Override
     public Respuesta<Page<List<ListarSemilleroPorIdMentor>>> obtenerSemillerosPorIdMentor(int pageNo, int pageSize, int idMentor) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
@@ -124,6 +132,8 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
         }
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
     }
+
+
 
     /*@Override
     public Respuesta<List<Semillero>> obtenerSemillerosPorIdMentor(String idMentor) {
