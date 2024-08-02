@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada;
 
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
@@ -13,8 +14,10 @@ public class FormalizarProyectoDTO {
 
     private String nombre;
 
+    @FutureOrPresent(message = "La fecha de Inicio no puede ser en el pasado")
     private LocalDate fechaInicio;
 
+    @FutureOrPresent(message = "La fecha de Fin no puede ser en el pasado")
     private LocalDate fechaFin;
 
     private String planteamiento;

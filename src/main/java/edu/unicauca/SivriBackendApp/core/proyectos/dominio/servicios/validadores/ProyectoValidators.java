@@ -49,6 +49,11 @@ public class ProyectoValidators {
             }
         }
 
+        // La fecha Inicio debe ser antes de la fecha Fin
+        if (proyecto.getFechaInicio().isAfter(proyecto.getFechaFin())){
+            throw new ReglaDeNegocioException("bad.fechaFinAntesFechaInicio");
+        }
+
         // Lo modifica únicamente un miembro del Proyecto
 //        if(!servicioDeIdentificacionDeUsuario.esFuncionario()){
 //            Usuario usuario = servicioDeIdentificacionDeUsuario.obtenerUsuario();
