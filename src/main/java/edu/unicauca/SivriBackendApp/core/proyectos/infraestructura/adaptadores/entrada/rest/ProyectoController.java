@@ -45,7 +45,7 @@ public class ProyectoController {
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
             "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
-    public ResponseEntity<Respuesta<Boolean>> crearConvocatoria(@Valid @RequestBody CrearProyectoDTO proyecto){
+    public ResponseEntity<Respuesta<Boolean>> crearProyecto(@Valid @RequestBody CrearProyectoDTO proyecto){
         Respuesta<Boolean> respuesta = proyectoCrearCU.crearProyecto(proyecto);
         return ResponseEntity.ok().body(respuesta);
     }
@@ -57,7 +57,7 @@ public class ProyectoController {
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
             "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
-    public ResponseEntity<Respuesta<Boolean>> formalizarConvocatoria(@Valid @RequestBody FormalizarProyectoDTO proyecto){
+    public ResponseEntity<Respuesta<Boolean>> formalizarProyecto(@Valid @RequestBody FormalizarProyectoDTO proyecto){
         Respuesta<Boolean> respuesta = proyectoCrearCU.formalizarProyecto(proyectoRestMapper.formalizarProyectoDto(proyecto));
         return ResponseEntity.ok().body(respuesta);
     }

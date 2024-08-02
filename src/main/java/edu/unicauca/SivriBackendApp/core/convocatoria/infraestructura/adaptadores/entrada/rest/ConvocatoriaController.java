@@ -52,6 +52,7 @@ public class ConvocatoriaController {
 
     @GetMapping("obtenerInformacionDetallada")
     @PreAuthorize("hasAnyAuthority(" +
+            "'PROYECTO:DIRECTOR',  " +
             "'FUNCIONARIO:VICERRECTOR',  " +
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
@@ -63,6 +64,7 @@ public class ConvocatoriaController {
 
     @GetMapping("listarTodoConFiltro")
     @PreAuthorize("hasAnyAuthority(" +
+            "'PROYECTO:DIRECTOR',  " +
             "'FUNCIONARIO:VICERRECTOR',  " +
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
