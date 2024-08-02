@@ -27,13 +27,9 @@ public class ActividadPlanTrabajoActualizarService implements ActividadPlanTraba
 
     @Override
     public Respuesta<Boolean> actualizar(int idActividad, ActividadPlanTrabajo nuevosDatosActividad) {
-        System.out.println("mentor "+nuevosDatosActividad.getResponsableUsuarioId());
-        System.out.println("id actividad "+idActividad+" DATOS llegan "+nuevosDatosActividad);
-        compromisoSemilleroObtenerCU.existePorId(nuevosDatosActividad.getCompromiso().getId());
+      compromisoSemilleroObtenerCU.existePorId(nuevosDatosActividad.getCompromiso().getId());
         //TODO falta validar el usuario
         ActividadPlanTrabajo objActividadActualizar=actividadPlanTrabajoObtenerCU.obtenerPorId(idActividad).getData();
-        System.out.println("actividad de la bd "+objActividadActualizar);
-        System.out.println("fecha inicio de la bd "+objActividadActualizar.getFechaInicio()+" fecha fin de bd "+objActividadActualizar.getFechaFin());
 
         objActividadActualizar.setObjetivo(nuevosDatosActividad.getObjetivo());
         objActividadActualizar.setActividad(nuevosDatosActividad.getActividad());
@@ -41,7 +37,6 @@ public class ActividadPlanTrabajoActualizarService implements ActividadPlanTraba
         objActividadActualizar.setResponsableUsuarioId(nuevosDatosActividad.getResponsableUsuarioId());
         objActividadActualizar.setFechaInicio(nuevosDatosActividad.getFechaInicio());
         objActividadActualizar.setFechaFin(nuevosDatosActividad.getFechaFin());
-        System.out.println("datos editados en service "+objActividadActualizar);
         boolean respuesta =actividadPlanTrabajoREPO.actualizar(objActividadActualizar);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Actividad Plan Trabajo", "Id", String.valueOf(idActividad)));

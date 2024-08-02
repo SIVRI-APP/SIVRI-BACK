@@ -71,7 +71,6 @@ public class GrupoActualizarService implements GrupoActualizarCU {
     public Respuesta<Boolean> actualizarPorDirector(int idGrupo,Grupo nuevosDatos) {
         Grupo objGrupoActualizar=grupoObtenerCU.obtenerGrupoPorId(idGrupo).getData();
         GrupoEstado estado=objGrupoActualizar.getEstado();
-        System.out.println("estado en service "+estado);
         if (estado==GrupoEstado.FORMULADO){
             //ACTUALIZA TODOS LOS CAMPOS DE GRUPO MENOS NOMBRE, FECHA CREACION Y ESTADO
             facultadObtenerCU.existePorId(nuevosDatos.getFacultad().getIdFacultad());
@@ -138,8 +137,7 @@ public class GrupoActualizarService implements GrupoActualizarCU {
 
         Grupo objGrupoActualizar=grupoObtenerCU.obtenerGrupoPorId(datosGrupo.getId()).getData();
         GrupoEstado estado=objGrupoActualizar.getEstado();
-        System.out.println("ESTADO "+estado);
-        if (estado==GrupoEstado.ACTIVO){
+         if (estado==GrupoEstado.ACTIVO){
             //actualiza los siguientes campos direccion, tel, email,sitioweb.
             objGrupoActualizar.setDireccion(datosGrupo.getDireccion());
             objGrupoActualizar.setTelefono(datosGrupo.getTelefono());
@@ -147,10 +145,8 @@ public class GrupoActualizarService implements GrupoActualizarCU {
             objGrupoActualizar.setSitioWeb(datosGrupo.getSitioWeb());
 
         }
-        System.out.println("GRUPO OBJACTUALIZAR "+objGrupoActualizar);
         Boolean respuesta=grupoActualizarREPO.actualizarGrupoActivoPorDirector(objGrupoActualizar);
         //Boolean respuesta=grupoActualizarREPO.actualizarGrupoActivoPorDirector(objGrupoActualizar);
-        System.out.println("RESPUESTA: "+respuesta);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Grupo", "Id", String.valueOf(datosGrupo.getId())));
         }

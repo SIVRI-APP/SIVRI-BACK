@@ -79,7 +79,7 @@ public class PlanTrabajoController {
     }
     @GetMapping("/listarPlanes")
     @PreAuthorize("hasAnyAuthority(" +
-            "'SEMILLERO:MENTOR' )"
+            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS' )"
     )
     public ResponseEntity<Respuesta> listarPlanTrabajoxfiltro(
             @RequestParam(required = false) Integer anio,
@@ -103,9 +103,7 @@ public class PlanTrabajoController {
             "'SEMILLERO:MENTOR' )"
     )
     public ResponseEntity<Respuesta> crear(@Valid @RequestBody PlanTrabajoCrearDTO nuevoPlan){
-        System.out.println("DATOS QUE LLEGAN al controller "+nuevoPlan.getIdSemillero()+" dto "+nuevoPlan);
         Respuesta respuesta = planTrabajoCrearCU.crear(planTrabajoDtoMapper.crear(nuevoPlan));
-        System.out.println("respuesta "+respuesta);
         return ResponseEntity.ok().body(respuesta);
 
     }

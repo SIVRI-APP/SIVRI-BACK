@@ -41,13 +41,9 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
     @Override
     public Optional<Semillero> obtenerSemilleroPorId(int id) {
         Optional<SemilleroEntity> respuestaJpa=semilleroRepository.findById(id);
-        System.out.println("respuestaJpa:"+ respuestaJpa);
         if (respuestaJpa.isPresent()){
-            System.out.println("coore: "+respuestaJpa.get());
             Semillero semilleromap=semilleroMapper.obtenerModelo(respuestaJpa.get());
-            System.out.println("correo: "+semilleromap.getCorreo());
             Optional<Semillero> resp= Optional.of(semilleromap);
-            //System.out.println("DATOS DESPUES DEL MAPEO: "+resp);
             return resp;
         }
         return Optional.empty();
@@ -78,14 +74,11 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
     @Override
     public List<Semillero> obtenerSemilleros() {
         List<Semillero> semilleros=semilleroRepository.findAll().stream().map(semilleroEntity -> {
-            Semillero semillero=semilleroMapper.obtenerModelo(semilleroEntity);
-            //System.out.println("DATOS SEMILLEROS: "+semillero);
-            return semillero;
+            Semillero semillero=semilleroMapper.obtenerModelo(semilleroEntity);return semillero;
         }).collect(Collectors.toList());
         return semilleros;
         /*return this.semilleroRepository.findAll().stream().map(semilleroEntity -> {
             Semillero semillero=semilleroMapper.obtenerModelo(semilleroEntity);
-            //System.out.println("DATOS SEMILLEROS: "+semillero);
             return semillero;
                 }).collect(Collectors.toList());*/
     }
@@ -97,7 +90,6 @@ public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
 
     @Override
     public Page<List<ListarConFiltroSemilleros>> listarSemillerosConfiltro(Pageable pageable, String nombre, String correo, SemilleroEstado estado) {
-        System.out.println("ingresa datos al adpter "+nombre+correo+estado);
         String estad= (estado != null) ? estado.toString() : null;
         return semilleroRepository.listarSemillerosConFiltro(nombre,correo, estad, pageable);
     }

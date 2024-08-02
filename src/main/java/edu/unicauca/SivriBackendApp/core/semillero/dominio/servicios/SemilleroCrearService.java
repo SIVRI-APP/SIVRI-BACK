@@ -33,8 +33,6 @@ public class SemilleroCrearService implements SemilleroCrearCU {
     @Transactional
     @Override
     public Respuesta<Boolean> crear(Semillero semillero, long mentorId) {
-        System.out.println("DATOS que recive el service del semillero nuevo: "+semillero+"nombre "+semillero.getNombre() );
-        System.out.println("mentorid "+mentorId);
         semilleroObtenerCU.existePorNombre(semillero.getNombre()).getData();
         grupoObtenerCU.existePorId(semillero.getGrupoId());
 
@@ -44,7 +42,6 @@ public class SemilleroCrearService implements SemilleroCrearCU {
         //debo llamar el caso de uso de crear el integrante
 
         Semillero semilleroCreado = semilleroCrearREPO.crear(semillero);
-        System.out.println("semillero que se ha creado "+semilleroCreado);
 
         IntegranteSemillero integranteSemillero=new IntegranteSemillero();
         Usuario usuario=new Usuario();
@@ -54,7 +51,6 @@ public class SemilleroCrearService implements SemilleroCrearCU {
         integranteSemillero.setSemillero(semilleroCreado);
         integranteSemillero.setUsuario(usuario);
         integranteSemillero.setRolSemillero(rolSemillero);
-        System.out.println("integrante mentor "+integranteSemillero);
         integranteSemilleroCrearCU.crear(integranteSemillero);
         /*if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.creacionSemilleroIntegrante.objeto", List.of("Semillero", "Id", String.valueOf(semillero.getId())*//*,"Mentor ","Id",String.valueOf(objIntegrante.getId()*//*));

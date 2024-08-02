@@ -20,9 +20,7 @@ public class LineaInvestigacionCrearService implements LineaInvestigacionCrearCU
 
     @Override
     public Respuesta<Boolean> crear(LineaInvestigacion nuevaLinea) {
-        System.out.println("datosdelservice idsemillero "+nuevaLinea.getSemilleroId()+" nuevalinea "+nuevaLinea);
       //  nuevaLinea.setSemilleroId(idSemillero);
-        System.out.println("nuevaLinea "+nuevaLinea);
         Boolean respuesta= lineaInvestigacionCrearREPO.crear(nuevaLinea);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.creacion.objeto", List.of("Linea Investigacion", "Id", String.valueOf(nuevaLinea.getId())));

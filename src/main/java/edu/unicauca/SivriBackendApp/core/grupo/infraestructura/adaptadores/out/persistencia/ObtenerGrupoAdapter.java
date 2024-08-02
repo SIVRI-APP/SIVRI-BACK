@@ -38,13 +38,9 @@ public class ObtenerGrupoAdapter implements GrupoObtenerREPO {
 
     @Override
     public Optional<Grupo> obtenerGrupoPorId(int id) {
-        System.out.println("ENTRA A OBTENER GRUPO POR ID DEL ADAPTER ");
         Optional<GrupoEntity> respuestaJpa=grupoRepository.findById(id);
-        //System.out.println("entty grupo "+respuestaJpa);
-        //System.out.println("obtener grupo antes del mapeo. idgrupo "+respuestaJpa.get().getId()+" demas datos propios de grupo "+respuestaJpa.get());
-        if (respuestaJpa.isPresent()) {
+       if (respuestaJpa.isPresent()) {
             Optional<Grupo> resp=Optional.of(grupoMapper.obtenerModelo(respuestaJpa.get()));
-            System.out.println("datos de grupo despues del mapeo "+resp.get());
             return resp;
         }
         return Optional.empty();
@@ -67,7 +63,6 @@ public class ObtenerGrupoAdapter implements GrupoObtenerREPO {
     @Override
     public List<ListarGruposPorIdDirector> obtenerGruposPorIdDirector(Long idDirector) {
         List<ListarGruposPorIdDirector> grupos=grupoRepository.listarGruposPorIdDirector(idDirector);
-        System.out.println("grupos "+grupos);
         return grupos;
     }
 

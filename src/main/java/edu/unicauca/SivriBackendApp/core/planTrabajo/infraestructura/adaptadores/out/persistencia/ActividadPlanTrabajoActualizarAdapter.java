@@ -19,11 +19,8 @@ public class ActividadPlanTrabajoActualizarAdapter implements ActividadPlanTraba
 
     @Override
     public Boolean actualizar(ActividadPlanTrabajo nuevosDatosActividad) {
-        System.out.println("datos adpter "+nuevosDatosActividad);
         ActividadPlanTrabajoEntity mapper=actividadPlanTrabajoMapper.obtenerEntity(nuevosDatosActividad);
-        System.out.println("DATOS DESPUES DEL MAPEO "+mapper);
         ActividadPlanTrabajoEntity guardar = actividadPlanTrabajoRepository.save(mapper);
-        System.out.println("datos guardados "+guardar);
         return true;
     }
 }

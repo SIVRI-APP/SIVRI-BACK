@@ -19,9 +19,7 @@ public class ActividadPlanTrabajoCrearAdapter implements ActividadPlanTrabajoCre
 
     @Override
     public Boolean crear(ActividadPlanTrabajo nuevaActividad) {
-       // System.out.println("nueva actividad "+nuevaActividad);
         ActividadPlanTrabajoEntity actividad= actividadPlanTrabajoRepository.save(actividadPlanTrabajoMapper.obtenerEntity(nuevaActividad));
-      //  System.out.println("actividad entity "+actividad);
-        return true;
+       return true;
     }
 }

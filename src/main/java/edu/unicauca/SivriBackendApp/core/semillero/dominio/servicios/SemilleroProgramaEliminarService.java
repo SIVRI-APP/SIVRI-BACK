@@ -23,8 +23,7 @@ public class SemilleroProgramaEliminarService implements SemilleroProgramaElimin
     @Override
     public Respuesta<Boolean> eliminacionSemilleroProgramaFisico(long id) {
         semilleroProgramaObtenerCU.existePorId(id).getData();
-        System.out.println("service del back"+id);
-        Boolean respuesta=semilleroProgramaEliminarREPO.eliminadoFisicoSemilleroPrograma(id);
+         Boolean respuesta=semilleroProgramaEliminarREPO.eliminadoFisicoSemilleroPrograma(id);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.eliminacion.objeto", List.of("Semillero Programa", "Id", String.valueOf(id)));
         }

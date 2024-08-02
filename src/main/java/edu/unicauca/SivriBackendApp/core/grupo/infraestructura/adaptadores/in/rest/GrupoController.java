@@ -38,7 +38,6 @@ public class GrupoController {
             "'SEMILLERO:MENTOR', " +
             "'GRUPO:DIRECTOR')")
     public ResponseEntity<Respuesta> obtenerPorId(@RequestParam(value = "idgrupo",required = true) int id){
-        System.out.println("ENTRA A BUSCAR GRUPO POR ID EN CONTROLLER ");
         Respuesta respuesta=grupoObtenerCU.obtenerGrupoPorId(id);
         respuesta.setData(grupoDtoMapper.dtoObtenerGrupo((Grupo) respuesta.getData()));
         return ResponseEntity.ok().body(respuesta);
@@ -71,7 +70,6 @@ public class GrupoController {
     @PreAuthorize("hasAnyAuthority(" +
             "'FUNCIONARIO:GRUPOS')")
     public ResponseEntity<Respuesta> crear(@Valid @RequestBody GrupoCrearDTO nuevoGrupo){
-        //System.out.println("datos que llegan al controlador por parametro del grupo "+ nuevoGrupo);
         Respuesta respuesta= grupoCrearCU.crear(grupoDtoMapper.crear(nuevoGrupo));
         return ResponseEntity.ok().body(respuesta);
     }

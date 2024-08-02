@@ -28,8 +28,6 @@ public class IntegranteSemilleroCrearService implements IntegranteSemilleroCrear
     @Transactional(readOnly = false)
     @Override
     public Respuesta<Boolean> crear(IntegranteSemillero nuevosIntegranteSemillero) {
-        System.out.println("datos que recibe el service "+nuevosIntegranteSemillero);
-
         nuevosIntegranteSemillero.getSemillero().setId(nuevosIntegranteSemillero.getSemillero().getSemilleroId());
         semilleroObtenerCU.existePorId(nuevosIntegranteSemillero.getSemillero().getSemilleroId());
         rolesSemilleroObtenerCU.existePorId(nuevosIntegranteSemillero.getRolSemillero().getId());
@@ -40,7 +38,6 @@ public class IntegranteSemilleroCrearService implements IntegranteSemilleroCrear
             //busca el usuario por tipodocumento y documento y devuelve el usuario obtenido
             System.out.println("entro al if");
         }*/
-        System.out.println("datos service "+nuevosIntegranteSemillero);
         Boolean respuesta=integranteSemilleroCrearREPO.crear(nuevosIntegranteSemillero);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.creacion.objeto", List.of("Integrante Semillero", "Id", String.valueOf(nuevosIntegranteSemillero.getId())));

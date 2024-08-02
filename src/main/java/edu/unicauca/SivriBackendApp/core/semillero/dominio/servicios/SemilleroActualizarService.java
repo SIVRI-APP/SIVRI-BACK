@@ -24,7 +24,6 @@ public  class SemilleroActualizarService implements SemilleroActualizarCU {
 
     @Override
     public Respuesta<Boolean> actualizarPorApoyo(Semillero nuevoSemillero) {
-        //System.out.println("DATOS SEMILLERO: "+nuevoSemillero);
         semilleroObtenerCU.existePorId(nuevoSemillero.getSemilleroId());
         String nombreLLega=nuevoSemillero.getNombre();
         Semillero objSemilleroActualizar = semilleroObtenerCU.obtenerSemilleroPorId(nuevoSemillero.getSemilleroId()).getData();
@@ -32,7 +31,6 @@ public  class SemilleroActualizarService implements SemilleroActualizarCU {
         if (!Objects.equals(nombreLLega, nombreBd)){
             semilleroObtenerCU.existePorNombre(nuevoSemillero.getNombre());
         }
-        //System.out.println("id semillero: "+objSemilleroActualizar);
         objSemilleroActualizar.setNombre(nuevoSemillero.getNombre());
         objSemilleroActualizar.setObjetivo(nuevoSemillero.getObjetivo());
         objSemilleroActualizar.setMision(nuevoSemillero.getMision());
@@ -50,16 +48,11 @@ public  class SemilleroActualizarService implements SemilleroActualizarCU {
 
     @Override
     public Respuesta<Boolean> actualizarEstadoSemillero(int idSemillero, Semillero nuevoEstadoSemillero) {
-        System.out.println("ENTRA AL SERVICE");
-        System.out.println("id semillero "+idSemillero+" semillero que llega "+nuevoEstadoSemillero);
-        semilleroObtenerCU.existePorId(idSemillero);
+       semilleroObtenerCU.existePorId(idSemillero);
         Semillero objSemilleroActualizar=semilleroObtenerCU.obtenerSemilleroPorId(idSemillero).getData();
-        System.out.println("obj semillero que se obtiene "+objSemilleroActualizar);
 
         objSemilleroActualizar.setEstado(nuevoEstadoSemillero.getEstado());
-        System.out.println("semillero con actualizacion "+objSemilleroActualizar);
         Boolean respuesta=semilleroActualizarREPO.actualizarEstadoSemillero(objSemilleroActualizar);
-        System.out.println("respuesta "+respuesta);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Semillero", "Id", String.valueOf(objSemilleroActualizar.getSemilleroId())));
         }
@@ -68,7 +61,6 @@ public  class SemilleroActualizarService implements SemilleroActualizarCU {
 
     @Override
     public Respuesta<Boolean> actualizarPorMentor(Semillero nuevoSemillero) {
-        //System.out.println("NUEVOSEMILLERO: "+nuevoSemillero);
         semilleroObtenerCU.existePorId(nuevoSemillero.getSemilleroId());
         String nombreLLega=nuevoSemillero.getNombre();
         Semillero objSemilleroActualizar = semilleroObtenerCU.obtenerSemilleroPorId(nuevoSemillero.getSemilleroId()).getData();
@@ -76,8 +68,7 @@ public  class SemilleroActualizarService implements SemilleroActualizarCU {
         if (!Objects.equals(nombreLLega, nombreBd)){
             semilleroObtenerCU.existePorNombre(nuevoSemillero.getNombre());
         }
-        //System.out.println("IDSEMILLERO: "+nuevoSemillero);
-        objSemilleroActualizar.setNombre(nuevoSemillero.getNombre());
+       objSemilleroActualizar.setNombre(nuevoSemillero.getNombre());
         objSemilleroActualizar.setCorreo(nuevoSemillero.getCorreo());
         objSemilleroActualizar.setObjetivo(nuevoSemillero.getObjetivo());
         objSemilleroActualizar.setMision(nuevoSemillero.getMision());

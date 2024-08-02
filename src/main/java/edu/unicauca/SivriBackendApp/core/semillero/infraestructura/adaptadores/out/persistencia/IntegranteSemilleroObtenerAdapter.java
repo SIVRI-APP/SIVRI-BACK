@@ -61,11 +61,9 @@ public class IntegranteSemilleroObtenerAdapter implements IntegranteSemilleroObt
 
     @Override
     public Page<List<ListarTodosIntegrantesConFiltro>> listarTodosIntegrantesSemilleroConFiltro(Pageable pageable, String numeroDocumento, String nombres, Integer semilleroId, String nombreSemillero, String rolSemillero, EstadoIntegranteSemillero estado) {
-        System.out.println("adapter parametros num doc "+numeroDocumento+"nombr"+nombres+"semilleroid "+semilleroId+ "nom semil "+nombreSemillero+"rol "+rolSemillero+"estado "+estado);
 
         String estad= (estado != null) ? estado.toString() : null;
         Page<List<ListarTodosIntegrantesConFiltro>> respuestaAdapter=integranteSemilleroRepository.listarTodosIntegranteSemilleroConFiltro(numeroDocumento,nombres,semilleroId,nombreSemillero,rolSemillero,estad,pageable);
-        System.out.println("respuesta adapter "+respuestaAdapter);
         return respuestaAdapter;
     }
 
@@ -80,7 +78,6 @@ public class IntegranteSemilleroObtenerAdapter implements IntegranteSemilleroObt
 */
     @Override
     public List<Semillero> obtenerSemillerosPorIdMentor(String idMentor) {
-        System.out.println("entra al adapter ");
         //Optional<UsuarioEntity> objUsuario=usuarioRepository.findById(idMentor);
         //System.out.println("OBJ USUARIO: "+objUsuario);
 

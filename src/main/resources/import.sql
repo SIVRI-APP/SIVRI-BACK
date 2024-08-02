@@ -118,7 +118,7 @@ INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuar
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'MASCULINO', 'ADMINISTRATIVO', 'Yurani', 'Guevara', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (3, 'yurany@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'FEMENINO', 'ADMINISTRATIVO', 'yurany', 'guevara', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (4, 'andrea@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10614', 'FEMENINO', 'ADMINISTRATIVO', 'andrea', 'robles', '3225864404' );
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (5, 'maicol@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10615', 'FEMENINO', 'ADMINISTRATIVO', 'maicol', 'paredes', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (5, 'C@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10615', 'FEMENINO', 'ADMINISTRATIVO', 'maicol', 'paredes', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (6, 'sebastian@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10616', 'MASCULINO', 'ADMINISTRATIVO', 'sebastian', 'perez', '3225864404' );
 
 
@@ -135,10 +135,13 @@ INSERT INTO rol_funcionario (id, nombre) VALUES (7, 'VICERRECTOR');
 INSERT INTO credencial (id, email, password, userId) VALUES (1, 'mandresmosquera@gmail.com', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 1);
 INSERT INTO credencial (id, email, password, userId) VALUES (2, 'yurani@unicauca.edu.co', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 2);
 INSERT INTO credencial (id, email, password, userId) VALUES (3, 'yurany@unicauca.edu.co', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 3);
+INSERT INTO credencial (id, email, password, userId) VALUES (4, 'andrea@unicauca.edu.co', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 4);
+INSERT INTO credencial (id, email, password, userId) VALUES (5, 'maicol@unicauca.edu.co', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 5);
 
 -- -- FUNCIONARIO
 INSERT INTO funcionario (id, usuarioId, rolId, estado, fechaInicio) VALUES (1, 1, 1, true, '2024-01-01');
 INSERT INTO funcionario (id, usuarioId, rolId, estado, fechaInicio) VALUES (2, 3, 4, true, '2024-01-01');
+INSERT INTO funcionario (id, usuarioId, rolId, estado, fechaInicio) VALUES (3, 5, 4, true, '2024-01-01');
 
 -- SOLICITUD DE USUARIO
 INSERT INTO usuario_solicitud (id, creadoPorUsuarioId, programaId, correo, tipoDocumento, numeroDocumento, sexo, estado, tipoUsuario, nombre, apellido, telefono, nota) VALUES (1, 1, 1, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '1061', 'MASCULINO', 'REVISION_VRI', 'ADMINISTRATIVO', 'Miguel Andres', 'Mosquera', '3225864404', 'no me lo nieguen porfa');
@@ -191,16 +194,20 @@ INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mis
 INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (6,'semillero4','2023-03-08','Impulsar el interés', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
 INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (7,'semillero5','2023-03-08','Impulsar el investigativo ', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
 INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (8,'semillero6','2023-03-08','interés investigativo ', 'El semillero tiene como propósito crear un nucleo','El semillero SIR');
+INSERT INTO organismo_de_investigacion (id, nombre, fechaCreacion, objetivo, mision, vision) VALUES (9,'Grupo I+D en Tecnologías de la Información','2023-03-08', '1. Fortalecer la infraestructura humana, técnica, investigativa y de formación especializada en diferentes áreas, de todo el Grupo de Investigación de Unicauca. 2. Definir, diseñar e implementar proyectos que propendan por la interdisciplinariedad de áreas dentro y fuera de La universidad Del Cauca.', 'El grupo se propone crear la infraestructura base que facilite la generación de soluciones informáticas para la comunidad en general y brinde asesorías en cuanto al aprovechamiento de nuevas tecnologías de la información para los sectores productivos y académicos.', 'Preservar y estimular el crecimiento de la capacidad de investigación e innovación en el área las Tecnologías de la Información de la Universidad del Cauca, a través de los integrantes del grupo GTI, por medio de la creación de espacios adecuados donde la crítica y el debate intelectual se constituyan en fuente de nuevo conocimiento. El GTI promoverá el desarrollo de su talento humano (profesores, investigadores y estudiantes), aportará la infraestructura requerida y establecerá alianzas estratégicas con centros de investigación de reconocido prestigio internacional para el desarrollo de su labor, con el propósito de agregar valor a su relación con la sociedad. Los principios de calidad, transparencia, independencia de criterio, compromiso y servicio, orientarán las actuaciones del GTI y se constituirán en su diferencial competitivo con respecto de otros grupos en el área. A largo plazo el GTI pretende ser: ¿Un centro tecnológico en Investigación y Desarrollo con reconocimiento nacional e internacional generador de proyectos ');
+
 
 --grupo
 INSERT INTO grupo (grupoId,departamentoId,estado, direccion, telefono, email, sitioWeb, escalafonColciencias, direccionGrupLac, codigoColciencias, centroInvestigaciones, realizaciones, perspectivas) VALUES (1,1,'ACTIVO','Facultad de Ingeniería','2-8209800','jccasas@unicauca.edu.co','No','A','http://scienti.colciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000012079','COL0119567','centro investigacion','Desarrollo y aprobación de 5 trabajos de Pregrado en el Departamento de Ingeniería Ambiental y Sanitaria, Facultad de Ingeniería Civil.','perspectivas del grupo');
+INSERT INTO grupo (grupoId,departamentoId,estado, direccion, telefono, email, sitioWeb, escalafonColciencias, direccionGrupLac, codigoColciencias, centroInvestigaciones, realizaciones, perspectivas) VALUES (9,1,'ACTIVO','Sector Tulcan - FIET','8233031','gti@unicauca.edu.co','No','A','http://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002157','COL0023303', 'centro investigacion','valor','¿Productividad investigativa medida por índices de eficiencia, eficacia y calidad de los proyectos. ¿Aporte de proyectos significativos, innovadores y útiles, que propendan por el mejoramiento y la calidad de vida de los posibles usuarios de los mismos. ¿Creación de alianzas estratégicas regionales, nacionales e internacionales, que generen vínculos entre distintos estamentos, brindando con ello: saber científico, financiamiento, investigación y todo tipo de apoyo al GTI.');
+
 
 --semillero
 INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (2,1,'ACTIVO','agora@correo.edu.co','POPAYAN');
 INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (3,1,'FORMULADO','semillero3@correo.edu.co','POPAYAN');
 INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (4,1,'ACTIVO','semillero4@correo.edu.co','POPAYAN');
 INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (5,1,'ACTIVO','agora5@correo.edu.co','POPAYAN');
-INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (6,1,'ACTIVO','agora6@correo.edu.co','POPAYAN');
+INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (6,9,'ACTIVO','agora6@correo.edu.co','POPAYAN');
 INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (7,1,'ACTIVO','agora7@correo.edu.co','POPAYAN');
 INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (8,1,'ACTIVO','agora8@correo.edu.co','POPAYAN');
 
@@ -212,7 +219,8 @@ INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rol
 INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(5,3,3,2, 'activo', '2023-09-05',NULL);
 
 --integrante grupo
-INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(1,1,3,1,'Activo','2023-09-07',NULL);
+INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(1,1,3,1,'ACTIVO','2023-09-07',NULL);
+INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(2,1,4,9,'ACTIVO','2023-09-07',NULL);
 
 --compromiso Semillero
 INSERT INTO compromiso_semillero(id,nombre) VALUES(1, 'compromiso 1');
@@ -220,18 +228,20 @@ INSERT INTO compromiso_semillero(id,nombre) VALUES(2, 'compromiso 2');
 INSERT INTO compromiso_semillero(id,nombre) VALUES(3, 'compromiso 3');
 
 
---evidencia actividad
-INSERT INTO evidencia_actividad(id,evidencia) VALUES(1,'evidencia');
-INSERT INTO evidencia_actividad(id,evidencia) VALUES(2,'evidencia');
+
 
 --plan de trabajo
 INSERT INTO plan_trabajo(id,semilleroId,nombrePlan,anio, estado) VALUES(1,2, 'plan', 2023,'FINALIZADO');
 INSERT INTO plan_trabajo(id,semilleroId,nombrePlan,anio, estado) VALUES(2,2, 'plan de trabajo', 2024, 'FORMULADO');
 
 --actividad plan de trabajo
-INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId,evidenciaId)VALUES(1,1,1,'obj','act','2023-03-08','2023-08-05',3,1);
-INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId,evidenciaId)VALUES(2,1,2,'obj','act','2023-03-08','2023-08-05',3,2);
-INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId,evidenciaId)VALUES(3,2,3,'obj','act','2023-03-08','2023-08-05',3,null);
+INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId)VALUES(1,1,1,'obj','act','2023-03-08','2023-08-05',3);
+INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId)VALUES(2,1,2,'obj','act','2023-03-08','2023-08-05',3);
+INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId)VALUES(3,2,3,'obj','act','2023-03-08','2023-08-05',3);
+
+--evidencia actividad
+INSERT INTO evidencia_actividad(id,actividadId,evidencia) VALUES(1,1,'evidencia');
+INSERT INTO evidencia_actividad(id,actividadId,evidencia) VALUES(2,2,'evidencia');
 
 --linea de investigacion
 INSERT INTO linea_investigacion(id,semilleroId,linea) VALUES(1,2,'calidad de procesos');

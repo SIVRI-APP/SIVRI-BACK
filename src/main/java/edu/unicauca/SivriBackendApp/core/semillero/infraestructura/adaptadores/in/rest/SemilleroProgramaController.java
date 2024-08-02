@@ -47,8 +47,6 @@ public class SemilleroProgramaController {
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR')")
     public ResponseEntity<Respuesta> crear(@RequestParam(value = "idSemillero") int idSemillero,@Valid @RequestParam("programaId") int idPrograma){
-        System.out.println("controlador de crear programa semillero");
-        System.out.println("valores que se ingresa en id semillero"+idSemillero+" id programa"+idPrograma);
         Respuesta respuesta =semilleroProgramaCrearCU.crear(idSemillero,idPrograma);
         return ResponseEntity.ok().body(respuesta);
     }
@@ -62,7 +60,6 @@ public class SemilleroProgramaController {
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR')")
     public ResponseEntity<Respuesta<Boolean>> eliminarProgramaSemillero(@PathVariable(value = "id") int idSemilleroPrograma){
-        System.out.println("entra al controler "+idSemilleroPrograma);
         Respuesta<Boolean> respuesta =semilleroProgramaEliminarCU.eliminacionSemilleroProgramaFisico(idSemilleroPrograma);
         return ResponseEntity.ok().body(respuesta);
 

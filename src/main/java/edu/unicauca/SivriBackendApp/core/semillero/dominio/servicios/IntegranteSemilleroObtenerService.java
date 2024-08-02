@@ -64,9 +64,7 @@ public class IntegranteSemilleroObtenerService implements IntegranteSemilleroObt
 
     @Override
     public Respuesta<List<Semillero>> obtenerSemillerosPorIdMentor(String idMentor) {
-        System.out.println("ENTRA A SERVICE ");
-        List<Semillero> respuesta=integranteSemilleroObtenerREPO.obtenerSemillerosPorIdMentor(idMentor);
-        //System.out.println("respuesta de service "+respuesta);
+       List<Semillero> respuesta=integranteSemilleroObtenerREPO.obtenerSemillerosPorIdMentor(idMentor);
         if (respuesta.isEmpty()){
             throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.semilleros.mentor");
         }
@@ -84,7 +82,6 @@ public class IntegranteSemilleroObtenerService implements IntegranteSemilleroObt
 
     @Override
     public Respuesta<Page<List<ListarTodosIntegrantesConFiltro>>> listarTodosIntegrantesSemilleroConFiltro(int pageNo, int pageSize, String numeroDocumento, String nombres, Integer semilleroId, String nombreSemillero, String rolSemillero, EstadoIntegranteSemillero estado) {
-        System.out.println("service parametros num doc "+numeroDocumento+"nombr"+nombres+"semilleroid "+semilleroId+ "nom semil "+nombreSemillero+"rol "+rolSemillero+"estado "+estado);
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<List<ListarTodosIntegrantesConFiltro>> respuestaBd = integranteSemilleroObtenerREPO.listarTodosIntegrantesSemilleroConFiltro(pageable,numeroDocumento,nombres, semilleroId, nombreSemillero,rolSemillero, estado);
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();

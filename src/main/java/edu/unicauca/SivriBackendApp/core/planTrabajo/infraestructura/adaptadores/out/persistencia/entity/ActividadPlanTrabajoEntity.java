@@ -29,9 +29,9 @@ public class ActividadPlanTrabajoEntity {
     @JoinColumn(name = "planTrabajoId")
     private PlanTrabajoEntity planTrabajo;
     //relacion 1a1 evidenciaActividad
-    @OneToOne
-    @JoinColumn(name = "evidenciaId")
-    private EvidenciaActividadEntity evidenciaActividad;
+    //@OneToOne
+    //@JoinColumn(name = "evidenciaId")
+    //private EvidenciaActividadEntity evidenciaActividad;
     //relacion *a1 compromisoSemillero
     @ManyToOne
     @JoinColumn(name = "compromisoSemilleroId")

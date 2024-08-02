@@ -19,9 +19,7 @@ public class IntegranteGrupoCrearAdapter implements IntegranteGrupoCrearREPO {
 
     @Override
     public Boolean asociarIntegranteGrupo(IntegranteGrupo nuevosDatos) {
-        //System.out.println("DATOS QUE LLEGAN AL ADAPTER: "+nuevosDatos);
-        IntegranteGrupoEntity objInteegrante=integranteGrupoRepository.save(integranteGrupoMapper.obtenerEntity(nuevosDatos));
-        //System.out.println("OBJ INTEGRANTE nuevo "+objInteegrante);
-        return true;
+         IntegranteGrupoEntity objInteegrante=integranteGrupoRepository.save(integranteGrupoMapper.obtenerEntity(nuevosDatos));
+         return true;
     }
 }

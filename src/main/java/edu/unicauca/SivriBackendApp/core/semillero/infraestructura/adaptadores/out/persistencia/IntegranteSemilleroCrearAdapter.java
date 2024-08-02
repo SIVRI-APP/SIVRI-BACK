@@ -26,7 +26,6 @@ public class IntegranteSemilleroCrearAdapter implements IntegranteSemilleroCrear
 
     @Override
     public Boolean crear(IntegranteSemillero nuevoIntegranteSemillero) {
-        System.out.println("integrante semillero adapter "+nuevoIntegranteSemillero);
         integranteSemilleroRepository.save(integranteSemilleroMapper.obtenerEntity(nuevoIntegranteSemillero));
         return true;
     }

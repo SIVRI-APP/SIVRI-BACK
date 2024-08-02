@@ -6,7 +6,6 @@ import lombok.Data;
 @Entity
 @Table(name = "evidencia_actividad")
 @Data
-
 public class EvidenciaActividadEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +14,8 @@ public class EvidenciaActividadEntity {
     private String evidencia;
 
     //relacion 1a1 con entidad ActividadPlanTrabajo
-    //@OneToOne(mappedBy ="evidenciaActividad")
-    //private ActividadPlanTrabajoEntity evidenciaActividad;
+    @OneToOne
+    @JoinColumn(name = "actividadId")
+    private ActividadPlanTrabajoEntity evidenciaActividad;
+
 }

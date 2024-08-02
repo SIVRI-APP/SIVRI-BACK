@@ -83,7 +83,6 @@ public class SemilleroControlller {
             "'FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> obtenerSemilleros(){
         Respuesta<List<Semillero>> respuestaCU=semilleroObtenerCU.obtenerSemilleros();
-        //System.out.println("LISSTADO RESPUESTA: "+respuestaCU);
         Respuesta<List<SemilleroObtenerDTO>> respuesta=new Respuesta<>();
         respuesta.setData(respuestaCU.getData().stream().map(semilleroDtoMapper::dtoObtenerSemillero).toList());
         respuesta.setStatus(respuestaCU.getStatus());
@@ -96,9 +95,7 @@ public class SemilleroControlller {
     @PreAuthorize("hasAnyAuthority(" +
             "'FUNCIONARIO:SEMILLEROS')")
    public ResponseEntity<Respuesta> actualizarEstadoSemillero(@PathVariable(value = "id") int idSemillero, @Valid @RequestBody SemilleroActualizarEstadoDTO semilleroActualizarEstadoDTO){
-        System.out.println("IDSemillero controller "+idSemillero+" datosque recibe delDto "+semilleroActualizarEstadoDTO);
         Respuesta respuesta=semilleroActualizarCU.actualizarEstadoSemillero(idSemillero,semilleroDtoMapper.actualizarEstadoSemillero(semilleroActualizarEstadoDTO));
-        System.out.println("RESPUESTA DELCONTROLLER "+respuesta);
         return ResponseEntity.ok().body(respuesta);
    }
 
@@ -130,10 +127,8 @@ public class SemilleroControlller {
     @PreAuthorize("hasAnyAuthority(" +
             "'GRUPO:DIRECTOR')")
     public ResponseEntity<Respuesta> crear(@Valid @RequestBody SemilleroCrearDTO nuevoSemillero){
-        System.out.println("DATOS QUE RECIBE SEMILLERO PARA CREAR "+nuevoSemillero);
 
         Respuesta respuesta= semilleroCrearCU.crear(semilleroDtoMapper.crear(nuevoSemillero), nuevoSemillero.getMentorId());
-        //System.out.println("DATOS RESPUESTA DE CONTROLLER: "+respuesta);
         return ResponseEntity.ok().body(respuesta);
 
     }
@@ -197,8 +192,7 @@ public class SemilleroControlller {
             @RequestParam(required = false) int pageNo,
             @RequestParam(required = false) int pageSize
     ){
-        System.out.println(idMentor+" "+pageNo+" "+pageSize);
-        Respuesta respuesta = semilleroObtenerCU.obtenerSemillerosPorIdMentor(pageNo,pageSize,idMentor);
+       Respuesta respuesta = semilleroObtenerCU.obtenerSemillerosPorIdMentor(pageNo,pageSize,idMentor);
         return ResponseEntity.ok().body(respuesta);
     }
 

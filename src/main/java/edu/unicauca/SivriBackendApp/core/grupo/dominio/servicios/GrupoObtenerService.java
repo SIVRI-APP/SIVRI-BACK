@@ -45,9 +45,7 @@ public class GrupoObtenerService implements GrupoObtenerCU {
 
     @Override
     public Respuesta<Grupo> obtenerGrupoPorId(int id) {
-        System.out.println("INGRESA AL SERVICE DE BUSCAR GRUPO POR ID ");
-        Optional<Grupo> respuestaBd = grupoObtenerREPO.obtenerGrupoPorId(id);
-        System.out.println("respuestabd"+ respuestaBd);
+         Optional<Grupo> respuestaBd = grupoObtenerREPO.obtenerGrupoPorId(id);
         if (respuestaBd.isEmpty()) {
             throw new ReglaDeNegocioException("el id " + id + " no existe.");
         }

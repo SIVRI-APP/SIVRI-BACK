@@ -65,7 +65,6 @@ public class ActividadPlanTrabajoController {
             "'SEMILLERO:MENTOR' )"
     )
     public ResponseEntity<Respuesta> crear(@PathVariable(value = "id") int idPlan,@Valid @RequestBody ActividadPlanTrabajoCrearDTO nuevaActividad){
-        //System.out.println("datos controller: "+nuevaActividad);
         Respuesta respuesta = actividadPlanTrabajoCrearCU.crear(idPlan,actividadPlanTrabajoDtoMapper.crear(nuevaActividad));
         return ResponseEntity.ok().body(respuesta);
     }
@@ -96,7 +95,6 @@ public class ActividadPlanTrabajoController {
             @RequestParam(required = false) int pageNo,
             @RequestParam(required = false) int pageSize
     ){
-        System.out.println("fecha inicio "+fechaInicio+" fecha fin "+fechaFin);
         Respuesta respuesta = actividadPlanTrabajoObtenerCU.ListarActividadesConFiltro(pageNo,pageSize,idPlan,fechaInicio,fechaFin);
         return ResponseEntity.ok().body(respuesta);
     }

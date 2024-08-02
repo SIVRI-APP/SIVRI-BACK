@@ -33,7 +33,6 @@ public class IntegranteGrupoObtenerAdapter implements IntegranteGrupoObtenerREPO
     public Optional<IntegranteGrupo> obtenerIntegranteGrupoPorId(int id) {
         Optional<IntegranteGrupoEntity> respuestaJpa = integranteGrupoRepository.findById(id);
         Optional<IntegranteGrupo> modeloIntegranteGrupo= respuestaJpa.map(integranteGrupoMapper::obtenerModelo);
-        //System.out.println("MODELO integrante grupo "+modeloIntegranteGrupo);
         return modeloIntegranteGrupo;
     }
 

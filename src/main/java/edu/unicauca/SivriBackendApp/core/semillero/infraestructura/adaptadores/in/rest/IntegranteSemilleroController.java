@@ -104,9 +104,7 @@ public class IntegranteSemilleroController {
 
      @GetMapping("/semillerosPorMentorId/{id}")
      public ResponseEntity<Respuesta> obtenerSemillerosPorIdMentor(@PathVariable(value = "id")String idMentor){
-          System.out.println("ENTRA A CONTROLLER CON DATOS: "+idMentor);
           Respuesta<List<Semillero>> respuestaCU=integranteSemilleroObtenerCU.obtenerSemillerosPorIdMentor(idMentor);
-          //System.out.println("RESPUESTA CU DE CONTROLLER "+respuestaCU);
           Respuesta<List<SemilleroObtenerDTO>> respuesta=new Respuesta<>();
           respuesta.setData(respuestaCU.getData().stream().map(integranteSemilleroDtoMapper::dtoObtenerSemillero).toList());
           respuesta.setStatus(respuestaCU.getStatus());
@@ -158,7 +156,6 @@ public class IntegranteSemilleroController {
              @RequestParam(required = false) int pageNo,
              @RequestParam(required = false) int pageSize
      ){
-          System.out.println("parametros "+numeroDocumento+" "+nombres+" "+semilleroId+" "+nombreSemillero+" "+rolSemillero+" "+estado);
           Respuesta<Page<List<ListarTodosIntegrantesConFiltro>>> respuesta = integranteSemilleroObtenerCU.listarTodosIntegrantesSemilleroConFiltro(pageNo,pageSize,numeroDocumento, nombres, semilleroId, nombreSemillero, rolSemillero, estado);
           return ResponseEntity.ok().body(respuesta);
      }

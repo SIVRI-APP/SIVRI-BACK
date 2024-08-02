@@ -31,7 +31,6 @@ public class PlanTrabajoActualizarService implements PlanTrabajoActualizarCU {
             objPlanActualizar.setEstado(nuevosDatosPlan.getEstado());
             objPlanActualizar.setAnio(nuevosDatosPlan.getAnio());
             boolean respuesta = planTrabajoActualizarREPO.actualizar(objPlanActualizar);
-            System.out.println("respuesta "+respuesta);
             if (!respuesta){
                 throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Plan Trabajo", "Id", String.valueOf(idPlan)));
             }

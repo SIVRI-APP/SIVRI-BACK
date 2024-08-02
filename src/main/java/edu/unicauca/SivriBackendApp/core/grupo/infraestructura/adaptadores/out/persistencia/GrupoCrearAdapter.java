@@ -31,7 +31,6 @@ public class GrupoCrearAdapter implements GrupoCrearREPO {
 
     @Override
     public Boolean crear(Grupo nuevoGrupo) {
-        //System.out.println("datos que llegan al adapter del grupo que se va a crear "+nuevoGrupo);
         //TODO AGREGRAR LO DE USUARIO
         //InformacionDetalladaUsuario integranteDirector=usuarioObtenerCU.validarExistenciaUsuarioSistema(nuevoGrupo.getTipoDocumento().toString(),nuevoGrupo.getNumeroDocumento()).getData();
         IntegranteGrupo objIntegranteGrupo=new IntegranteGrupo();
@@ -48,11 +47,7 @@ public class GrupoCrearAdapter implements GrupoCrearREPO {
         grupoIntegrante.setGrupoId(grupo.getId());
         objIntegranteGrupo.setGrupo(grupoIntegrante);
         IntegranteGrupoEntity integrante=integranteGrupoMapper.obtenerEntity(objIntegranteGrupo);
-        //System.out.println("INTEGRANTE A GUARDAR COMO DIRECTOR: "+integrante);
         IntegranteGrupoEntity integranteGuardado= integranteGrupoRepository.save(integrante);
-        /*System.out.println("integrante grupo entity"+integranteGuardado);
-        System.out.println("OBJ INTEGRANTE "+objIntegranteGrupo);
-        System.out.println("id del grupo que se creo "+grupo.getId()); */
 
         return true;
     }

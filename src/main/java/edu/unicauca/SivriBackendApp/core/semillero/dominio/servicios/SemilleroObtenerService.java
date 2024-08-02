@@ -106,8 +106,7 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
 
     @Override
     public Respuesta<Page<List<ListarSemillerosConFiltroxMentor>>> listarSemilleroConFiltroxMentor(int pageNo, int pageSize, Integer semilleroId, String nombre, SemilleroEstado estado) {
-        System.out.println("lleg al service");
-        Long usuarioId=servicioDeIdentificacionDeUsuario.obtenerUsuario().getId();
+       Long usuarioId=servicioDeIdentificacionDeUsuario.obtenerUsuario().getId();
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<List<ListarSemillerosConFiltroxMentor>> respuestaBd= semilleroObtenerREPO.listarSemilleroConFiltroxMentor(pageable,semilleroId,usuarioId,nombre,estado);
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","",respuestaBd).getRespuesta();

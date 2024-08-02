@@ -24,7 +24,6 @@ public class SubAreaObtenerService implements SubAreaObtenerCU {
         if (respuestaBd.isEmpty()) {
             throw new ReglaDeNegocioException("subaAreas.Disciplina.NoEncontrada");
         }
-        //System.out.println("respuesta "+respuestaBd);
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
 
     }
