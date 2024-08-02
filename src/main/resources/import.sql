@@ -68,12 +68,12 @@ INSERT INTO checklist (id, convocatoriaId, documentoConvocatoriaId, etapaDocumen
 
 -- USUARIO
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (1, 'mandresmosquera@gmail.com', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono, departamentoId) VALUES (3, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'MASCULINO', 'DOCENTE', 'Miguel', 'Monje', '3225864404', 1);
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono, departamentoId) VALUES (4, 'daniel@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10614', 'MASCULINO', 'DOCENTE', 'Daniel', 'Paz', '3225864404', 2);
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono, departamentoId) VALUES (7, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'MASCULINO', 'DOCENTE', 'Miguel', 'Monje', '3225864404', 1);
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono, departamentoId) VALUES (8, 'daniel@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10614', 'MASCULINO', 'DOCENTE', 'Daniel', 'Paz', '3225864404', 2);
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'MASCULINO', 'ADMINISTRATIVO', 'Yurani', 'Guevara', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (3, 'yurany@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'FEMENINO', 'ADMINISTRATIVO', 'yurany', 'guevara', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (4, 'andrea@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10614', 'FEMENINO', 'ADMINISTRATIVO', 'andrea', 'robles', '3225864404' );
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (5, 'C@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10615', 'FEMENINO', 'ADMINISTRATIVO', 'maicol', 'paredes', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (5, 'maicol@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10615', 'FEMENINO', 'ADMINISTRATIVO', 'maicol', 'paredes', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (6, 'sebastian@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10616', 'MASCULINO', 'ADMINISTRATIVO', 'sebastian', 'perez', '3225864404' );
 
 -- ROL FUNCIONARIO
@@ -87,7 +87,7 @@ INSERT INTO rol_funcionario (id, nombre) VALUES (7, 'VICERRECTOR');
 
 -- -- CREDENCIAL
 INSERT INTO credencial (id, email, password, userId) VALUES (1, 'mandresmosquera@gmail.com', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 1);
-INSERT INTO credencial (id, email, password, userId) VALUES (3, 'miguelmonje@unicauca.edu.co', '$2a$10$18wfrpKUmiVKzIAnm6trUe67Q0XHaqwbbMG/jLObycUuFE/6OwwAy', 3);
+INSERT INTO credencial (id, email, password, userId) VALUES (6, 'miguelmonje@unicauca.edu.co', '$2a$10$18wfrpKUmiVKzIAnm6trUe67Q0XHaqwbbMG/jLObycUuFE/6OwwAy', 7);
 INSERT INTO credencial (id, email, password, userId) VALUES (2, 'yurani@unicauca.edu.co', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 2);
 INSERT INTO credencial (id, email, password, userId) VALUES (3, 'yurany@unicauca.edu.co', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 3);
 INSERT INTO credencial (id, email, password, userId) VALUES (4, 'andrea@unicauca.edu.co', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 4);
@@ -108,8 +108,35 @@ INSERT INTO usuario_solicitud_observaciones(id, solicitudUsuarioId, funcionarioI
 INSERT INTO usuario_solicitud_conversacion(id, usuarioSolicitudObservacionesId, autor, mensaje, fechaMensaje) VALUES (1, 1, 'Miguel Mosquera', 'Me parece injusta la observaciones', '2024-01-01');
 INSERT INTO usuario_solicitud_conversacion(id, usuarioSolicitudObservacionesId, autor, mensaje, fechaMensaje) VALUES (2, 1, 'Daniel Paz', 'Pues de malas', '2024-01-01');
 
--- COOPERACION
-INSERT INTO cooperacion (id, estado, fechaInicio, organismoDeInvestigacionId, principal, proyectoId) VALUES (1, 1, '2024-08-30', 2, 1, 1);
+
+
+-- |***** PROYECTO *****|
+
+INSERT INTO rol_proyecto(id, nombre) VALUES (1, 'DIRECTOR');
+INSERT INTO rol_proyecto(id, nombre) VALUES (2, 'CO_INVESTIGADOR');
+
+-- PROYECTO
+INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, eliminadoLogico, convocatoriaId) VALUES (1, 'Proyecto Internos 2023', 'Formulado', '2024-08-30', '2024-08-30', 'Este sera un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 0, 1);
+
+-- INTEGRANTE PROYECTO
+INSERT INTO integrante_proyecto (id, estado, fechaInicio, rolId, proyectoId, usuarioId) VALUES(1, 1, '2024-08-30', 1, 1, 3);
+
+
+-- ENFOQUE DIFERENCIAL
+-- INSERT INTO enfoque_diferencial (id, nombre) VALUES (1, 'Comunidad Afro');
+-- INSERT INTO enfoque_diferencial (id, nombre) VALUES (2, 'Comunidad Palenquera');
+-- INSERT INTO enfoque_diferencial (id, nombre) VALUES (3, 'Comunidad Indigena');
+-- INSERT INTO enfoque_diferencial (id, nombre) VALUES (4, 'Comunidad LGBTIQ+');
+
+-- ENFOQUE DIFERENCIAL PROYECTO
+-- INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (1, 1, 1);
+-- INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (2, 2, 1);
+-- INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (3, 3, 1);
+-- INSERT INTO enfoque_diferencial_proyecto(id, enfoqueDiferencialId, proyectoId) VALUES (4, 4, 2);
+
+
+
+
 
 
 
@@ -119,8 +146,6 @@ INSERT INTO cooperacion (id, estado, fechaInicio, organismoDeInvestigacionId, pr
 INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (1, 'bienvenidoSIVRI.html', 'Correo para crear credenciales de Usuario', 'nombreCompleto, passwordCode');
 INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (2, 'recuperarContraseña.html', 'Correo para recuperar la contraseña de un usuario', 'correo,codigo');
 INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (3, 'notificacionSIVRI.html', 'Notificacion generica de SIVRI', 'mensaje');
-
-
 
 
 
@@ -220,3 +245,11 @@ INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,2);
 
 --observacion semillero
 INSERT INTO observacion_semillero(id,semilleroId,funcionarioId,observacion,fecha) VALUES (1,2,1,'revisando el semillero se encuentra que no ha subido los documentos','2023-09-04');
+
+
+
+
+
+
+-- COOPERACION
+INSERT INTO cooperacion (id, estado, fechaInicio, organismoDeInvestigacionId, principal, proyectoId) VALUES (1, 1, '2024-08-30', 2, 1, 1);
