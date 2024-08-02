@@ -68,8 +68,8 @@ INSERT INTO checklist (id, convocatoriaId, documentoConvocatoriaId, etapaDocumen
 -- USUARIO
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (1, 'mandresmosquera@gmail.com', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'MASCULINO', 'ADMINISTRATIVO', 'Yurani', 'Mosquera', '3225864404' );
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (3, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'MASCULINO', 'DOCENTE', 'Miguel', 'Monje', '3225864404' );
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (4, 'daniel@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10614', 'MASCULINO', 'DOCENTE', 'Daniel', 'Paz', '3225864404' );
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono, departamentoId) VALUES (3, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'MASCULINO', 'DOCENTE', 'Miguel', 'Monje', '3225864404', 1);
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono, departamentoId) VALUES (4, 'daniel@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10614', 'MASCULINO', 'DOCENTE', 'Daniel', 'Paz', '3225864404', 2);
 
 -- ROL FUNCIONARIO
 INSERT INTO rol_funcionario (id, nombre) VALUES (1, 'SUPER_ADMIN');

@@ -21,9 +21,6 @@ public class Usuario {
     /** Identificador único de la solicitud de usuario */
     private Long id;
 
-    /** Identificador del programa al que pertenece la solicitud de usuario */
-    private Programa programa;
-
     /** Correo electrónico de la solicitud de usuario. Es un campo obligatorio, único y tiene una longitud máxima de 60 caracteres */
     private String correo;
 
@@ -50,6 +47,10 @@ public class Usuario {
 
     /** Enlace al Curriculum Vitae de la solicitud de usuario. Tiene una longitud máxima de 150 caracteres */
     private String cvLac;
+
+    private int departamentoId;
+
+    private int programaId;
 
     @Override
     public boolean equals(Object o) {

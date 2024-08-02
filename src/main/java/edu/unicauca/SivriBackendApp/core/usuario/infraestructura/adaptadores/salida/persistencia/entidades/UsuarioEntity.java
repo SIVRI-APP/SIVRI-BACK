@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades;
 
-import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.entity.ProgramaEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.Sexo;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
@@ -25,11 +24,6 @@ public class UsuarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    /** Identificador del programa al que pertenece la solicitud de usuario */
-    @ManyToOne()
-    @JoinColumn(name = "programaId")
-    private ProgramaEntity programa;
 
     /** Correo electrónico de la solicitud de usuario. Es un campo obligatorio, único y tiene una longitud máxima de 60 caracteres */
     @Column(length = 100, nullable = false, unique = true)
@@ -69,6 +63,10 @@ public class UsuarioEntity {
     /** Enlace al Curriculum Vitae de la solicitud de usuario. Tiene una longitud máxima de 150 caracteres */
     @Column(length = 100)
     private String cvLac;
+
+    private Integer departamentoId;
+
+    private Integer programaId;
 
     @Override
     public boolean equals(Object o) {

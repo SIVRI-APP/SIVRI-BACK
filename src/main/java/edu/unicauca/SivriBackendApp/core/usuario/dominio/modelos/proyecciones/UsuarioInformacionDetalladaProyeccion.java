@@ -17,5 +17,7 @@ public interface UsuarioInformacionDetalladaProyeccion {
     String getTelefono();
     String getCvLac();
     String getNota();
+    String getDepartamentoNombre();
+    String getProgramaNombre();
 
 }

@@ -59,9 +59,13 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
             " u.telefono, " +
             " u.cvLac, " +
             " u.sexo, " +
-            " u.tipoUsuario " +
+            " u.tipoUsuario, " +
+            " dep.nombre as departamentoNombre, " +
+            " pro.nombre as programaNombre " +
             "from " +
             " usuario u " +
+            "left join departamento dep on dep.id = u.departamentoId  " +
+            "left join programa pro on pro.id = u.programaId  " +
             "where " +
             " u.id = :usuarioId"
             , nativeQuery = true)
