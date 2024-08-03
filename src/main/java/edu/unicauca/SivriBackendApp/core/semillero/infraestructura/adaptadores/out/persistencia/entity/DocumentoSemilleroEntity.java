@@ -5,6 +5,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.TipoDocumento
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -24,8 +25,14 @@ public class DocumentoSemilleroEntity {
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private EstadoDocumentoSemillero estado;
+    @Column(length = 50)
+    private LocalDate fechaRegistro;
 
+//relacion *a1 semillero
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "semilleroId")
+    private SemilleroEntity semillero;
     //relacion 1a* con entidad semilleroDOcumentacion
-    @OneToMany(mappedBy = "documentoSemillero", fetch = FetchType.LAZY)
-    private List<SemilleroDocumentacionEntity> documentos;
+    //@OneToMany(mappedBy = "documentoSemillero", fetch = FetchType.LAZY)
+    //private List<SemilleroDocumentacionEntity> documentos;
 }

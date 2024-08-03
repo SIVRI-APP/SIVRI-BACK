@@ -215,9 +215,9 @@ INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,
 INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(2,1,4,9,'ACTIVO','2023-09-07',NULL);
 
 --compromiso Semillero
-INSERT INTO compromiso_semillero(id,nombre) VALUES(1, 'compromiso 1');
-INSERT INTO compromiso_semillero(id,nombre) VALUES(2, 'compromiso 2');
-INSERT INTO compromiso_semillero(id,nombre) VALUES(3, 'compromiso 3');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(1, 'BOLETÍN DIVULGATIVO DE RESULTADOS DE INVESTIGACIÓN');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(2, 'CONSULTORÍAS CIENTÍFICO-TECNOLÓGICAS');
+INSERT INTO compromiso_semillero(id,nombre) VALUES(3, 'DOCUMENTO DE TRABAJO (WORKING PAPER)');
 
 
 

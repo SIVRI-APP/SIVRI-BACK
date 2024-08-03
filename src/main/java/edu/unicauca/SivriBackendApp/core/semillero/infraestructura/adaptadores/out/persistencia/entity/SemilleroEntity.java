@@ -33,9 +33,9 @@ public class SemilleroEntity extends OrganismoDeInvestigacionEntity {
     //@JsonIgnore
     @OneToMany(mappedBy = "semillero",fetch = FetchType.LAZY)
     private List<IntegranteSemilleroEntity> integrantes;
-    //relacion 1a* con entidad semilleroDocumentacion
+    //relacion 1a* con entidad documentoSemillero
     @OneToMany(mappedBy = "semillero", fetch = FetchType.LAZY)
-    private List<SemilleroDocumentacionEntity> documentosSemillero;
+    private List<DocumentoSemilleroEntity> documentosSemillero;
 
     //relacion 1a* con entidad lineadeInvestiacion
     @OneToMany(mappedBy = "semillero",fetch = FetchType.LAZY)

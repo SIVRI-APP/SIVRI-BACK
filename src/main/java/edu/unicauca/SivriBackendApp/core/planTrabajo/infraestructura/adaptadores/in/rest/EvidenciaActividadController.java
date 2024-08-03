@@ -7,6 +7,7 @@ import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores
 import jakarta.annotation.Resource;
 import lombok.AllArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,11 +16,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
+import java.nio.file.Files;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("evidenciaActividad")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "htt://localhost:4200/", allowedHeaders = "*")
 public class EvidenciaActividadController {
     private final EvidenciaActividadCU evidenciaActividadCrearCU;
     private final EvidenciaActividadDtoMapper evidenciaActividadDtoMapper;
@@ -43,14 +45,21 @@ public class EvidenciaActividadController {
     @GetMapping("/descargarEvidenciaActividad/{idEvidencia}")
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR' )")
-    public ResponseEntity<Resource> descargarEvidencia(@PathVariable(value = "idEvidencia") int id){
+    public ResponseEntity<?> descargarEvidencia(@PathVariable(value = "idEvidencia") int id){
         try {
-            Resource file = evidenciaActividadCrearCU.obtenerArchivoPorActividadId(id);
-                    
+            var file = evidenciaActividadCrearCU.obtenerArchivoPorActividadId(id);
+            ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(file.toPath()));
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getName());
+            headers.add(HttpHeaders.CONTENT_TYPE, "application/pdf");
+
             return ResponseEntity.ok()
+                    .headers(headers)
+                    .contentLength(file.length())
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.mappedName()+ "\"")
-                    .body(file);
+                    .body(resource);
+
         } catch (FileNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } catch (Exception e) {
