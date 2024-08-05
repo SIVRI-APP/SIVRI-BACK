@@ -49,7 +49,6 @@ public class EvidenciaActividadController {
         try {
             var file = evidenciaActividadCrearCU.obtenerArchivoPorActividadId(id);
             ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(file.toPath()));
-
             HttpHeaders headers = new HttpHeaders();
             headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getName());
             headers.add(HttpHeaders.CONTENT_TYPE, "application/pdf");

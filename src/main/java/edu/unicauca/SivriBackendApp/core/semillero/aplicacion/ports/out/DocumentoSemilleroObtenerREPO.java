@@ -10,4 +10,5 @@ public interface DocumentoSemilleroObtenerREPO {
     Boolean existePorId(int id);
     Optional<DocumentoSemillero> obtenerPorId(int id);
     Optional<VerDoumentoSemillero> obtenerDatosDocumento();
+    Integer existeDocumentoxIdSemillero(Integer idSemillero,String tipo);
 }

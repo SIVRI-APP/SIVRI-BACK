@@ -25,7 +25,7 @@ public class DocumentoSemilleroEntity {
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private EstadoDocumentoSemillero estado;
-    @Column(length = 50)
+    @Column(length = 50, unique = true)
     private LocalDate fechaRegistro;
 
 //relacion *a1 semillero
