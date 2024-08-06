@@ -65,6 +65,11 @@ public class UsuarioObtenerAdapter implements UsuarioObtenerREPO {
     }
 
     @Override
+    public Optional<UsuarioInformacionDetalladaProyeccion> obtenerUsuarioInformacionDetalladaPorDocumento(long usuarioNumDoc, TipoDocumento tipoDocumento) {
+        return usuarioRepository.obtenerUsuarioInformacionDetalladaPorDocumento(usuarioNumDoc, tipoDocumento.toString());
+    }
+
+    @Override
     public Optional<Usuario> obtenerUsuario(long usuarioId) {
         Optional<UsuarioEntity> respuestaBd = usuarioRepository.findById(usuarioId);
 

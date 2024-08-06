@@ -39,14 +39,19 @@ public interface UsuarioObtenerCU {
     Respuesta<UsuarioInformacionDetalladaProyeccion> obtenerUsuarioInformacionDetallada(long usuarioId);
 
     /**
+     * Obtiene información detallada de un usuario por documento.
+     *
+     * @param usuarioNumDoc Numero de Documento del Usuario.
+     * @param tipoDocumento Tipo de Documento del Usuario.
+     * @return Respuesta que contiene información detallada de la solicitud de usuario.
+     */
+    Respuesta<UsuarioInformacionDetalladaProyeccion> obtenerUsuarioInformacionDetalladaPorDocumento(long usuarioNumDoc, TipoDocumento tipoDocumento);
+
+    /**
      * Obtiene una solicitud de usuario por su identificador único.
      *
      * @param usuarioId Identificador único de la solicitud de usuario.
      * @return Respuesta que contiene la solicitud de usuario obtenida.
      */
     Respuesta<Usuario> obtenerUsuario(long usuarioId);
-
-    /**
-     * todo miguel ObtenerUsuarioPorNumeroDeDocumentos
-     */
 }

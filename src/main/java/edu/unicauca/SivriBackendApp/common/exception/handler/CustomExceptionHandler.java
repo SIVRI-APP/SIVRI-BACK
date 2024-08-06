@@ -13,7 +13,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -55,5 +57,13 @@ public class CustomExceptionHandler{
         error.put("error", ex.getMessage());
 
         return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, "", error).getRespuesta(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Respuesta<String>> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        String errorMessage = String.format("El valor '%s' no es válido para el Enum requerido.", ex.getValue());
+
+        return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, "", errorMessage).getRespuesta(), HttpStatus.BAD_REQUEST);
     }
 }
