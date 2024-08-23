@@ -48,4 +48,11 @@ public class ProyectoCrearAdapter implements ProyectoCrearREPO {
 
         return true;
     }
+
+    @Override
+    public boolean guardarProyecto(ProyectoEntity proyecto) {
+        proyectoRepository.save(proyecto);
+
+        return true;
+    }
 }

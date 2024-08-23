@@ -11,9 +11,12 @@ import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.Pro
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.RolProyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.servicios.utils.CrearProyectoUtils;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.servicios.validadores.IntegranteValidator;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.servicios.validadores.ProyectoValidators;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.CrearProyectoDTO;
+import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.GuardarProyectoDTO;
+import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.entrada.UsuarioObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import jakarta.transaction.Transactional;
@@ -38,6 +41,11 @@ public class ProyectoCrearService implements ProyectoCrearCU {
      */
     private final ProyectoCrearREPO proyectoCrearREPO;
     private final ProyectoObtenerREPO proyectoObtenerREPO;
+
+    /**
+     * Utils
+     */
+    private CrearProyectoUtils crearProyectoUtils;
 
     /**
      *
@@ -108,6 +116,21 @@ public class ProyectoCrearService implements ProyectoCrearCU {
         proyectoCrearREPO.formalizarProyecto(proyecto);
 
         return new RespuestaHandler<>(200, "ok.detallesDelProyectoActualizadoCorrectamente", List.of(proyecto.getNombre()), "", true).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Boolean> guardarProyecto(GuardarProyectoDTO proyecto) {
+        System.out.println(proyecto);
+
+        // Validaciones
+        ProyectoEntity oldProyecto = proyectoValidators.validarGuardarProyecto(proyecto);
+
+        // Guardar Información general
+        crearProyectoUtils.guardarProyecto(oldProyecto, proyecto);
+
+
+
+        return new RespuestaHandler<>(200, "ok.guardarCambiosProyecto", List.of(proyecto.getInformacionGeneral().getNombre()), "", true).getRespuesta();
     }
 
     @Override

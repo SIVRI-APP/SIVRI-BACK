@@ -6,6 +6,7 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -55,5 +56,17 @@ public class CustomExceptionHandler{
         error.put("error", ex.getMessage());
 
         return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, "", error).getRespuesta(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Respuesta<Map<String, String>>> handleConstraintViolationException(ConstraintViolationException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getConstraintViolations().forEach(violation -> {
+            String fieldName = violation.getPropertyPath().toString();
+            String errorMessage = violation.getMessage();
+            errors.put(fieldName, errorMessage);
+        });
+
+        return new ResponseEntity<>(new RespuestaHandler<>(400, ERROR, "", errors).getRespuesta(), HttpStatus.BAD_REQUEST);
     }
 }

@@ -4,6 +4,7 @@ import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificacionDeUsuario;
 import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.salida.persistencia.repositorio.ConvocatoriaRepository;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
+import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.GuardarProyectoDTO;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.IntegranteProyectoEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.mapper.ProyectoInfraMapper;
@@ -53,6 +54,27 @@ public class ProyectoValidators {
         if (proyecto.getFechaInicio().isAfter(proyecto.getFechaFin())){
             throw new ReglaDeNegocioException("bad.fechaFinAntesFechaInicio");
         }
+    }
+
+    public ProyectoEntity validarGuardarProyecto(GuardarProyectoDTO proyecto){
+        Optional<ProyectoEntity> proyectoEntity = proyectoRepository.findById(proyecto.getInformacionGeneral().getId());
+
+        // El proyecto debe Existir
+        if (proyectoEntity.isEmpty()){
+            throw new ReglaDeNegocioException("bad.proyectoNoExiste", List.of(String.valueOf(proyecto.getInformacionGeneral().getId())));
+        }
+
+        // Si cambio el nombre, este no debe existir en el sistema
+        if (!proyectoEntity.get().getNombre().equals(proyecto.getInformacionGeneral().getNombre())){
+            if (proyectoRepository.existsByNombre(proyecto.getInformacionGeneral().getNombre())){
+                throw new ReglaDeNegocioException("bad.proyectoYaExiste", List.of(proyecto.getInformacionGeneral().getNombre()));
+            }
+        }
+
+        // La fecha Inicio debe ser antes de la fecha Fin
+        if (proyecto.getInformacionGeneral().getFechaInicio().isAfter(proyecto.getInformacionGeneral().getFechaFin())){
+            throw new ReglaDeNegocioException("bad.fechaFinAntesFechaInicio");
+        }
 
         // Lo modifica únicamente un miembro del Proyecto
 //        if(!servicioDeIdentificacionDeUsuario.esFuncionario()){
@@ -69,6 +91,8 @@ public class ProyectoValidators {
 //                throw new ReglaDeNegocioException("bad.proyectoFormalizarNoTienePermisos", List.of(usuario.getNombre(), proyecto.getNombre()));
 //            }
 //        }
+
+        return proyectoEntity.get();
     }
 
     public void validarAsociacionDeConvocatoria(long proyectoId, long convocatoriaId){

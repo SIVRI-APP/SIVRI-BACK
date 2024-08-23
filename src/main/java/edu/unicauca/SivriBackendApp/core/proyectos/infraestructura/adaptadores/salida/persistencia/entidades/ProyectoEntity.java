@@ -27,7 +27,7 @@ public class ProyectoEntity {
     @FutureOrPresent
     private LocalDate fechaInicio;
 
-    @FutureOrPresent
+    @FutureOrPresent(message = "Fecha de Inicio Debe ser una fecha en el presente o en l futuro Entity")
     private LocalDate fechaFin;
 
     @Column(length = 256)

@@ -9,6 +9,7 @@ import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoListarConFiltroProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.CrearProyectoDTO;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.FormalizarProyectoDTO;
+import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.GuardarProyectoDTO;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.mapper.ProyectoRestMapper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -59,6 +60,18 @@ public class ProyectoController {
             "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
     public ResponseEntity<Respuesta<Boolean>> formalizarProyecto(@Valid @RequestBody FormalizarProyectoDTO proyecto){
         Respuesta<Boolean> respuesta = proyectoCrearCU.formalizarProyecto(proyectoRestMapper.formalizarProyectoDto(proyecto));
+        return ResponseEntity.ok().body(respuesta);
+    }
+
+    @PostMapping("guardar")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'PROYECTO:DIRECTOR',  " +
+            "'FUNCIONARIO:VICERRECTOR',  " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
+            "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
+    public ResponseEntity<Respuesta<Boolean>> guardarProyecto(@Valid @RequestBody GuardarProyectoDTO proyectoDto){
+        Respuesta<Boolean> respuesta = proyectoCrearCU.guardarProyecto(proyectoDto);
         return ResponseEntity.ok().body(respuesta);
     }
 
