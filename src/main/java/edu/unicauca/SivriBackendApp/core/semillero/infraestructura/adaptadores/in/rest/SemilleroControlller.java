@@ -47,7 +47,6 @@ public class SemilleroControlller {
     public ResponseEntity<Respuesta> obtenerSemilleroPorId(
             @RequestParam(required = true) Integer semilleroId
             ){
-
         Respuesta respuesta=semilleroObtenerCU.obtenerSemilleroPorId(semilleroId);
         respuesta.setData(semilleroDtoMapper.dtoObtenerSemillero((Semillero) respuesta.getData()));
         return ResponseEntity.ok().body(respuesta);
@@ -139,7 +138,7 @@ public class SemilleroControlller {
 
     @PatchMapping("/actualizarSemilleroxMentor")
     @PreAuthorize("hasAnyAuthority(" +
-            "'SEMILLERO:MENTOR')")
+            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> actualizarPorMentor(@Valid @RequestBody SemilleroActualizarPorMentorDTO nuevoSemilleroDto){
         Respuesta respuesta=semilleroActualizarCU.actualizarPorMentor(semilleroDtoMapper.actualizarPorMentor(nuevoSemilleroDto));
         return ResponseEntity.ok().body(respuesta);
@@ -199,5 +198,24 @@ public class SemilleroControlller {
        Respuesta respuesta = semilleroObtenerCU.obtenerSemillerosPorIdMentor(pageNo,pageSize,idMentor);
         return ResponseEntity.ok().body(respuesta);
     }
-
+    @GetMapping("/emailRevisionVri")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR',  " +
+            "'SEMILLERO:MENTOR')")
+    public ResponseEntity<Respuesta> revisionVri(
+            @RequestParam() Integer semilleroId
+    ){
+       Respuesta respuesta=semilleroObtenerCU.envioEmailRevisionVri(semilleroId);
+       return ResponseEntity.ok().body(respuesta);
+    }
+    @GetMapping("/emailnotificacionMentorSemillero")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR',  " +
+            "'SEMILLERO:MENTOR')")
+    public ResponseEntity<Respuesta> notificacionMentorSemilleroEmail(
+            @RequestParam() Integer semilleroId
+    ){
+        Respuesta respuesta=semilleroObtenerCU.notificacionCorreoMentorSemillero(semilleroId,"nombre nuevo semillero",8);
+        return ResponseEntity.ok().body(respuesta);
+    }
 }

@@ -6,6 +6,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.Documento
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.DocumentoSemilleroObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.DocumentoSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.TipoDocumentoSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.DocumentoSemilleroProyeccion;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.Base64FileDto;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.petición.DocumentoSemilleroActualizarDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.mapper.DocumentoSemilleroDtoMapper;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @RestController
@@ -33,6 +36,23 @@ public class DocumentoSemilleroController {
     private final DocumentoSemilleroActualizarCU documentoSemilleroActualizarCU;
     private final DocumentoSemilleroDtoMapper documentoSemilleroDtoMapper;
     private final DocumentoSemilleroCrearCU documentoSemilleroCrearCU;
+
+    @GetMapping("/obtenerDocumentoActivo")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS','GRUPO:DIRECTOR' )")
+    public ResponseEntity<Respuesta> obtenerDocumentoSemilleroxdocuemntoActivo(
+            @RequestParam() Integer semilleroId,
+            @RequestParam() String tipo
+            ){
+        TipoDocumentoSemillero tip = null;
+        if (Objects.equals(tipo, "AVAL_DEPARTAMENTO")){
+            tip= TipoDocumentoSemillero.AVAL_DEPARTAMENTO;
+        }else if (Objects.equals(tipo, "OTROS")){
+            tip=TipoDocumentoSemillero.OTROS;
+        }
+        Respuesta respuesta=documentoSemilleroObtenerCU.obtenerDocumentoxDocumentoActivo(semilleroId,tip);
+        return ResponseEntity.ok().body(respuesta);
+    }
     @GetMapping("/documentoPorId/{id}")
     public ResponseEntity<Respuesta> obtenerDocumentoSemilleroPorId(
             @PathVariable(value = "id") int id

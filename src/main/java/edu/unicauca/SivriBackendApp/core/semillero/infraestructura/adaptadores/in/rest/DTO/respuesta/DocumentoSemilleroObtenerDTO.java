@@ -4,6 +4,8 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoDocumen
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.TipoDocumentoSemillero;
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 public class DocumentoSemilleroObtenerDTO {
     private Integer id;
@@ -11,4 +13,7 @@ public class DocumentoSemilleroObtenerDTO {
     private String rutaDocumento;
     private String observacion;
     private EstadoDocumentoSemillero estado;
+    private LocalDate fechaRegistro;
+    private Boolean documentoActivo;
+    private Integer semilleroId;
 }

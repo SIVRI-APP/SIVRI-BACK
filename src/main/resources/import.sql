@@ -69,7 +69,7 @@ INSERT INTO checklist (id, convocatoriaId, documentoConvocatoriaId, etapaDocumen
 -- USUARIO
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (1, 'mandresmosquera@gmail.com', 'CEDULA_CIUDADANIA', '10611', 'MASCULINO', 'ADMINISTRATIVO', 'Miguel', 'Mosquera', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono, departamentoId) VALUES (7, 'miguelmonje@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'MASCULINO', 'DOCENTE', 'Miguel', 'Monje', '3225864404', 1);
-INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono, departamentoId) VALUES (8, 'daniel@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10614', 'MASCULINO', 'DOCENTE', 'Daniel', 'Paz', '3225864404', 2);
+INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono, departamentoId) VALUES (8, 'panita49545@gmail.com', 'CEDULA_CIUDADANIA', '10614', 'MASCULINO', 'DOCENTE', 'Daniel', 'Paz', '3225864404', 2);
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (2, 'yurani@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10612', 'MASCULINO', 'ADMINISTRATIVO', 'Yurani', 'Guevara', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (3, 'yurany@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10613', 'FEMENINO', 'ADMINISTRATIVO', 'yurany', 'guevara', '3225864404' );
 INSERT INTO usuario (id, correo, tipoDocumento, numeroDocumento, sexo, tipoUsuario, nombre, apellido, telefono) VALUES (4, 'andrea@unicauca.edu.co', 'CEDULA_CIUDADANIA', '10614', 'FEMENINO', 'ADMINISTRATIVO', 'andrea', 'robles', '3225864404' );
@@ -146,6 +146,8 @@ INSERT INTO integrante_proyecto (id, estado, fechaInicio, rolId, proyectoId, usu
 INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (1, 'bienvenidoSIVRI.html', 'Correo para crear credenciales de Usuario', 'nombreCompleto, passwordCode');
 INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (2, 'recuperarContraseña.html', 'Correo para recuperar la contraseña de un usuario', 'correo,codigo');
 INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (3, 'notificacionSIVRI.html', 'Notificacion generica de SIVRI', 'mensaje');
+INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (4, 'notificacionRevisionVRI.html', 'Notificacion generica de envio a revision vri', 'semilleroId,nombreSemillero,nombreUsuario');
+INSERT INTO templates (id, nombreTemplate, description, vars) VALUES (5, 'notificacionAlMentorSemillero.html', 'Notificacion generica al mentor de un semillero', 'semilleroId,nombreSemillero,nombreDirector');
 
 
 
@@ -208,7 +210,7 @@ INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rol
 INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(2,2,4,1, 'activo', '2023-09-04',NULL);
 INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(3,2,5,6, 'activo', '2023-09-04',NULL);
 INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(4,2,6,6, 'activo', '2023-09-04',NULL);
-INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(5,3,3,2, 'activo', '2023-09-05',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(5,3,2,2, 'activo', '2023-09-05',NULL);
 
 --integrante grupo
 INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(1,1,3,1,'ACTIVO','2023-09-07',NULL);

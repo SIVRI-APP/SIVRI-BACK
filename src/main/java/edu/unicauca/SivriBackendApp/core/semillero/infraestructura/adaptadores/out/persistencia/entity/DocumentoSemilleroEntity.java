@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "documento_semillero")
+@Table(name = "documento_semillero", uniqueConstraints = {@UniqueConstraint(columnNames = {"fechaRegistro","tipo","semilleroId"})})
 @Data
 public class DocumentoSemilleroEntity {
     @Id
@@ -25,8 +25,10 @@ public class DocumentoSemilleroEntity {
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private EstadoDocumentoSemillero estado;
-    @Column(length = 50, unique = true)
+    @Column(length = 50)
     private LocalDate fechaRegistro;
+    @Column(length = 1)
+    private Boolean documentoActivo;
 
 //relacion *a1 semillero
     @ManyToOne(optional = false)

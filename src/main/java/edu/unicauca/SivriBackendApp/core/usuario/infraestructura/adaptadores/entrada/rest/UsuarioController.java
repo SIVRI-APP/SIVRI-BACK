@@ -62,7 +62,8 @@ public class UsuarioController {
     @PreAuthorize("hasAnyAuthority(" +
             "'GRUPO:DIRECTOR', " +
             "'FUNCIONARIO:SUPER_ADMIN', " +
-            "'FUNCIONARIO:USUARIOS')")
+            "'FUNCIONARIO:USUARIOS'," +
+            "'SEMILLERO:MENTOR')")
     public ResponseEntity<Respuesta<UsuarioInformacionDetalladaProyeccion>> obtenerUsuarioInformacionDetalladaPorDocumento(
             @RequestParam @Min(value = 0, message = "El valor de usuarioId debe ser positivo") long usuarioNumDoc,
             @RequestParam @NotEmpty(message = "Tipo de Documento requerido") TipoDocumento tipoDocumento

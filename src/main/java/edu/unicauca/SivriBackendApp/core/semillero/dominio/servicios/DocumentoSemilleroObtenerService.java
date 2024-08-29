@@ -6,6 +6,8 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHa
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.DocumentoSemilleroObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.DocumentoSemilleroObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.DocumentoSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.TipoDocumentoSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.DocumentoSemilleroProyeccion;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.VerDoumentoSemillero;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -31,12 +33,31 @@ public class DocumentoSemilleroObtenerService implements DocumentoSemilleroObten
     }
 
     @Override
+    public Respuesta<Boolean> existexSemilleroIdytipo(Integer semilleroId, TipoDocumentoSemillero tipo) {
+        Boolean respuesta= documentoSemilleroObtenerREPO.existexSemilleroIdyTipo(semilleroId, tipo);
+        if (!respuesta){
+            return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",false).getRespuesta();
+        }
+        return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta();
+    }
+
+    @Override
     public Respuesta<DocumentoSemillero> obtenerPorId(int id) {
         Optional<DocumentoSemillero> respuestaBd= documentoSemilleroObtenerREPO.obtenerPorId(id);
         if (respuestaBd.isEmpty()){
             throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("Documento Semillero", "Id", String.valueOf(id)));
         }
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd.get()).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<DocumentoSemilleroProyeccion> obtenerDocumentoxDocumentoActivo(Integer semilleroId, TipoDocumentoSemillero tipo) {
+        Optional<DocumentoSemilleroProyeccion> respuesta=documentoSemilleroObtenerREPO.obtenerDocumentoSemilleroxDocumentoActivo(semilleroId,tipo);
+
+        if (respuesta.isEmpty()){
+            throw new ReglaDeNegocioException("bad.no.se.encontro.documento.semillero",List.of("Documento semillero","ID",String.valueOf(semilleroId)));
+        }
+        return new RespuestaHandler<>(200,"sucess.docuemnto.semillero.encontrado","",respuesta.get()).getRespuesta();
     }
 
     @Override

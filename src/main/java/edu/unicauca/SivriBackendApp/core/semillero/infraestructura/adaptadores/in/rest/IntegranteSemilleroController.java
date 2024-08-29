@@ -64,7 +64,6 @@ public class IntegranteSemilleroController {
           return ResponseEntity.ok().body(respuesta);
      }
 
-
      @GetMapping("/obtenerxId")
      @PreAuthorize("hasAnyAuthority(" +
              "'FUNCIONARIO:SEMILLEROS', " +
@@ -121,7 +120,7 @@ public class IntegranteSemilleroController {
              @RequestParam(value = "semilleroId",required = true) int semilleroId,
              @RequestParam(value = "numeroDocumento",required = false) String numeroDocumento,
              @RequestParam(value = "estado",required = false) EstadoIntegranteSemillero estado,
-             @RequestParam(value = "rolSemillero",required = false) String rolSemillero,
+             @RequestParam(value = "rolSemillero",required = false) Integer rolSemillero,
              @RequestParam(required = false) int pageNo,
              @RequestParam(required = false) int pageSize
      ) {

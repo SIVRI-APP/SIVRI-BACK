@@ -47,7 +47,7 @@ public class IntegranteSemilleroObtenerAdapter implements IntegranteSemilleroObt
     }
 
     @Override
-    public Page<List<ListarIntegrantesSemilleroxIdSemillero>> obtenerIntegrantesSemilleroPorIdSemillero(Pageable pageable, int idSemillero, String numeroDocumento, String rolSemillero, EstadoIntegranteSemillero estado) {
+    public Page<List<ListarIntegrantesSemilleroxIdSemillero>> obtenerIntegrantesSemilleroPorIdSemillero(Pageable pageable, int idSemillero, String numeroDocumento, Integer rolSemillero, EstadoIntegranteSemillero estado) {
         String estad= (estado != null) ? estado.toString() : null;
         return integranteSemilleroRepository.obtenerIntegrantesSemilleroPorIdSemillero(idSemillero,numeroDocumento,rolSemillero,estad,pageable);
     }

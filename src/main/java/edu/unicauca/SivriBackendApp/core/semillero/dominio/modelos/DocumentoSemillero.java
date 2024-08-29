@@ -13,5 +13,6 @@ public class DocumentoSemillero {
     private String observacion;
     private EstadoDocumentoSemillero estado;
     private LocalDate fechaRegistro;
+    private Boolean documentoActivo;
     private Semillero semillero;
 }

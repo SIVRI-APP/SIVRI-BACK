@@ -1,6 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out;
 
-import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroEstado;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroSemilleros;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SemilleroObtenerREPO {
-    Boolean existePorId(int id);
+    public Boolean existePorId(int id);
     Boolean existePorNombre(String nombre);
     //List<Semillero> obtenerSemilleroPorIdAndNombre(int idSemillero, String nombre);
     //List<Semillero> obtenerSemilleroPorNombre(String nombre);

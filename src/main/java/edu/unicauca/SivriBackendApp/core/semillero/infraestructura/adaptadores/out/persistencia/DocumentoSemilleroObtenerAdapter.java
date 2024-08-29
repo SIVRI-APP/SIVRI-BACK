@@ -2,6 +2,8 @@ package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.
 
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.DocumentoSemilleroObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.DocumentoSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.TipoDocumentoSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.DocumentoSemilleroProyeccion;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.VerDoumentoSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.DocumentoSemilleroEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.mapper.DocumentoSemilleroMapper;
@@ -9,6 +11,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.o
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -24,9 +27,19 @@ public class DocumentoSemilleroObtenerAdapter implements DocumentoSemilleroObten
     }
 
     @Override
+    public Boolean existexSemilleroIdyTipo(Integer semilleroId, TipoDocumentoSemillero tipo) {
+        return documentoSemilleroRepository.existsBySemilleroIdAndTipo(semilleroId,tipo);
+    }
+
+    @Override
     public Optional<DocumentoSemillero> obtenerPorId(int id) {
         Optional<DocumentoSemilleroEntity> respuestaJpa= documentoSemilleroRepository.findById(id);
         return respuestaJpa.map(documentoSemilleroMapper::obtenerModelo);
+    }
+
+    @Override
+    public Optional<DocumentoSemilleroProyeccion> obtenerDocumentoSemilleroxDocumentoActivo(Integer semilleroId, TipoDocumentoSemillero tipo) {
+        return documentoSemilleroRepository.obtenerDocumentoxDocumentoActivo(semilleroId,tipo.toString());
     }
 
     @Override
