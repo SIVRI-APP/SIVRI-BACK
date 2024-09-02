@@ -4,6 +4,8 @@ import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.Tipo
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.EvidenciasDocumentosConvocatoriaProyeccion;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoInformacionDetalladaDTO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoInformacionDetalladaProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoListarConFiltroProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Set;
 
 @Component
 @AllArgsConstructor
@@ -25,8 +28,15 @@ public class ProyectoObtenerAdapter implements ProyectoObtenerREPO {
     private final ProyectoInfraMapperStruct proyectoInfraMapperStruct;
 
     @Override
-    public Optional<ProyectoInformacionDetalladaProyeccion> obtenerProyectoInformacionDetallada(long proyectoId) {
-        return proyectoRepository.obtenerProyectoInformacionDetallada(proyectoId);
+    public Optional<ProyectoInformacionDetalladaDTO> obtenerProyectoInformacionDetallada(long proyectoId) {
+        ProyectoInformacionDetalladaProyeccion r1 = proyectoRepository.obtenerProyectoInformacionDetallada1(proyectoId).get();
+        Set<EvidenciasDocumentosConvocatoriaProyeccion> r2 = proyectoRepository.obtenerProyectoInformacionDetallada2(proyectoId);
+
+        ProyectoInformacionDetalladaDTO resultado = new ProyectoInformacionDetalladaDTO();
+        resultado.setInformacionDetallada(r1);
+        resultado.setEvidenciasDocumentosConvocatoria(r2);
+
+        return Optional.of(resultado);
     }
 
     @Override

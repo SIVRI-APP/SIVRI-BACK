@@ -9,6 +9,7 @@ import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.Pr
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoInformacionDetalladaDTO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoInformacionDetalladaProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoListarConFiltroProyeccion;
 import lombok.AllArgsConstructor;
@@ -38,9 +39,9 @@ public class ProyectoObtenerService implements ProyectoObtenerCU {
     private final ServicioDeIdentificacionDeUsuario servicioDeIdentificacionDeUsuario;
 
     @Override
-    public Respuesta<ProyectoInformacionDetalladaProyeccion> obtenerProyectoInformacionDetallada(long proyectoId) {
+    public Respuesta<ProyectoInformacionDetalladaDTO> obtenerProyectoInformacionDetallada(long proyectoId) {
 
-        Optional<ProyectoInformacionDetalladaProyeccion> respuesta = proyectoObtenerREPO.obtenerProyectoInformacionDetallada(proyectoId);
+        Optional<ProyectoInformacionDetalladaDTO> respuesta = proyectoObtenerREPO.obtenerProyectoInformacionDetallada(proyectoId);
 
         if (respuesta.isEmpty()){
             throw new ReglaDeNegocioException("bad.proyectoNoExiste", List.of(String.valueOf(proyectoId)));
@@ -52,13 +53,13 @@ public class ProyectoObtenerService implements ProyectoObtenerCU {
         return new RespuestaHandler<>(200, "ok", accionesPermitidas, respuesta.get()).getRespuesta();
     }
 
-    private String accionesPermitidasSegunEstadoDelProyecto(ProyectoInformacionDetalladaProyeccion proyecto){
+    private String accionesPermitidasSegunEstadoDelProyecto(ProyectoInformacionDetalladaDTO proyecto){
         String accionesPermitidas = "";
 
         if (servicioDeIdentificacionDeUsuario.esFuncionario()){
             accionesPermitidas = "edicion";
         }else{
-            if (!proyecto.getEstado().equals(EstadoProyecto.FORMULADO) || !proyecto.getEstado().equals(EstadoProyecto.FORMULADO_OBSERVACIONES)){
+            if (!proyecto.getInformacionDetallada().getEstado().equals(EstadoProyecto.FORMULADO) || !proyecto.getInformacionDetallada().getEstado().equals(EstadoProyecto.FORMULADO_OBSERVACIONES)){
                 accionesPermitidas = "lectura";
             }else {
                 accionesPermitidas = "edicion";

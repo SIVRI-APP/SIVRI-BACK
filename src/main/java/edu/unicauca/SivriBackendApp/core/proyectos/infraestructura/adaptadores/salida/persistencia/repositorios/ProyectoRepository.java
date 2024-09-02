@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios;
 
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.EvidenciasDocumentosConvocatoriaProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoInformacionDetalladaProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoListarConFiltroProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
@@ -12,6 +13,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.Set;
 
 
 @Repository
@@ -19,15 +21,20 @@ public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
 
     Boolean existsByNombre(String nombre);
 
-    @Query("SELECT proyecto " +
+    @Query("SELECT DISTINCT proyecto " +
             "FROM ProyectoEntity proyecto " +
             "LEFT JOIN FETCH proyecto.convocatoria convocatoria " +
-            "LEFT JOIN FETCH proyecto.enfoquesDiferenciales " +
             "LEFT JOIN FETCH proyecto.integrantes " +
-            "LEFT JOIN FETCH proyecto.lineasDeInvestigacion " +
             "WHERE proyecto.id = :proyectoId"
     )
-    Optional<ProyectoInformacionDetalladaProyeccion> obtenerProyectoInformacionDetallada(@Param("proyectoId") long proyectoId);
+    Optional<ProyectoInformacionDetalladaProyeccion> obtenerProyectoInformacionDetallada1(@Param("proyectoId") long proyectoId);
+
+    @Query("SELECT DISTINCT proyecto " +
+            "FROM ProyectoEntity proyecto " +
+            "LEFT JOIN FETCH proyecto.evidenciasDocumentosConvocatoria " +
+            "WHERE proyecto.id = :proyectoId"
+    )
+    Set<EvidenciasDocumentosConvocatoriaProyeccion> obtenerProyectoInformacionDetallada2(@Param("proyectoId") long proyectoId);
 
     @Query(value = "select " +
             " p.id, " +

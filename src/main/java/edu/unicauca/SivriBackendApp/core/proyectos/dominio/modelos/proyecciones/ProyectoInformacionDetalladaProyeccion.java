@@ -30,9 +30,7 @@ public interface ProyectoInformacionDetalladaProyeccion {
     boolean isEliminadoLogico();
 
     // Proyecciones para las relaciones
-    Set<LineaDeInvestigacionProyectoProjection> getLineasDeInvestigacion();
-    List<IntegranteProyectoProyeccion> getIntegrantes();
-    Set<EnfoqueDiferencialListadoProjection> getEnfoquesDiferenciales();
+    Set<IntegranteProyectoProyeccion> getIntegrantes();
     ConvocatoriaProjection getConvocatoria();
 
     interface LineaDeInvestigacionProyectoProjection {

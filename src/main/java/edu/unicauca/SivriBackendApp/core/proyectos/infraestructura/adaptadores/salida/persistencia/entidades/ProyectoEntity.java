@@ -5,14 +5,19 @@ import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoP
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "proyecto")
-@Data
+@Getter
+@Setter
 public class ProyectoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,16 +67,33 @@ public class ProyectoEntity {
 
     private boolean eliminadoLogico;
 
-    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private Set<LineaDeInvestigacionProyectoEntity> lineasDeInvestigacion;
+    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE)
+    private List<LineaDeInvestigacionProyectoEntity> lineasDeInvestigacion;
 
-    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private List<IntegranteProyectoEntity> integrantes;
+    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE)
+    private Set<IntegranteProyectoEntity> integrantes;
 
-    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private Set<EnfoqueDiferencialListadoEntity> enfoquesDiferenciales;
+    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.REMOVE)
+    private List<EnfoqueDiferencialListadoEntity> enfoquesDiferenciales;
+
+    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.REMOVE)
+    private Set<EvidenciaProyectoDocumentoConvocatoriaEntity> evidenciasDocumentosConvocatoria;
 
     @ManyToOne()
     @JoinColumn(name = "convocatoriaId")
     private ConvocatoriaEntity convocatoria;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProyectoEntity that = (ProyectoEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
