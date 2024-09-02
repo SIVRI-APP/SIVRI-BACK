@@ -62,6 +62,9 @@ INSERT INTO documento_convocatoria (id, nombre) VALUES (10, 'Acta de nacimiento 
 INSERT INTO convocatoria (fechaFin, fechaInicio, id, nombre, oferente, descripcion, objetivos, estado, tipoFinanciacion) VALUES('2024-12-31', '2024-09-01', 1, 'Convocatoria de Innovación Tecnológica', 'Ministerio de Energía y Minas', 'Convocatoria destinada a financiar proyectos de innovación tecnológica en el sector de las energías renovables.', 'Fomentar la investigación y desarrollo en tecnologías limpias y sostenibles.', 'ABIERTA', 'PROYECTOS_INTERNOS');
 
 INSERT INTO checklist (id, convocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio, completado) VALUES (1, 1, 1, 'PRE_EJECUCION', 'ORGANISMO_DE_INVESTIGACION', 1, 1, 0);
+INSERT INTO checklist (id, convocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio, completado) VALUES (2, 1, 2, 'PRE_EJECUCION', 'VRI', 1, 1, 0);
+INSERT INTO checklist (id, convocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio, completado) VALUES (3, 1, 3, 'EJECUCION', 'ORGANISMO_DE_INVESTIGACION', 3, 1, 0);
+INSERT INTO checklist (id, convocatoriaId, documentoConvocatoriaId, etapaDocumento, responsableDocumento, cantidad, obligatorio, completado) VALUES (4, 1, 4, 'POST_EJECUCION', 'ORGANISMO_DE_INVESTIGACION', 1, 1, 0);
 
 
 -- |***** USUARIO *****|

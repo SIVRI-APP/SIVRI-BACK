@@ -1,9 +1,5 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.mapper;
 
-import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.Convocatoria;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.EnfoqueDiferencialListado;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.IntegranteProyecto;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.LineaDeInvestigacionProyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
 import org.springframework.stereotype.Component;
