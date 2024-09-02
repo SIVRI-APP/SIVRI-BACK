@@ -7,6 +7,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.Documento
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.DocumentoSemilleroObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.DocumentoSemilleroActualizarREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.DocumentoSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoDocumentoSemillero;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,11 +25,13 @@ public class DocumentoSemilleroActualizarService implements DocumentoSemilleroAc
 
     @Override
     public Respuesta<Boolean> actualizar(int idDocumentoSemillero, DocumentoSemillero datos) {
-
         DocumentoSemillero documentoActualizar= documentoSemilleroObtenerCU.obtenerPorId(idDocumentoSemillero).getData();
-        documentoActualizar.setObservacion(datos.getObservacion());
-        documentoActualizar.setEstado(datos.getEstado());
-
+        if(datos.getObservacion()!="") {
+            documentoActualizar.setObservacion(datos.getObservacion());
+        }
+        if(datos.getEstado()!= EstadoDocumentoSemillero.NULL){
+            documentoActualizar.setEstado(datos.getEstado());
+        }
         Boolean respuesta= documentoSemilleroActualizarREPO.actualizar(documentoActualizar);
         if (!respuesta) {
             throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Documento Semillero", "Id", String.valueOf(datos.getId())));

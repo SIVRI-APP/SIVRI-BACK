@@ -86,7 +86,7 @@ public class ActividadPlanTrabajoController {
     }
     @GetMapping("/listarActividadesConFiltro/{idPlan}")
     @PreAuthorize("hasAnyAuthority(" +
-            "'SEMILLERO:MENTOR' )"
+            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS' )"
     )
     public ResponseEntity<Respuesta<Page<List<ListarActividadesConFiltro>>>> listarActividadesxidPlanSemilleroConFIltro(
             @PathVariable(value = "idPlan") Integer idPlan,

@@ -5,6 +5,6 @@ public enum EstadoDocumentoSemillero {
     AJUSTES,
     APROBADO,
     REVISION,
-    NO_ANEXADO
-
+    NO_ANEXADO,
+    NULL
 }
