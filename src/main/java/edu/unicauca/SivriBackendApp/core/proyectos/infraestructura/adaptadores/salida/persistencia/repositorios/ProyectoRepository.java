@@ -1,8 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios;
 
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.EvidenciasDocumentosConvocatoriaProyeccion;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoInformacionDetalladaProyeccion;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoListarConFiltroProyeccion;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.*;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,20 +19,34 @@ public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
 
     Boolean existsByNombre(String nombre);
 
+
     @Query("SELECT DISTINCT proyecto " +
             "FROM ProyectoEntity proyecto " +
-            "LEFT JOIN FETCH proyecto.convocatoria convocatoria " +
-            "LEFT JOIN FETCH proyecto.integrantes " +
             "WHERE proyecto.id = :proyectoId"
     )
     Optional<ProyectoInformacionDetalladaProyeccion> obtenerProyectoInformacionDetallada1(@Param("proyectoId") long proyectoId);
+
+    @Query(value = "SELECT DISTINCT p " +
+            "FROM ProyectoEntity p " +
+            "LEFT JOIN FETCH p.convocatoria " +
+            "WHERE p.id = :proyectoId"
+    )
+    Optional<ProyectoConvocatoriaProyeccion> obtenerProyectoInformacionDetallada2(@Param("proyectoId") long proyectoId);
 
     @Query("SELECT DISTINCT proyecto " +
             "FROM ProyectoEntity proyecto " +
             "LEFT JOIN FETCH proyecto.evidenciasDocumentosConvocatoria " +
             "WHERE proyecto.id = :proyectoId"
     )
-    Set<EvidenciasDocumentosConvocatoriaProyeccion> obtenerProyectoInformacionDetallada2(@Param("proyectoId") long proyectoId);
+    Optional<ProyectoEvidenciasDocumentosProyeccion> obtenerProyectoInformacionDetallada3(@Param("proyectoId") long proyectoId);
+
+    @Query("SELECT DISTINCT proyecto " +
+            "FROM ProyectoEntity proyecto " +
+            "LEFT JOIN FETCH proyecto.integrantes " +
+            "WHERE proyecto.id = :proyectoId"
+    )
+    Optional<ProyectoIntegrantesProyeccion> obtenerProyectoInformacionDetallada4(@Param("proyectoId") long proyectoId);
+
 
     @Query(value = "select " +
             " p.id, " +

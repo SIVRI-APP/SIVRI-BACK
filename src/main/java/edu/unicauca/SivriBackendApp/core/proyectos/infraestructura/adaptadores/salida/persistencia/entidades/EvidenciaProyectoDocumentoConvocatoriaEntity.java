@@ -21,7 +21,7 @@ public class EvidenciaProyectoDocumentoConvocatoriaEntity {
 
     @ManyToOne()
     @JoinColumn(name = "DocumentoConvocatoriaId")
-    private DocumentoConvocatoriaEntity DocumentoConvocatoria;
+    private DocumentoConvocatoriaEntity documentoConvocatoria;
 
     @Column(length = 256)
     private String nombre;

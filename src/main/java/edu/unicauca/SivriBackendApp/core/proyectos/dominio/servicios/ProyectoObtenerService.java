@@ -9,8 +9,7 @@ import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.Pr
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoInformacionDetalladaDTO;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoInformacionDetalladaProyeccion;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoDetalladoDTO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoListarConFiltroProyeccion;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -39,9 +38,9 @@ public class ProyectoObtenerService implements ProyectoObtenerCU {
     private final ServicioDeIdentificacionDeUsuario servicioDeIdentificacionDeUsuario;
 
     @Override
-    public Respuesta<ProyectoInformacionDetalladaDTO> obtenerProyectoInformacionDetallada(long proyectoId) {
+    public Respuesta<ProyectoDetalladoDTO> obtenerProyectoInformacionDetallada(long proyectoId) {
 
-        Optional<ProyectoInformacionDetalladaDTO> respuesta = proyectoObtenerREPO.obtenerProyectoInformacionDetallada(proyectoId);
+        Optional<ProyectoDetalladoDTO> respuesta = proyectoObtenerREPO.obtenerProyectoInformacionDetallada(proyectoId);
 
         if (respuesta.isEmpty()){
             throw new ReglaDeNegocioException("bad.proyectoNoExiste", List.of(String.valueOf(proyectoId)));
@@ -53,13 +52,13 @@ public class ProyectoObtenerService implements ProyectoObtenerCU {
         return new RespuestaHandler<>(200, "ok", accionesPermitidas, respuesta.get()).getRespuesta();
     }
 
-    private String accionesPermitidasSegunEstadoDelProyecto(ProyectoInformacionDetalladaDTO proyecto){
-        String accionesPermitidas = "";
+    private String accionesPermitidasSegunEstadoDelProyecto(ProyectoDetalladoDTO proyecto){
+        String accionesPermitidas;
 
         if (servicioDeIdentificacionDeUsuario.esFuncionario()){
             accionesPermitidas = "edicion";
         }else{
-            if (!proyecto.getInformacionDetallada().getEstado().equals(EstadoProyecto.FORMULADO) || !proyecto.getInformacionDetallada().getEstado().equals(EstadoProyecto.FORMULADO_OBSERVACIONES)){
+            if (!proyecto.getInformacionDetalladaProyecto().getEstado().equals(EstadoProyecto.FORMULADO) || !proyecto.getInformacionDetalladaProyecto().getEstado().equals(EstadoProyecto.FORMULADO_OBSERVACIONES)){
                 accionesPermitidas = "lectura";
             }else {
                 accionesPermitidas = "edicion";

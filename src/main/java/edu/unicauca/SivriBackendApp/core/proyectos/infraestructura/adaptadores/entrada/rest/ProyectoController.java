@@ -5,8 +5,7 @@ import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.Tipo
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoCrearCU;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoObtenerCU;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoInformacionDetalladaDTO;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoInformacionDetalladaProyeccion;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoDetalladoDTO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoListarConFiltroProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.CrearProyectoDTO;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.FormalizarProyectoDTO;
@@ -114,8 +113,8 @@ public class ProyectoController {
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
             "'PROYECTO:DIRECTOR')")
-    public ResponseEntity<Respuesta<ProyectoInformacionDetalladaDTO>> obtenerProyectoInformacionDetallada(@Valid @RequestParam @PositiveOrZero(message = "El Id deL proyecto debe ser positivo") long proyectoId){
-        Respuesta<ProyectoInformacionDetalladaDTO> respuesta = proyectoObtenerCU.obtenerProyectoInformacionDetallada(proyectoId);
+    public ResponseEntity<Respuesta<ProyectoDetalladoDTO>> obtenerProyectoInformacionDetallada(@Valid @RequestParam @PositiveOrZero(message = "El Id deL proyecto debe ser positivo") long proyectoId){
+        Respuesta<ProyectoDetalladoDTO> respuesta = proyectoObtenerCU.obtenerProyectoInformacionDetallada(proyectoId);
         return ResponseEntity.ok().body(respuesta);
     }
 

@@ -4,10 +4,7 @@ import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.Tipo
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.EvidenciasDocumentosConvocatoriaProyeccion;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoInformacionDetalladaDTO;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoInformacionDetalladaProyeccion;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoListarConFiltroProyeccion;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.*;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.mapper.ProyectoInfraMapperStruct;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios.ProyectoRepository;
@@ -28,13 +25,19 @@ public class ProyectoObtenerAdapter implements ProyectoObtenerREPO {
     private final ProyectoInfraMapperStruct proyectoInfraMapperStruct;
 
     @Override
-    public Optional<ProyectoInformacionDetalladaDTO> obtenerProyectoInformacionDetallada(long proyectoId) {
-        ProyectoInformacionDetalladaProyeccion r1 = proyectoRepository.obtenerProyectoInformacionDetallada1(proyectoId).get();
-        Set<EvidenciasDocumentosConvocatoriaProyeccion> r2 = proyectoRepository.obtenerProyectoInformacionDetallada2(proyectoId);
+    public Optional<ProyectoDetalladoDTO> obtenerProyectoInformacionDetallada(long proyectoId) {
 
-        ProyectoInformacionDetalladaDTO resultado = new ProyectoInformacionDetalladaDTO();
-        resultado.setInformacionDetallada(r1);
-        resultado.setEvidenciasDocumentosConvocatoria(r2);
+        ProyectoInformacionDetalladaProyeccion proyectoInformacionDetallada = proyectoRepository.obtenerProyectoInformacionDetallada1(proyectoId).orElse(null);
+        ProyectoConvocatoriaProyeccion proyectoConvocatoria = proyectoRepository.obtenerProyectoInformacionDetallada2(proyectoId).orElse(null);
+        ProyectoEvidenciasDocumentosProyeccion proyectoEvidenciasDocumentosConvocatoria = proyectoRepository.obtenerProyectoInformacionDetallada3(proyectoId).orElse(null);
+        ProyectoIntegrantesProyeccion proyectoIntegrantes = proyectoRepository.obtenerProyectoInformacionDetallada4(proyectoId).orElse(null);
+
+
+        ProyectoDetalladoDTO resultado = new ProyectoDetalladoDTO();
+        resultado.setInformacionDetalladaProyecto(proyectoInformacionDetallada);
+        resultado.setConvocatoriaProyecto(proyectoConvocatoria);
+        resultado.setEvidenciasDocumentosProyecto(proyectoEvidenciasDocumentosConvocatoria);
+        resultado.setIntegrantesProyecto(proyectoIntegrantes);
 
         return Optional.of(resultado);
     }

@@ -1,17 +1,11 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones;
 
-import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.EtapaDocumento;
-import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.ResponsableDocumento;
-import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
-import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.proyecciones.ConvocatoriaInformacionDetalladaProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.RolProyectoEnum;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Set;
 
 public interface ProyectoInformacionDetalladaProyeccion {
+
     Long getId();
     String getNombre();
     EstadoProyecto getEstado();
@@ -29,60 +23,4 @@ public interface ProyectoInformacionDetalladaProyeccion {
     String getConsideraciones();
     boolean isEliminadoLogico();
 
-    // Proyecciones para las relaciones
-    Set<IntegranteProyectoProyeccion> getIntegrantes();
-    ConvocatoriaProjection getConvocatoria();
-
-    interface LineaDeInvestigacionProyectoProjection {
-        // Define los campos necesarios de LineaDeInvestigacionProyectoEntity
-        Integer getId();
-    }
-
-    interface IntegranteProyectoProyeccion {
-        // Define los campos necesarios de IntegranteProyectoEntity
-        Integer getId();
-        IntegranteUsuarioProyeccion getUsuario();
-        IntegranteRolProyeccion getRolProyecto();
-
-        interface IntegranteUsuarioProyeccion {
-            Long getId();
-            String getNombre();
-            String getApellido();
-        }
-        interface IntegranteRolProyeccion {
-            Integer getId();
-            RolProyectoEnum getNombre();
-        }
-    }
-
-    interface EnfoqueDiferencialListadoProjection {
-        // Define los campos necesarios de EnfoqueDiferencialListadoEntity
-        Integer getId();
-    }
-
-    interface ConvocatoriaProjection {
-        // Define los campos necesarios de ConvocatoriaEntity
-        Long getId();
-        String getNombre();
-        TipoFinanciacion getTipoFinanciacion();
-        Set<ChecklistProyeccion> getChecklist();
-
-        interface ChecklistProyeccion {
-
-            long getId();
-            EtapaDocumento getEtapaDocumento();
-            ResponsableDocumento getResponsableDocumento();
-            int getCantidad();
-            boolean getObligatorio();
-            boolean getCompletado();
-            DocumentoProyeccion getDocumentoConvocatoria();
-
-            interface DocumentoProyeccion {
-
-                Long getId();
-
-                String getNombre();
-            }
-        }
-    }
 }

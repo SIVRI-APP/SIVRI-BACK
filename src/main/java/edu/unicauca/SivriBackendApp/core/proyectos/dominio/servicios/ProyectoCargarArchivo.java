@@ -49,6 +49,10 @@ public class ProyectoCargarArchivo {
         evidencia.setDocumentoConvocatoria(documentoConvocatoria.get());
         evidencia.setNombre(nombre);
 
+        System.out.println("-------");
+        System.out.println("Doc Id: " + documentoConvocatoriaId);
+        System.out.println(evidencia);
+
         return new RespuestaHandler<>(200, "ok", "", evidenciaProyectoDocumentoConvocatoriaAdapter.guardar(evidencia)).getRespuesta();
     }
 
