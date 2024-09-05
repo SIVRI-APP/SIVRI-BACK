@@ -55,7 +55,7 @@ public class ObservacionSemilleroController {
     @GetMapping("/listarObservacionSemilleroPorIdSemillero")
     @PreAuthorize("hasAnyAuthority(" +
             "'GRUPO:DIRECTOR', " +
-            "'SEMILLERO:MENTOR')")
+            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> listarObservacionesSemilleroPorIdSemillero(
             @RequestParam(required = true) Integer semilleroId,
             @RequestParam() int pageNo,

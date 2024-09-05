@@ -95,6 +95,8 @@ INSERT INTO credencial (id, email, password, userId) VALUES (2, 'yurani@unicauca
 INSERT INTO credencial (id, email, password, userId) VALUES (3, 'yurany@unicauca.edu.co', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 3);
 INSERT INTO credencial (id, email, password, userId) VALUES (4, 'andrea@unicauca.edu.co', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 4);
 INSERT INTO credencial (id, email, password, userId) VALUES (5, 'maicol@unicauca.edu.co', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 5);
+INSERT INTO credencial (id, email, password, userId) VALUES (7, 'panita49545@gmail.com', '$2a$10$JFFr5qTnU7yddAkGjFrJKOzDT6kUgDl2XwtYHs8bKnwkXnKG42yLi', 8);
+
 
 -- -- FUNCIONARIO
 INSERT INTO funcionario (id, usuarioId, rolId, estado, fechaInicio) VALUES (1, 1, 1, true, '2024-01-01');
