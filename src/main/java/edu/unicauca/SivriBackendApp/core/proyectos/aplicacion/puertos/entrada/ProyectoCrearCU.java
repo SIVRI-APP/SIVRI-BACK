@@ -2,6 +2,7 @@ package edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada;
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.RolProyectoEnum;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.CrearProyectoDTO;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.GuardarProyectoDTO;
 
@@ -16,5 +17,5 @@ public interface ProyectoCrearCU {
 
     Respuesta<Boolean> asociarConvocatoria(long proyectoId, long convocatoriaId);
 
-    Respuesta<Boolean> agregarIntegrante(Long proyectoId, Long usuarioId, Integer rolId);
+    Respuesta<Boolean> agregarIntegrante(Long proyectoId, Long usuarioId, RolProyectoEnum rolId);
 }

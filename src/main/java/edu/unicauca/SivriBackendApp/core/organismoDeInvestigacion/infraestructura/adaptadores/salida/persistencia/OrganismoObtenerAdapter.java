@@ -31,11 +31,21 @@ public class OrganismoObtenerAdapter implements OrganismoObtenerREPO {
     public Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarIntegrantesDocenteOrganismo(Integer organismoId) {
 
         if (organismoRepository.isGrupo(organismoId) > 0){
+            return organismoRepository.listarConFiltroIntegrantesDocenteGrupo(organismoId);
+
+        }else  {
+            return organismoRepository.listarConFiltroIntegrantesDocenteSemillero(organismoId);
+        }
+    }
+
+    @Override
+    public Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarIntegrantesOrganismo(Integer organismoId) {
+
+        if (organismoRepository.isGrupo(organismoId) > 0){
             return organismoRepository.listarConFiltroIntegrantesGrupo(organismoId);
 
         }else  {
             return organismoRepository.listarConFiltroIntegrantesSemillero(organismoId);
         }
-
     }
 }

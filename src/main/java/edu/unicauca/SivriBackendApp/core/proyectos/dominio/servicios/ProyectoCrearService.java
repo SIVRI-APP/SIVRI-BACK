@@ -11,6 +11,7 @@ import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.Pro
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.RolProyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.RolProyectoEnum;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.servicios.utils.CrearProyectoUtils;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.servicios.validadores.IntegranteValidator;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.servicios.validadores.ProyectoValidators;
@@ -90,7 +91,7 @@ public class ProyectoCrearService implements ProyectoCrearCU {
     }
 
     @Override
-    public Respuesta<Boolean> agregarIntegrante(Long proyectoId, Long usuarioId, Integer rolId) {
+    public Respuesta<Boolean> agregarIntegrante(Long proyectoId, Long usuarioId, RolProyectoEnum rolId) {
 
         // Obtener Proyecto
         Proyecto proyecto = proyectoObtenerCU.obtenerProyecto(proyectoId).getData();
@@ -99,7 +100,7 @@ public class ProyectoCrearService implements ProyectoCrearCU {
         Usuario usuario = usuarioObtenerCU.obtenerUsuario(usuarioId).getData();
 
         // Obtener Rol
-        RolProyecto rol = rolObtenerCU.obtenerRolPorId(rolId).getData();
+        RolProyecto rol = rolObtenerCU.obtenerRolPorEnum(rolId).getData();
 
         // Crear Integrante Proyecto
         integranteCrearCU.crear(usuario, proyecto, rol);

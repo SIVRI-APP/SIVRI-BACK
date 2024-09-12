@@ -61,4 +61,19 @@ public class OrganismoController {
 
         return ResponseEntity.ok().body(respuesta);
     }
+
+    @GetMapping("listarIntegrantesOrganismo")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:VICERRECTOR',  " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
+            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
+            "'PROYECTO:DIRECTOR')")
+    public ResponseEntity<Respuesta<Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion>>> listarIntegrantesOrganismo(
+            @RequestParam Integer organismoId
+    ) {
+        Respuesta<Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion>> respuesta = organismoObtenerCU.listarIntegrantesDocenteOrganismo(organismoId);
+
+        return ResponseEntity.ok().body(respuesta);
+    }
 }

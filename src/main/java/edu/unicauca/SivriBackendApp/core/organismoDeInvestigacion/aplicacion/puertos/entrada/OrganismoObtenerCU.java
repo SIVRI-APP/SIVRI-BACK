@@ -13,4 +13,6 @@ public interface OrganismoObtenerCU {
     Respuesta<Page<ListarOrganismosParaAsociarProyectoProyeccion>> listarConFiltro(int pageNo, int pageSize, String tipoOrganismo, Integer id, String nombre);
 
     Respuesta<Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion>> listarIntegrantesDocenteOrganismo(Integer organismoId);
+
+    Respuesta<Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion>> listarIntegrantesOrganismo(Integer organismoId);
 }

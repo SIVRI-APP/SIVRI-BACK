@@ -117,6 +117,15 @@ INSERT INTO usuario_solicitud_conversacion(id, usuarioSolicitudObservacionesId, 
 
 INSERT INTO rol_proyecto(id, nombre) VALUES (1, 'DIRECTOR');
 INSERT INTO rol_proyecto(id, nombre) VALUES (2, 'CO_INVESTIGADOR');
+INSERT INTO rol_proyecto(id, nombre) VALUES (3, 'ASESOR');
+INSERT INTO rol_proyecto(id, nombre) VALUES (4, 'ESTUDIANTE_DOCTORADO');
+INSERT INTO rol_proyecto(id, nombre) VALUES (5, 'ESTUDIANTE_ESPECIALIZACION');
+INSERT INTO rol_proyecto(id, nombre) VALUES (6, 'ESTUDIANTE_MAESTRIA');
+INSERT INTO rol_proyecto(id, nombre) VALUES (7, 'ESTUDIANTE_POSTDOCTORADO');
+INSERT INTO rol_proyecto(id, nombre) VALUES (8, 'ESTUDIANTE_PREGRADO');
+INSERT INTO rol_proyecto(id, nombre) VALUES (9, 'INVESTIGADOR_EXTERNO');
+INSERT INTO rol_proyecto(id, nombre) VALUES (10, 'JOVEN_INVESTIGADOR');
+INSERT INTO rol_proyecto(id, nombre) VALUES (11, 'PERSONAL_TECNICO');
 
 -- PROYECTO
 INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, eliminadoLogico, convocatoriaId) VALUES (1, 'Método de Ingeniería de Requisitos para Manejo de Discrepancias', 'FORMULADO', '2024-08-30', '2024-08-30', 'Este será un proyecto super elegante', 'Elaborar un proyecto re elegante', 'Alcanzar la Elegancia', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 'Texto', 0, 1);
@@ -132,7 +141,7 @@ INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, 
 INSERT INTO proyecto (id, nombre, estado, fechaInicio, fechaFin, planteamiento, objetivoGeneral, objetivosEspecificos, justificacion, enfoqueMetodologico, aspectosEticosLegales, confidencialidadDeInformacion, efectosAdversos, impactosResultadosEsperados, consideraciones, eliminadoLogico) VALUES (11, 'Desarrollo de Vacunas contra Enfermedades Tropicales', 'APROBADO', '2024-10-01', '2026-10-01', 'Desarrollar y probar vacunas efectivas contra enfermedades tropicales', 'Reducir la incidencia de enfermedades tropicales en comunidades vulnerables', 'Realizar ensayos clínicos, evaluar la efectividad de las vacunas', 'Las enfermedades tropicales son un problema de salud pública urgente', 'Investigación en laboratorio, pruebas en campo', 'Cumplimiento de normativas internacionales de ensayos clínicos', 'Confidencialidad de datos de pacientes', 'Efectos secundarios potenciales de las vacunas', 'Desarrollo de vacunas seguras y eficaces', 'Consideración de la logística de distribución en áreas remotas', 0);
 
 -- EVIDENCIA PROYECTO DOC CONVOCATORIA
-INSERT INTO evidencia_proyecto_documento_convocatoria (`documentoConvocatoriaId`, `id`, `proyectoId`, `nombre`) VALUES ('1', 1, '1', 'escudo-departamento-del-cauca.jpg');
+-- INSERT INTO evidencia_proyecto_documento_convocatoria (`documentoConvocatoriaId`, `id`, `proyectoId`, `nombre`) VALUES ('1', 1, '1', 'escudo-departamento-del-cauca.jpg');
 
 -- INTEGRANTE PROYECTO
 INSERT INTO integrante_proyecto (id, estado, fechaInicio, rolId, proyectoId, usuarioId) VALUES(1, 1, '2024-08-30', 1, 1, 7);

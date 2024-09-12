@@ -12,4 +12,6 @@ public interface OrganismoObtenerREPO {
     Page<ListarOrganismosParaAsociarProyectoProyeccion> listarConFiltro(Pageable page, String tipoOrganismo, Integer id, String nombre, Long usuarioAutenticadoId);
 
     Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarIntegrantesDocenteOrganismo(Integer organismoId);
+
+    Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarIntegrantesOrganismo(Integer organismoId);
 }

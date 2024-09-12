@@ -1,5 +1,8 @@
 package edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones;
 
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
+
 import java.util.List;
 
 public interface ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion {
@@ -15,6 +18,9 @@ public interface ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion {
             Long getId();
             String getNombre();
             String getApellido();
+            TipoUsuario getTipoUsuario();
+            TipoDocumento getTipoDocumento();
+            String getNumeroDocumento();
         }
     }
 }

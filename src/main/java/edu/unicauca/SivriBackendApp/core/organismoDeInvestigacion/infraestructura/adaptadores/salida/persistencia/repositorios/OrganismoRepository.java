@@ -23,6 +23,24 @@ public interface OrganismoRepository extends JpaRepository<OrganismoDeInvestigac
             "LEFT JOIN FETCH integrantes.usuario usuario " +
             "WHERE semillero.id = :semilleroId and usuario.tipoUsuario = 'DOCENTE'"
     )
+    Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarConFiltroIntegrantesDocenteSemillero(@Param("semilleroId") long semilleroId);
+
+    @Query("SELECT grupo " +
+            "FROM GrupoEntity grupo " +
+            "LEFT JOIN FETCH grupo.integrantes integrantes " +
+            "LEFT JOIN FETCH integrantes.rolGrupo rol " +
+            "LEFT JOIN FETCH integrantes.usuario usuario " +
+            "WHERE grupo.id = :grupoId"
+    )
+    Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarConFiltroIntegrantesGrupo(@Param("grupoId") long grupoId);
+
+    @Query("SELECT semillero " +
+            "FROM SemilleroEntity semillero " +
+            "LEFT JOIN FETCH semillero.integrantes integrantes " +
+            "LEFT JOIN FETCH integrantes.rolSemillero rol " +
+            "LEFT JOIN FETCH integrantes.usuario usuario " +
+            "WHERE semillero.id = :semilleroId"
+    )
     Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarConFiltroIntegrantesSemillero(@Param("semilleroId") long semilleroId);
 
     @Query("SELECT grupo " +
@@ -32,7 +50,7 @@ public interface OrganismoRepository extends JpaRepository<OrganismoDeInvestigac
             "LEFT JOIN FETCH integrantes.usuario usuario " +
             "WHERE grupo.id = :grupoId and usuario.tipoUsuario = 'DOCENTE'"
     )
-    Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarConFiltroIntegrantesGrupo(@Param("grupoId") long grupoId);
+    Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarConFiltroIntegrantesDocenteGrupo(@Param("grupoId") long grupoId);
 
     @Query(value = "select " +
             " org.id, " +

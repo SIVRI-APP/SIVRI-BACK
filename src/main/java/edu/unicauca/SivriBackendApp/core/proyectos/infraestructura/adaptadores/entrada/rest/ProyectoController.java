@@ -5,6 +5,7 @@ import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.Tipo
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoCrearCU;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoObtenerCU;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.RolProyectoEnum;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoDetalladoDTO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoListarConFiltroProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.CrearProyectoDTO;
@@ -85,7 +86,7 @@ public class ProyectoController {
     public ResponseEntity<Respuesta<Boolean>> agregarIntegrante(
             @Valid @RequestParam @Positive(message = "Proyecto Id no valido") Long proyectoId,
             @Valid @RequestParam @Positive(message = "Usuario Id no valido")Long usuarioId,
-            @Valid @RequestParam @Positive(message = "Rol Id no valido")Integer rolId
+            @Valid @RequestParam @Positive(message = "Rol Id no valido") RolProyectoEnum rolId
     ){
         Respuesta<Boolean> respuesta = proyectoCrearCU.agregarIntegrante(proyectoId, usuarioId, rolId);
         return ResponseEntity.ok().body(respuesta);

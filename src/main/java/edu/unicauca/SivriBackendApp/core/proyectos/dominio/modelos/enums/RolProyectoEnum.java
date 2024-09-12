@@ -1,6 +1,15 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums;
 
 public enum RolProyectoEnum {
+    ASESOR,
+    CO_INVESTIGADOR,
     DIRECTOR,
-    CO_INVESTIGADOR
+    ESTUDIANTE_DOCTORADO,
+    ESTUDIANTE_ESPECIALIZACION,
+    ESTUDIANTE_MAESTRIA,
+    ESTUDIANTE_POSTDOCTORADO,
+    ESTUDIANTE_PREGRADO,
+    INVESTIGADOR_EXTERNO,
+    JOVEN_INVESTIGADOR,
+    PERSONAL_TECNICO
 }
