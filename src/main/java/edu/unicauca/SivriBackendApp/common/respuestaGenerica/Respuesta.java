@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.common.respuestaGenerica;
 
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import lombok.*;
 
 /**
@@ -21,4 +22,6 @@ public class Respuesta<T> {
 
     /** Objeto con la respuesta de la transacción */
     private T data;
+
+
 }

@@ -13,6 +13,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroEstado;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.entrada.UsuarioObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioInformacionDetalladaProyeccion;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,6 +53,11 @@ public class SemilleroCrearService implements SemilleroCrearCU {
         integranteSemillero.setUsuario(usuario);
         integranteSemillero.setRolSemillero(rolSemillero);
         integranteSemilleroCrearCU.crear(integranteSemillero);
+        //enviar correo de notificacion al mentor asignado del semillero
+        //obtengo la informacion del mentor
+        Respuesta<UsuarioInformacionDetalladaProyeccion> mentorInfo= usuarioObtenerCU.obtenerUsuarioInformacionDetallada(mentorId);
+        //enviar el correo notificando al mentor
+        semilleroObtenerCU.notificacionCorreoMentorSemillero(semilleroCreado.getSemilleroId(),semilleroCreado.getNombre(),mentorId);
         /*if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.creacionSemilleroIntegrante.objeto", List.of("Semillero", "Id", String.valueOf(semillero.getId())*//*,"Mentor ","Id",String.valueOf(objIntegrante.getId()*//*));
         }*/

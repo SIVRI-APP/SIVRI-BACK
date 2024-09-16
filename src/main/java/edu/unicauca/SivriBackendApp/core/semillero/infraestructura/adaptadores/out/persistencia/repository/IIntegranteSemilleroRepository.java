@@ -10,9 +10,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface IIntegranteSemilleroRepository extends JpaRepository<IntegranteSemilleroEntity,Integer> {
     //public List<SemilleroEntity> findByusuarioId(String idMentor);
    public List<IntegranteSemilleroEntity> findBySemilleroId(int idSemillero);
@@ -28,12 +29,12 @@ public interface IIntegranteSemilleroRepository extends JpaRepository<Integrante
            "INNER JOIN rol_semillero rs ON rs.id = ins.rolId\n" +
            "WHERE ins.semilleroId = (:semilleroId)\n" +
            "AND (LOWER(u.numeroDocumento) LIKE COALESCE(CONCAT('%', LOWER(:numeroDocumento), '%'), '%') OR :numeroDocumento IS NULL OR :numeroDocumento = '')\n" +
-           "AND (LOWER(rs.rolSemillero) LIKE COALESCE(LOWER(:rolSemillero), '%') OR :rolSemillero IS NULL OR :rolSemillero = '')\n" +
+           "AND (LOWER(rs.id) LIKE COALESCE(LOWER(:rolSemillero), '%') OR :rolSemillero IS NULL OR :rolSemillero = '')\n" +
            "AND (LOWER(ins.estado) LIKE COALESCE(LOWER(:estado), '%') OR :estado IS NULL OR :estado = '');",nativeQuery = true)
    Page<List<ListarIntegrantesSemilleroxIdSemillero>> obtenerIntegrantesSemilleroPorIdSemillero(
            @Param("semilleroId") int semilleroId,
            @Param("numeroDocumento") String numeroDocumento,
-           @Param("rolSemillero") String rolSemillero,
+           @Param("rolSemillero") Integer rolSemillero,
            @Param("estado") String estado,
            @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable);
     // TODO falta agregar el programa no esta en usuario y buscar por programa tambien

@@ -9,14 +9,12 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SemilleroObtenerCU {
     Respuesta<Boolean> existePorId(int id);
     Respuesta<Boolean> existePorNombre(String nombre);
     Respuesta<Semillero> obtenerSemilleroPorId(int id);
-    //Respuesta<List<Semillero>> obtenerSemillerosPorIdAndNombre(int idSemillero,String nombre);
-    //Respuesta<List<Semillero>> obtenerSemillerosPorIdOrNombre(String dato);
-    //Respuesta<Semillero> obtenerSemilleroPorIdONombre(Semillero semillero);
 
     Respuesta<List<Semillero>> obtenerSemillerosPorIdGrupo(int idGrupo);
     Respuesta<List<Semillero>> obtenerSemillerosPorIdDirectorGrupo(long idDirector);
@@ -29,5 +27,7 @@ public interface SemilleroObtenerCU {
 
     Respuesta<Page<List<ListarSemillerosConFiltroxMentor>>> listarSemilleroConFiltroxMentor(int pageNo, int pageSize, Integer semilleroId, String nombre, SemilleroEstado estado);
     Respuesta<Page<List<ListarSemilleroPorIdMentor>>> obtenerSemillerosConFiltroxIdDirector(int pageNo, int pageSize, Integer semilleroId, String nombre, SemilleroEstado estado);
+    Respuesta<Boolean> envioEmailRevisionVri(Integer semilleroId);
+    Respuesta<Boolean> notificacionCorreoMentorSemillero(Integer semilleroId,String nombreSemillero,long mentorId);
 
 }

@@ -6,17 +6,14 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHa
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.LineaInvestigacionCrearCU;
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.LineaInvestigacionCrearREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.LineaInvestigacion;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@AllArgsConstructor
 @Component
 public class LineaInvestigacionCrearService implements LineaInvestigacionCrearCU {
     private final LineaInvestigacionCrearREPO lineaInvestigacionCrearREPO;
-
-    public LineaInvestigacionCrearService(LineaInvestigacionCrearREPO lineaInvestigacionCrearREPO) {
-        this.lineaInvestigacionCrearREPO = lineaInvestigacionCrearREPO;
-    }
 
     @Override
     public Respuesta<Boolean> crear(LineaInvestigacion nuevaLinea) {

@@ -2,6 +2,8 @@ package edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos;
 
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 public class DocumentoSemillero {
 
@@ -10,5 +12,7 @@ public class DocumentoSemillero {
     private String rutaDocumento;
     private String observacion;
     private EstadoDocumentoSemillero estado;
-
+    private LocalDate fechaRegistro;
+    private Boolean documentoActivo;
+    private Semillero semillero;
 }

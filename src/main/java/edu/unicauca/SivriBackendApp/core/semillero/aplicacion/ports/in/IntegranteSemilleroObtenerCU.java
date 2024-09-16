@@ -18,7 +18,7 @@ public interface IntegranteSemilleroObtenerCU {
 
     Respuesta<Page<IntegranteSemillero>> obtenerListadoIntegrantesSemilleroPaginado(int pageNo, int pageSize);
     Respuesta<List<IntegranteSemillero>> obtenerIntegranteSemilleroPorIdSemillero(int idSemillero);
-    Respuesta<Page<List<ListarIntegrantesSemilleroxIdSemillero>>> obtenerIntegrantesSemilleroPorIdSemillero(int pageNo, int pageSize, int idSemillero, String numeroDocumento, String rolSemillero, EstadoIntegranteSemillero estado);
+    Respuesta<Page<List<ListarIntegrantesSemilleroxIdSemillero>>> obtenerIntegrantesSemilleroPorIdSemillero(int pageNo, int pageSize, int idSemillero, String numeroDocumento, Integer rolSemillero, EstadoIntegranteSemillero estado);
     Respuesta<List<Semillero>> obtenerSemillerosPorIdMentor(String idMentor);
     Respuesta<Page<List<ListarConFiltroIntegrantesSemillero>>> listarIntegrantesSemilleroConFiltro(int pageNo, int pageSize, String numeroDocumento, String rolSemillero, EstadoIntegranteSemillero estado/*,String programa*/);
     //Respuesta<Page<List<>>>

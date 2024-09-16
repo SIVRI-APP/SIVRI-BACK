@@ -2,28 +2,33 @@ package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.
 
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.DocumentoSemilleroObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.DocumentoSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.TipoDocumentoSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.DocumentoSemilleroProyeccion;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.VerDoumentoSemillero;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.DocumentoSemilleroEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.mapper.DocumentoSemilleroMapper;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.repository.IDocumentoSemilleroRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Component
 public class DocumentoSemilleroObtenerAdapter implements DocumentoSemilleroObtenerREPO {
 
     private final IDocumentoSemilleroRepository documentoSemilleroRepository;
     private final DocumentoSemilleroMapper documentoSemilleroMapper;
 
-    public DocumentoSemilleroObtenerAdapter(IDocumentoSemilleroRepository documentoSemilleroRepository, DocumentoSemilleroMapper documentoSemilleroMapper) {
-        this.documentoSemilleroRepository = documentoSemilleroRepository;
-        this.documentoSemilleroMapper = documentoSemilleroMapper;
-    }
-
     @Override
     public Boolean existePorId(int id) {
         return documentoSemilleroRepository.existsById(id);
+    }
+
+    @Override
+    public Boolean existexSemilleroIdyTipo(Integer semilleroId, TipoDocumentoSemillero tipo) {
+        return documentoSemilleroRepository.existsBySemilleroIdAndTipo(semilleroId,tipo);
     }
 
     @Override
@@ -33,8 +38,19 @@ public class DocumentoSemilleroObtenerAdapter implements DocumentoSemilleroObten
     }
 
     @Override
+    public Optional<DocumentoSemilleroProyeccion> obtenerDocumentoSemilleroxDocumentoActivo(Integer semilleroId, TipoDocumentoSemillero tipo) {
+        return documentoSemilleroRepository.obtenerDocumentoxDocumentoActivo(semilleroId,tipo.toString());
+    }
+
+    @Override
     public Optional<VerDoumentoSemillero> obtenerDatosDocumento() {
         //Optional<VerDoumentoSemillero> respuestaJpa=documentoSemilleroRepository
         return Optional.empty();
+    }
+
+    @Override
+    public Integer existeDocumentoxIdSemillero(Integer idSemillero,String tipo) {
+        Integer idDocumento= documentoSemilleroRepository.existeDocumentoxIdSemillero(idSemillero,tipo);
+        return idDocumento;
     }
 }

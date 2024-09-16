@@ -7,20 +7,17 @@ import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.Semillero
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.SemilleroObtenerCU;
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.SemilleroActualizarREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
-
+@AllArgsConstructor
 @Component
 public  class SemilleroActualizarService implements SemilleroActualizarCU {
 
     private final SemilleroActualizarREPO semilleroActualizarREPO;
     private final SemilleroObtenerCU semilleroObtenerCU;
-    public SemilleroActualizarService(SemilleroActualizarREPO semilleroActualizarREPO, SemilleroObtenerCU semilleroObtenerCU) {
-        this.semilleroActualizarREPO = semilleroActualizarREPO;
-        this.semilleroObtenerCU = semilleroObtenerCU;
-    }
 
     @Override
     public Respuesta<Boolean> actualizarPorApoyo(Semillero nuevoSemillero) {

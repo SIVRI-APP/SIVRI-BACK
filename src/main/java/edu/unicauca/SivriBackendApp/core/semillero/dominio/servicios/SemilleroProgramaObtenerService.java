@@ -45,8 +45,10 @@ public class SemilleroProgramaObtenerService implements SemilleroProgramaObtener
 
     @Override
     public Respuesta<Page<ListarProgramas>> obtenerListadoProgramasPorSemilleroId(int pageNo, int pageSize, int idSemillero) {
+        System.out.println("para metros service: "+idSemillero+" "+pageNo+" "+pageSize);
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<ListarProgramas> respuestaBd=semilleroProgramaObtenerREPO.obtenerListadoProgramasPorSemilleroId(pageable, idSemillero);
+        System.out.println("respuesta del service: "+respuestaBd);
         if (respuestaBd.isEmpty()){
             throw new ReglaDeNegocioException("bad.no.se.encontraron.registros");
         }

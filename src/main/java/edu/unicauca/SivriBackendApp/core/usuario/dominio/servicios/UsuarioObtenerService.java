@@ -59,6 +59,14 @@ public class UsuarioObtenerService implements UsuarioObtenerCU {
         return new RespuestaHandler<>(200, "ok", "", respuestaBd).getRespuesta();
     }
 
+    @Override
+    public Respuesta<UsuarioInformacionDetalladaProyeccion> obtenerUsuarioInformacionDetalladaPorDocumento(long usuarioNumDoc, TipoDocumento tipoDocumento) {
+        UsuarioInformacionDetalladaProyeccion respuestaBd = usuarioObtenerREPO.obtenerUsuarioInformacionDetalladaPorDocumento(usuarioNumDoc, tipoDocumento).orElseThrow(
+                () -> new ReglaDeNegocioException("bad.usuarios.no.existe.por.doc", List.of(tipoDocumento.toString(), Long.toString(usuarioNumDoc))));
+
+        return new RespuestaHandler<>(200, "ok", "", respuestaBd).getRespuesta();
+    }
+
     /**
      * Obtiene una solicitud de usuario por su identificador.
      *

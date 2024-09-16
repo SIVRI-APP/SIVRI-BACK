@@ -9,6 +9,7 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.Us
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -57,4 +58,17 @@ public class UsuarioController {
         return ResponseEntity.ok().body(respuesta);
     }
 
+    @GetMapping("obtenerUsuarioPorDoc")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'GRUPO:DIRECTOR', " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:USUARIOS'," +
+            "'SEMILLERO:MENTOR')")
+    public ResponseEntity<Respuesta<UsuarioInformacionDetalladaProyeccion>> obtenerUsuarioInformacionDetalladaPorDocumento(
+            @RequestParam @Min(value = 0, message = "El valor de usuarioId debe ser positivo") long usuarioNumDoc,
+            @RequestParam @NotEmpty(message = "Tipo de Documento requerido") TipoDocumento tipoDocumento
+    ) {
+        Respuesta<UsuarioInformacionDetalladaProyeccion> respuesta = usuarioObtenerCU.obtenerUsuarioInformacionDetalladaPorDocumento(usuarioNumDoc, tipoDocumento);
+        return ResponseEntity.ok().body(respuesta);
+    }
 }

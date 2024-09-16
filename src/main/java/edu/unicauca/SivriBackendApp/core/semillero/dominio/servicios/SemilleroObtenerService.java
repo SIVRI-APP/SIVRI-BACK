@@ -1,5 +1,8 @@
 package edu.unicauca.SivriBackendApp.core.semillero.dominio.servicios;
 
+import edu.unicauca.SivriBackendApp.common.email.dto.MetaData;
+import edu.unicauca.SivriBackendApp.common.email.dto.SendRequest;
+import edu.unicauca.SivriBackendApp.common.email.service.SendMessageService;
 import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
@@ -11,30 +14,34 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroEsta
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarConFiltroSemilleros;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarSemilleroPorIdMentor;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarSemillerosConFiltroxMentor;
+import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.entrada.UsuarioObtenerCU;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioInformacionDetalladaProyeccion;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 @AllArgsConstructor
 public class SemilleroObtenerService implements SemilleroObtenerCU {
 
     private final SemilleroObtenerREPO semilleroObtenerREPO;
     private final ServicioDeIdentificacionDeUsuario servicioDeIdentificacionDeUsuario;
-
-
+    private final SendMessageService sendMessageService;
+   // private final SemilleroObtenerCU semilleroObtenerCU;
+    private final UsuarioObtenerCU usuarioObtenerCU;
     @Override
     public Respuesta<Boolean> existePorId(int id) {
         Boolean respuesta=semilleroObtenerREPO.existePorId(id);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.no.se.encontro.registro", List.of("Semillero", "Id", String.valueOf(id)));
         }
-
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta();
     }
 
@@ -52,7 +59,7 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
 
         Optional<Semillero> respuesta=semilleroObtenerREPO.obtenerSemilleroPorId(id);
         if (respuesta.isEmpty()) {
-            throw new ReglaDeNegocioException("el id " + id + " no existe.");
+            throw new ReglaDeNegocioException("bad.semillero.no.existe",List.of("id",String.valueOf(id)));
         }
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "Exitoso", respuesta.get()).getRespuesta();
     }
@@ -122,6 +129,34 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
         }
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
     }
+
+    @Override
+    public Respuesta<Boolean> envioEmailRevisionVri(Integer semilleroId) {
+        //ontener el semillero
+        Optional<Semillero> semillero= semilleroObtenerREPO.obtenerSemilleroPorId(semilleroId);
+        //obtener el ususario
+        Respuesta<UsuarioInformacionDetalladaProyeccion> usuario= usuarioObtenerCU.obtenerUsuarioInformacionDetallada(servicioDeIdentificacionDeUsuario.obtenerUsuario().getId());
+        //enviar email
+        //TODO SE DEBE CAMBIAR EL CORREO POR EL DE EL ADMINISTRADOR DEL SEMILLERO
+        if(semillero.isPresent()){
+            SendRequest datosenvio=new SendRequest("yuranyguev@unicauca.edu.co","Notificación de registro de semillero",4, List.of(new MetaData("semilleroId",semilleroId.toString()),new MetaData("nombreSemillero",semillero.get().getNombre()),new MetaData("nombreUsuario",usuario.getData().getNombre()+" "+usuario.getData().getApellido())));
+            sendMessageService.sendMessage(datosenvio);
+            return new RespuestaHandler<>(200,"sucess.operacion.exitosa.revisionVri","Exitoso",true).getRespuesta();
+        }else {
+            return new RespuestaHandler<>(400,"bad.error.envio.revisionVri","No exitoso",false).getRespuesta();
+        }
+    }
+    //@Override
+    public Respuesta<Boolean> notificacionCorreoMentorSemillero(Integer semilleroId,String nombreSemillero,long mentorId) {
+        //obtener el ususario
+        Respuesta<UsuarioInformacionDetalladaProyeccion> usuarioMentor= usuarioObtenerCU.obtenerUsuarioInformacionDetallada(mentorId);
+        Respuesta<UsuarioInformacionDetalladaProyeccion> usuarioDirector= usuarioObtenerCU.obtenerUsuarioInformacionDetallada(servicioDeIdentificacionDeUsuario.obtenerUsuario().getId());
+        //enviar email
+        SendRequest datosEnvio=new SendRequest(usuarioMentor.getData().getCorreo(),"Notificación de asignacion como Mentor de un semillero",5,List.of(new MetaData("semilleroId",semilleroId.toString()),new MetaData("nombreSemillero",nombreSemillero),new MetaData("nombreDirector",usuarioDirector.getData().getNombre()+" "+usuarioDirector.getData().getApellido())));
+        sendMessageService.sendMessage(datosEnvio);
+        return new RespuestaHandler<>(200,"sucess.operacion.exitosa.notificacion.mentor.semillero","Exitoso",true).getRespuesta();
+    }
+
     @Override
     public Respuesta<Page<List<ListarSemilleroPorIdMentor>>> obtenerSemillerosPorIdMentor(int pageNo, int pageSize, int idMentor) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
@@ -132,18 +167,5 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
         }
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
     }
-
-
-
-    /*@Override
-    public Respuesta<List<Semillero>> obtenerSemillerosPorIdMentor(String idMentor) {
-        List<Semillero> respuesta=semilleroObtenerREPO.obtenerSemillerosPorIdMentor(idMentor);
-        if (respuesta.isEmpty()){
-            throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.semilleros.mentor");
-        }
-
-        return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuesta).getRespuesta();
-
-    }*/
 
 }

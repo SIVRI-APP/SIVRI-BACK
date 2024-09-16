@@ -136,19 +136,18 @@ public class EvidenciaActividadService implements EvidenciaActividadCU {
     }
 
     @Override
-    public Resource obtenerArchivoPorActividadId(Integer actividadId) throws Exception {
+    public File obtenerArchivoPorActividadId(Integer actividadId) throws Exception {
         Integer idEvidencia = evidenciaActividadREPO.existexActividadId(actividadId);
         if (idEvidencia != 0){
             EvidenciaActividad evidencia = obtenerPorId(idEvidencia).getData();
             String filePath = evidencia.getEvidencia();
-            Path path = Paths.get(filePath);
-            if (Files.exists(path)) {
-                Resource resourse= (Resource) new UrlResource(path.toUri());
-                System.out.println("resourse "+resourse);
-                return resourse;
-            } else {
+            File archivoObtenido= new File(filePath);
+            if (archivoObtenido.exists()){
+                return archivoObtenido;
+            }else {
                 throw new FileNotFoundException("Archivo no encontrado: " + filePath);
             }
+            
         }else {
             throw new FileNotFoundException("Evidencia no encontrada para la actividad con ID: " + actividadId);
         }

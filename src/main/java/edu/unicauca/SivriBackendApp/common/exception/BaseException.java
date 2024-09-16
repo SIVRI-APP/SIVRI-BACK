@@ -3,6 +3,8 @@ package edu.unicauca.SivriBackendApp.common.exception;
 import edu.unicauca.SivriBackendApp.common.resourceBundleMessages.BundleMessage;
 
 import java.util.List;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 public class BaseException extends RuntimeException {
 
@@ -18,5 +20,11 @@ public class BaseException extends RuntimeException {
     BaseException(String key, List<String> args) {
         super(BundleMessage.getExceptionMessage(key, args));
     }
-
+    private static String getMessageForKey(String key) {
+        try {
+            return ResourceBundle.getBundle("messages").getString(key);
+        } catch (MissingResourceException e) {
+            return key; // En pruebas, devuelve el key si el recurso no está disponible
+        }
+    }
 }

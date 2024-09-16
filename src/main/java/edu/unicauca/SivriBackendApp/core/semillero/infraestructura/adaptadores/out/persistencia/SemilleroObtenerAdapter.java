@@ -9,6 +9,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.SemilleroEntity;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.mapper.SemilleroMapper;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.repository.ISemilleroRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,14 +20,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
+@AllArgsConstructor
 public class SemilleroObtenerAdapter implements SemilleroObtenerREPO {
     private final ISemilleroRepository semilleroRepository;
     private final SemilleroMapper semilleroMapper;
-
-    public SemilleroObtenerAdapter(ISemilleroRepository semilleroRepository, SemilleroMapper semilleroMapper) {
-        this.semilleroRepository = semilleroRepository;
-        this.semilleroMapper = semilleroMapper;
-    }
 
     @Override
     public Boolean existePorId(int id) {

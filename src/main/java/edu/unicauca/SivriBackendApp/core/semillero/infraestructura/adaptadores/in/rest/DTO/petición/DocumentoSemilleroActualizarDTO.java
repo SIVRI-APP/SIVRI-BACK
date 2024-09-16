@@ -5,10 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
+import java.util.Optional;
+
 @Data
 public class DocumentoSemilleroActualizarDTO {
-    @NotEmpty(message = "la observacion no puede ser nula")
-    @NotBlank(message = "Dato Invalido")
+
     private String observacion;
-    private EstadoDocumentoSemillero estado;
+    private String estado;
 }
