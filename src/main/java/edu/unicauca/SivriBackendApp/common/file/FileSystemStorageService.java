@@ -14,6 +14,7 @@ import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.servicios.ProyectoCargarArchivo;
+import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.EvidenciaCompromisoEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.EvidenciaProyectoDocumentoConvocatoriaEntity;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class FileSystemStorageService implements StorageService{
     private ProyectoCargarArchivo proyectoCargarArchivo;
 
     @Override
-    public Respuesta<String> store(MultipartFile file, String tipoDeOrganismo, String organismoId, String documentoId) {
+    public Respuesta<String> store(MultipartFile file, String tipoDeOrganismo, String organismoId, String documentoId, String tablaBd) {
         try {
             // Verifica si el archivo está vacío.
             if (file.isEmpty()) {
@@ -50,19 +51,34 @@ public class FileSystemStorageService implements StorageService{
                 throw new ReglaDeNegocioException("Nombre de archivo inválido"); // Lanza excepción si el nombre del archivo es inseguro.
             }
 
-            // Construir la ruta del subdirectorio usando los parámetros "organismo" y "organismoId".
-            Path directoryPath = this.rootLocation
-                    .resolve(Paths.get(tipoDeOrganismo))   // Primer subdirectorio basado en "organismo".
-                    .resolve(Paths.get(organismoId)) // Segundo subdirectorio basado en "organismoId".
-                    .normalize().toAbsolutePath();
+            // Variable para Construir la ruta del subdirectorio usando los parámetros "organismo" y "organismoId" y "tablaBd".
+            Path directoryPath = switch (tablaBd) {
+                case "ProyectoDocumentoConvocatoria" -> {
+                    EvidenciaProyectoDocumentoConvocatoriaEntity evidencia = proyectoCargarArchivo.cargarDocumentoConvocatoria(filename, organismoId, documentoId).getData(); // Alamacenar el registro en base de datos
+                    filename =  evidencia.getId() + "-" + file.getOriginalFilename();
+                    yield this.rootLocation
+                            .resolve(Paths.get(tipoDeOrganismo))                // Primer subdirectorio basado en "organismo".
+                            .resolve(Paths.get(organismoId))                    // Segundo subdirectorio basado en "organismoId".
+                            .resolve(Paths.get("DocumentosConvocatoria"))  // Tercer subdirectorio basado en "DocumentosConvocatoria".
+                            .normalize().toAbsolutePath();
+                }
+                case "ProyectoDocumentoCompromiso" -> {
+                    EvidenciaCompromisoEntity evidencia = proyectoCargarArchivo.cargarDocumentoCompromiso(filename, organismoId, documentoId).getData(); // Alamacenar el registor en base de datos
+                    filename =  evidencia.getId() + "-" + file.getOriginalFilename();
+                    yield this.rootLocation
+                            .resolve(Paths.get(tipoDeOrganismo))                // Primer subdirectorio basado en "organismo".
+                            .resolve(Paths.get(organismoId))                    // Segundo subdirectorio basado en "organismoId".
+                            .resolve(Paths.get("DocumentosCompromiso"))    // Tercer subdirectorio basado en "DocumentosConvocatoria".
+                            .normalize().toAbsolutePath();
+                }
+                default -> throw new ReglaDeNegocioException("bad.location9", List.of(tablaBd));
+            };
+
 
             // Crear los subdirectorios si no existen.
             if (!Files.exists(directoryPath)) {
                 Files.createDirectories(directoryPath); // Crea los directorios necesarios para la ruta si no existen.
             }
-
-            // Alamacenar el registor en base de datos
-            EvidenciaProyectoDocumentoConvocatoriaEntity evidencia = proyectoCargarArchivo.cargarDocumentoConvocatoria(filename, organismoId, documentoId).getData();
 
             // Construir la ruta completa donde se guardará el archivo dentro de los subdirectorios "organismo/organismoId".
             Path destinationFile = directoryPath.resolve(Paths.get(filename)).normalize().toAbsolutePath();
@@ -88,20 +104,25 @@ public class FileSystemStorageService implements StorageService{
     }
 
 
-    private Path load(String filename) {
-        return rootLocation.resolve(filename);
-    }
-
     @Override
-    public Resource loadAsResource(String organismo, String organismoId, String filename) {
+    public Resource loadAsResource(String filename, String tipoDeOrganismo, String organismoId, String tablaBd) {
         try {
-            // Construye la ruta completa del archivo.
-            Path filePath = this.rootLocation
-                    .resolve(Paths.get(organismo))
-                    .resolve(Paths.get(organismoId))
-                    .resolve(Paths.get(filename))
-                    .normalize()
-                    .toAbsolutePath();
+            // Variable para Construir la ruta del subdirectorio usando los parámetros "organismo" y "organismoId" y "tablaBd".
+            Path filePath = switch (tablaBd) {
+                case "ProyectoDocumentoConvocatoria" -> this.rootLocation
+                        .resolve(Paths.get(tipoDeOrganismo))                // Primer subdirectorio basado en "organismo".
+                        .resolve(Paths.get(organismoId))                    // Segundo subdirectorio basado en "organismoId".
+                        .resolve(Paths.get("DocumentosConvocatoria"))  // Tercer subdirectorio basado en "DocumentosConvocatoria".
+                        .resolve(Paths.get(filename))                       // Archivo
+                        .normalize().toAbsolutePath();
+                case "ProyectoDocumentoCompromiso" -> this.rootLocation
+                        .resolve(Paths.get(tipoDeOrganismo))                // Primer subdirectorio basado en "organismo".
+                        .resolve(Paths.get(organismoId))                    // Segundo subdirectorio basado en "organismoId".
+                        .resolve(Paths.get("DocumentosCompromiso"))    // Tercer subdirectorio basado en "DocumentosConvocatoria".
+                        .resolve(Paths.get(filename))                       // Archivo
+                        .normalize().toAbsolutePath();
+                default -> throw new ReglaDeNegocioException("bad.location9", List.of(tablaBd));
+            };
 
             Resource resource = new UrlResource(filePath.toUri());
             if (resource.exists() || resource.isReadable()) {

@@ -6,7 +6,10 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHa
 import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.salida.persistencia.entidad.DocumentoConvocatoriaEntity;
 import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.salida.persistencia.repositorio.DocumentoConvocatoriaRepository;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoObtenerCU;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoCompromisoProyectoEnum;
+import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.CompromisoAdapter;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.EvidenciaProyectoDocumentoConvocatoriaAdapter;
+import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.EvidenciaCompromisoEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.EvidenciaProyectoDocumentoConvocatoriaEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.mapper.ProyectoInfraMapper;
@@ -26,6 +29,7 @@ public class ProyectoCargarArchivo {
      */
     private final EvidenciaProyectoDocumentoConvocatoriaAdapter evidenciaProyectoDocumentoConvocatoriaAdapter;
     private final DocumentoConvocatoriaRepository documentoConvocatoriaRepository;
+    private final CompromisoAdapter compromisoAdapter;
 
     /**
      * Servicios
@@ -49,11 +53,18 @@ public class ProyectoCargarArchivo {
         evidencia.setDocumentoConvocatoria(documentoConvocatoria.get());
         evidencia.setNombre(nombre);
 
-        System.out.println("-------");
-        System.out.println("Doc Id: " + documentoConvocatoriaId);
-        System.out.println(evidencia);
-
         return new RespuestaHandler<>(200, "ok", "", evidenciaProyectoDocumentoConvocatoriaAdapter.guardar(evidencia)).getRespuesta();
+    }
+
+    @Transactional
+    public Respuesta<EvidenciaCompromisoEntity> cargarDocumentoCompromiso(String nombre, String organismoId, String documentoConvocatoriaId) {
+
+        EvidenciaCompromisoEntity evidencia = new EvidenciaCompromisoEntity();
+        evidencia.setCompromisoProyecto(null);
+        evidencia.setRutaAlmacenamiento(null);
+        evidencia.setEstado(EstadoCompromisoProyectoEnum.REVISION_VRI);
+
+        return new RespuestaHandler<>(200, "ok", "", compromisoAdapter.agregarEvidenciaCompromiso(evidencia)).getRespuesta();
     }
 
 }

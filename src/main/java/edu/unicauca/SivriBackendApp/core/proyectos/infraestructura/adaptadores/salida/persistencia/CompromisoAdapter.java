@@ -4,6 +4,7 @@ import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.Com
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.PrepararAgregarCompromisoDTO;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.CompromisoProyectoEntity;
+import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.EvidenciaCompromisoEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.mapper.ProyectoInfraMapper;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios.CompromisoProyectoRepository;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios.IntegranteRepository;
@@ -40,5 +41,11 @@ public class CompromisoAdapter implements CompromisoREPO {
 
         compromisoProyectoRepository.save(compromisoProyecto);
         return true;
+    }
+
+    @Override
+    public EvidenciaCompromisoEntity agregarEvidenciaCompromiso(EvidenciaCompromisoEntity evidenciaCompromiso) {
+//        todo compromiso
+        return null;
     }
 }

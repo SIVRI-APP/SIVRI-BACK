@@ -12,8 +12,8 @@ public interface StorageService {
 
     void init();
 
-    Respuesta<String> store(MultipartFile file, String tipoDeOrganismo, String organismoId, String documentoId);
+    Respuesta<String> store(MultipartFile file, String tipoDeOrganismo, String organismoId, String documentoId, String tablaBd);
 
-    Resource loadAsResource(String filename, String organismo, String organismoId);
+    Resource loadAsResource(String filename, String tipoDeOrganismo, String organismoId, String tablaBd);
 
 }
