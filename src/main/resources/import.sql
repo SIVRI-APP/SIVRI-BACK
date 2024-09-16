@@ -213,7 +213,7 @@ INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (8,1,'ACTI
 -- integrante semillero
 INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(1,2,3,2, 'activo', '2023-09-04',NULL);
 INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(2,2,4,1, 'activo', '2023-09-04',NULL);
-INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(3,2,5,6, 'activo', '2023-09-04',NULL);
+INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(3,2,10,6, 'activo', '2023-09-04',NULL);
 INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(4,2,6,6, 'activo', '2023-09-04',NULL);
 INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(5,3,2,2, 'activo', '2023-09-05',NULL);
 
@@ -223,7 +223,7 @@ INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,
 INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(3,2,6,1,'ACTIVO','2023-09-07',NULL);
 INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(4,1,7,1,'ACTIVO','2023-09-07',NULL);
 INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(5,1,8,1,'ACTIVO','2023-09-07',NULL);
-INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(6,1,2,1,'ACTIVO','2023-09-07',NULL);
+INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(6,3,2,1,'ACTIVO','2023-09-07',NULL);
 
 --compromiso Semillero
 INSERT INTO compromiso_semillero(id,nombre) VALUES(1, 'BOLETÍN DIVULGATIVO DE RESULTADOS DE INVESTIGACIÓN');

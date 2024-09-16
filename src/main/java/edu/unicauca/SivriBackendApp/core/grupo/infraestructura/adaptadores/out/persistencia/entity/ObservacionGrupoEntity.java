@@ -4,6 +4,7 @@ import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.sal
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "observacion_grupo")
 @Data
+@NoArgsConstructor
 public class ObservacionGrupoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
