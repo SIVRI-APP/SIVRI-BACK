@@ -12,9 +12,7 @@ public interface StorageService {
 
     void init();
 
-    Respuesta<String> store(MultipartFile file, String organismo, String organismoId, String documentoConvocatoriaId);
-
-    Stream<Path> loadAll();
+    Respuesta<String> store(MultipartFile file, String tipoDeOrganismo, String organismoId, String documentoId);
 
     Resource loadAsResource(String filename, String organismo, String organismoId);
 

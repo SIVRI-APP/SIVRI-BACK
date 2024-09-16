@@ -79,6 +79,9 @@ public class ProyectoEntity {
     @OneToMany(mappedBy = "proyecto", cascade = CascadeType.REMOVE)
     private Set<EvidenciaProyectoDocumentoConvocatoriaEntity> evidenciasDocumentosConvocatoria;
 
+    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE)
+    private Set<CompromisoProyectoEntity> compromisos;
+
     @ManyToOne()
     @JoinColumn(name = "convocatoriaId")
     private ConvocatoriaEntity convocatoria;

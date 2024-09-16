@@ -35,7 +35,7 @@ public class FileSystemStorageService implements StorageService{
     private ProyectoCargarArchivo proyectoCargarArchivo;
 
     @Override
-    public Respuesta<String> store(MultipartFile file, String organismo, String organismoId, String documentoConvocatoriaId) {
+    public Respuesta<String> store(MultipartFile file, String tipoDeOrganismo, String organismoId, String documentoId) {
         try {
             // Verifica si el archivo está vacío.
             if (file.isEmpty()) {
@@ -52,7 +52,7 @@ public class FileSystemStorageService implements StorageService{
 
             // Construir la ruta del subdirectorio usando los parámetros "organismo" y "organismoId".
             Path directoryPath = this.rootLocation
-                    .resolve(Paths.get(organismo))   // Primer subdirectorio basado en "organismo".
+                    .resolve(Paths.get(tipoDeOrganismo))   // Primer subdirectorio basado en "organismo".
                     .resolve(Paths.get(organismoId)) // Segundo subdirectorio basado en "organismoId".
                     .normalize().toAbsolutePath();
 
@@ -62,7 +62,7 @@ public class FileSystemStorageService implements StorageService{
             }
 
             // Alamacenar el registor en base de datos
-            EvidenciaProyectoDocumentoConvocatoriaEntity evidencia = proyectoCargarArchivo.cargarDocumentoConvocatoria(filename, organismoId, documentoConvocatoriaId).getData();
+            EvidenciaProyectoDocumentoConvocatoriaEntity evidencia = proyectoCargarArchivo.cargarDocumentoConvocatoria(filename, organismoId, documentoId).getData();
 
             // Construir la ruta completa donde se guardará el archivo dentro de los subdirectorios "organismo/organismoId".
             Path destinationFile = directoryPath.resolve(Paths.get(filename)).normalize().toAbsolutePath();
@@ -87,18 +87,6 @@ public class FileSystemStorageService implements StorageService{
         }
     }
 
-    @Override
-    public Stream<Path> loadAll() {
-        try {
-            return Files.walk(this.rootLocation, 1)
-                    .filter(path -> !path.equals(this.rootLocation))
-                    .map(this.rootLocation::relativize);
-        }
-        catch (IOException e) {
-            throw new ReglaDeNegocioException("bad.location5", List.of(e.getMessage()));
-        }
-
-    }
 
     private Path load(String filename) {
         return rootLocation.resolve(filename);

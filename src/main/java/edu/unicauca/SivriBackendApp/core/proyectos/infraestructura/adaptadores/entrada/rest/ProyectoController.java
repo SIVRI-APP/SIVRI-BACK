@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest;
 
+import edu.unicauca.SivriBackendApp.common.file.StorageService;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoCrearCU;
@@ -35,6 +36,7 @@ public class ProyectoController {
      */
     private final ProyectoCrearCU proyectoCrearCU;
     private final ProyectoObtenerCU proyectoObtenerCU;
+    private final StorageService storageService;
 
     /**
      * Mappers

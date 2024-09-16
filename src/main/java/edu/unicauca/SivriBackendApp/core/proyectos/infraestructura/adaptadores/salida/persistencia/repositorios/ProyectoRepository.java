@@ -45,7 +45,14 @@ public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
             "LEFT JOIN FETCH proyecto.integrantes " +
             "WHERE proyecto.id = :proyectoId"
     )
-    Optional<ProyectoIntegrantesProyeccion> obtenerProyectoInformacionDetallada4(@Param("proyectoId") long proyectoId);
+    Optional<ProyectoIntegrantesProyeccion> obtenerProyectoInformacionDetalladaIntegrantes(@Param("proyectoId") long proyectoId);
+
+    @Query("SELECT DISTINCT proyecto " +
+            "FROM ProyectoEntity proyecto " +
+            "LEFT JOIN FETCH proyecto.compromisos " +
+            "WHERE proyecto.id = :proyectoId"
+    )
+    Optional<ProyectoCompromisosProyeccion> obtenerProyectoInformacionDetalladaCompromisos(@Param("proyectoId") long proyectoId);
 
 
     @Query(value = "select " +

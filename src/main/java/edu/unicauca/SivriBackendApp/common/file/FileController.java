@@ -26,17 +26,6 @@ public class FileController {
         this.storageService = storageService;
     }
 
-    @GetMapping("files")
-    public String listUploadedFiles(Model model) throws IOException {
-
-        model.addAttribute("files", storageService.loadAll().map(
-                        path -> MvcUriComponentsBuilder.fromMethodName(FileController.class,
-                                "serveFile", path.getFileName().toString()).build().toUri().toString())
-                .collect(Collectors.toList()));
-        System.out.println(model.getAttribute("files"));
-        return "uploadForm";
-    }
-
     @GetMapping("files/{organismo}/{organismoId}/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(

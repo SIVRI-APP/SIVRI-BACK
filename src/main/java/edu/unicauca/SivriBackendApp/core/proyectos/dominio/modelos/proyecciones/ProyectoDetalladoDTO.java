@@ -13,5 +13,6 @@ public class ProyectoDetalladoDTO {
     private ProyectoConvocatoriaProyeccion convocatoriaProyecto;
     private ProyectoEvidenciasDocumentosProyeccion evidenciasDocumentosProyecto;
     private ProyectoIntegrantesProyeccion integrantesProyecto;
+    private ProyectoCompromisosProyeccion compromisosProyecto;
 
 }
