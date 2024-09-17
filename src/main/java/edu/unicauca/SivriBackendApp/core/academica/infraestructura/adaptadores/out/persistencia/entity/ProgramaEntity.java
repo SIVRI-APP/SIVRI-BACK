@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class ProgramaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Column(name = "nombre", length = 80, nullable = false)

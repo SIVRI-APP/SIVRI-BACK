@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 public class DocumentoSemilleroEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     @Column(length = 85)
     @Enumerated(EnumType.STRING)

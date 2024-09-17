@@ -4,12 +4,10 @@ import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadore
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -20,7 +18,7 @@ import java.util.Set;
 @Setter
 public class ProyectoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(length = 256, nullable = false)
@@ -54,13 +52,13 @@ public class ProyectoEntity {
     private String aspectosEticosLegales;
 
     @Column(length = 256)
-    private String confidencialidadDeInformacion;
+    private String confidencialidad;
 
     @Column(length = 256)
     private String efectosAdversos;
 
     @Column(length = 256)
-    private String impactosResultadosEsperados;
+    private String impacResulEsperados;
 
     @Column(length = 256)
     private String consideraciones;

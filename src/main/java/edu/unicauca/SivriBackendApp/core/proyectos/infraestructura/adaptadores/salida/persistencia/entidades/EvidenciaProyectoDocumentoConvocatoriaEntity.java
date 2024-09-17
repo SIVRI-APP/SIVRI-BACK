@@ -8,11 +8,11 @@ import lombok.Data;
 import java.util.Objects;
 
 @Entity
-@Table(name = "evidencia_proyecto_documento_convocatoria")
+@Table(name = "evidencia_proyec_docu_conv")
 @Data
 public class EvidenciaProyectoDocumentoConvocatoriaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

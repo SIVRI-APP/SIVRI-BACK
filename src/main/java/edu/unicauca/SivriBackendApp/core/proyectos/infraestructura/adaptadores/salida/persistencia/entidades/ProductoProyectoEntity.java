@@ -13,7 +13,7 @@ import lombok.Setter;
 public class ProductoProyectoEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Enumerated(EnumType.STRING)

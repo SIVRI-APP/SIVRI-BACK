@@ -26,7 +26,7 @@ public class Credencial implements UserDetails {
 
   /** Identificador único de la credencial */
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Integer id;
 
   /**
@@ -66,7 +66,7 @@ public class Credencial implements UserDetails {
    * Debe ser una fecha futura o presente.
    */
   @FutureOrPresent
-  private LocalDate recoverPasswordRequestedDate;
+  private LocalDate recoverPassDate;
 
 
   @Override

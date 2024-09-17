@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class PlanTrabajoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     @Column(length = 45)
     private String nombrePlan;

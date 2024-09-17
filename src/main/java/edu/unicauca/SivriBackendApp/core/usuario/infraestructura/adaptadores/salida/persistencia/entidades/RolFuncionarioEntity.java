@@ -20,7 +20,7 @@ public class RolFuncionarioEntity {
 
     /** Identificador único del rol del funcionario */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     /** Relación uno a muchós mapeada por el campo rolFuncionario de la tabla Funcionario */

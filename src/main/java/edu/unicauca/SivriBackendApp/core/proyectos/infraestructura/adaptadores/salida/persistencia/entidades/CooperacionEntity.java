@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Data
 public class CooperacionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private Boolean principal;

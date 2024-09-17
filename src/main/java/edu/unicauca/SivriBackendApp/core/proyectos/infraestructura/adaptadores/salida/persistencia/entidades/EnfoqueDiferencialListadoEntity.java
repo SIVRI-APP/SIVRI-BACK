@@ -6,12 +6,12 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "enfoque_diferencial_listado")
+@Table(name = "enfoque_diferencial_list")
 @Data
 public class EnfoqueDiferencialListadoEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)

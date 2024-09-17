@@ -23,14 +23,14 @@ public class ProyectoInfraMapper {
         model.setConsideraciones(entity.getConsideraciones());
         model.setEstado(entity.getEstado());
         model.setAspectosEticosLegales(entity.getAspectosEticosLegales());
-        model.setConfidencialidadDeInformacion(entity.getConfidencialidadDeInformacion());
+        model.setConfidencialidadDeInformacion(entity.getConfidencialidad());
         model.setEfectosAdversos(entity.getEfectosAdversos());
         model.setEliminadoLogico(entity.isEliminadoLogico());
         model.setEnfoqueMetodologico(entity.getEnfoqueMetodologico());
         model.setFechaFin(entity.getFechaFin());
         model.setFechaInicio(entity.getFechaInicio());
         model.setJustificacion(entity.getJustificacion());
-        model.setImpactosResultadosEsperados(entity.getImpactosResultadosEsperados());
+        model.setImpactosResultadosEsperados(entity.getImpacResulEsperados());
         model.setPlanteamiento(entity.getPlanteamiento());
         model.setObjetivoGeneral(entity.getObjetivoGeneral());
         model.setObjetivosEspecificos(entity.getObjetivosEspecificos());

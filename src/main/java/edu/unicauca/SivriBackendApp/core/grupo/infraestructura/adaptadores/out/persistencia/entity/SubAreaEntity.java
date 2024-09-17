@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class SubAreaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer idSubArea;
     @Column(length = 60,nullable = false)
     private String subArea;

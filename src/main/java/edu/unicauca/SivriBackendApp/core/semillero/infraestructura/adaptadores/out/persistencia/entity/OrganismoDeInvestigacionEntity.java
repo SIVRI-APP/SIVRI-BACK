@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Data
 public abstract class OrganismoDeInvestigacionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Column(nullable=false, length = 200,unique = true)

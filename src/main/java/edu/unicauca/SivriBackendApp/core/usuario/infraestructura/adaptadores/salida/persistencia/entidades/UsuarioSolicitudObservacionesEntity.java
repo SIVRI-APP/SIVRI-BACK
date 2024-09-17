@@ -11,7 +11,7 @@ import java.util.Set;
  * Representa la entidad de persistencia para las observaciones asociadas a las solicitudes de usuarios en el sistema.
  */
 @Entity
-@Table(name = "usuario_solicitud_observaciones")
+@Table(name = "usuario_solicitud_obser")
 @Getter
 @Setter
 @Builder
@@ -21,7 +21,7 @@ public class UsuarioSolicitudObservacionesEntity {
 
     /** Identificador único de la observacion asociada a la solicitud de usuario */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     /** Solicitud de usuario a la que está asociada la observacion. Es un campo obligatorio */

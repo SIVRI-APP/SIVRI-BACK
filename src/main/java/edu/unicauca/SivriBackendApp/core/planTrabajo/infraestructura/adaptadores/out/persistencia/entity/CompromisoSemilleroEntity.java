@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class CompromisoSemilleroEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     @Column(length = 200)
     private String nombre;

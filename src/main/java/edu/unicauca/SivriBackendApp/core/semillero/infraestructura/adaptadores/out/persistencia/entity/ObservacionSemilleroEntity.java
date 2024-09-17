@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Data
 public class ObservacionSemilleroEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     @Column(length = 1445)
     private String observacion;

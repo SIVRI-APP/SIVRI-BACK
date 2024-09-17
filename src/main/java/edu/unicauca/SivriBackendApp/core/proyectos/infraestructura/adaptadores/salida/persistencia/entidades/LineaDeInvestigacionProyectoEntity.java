@@ -5,11 +5,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "linea_de_investigacion_proyecto")
+@Table(name = "linea_de_inves_proyecto")
 @Data
 public class LineaDeInvestigacionProyectoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Column(length = 250, nullable = false)

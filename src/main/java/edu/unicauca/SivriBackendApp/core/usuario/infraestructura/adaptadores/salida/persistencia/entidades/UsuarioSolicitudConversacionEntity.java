@@ -10,7 +10,7 @@ import java.util.Objects;
  * Representa la entidad de persistencia para las observaciones asociadas a las solicitudes de usuarios en el sistema.
  */
 @Entity
-@Table(name = "usuario_solicitud_conversacion")
+@Table(name = "usuario_solicitud_conver")
 @Getter
 @Setter
 @Builder
@@ -20,12 +20,12 @@ public class UsuarioSolicitudConversacionEntity {
 
     /** Identificador único de la observacion asociada a la solicitud de usuario */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     /** Solicitud de usuario a la que está asociada la observacion. Es un campo obligatorio */
     @ManyToOne(optional = false)
-    @JoinColumn(name = "usuarioSolicitudObservacionesId")
+    @JoinColumn(name = "usuaSolicitudObserId")
     private UsuarioSolicitudObservacionesEntity usuarioSolicitudObservaciones;
 
     /** Texto de la observacion. Tiene una longitud máxima de 1000 caracteres y es un campo obligatorio */

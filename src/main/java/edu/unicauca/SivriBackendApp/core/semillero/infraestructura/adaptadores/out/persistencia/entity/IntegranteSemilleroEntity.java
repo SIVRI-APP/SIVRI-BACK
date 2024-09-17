@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class IntegranteSemilleroEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "idIntegranteSemillero")
     private Integer id;
 

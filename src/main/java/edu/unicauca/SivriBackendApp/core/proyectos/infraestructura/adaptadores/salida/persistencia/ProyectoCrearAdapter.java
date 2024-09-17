@@ -38,9 +38,9 @@ public class ProyectoCrearAdapter implements ProyectoCrearREPO {
             antiguo.get().setJustificacion(proyecto.getJustificacion());
             antiguo.get().setEnfoqueMetodologico(proyecto.getEnfoqueMetodologico());
             antiguo.get().setAspectosEticosLegales(proyecto.getAspectosEticosLegales());
-            antiguo.get().setConfidencialidadDeInformacion(proyecto.getConfidencialidadDeInformacion());
+            antiguo.get().setConfidencialidad(proyecto.getConfidencialidadDeInformacion());
             antiguo.get().setEfectosAdversos(proyecto.getEfectosAdversos());
-            antiguo.get().setImpactosResultadosEsperados(proyecto.getImpactosResultadosEsperados());
+            antiguo.get().setImpacResulEsperados(proyecto.getImpactosResultadosEsperados());
             antiguo.get().setConsideraciones(proyecto.getConsideraciones());
 
             proyectoRepository.save(antiguo.get());

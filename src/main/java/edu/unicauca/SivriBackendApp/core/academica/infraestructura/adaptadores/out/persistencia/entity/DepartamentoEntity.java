@@ -15,7 +15,7 @@ public class DepartamentoEntity {
      * Identificador único del departamento.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     /**

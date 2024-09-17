@@ -26,9 +26,9 @@ public class CrearProyectoUtils {
         proyecto.setJustificacion(dto.getInformacionGeneral().getJustificacion());
         proyecto.setEnfoqueMetodologico(dto.getInformacionGeneral().getEnfoqueMetodologico());
         proyecto.setAspectosEticosLegales(dto.getInformacionGeneral().getAspectosEticosLegales());
-        proyecto.setConfidencialidadDeInformacion(dto.getInformacionGeneral().getConfidencialidadDeInformacion());
+        proyecto.setConfidencialidad(dto.getInformacionGeneral().getConfidencialidadDeInformacion());
         proyecto.setEfectosAdversos(dto.getInformacionGeneral().getEfectosAdversos());
-        proyecto.setImpactosResultadosEsperados(dto.getInformacionGeneral().getImpactosResultadosEsperados());
+        proyecto.setImpacResulEsperados(dto.getInformacionGeneral().getImpactosResultadosEsperados());
         proyecto.setConsideraciones(dto.getInformacionGeneral().getConsideraciones());
         proyecto.setEliminadoLogico(dto.getInformacionGeneral().getEliminadoLogico());
 

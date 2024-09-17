@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class GrupoDisciplinaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     @ManyToOne(optional = false)
     @JoinColumn(name = "grupoId",referencedColumnName = "id")

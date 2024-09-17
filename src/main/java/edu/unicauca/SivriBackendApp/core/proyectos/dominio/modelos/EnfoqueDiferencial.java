@@ -14,7 +14,7 @@ import java.util.Set;
 public class EnfoqueDiferencial {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Column(length = 45, nullable = false)

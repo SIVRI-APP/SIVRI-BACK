@@ -31,7 +31,7 @@ public class CredentialService {
 
     // Crea código de seguridad que permitirá al usuario recuperar contraseña
     newCredencial.setPasswordRecoveryCode(CadenaAleatoria.generarStringAleatorio(20) + request.getUserId());
-    newCredencial.setRecoverPasswordRequestedDate(LocalDate.now());
+    newCredencial.setRecoverPassDate(LocalDate.now());
 
     return credencialRepository.save(newCredencial);
   }
@@ -44,7 +44,7 @@ public class CredentialService {
     // Limpiar código de seguridad
     credencial.setPassword(passwordEncoder.encode(request.getPassword()));
     credencial.setPasswordRecoveryCode(null);
-    credencial.setRecoverPasswordRequestedDate(null);
+    credencial.setRecoverPassDate(null);
 
      credencialRepository.save(credencial);
   }
