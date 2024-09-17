@@ -17,7 +17,7 @@ public class PlanTrabajoEntity {
     private Integer id;
     @Column(length = 45)
     private String nombrePlan;
-    @Column(length = 9,nullable = false)
+    @Column(length = 10,nullable = false)
     @Enumerated(EnumType.STRING)
     private EstadoPlanTrabajo estado;
     //relacion *a1 semillero
