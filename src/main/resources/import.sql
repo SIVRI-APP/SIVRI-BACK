@@ -302,11 +302,11 @@ INSERT INTO GRUPO (GRUPO_ID, DEPARTAMENTO_ID, ESTADO, DIRECCION, TELEFONO, EMAIL
  INSERT INTO LINEA_INVESTIGACION (ID, SEMILLERO_ID, LINEA) VALUES (2,2,'calidad de sotware');
 --
 -- --semillero programa
--- INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,1);
--- INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,2);
+ INSERT INTO SEMILLERO_PROGRAMA(ID,SEMILLERO_ID,ID_PROGRAMA) VALUES(1,2,1);
+ INSERT INTO SEMILLERO_PROGRAMA(ID,SEMILLERO_ID,ID_PROGRAMA) VALUES(2,2,2);
 --
 -- --observacion semillero
- INSERT INTO  OBSERVACION_SEMILLERO (ID, SEMILLERO_ID, FUNCIONARIO_ID, OBSERVACION, FECHA) VALUES (1,2,1,'revisando el semillero se encuentra que no ha subido los documentos',TO_DATE('2023-09-04', 'YYYY-MM-DD'));
+--INSERT INTO  OBSERVACION_SEMILLERO (ID, SEMILLERO_ID, FUNCIONARIO_ID, OBSERVACION, FECHA) VALUES (1,2,1,'revisando el semillero se encuentra que no ha subido los documentos',TO_DATE('2023-09-04', 'YYYY-MM-DD'));
 --
 --
 
