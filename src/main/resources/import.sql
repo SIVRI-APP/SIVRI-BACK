@@ -202,24 +202,24 @@ INSERT INTO templates (ID, NOMBRE_TEMPLATE, DESCRIPTION, VARS) VALUES (5, 'notif
 
 -- -- **************** import yurany *****************************
 -- --rol semillero
--- INSERT INTO rol_semillero(id,rolSemillero) VALUES(1,'COORDINADOR');
--- INSERT INTO rol_semillero(id,rolSemillero) VALUES(2,'MENTOR');
--- INSERT INTO rol_semillero(id,rolSemillero) VALUES(3,'MIEMBRO_ACTIVO_PROFESOR');
--- INSERT INTO rol_semillero(id,rolSemillero) VALUES(4,'MIEMBRO_ACTIVO_ESTUDIANTE_POSGRADO');
--- INSERT INTO rol_semillero(id,rolSemillero) VALUES(5,'MIEMBRO_ACTIVO_EGRESADO');
--- INSERT INTO rol_semillero(id,rolSemillero) VALUES(6,'SEMILLAS');
---
+ INSERT INTO ROL_SEMILLERO (ID, ROL_SEMILLERO) VALUES(1,'COORDINADOR');
+ INSERT INTO ROL_SEMILLERO (ID, ROL_SEMILLERO) VALUES(2,'MENTOR');
+ INSERT INTO ROL_SEMILLERO (ID, ROL_SEMILLERO) VALUES(3,'MIEMBRO_ACTIVO_PROFESOR');
+ INSERT INTO ROL_SEMILLERO (ID, ROL_SEMILLERO) VALUES(4,'MIEMBRO_ACTIVO_ESTUDIANTE_POSGRADO');
+ INSERT INTO ROL_SEMILLERO (ID, ROL_SEMILLERO) VALUES(5,'MIEMBRO_ACTIVO_EGRESADO');
+ INSERT INTO ROL_SEMILLERO (ID, ROL_SEMILLERO) VALUES(6,'SEMILLAS');
+
 -- --ROL GRUPO
--- INSERT INTO rol_grupo(id,rolGrupo) VALUES(1,'DIRECTOR');
--- INSERT INTO rol_grupo(id,rolGrupo) VALUES(2,'COINVESTIGADOR');
--- INSERT INTO rol_grupo(id,rolGrupo) VALUES(3,'ASESOR');
--- INSERT INTO rol_grupo(id,rolGrupo) VALUES(4,'ESTUDIANTE_PREGRADO');
--- INSERT INTO rol_grupo(id,rolGrupo) VALUES(5,'ESTUDIANTE_ESPECIALIZACION');
--- INSERT INTO rol_grupo(id,rolGrupo) VALUES(6,'ESTUDIANTE_MAESTRIA');
--- INSERT INTO rol_grupo(id,rolGrupo) VALUES(7,'ESTUDIANTE_DOCTORADO');
--- INSERT INTO rol_grupo(id,rolGrupo) VALUES(8,'ESTUDIANTE_POSDOCTORADO');
--- INSERT INTO rol_grupo(id,rolGrupo) VALUES(9,'INVESTIGADOR_EXTERNO');
--- INSERT INTO rol_grupo(id,rolGrupo) VALUES(10,'JOVEN_INVESTIGADOR');
+ INSERT INTO ROL_GRUPO (ID, ROL_GRUPO) VALUES(1,'DIRECTOR');
+ INSERT INTO ROL_GRUPO (ID, ROL_GRUPO) VALUES(2,'COINVESTIGADOR');
+ INSERT INTO ROL_GRUPO (ID, ROL_GRUPO) VALUES(3,'ASESOR');
+ INSERT INTO ROL_GRUPO (ID, ROL_GRUPO) VALUES(4,'ESTUDIANTE_PREGRADO');
+ INSERT INTO ROL_GRUPO (ID, ROL_GRUPO) VALUES(5,'ESTUDIANTE_ESPECIALIZACION');
+ INSERT INTO ROL_GRUPO (ID, ROL_GRUPO) VALUES(6,'ESTUDIANTE_MAESTRIA');
+ INSERT INTO ROL_GRUPO (ID, ROL_GRUPO) VALUES(7,'ESTUDIANTE_DOCTORADO');
+ INSERT INTO ROL_GRUPO (ID, ROL_GRUPO) VALUES(8,'ESTUDIANTE_POSDOCTORADO');
+ INSERT INTO ROL_GRUPO (ID, ROL_GRUPO) VALUES(9,'INVESTIGADOR_EXTERNO');
+ INSERT INTO ROL_GRUPO (ID, ROL_GRUPO) VALUES(10,'JOVEN_INVESTIGADOR');
 
 
 INSERT INTO ORGANISMO_DE_INVESTIGACION (ID, NOMBRE, FECHA_CREACION, OBJETIVO, MISION, VISION) VALUES (1, 'GRUPO DE CIENCIA', TO_DATE('2023-03-08', 'YYYY-MM-DD'), 'Desarrollar investigación científica', 'mision del grupo', 'El grupo GCISA-TSEJK tiene');
@@ -233,70 +233,66 @@ INSERT INTO ORGANISMO_DE_INVESTIGACION (ID, NOMBRE, FECHA_CREACION, OBJETIVO, MI
 INSERT INTO ORGANISMO_DE_INVESTIGACION (ID, NOMBRE, FECHA_CREACION, OBJETIVO, MISION, VISION) VALUES (9, 'GRUPO I+D EN TECNOLOGÍAS DE LA INFORMACIÓN', TO_DATE('2023-03-08', 'YYYY-MM-DD'), '1. Fortalecer la infraestructura humana, técnica, investigativa y de formación especializada en diferentes áreas, de todo el Grupo de Investigación de Unicauca. 2. Definir, diseñar e implementar proyectos que propendan por la interdisciplinariedad de áreas dentro y fuera de La universidad Del Cauca.', 'El grupo se propone crear la infraestructura base que facilite la generación de soluciones informáticas para la comunidad en general y brinde asesorías en cuanto al aprovechamiento de nuevas tecnologías de la información para los sectores productivos y académicos.', 'Preservar y estimular el crecimiento de la capacidad de investigación e innovación en el área las Tecnologías de la Información de la Universidad del Cauca, a través de los integrantes del grupo GTI, por medio de la creación de espacios adecuados donde la crítica y el debate intelectual se constituyan en fuente de nuevo conocimiento. El GTI promoverá el desarrollo de su talento humano (profesores, investigadores y estudiantes), aportará la infraestructura requerida y establecerá alianzas estratégicas con centros de investigación de reconocido prestigio internacional para el desarrollo de su labor, con el propósito de agregar valor a su relación con la sociedad. Los principios de calidad, transparencia, independencia de criterio, compromiso y servicio, orientarán las actuaciones del GTI y se constituirán en su diferencial competitivo con respecto de otros grupos en el área. A largo plazo el GTI pretende ser: ¿Un centro tecnológico en Investigación y Desarrollo con reconocimiento nacional e internacional generador de proyectos ');
 
 -- --grupo
--- INSERT INTO grupo (grupoId,departamentoId,estado, direccion, telefono, email, sitioWeb, escalafonColciencias, direccionGrupLac, codigoColciencias, centroInvestigaciones, realizaciones, perspectivas) VALUES (1,1,'ACTIVO','Facultad de Ingeniería','2-8209800','jccasas@unicauca.edu.co','No','A','http://scienti.colciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000012079','COL0119567','centro investigacion','Desarrollo y aprobación de 5 trabajos de Pregrado en el Departamento de Ingeniería Ambiental y Sanitaria, Facultad de Ingeniería Civil.','perspectivas del grupo');
--- INSERT INTO grupo (grupoId,departamentoId,estado, direccion, telefono, email, sitioWeb, escalafonColciencias, direccionGrupLac, codigoColciencias, centroInvestigaciones, realizaciones, perspectivas) VALUES (9,1,'ACTIVO','Sector Tulcan - FIET','8233031','gti@unicauca.edu.co','No','A','http://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002157','COL0023303', 'centro investigacion','valor','¿Productividad investigativa medida por índices de eficiencia, eficacia y calidad de los proyectos. ¿Aporte de proyectos significativos, innovadores y útiles, que propendan por el mejoramiento y la calidad de vida de los posibles usuarios de los mismos. ¿Creación de alianzas estratégicas regionales, nacionales e internacionales, que generen vínculos entre distintos estamentos, brindando con ello: saber científico, financiamiento, investigación y todo tipo de apoyo al GTI.');
+INSERT INTO GRUPO (GRUPO_ID, DEPARTAMENTO_ID, ESTADO, DIRECCION, TELEFONO, EMAIL, SITIO_WEB, ESCALAFON_COLCIENCIAS, DIRECCION_GRUP_LAC, CODIGO_COLCIENCIAS, CENTRO_INVESTIGACIONES, REALIZACIONES, PERSPECTIVAS) VALUES (1,1,'ACTIVO','Facultad de Ingeniería','2-8209800','jccasas@unicauca.edu.co','No','A','http://scienti.colciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000012079','COL0119567','centro investigacion','Desarrollo y aprobación de 5 trabajos de Pregrado en el Departamento de Ingeniería Ambiental y Sanitaria, Facultad de Ingeniería Civil.','perspectivas del grupo');
+INSERT INTO GRUPO (GRUPO_ID, DEPARTAMENTO_ID, ESTADO, DIRECCION, TELEFONO, EMAIL, SITIO_WEB, ESCALAFON_COLCIENCIAS, DIRECCION_GRUP_LAC, CODIGO_COLCIENCIAS, CENTRO_INVESTIGACIONES, REALIZACIONES, PERSPECTIVAS) VALUES (9,1,'ACTIVO','Sector Tulcan - FIET','8233031','gti@unicauca.edu.co','No','A','http://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002157','COL0023303', 'centro investigacion','valor','¿Productividad investigativa medida por índices de eficiencia, eficacia y calidad de los proyectos. ¿Aporte de proyectos significativos, innovadores y útiles, que propendan por el mejoramiento y la calidad de vida de los posibles usuarios de los mismos. ¿Creación de alianzas estratégicas regionales, nacionales e internacionales, que generen vínculos entre distintos estamentos, brindando con ello: saber científico, financiamiento, investigación y todo tipo de apoyo al GTI.');
 --
 --
 -- --semillero
--- INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (2,1,'ACTIVO','agora@correo.edu.co','POPAYAN');
--- INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (3,1,'FORMULADO','semillero3@correo.edu.co','POPAYAN');
--- INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (4,1,'ACTIVO','semillero4@correo.edu.co','POPAYAN');
--- INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (5,1,'ACTIVO','agora5@correo.edu.co','POPAYAN');
--- INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (6,9,'ACTIVO','agora6@correo.edu.co','POPAYAN');
--- INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (7,1,'ACTIVO','agora7@correo.edu.co','POPAYAN');
--- INSERT INTO semillero(semilleroId,grupoId, estado,correo,sede) VALUES (8,1,'ACTIVO','agora8@correo.edu.co','POPAYAN');
---
+ INSERT INTO SEMILLERO (SEMILLERO_ID, GRUPO_ID, ESTADO, CORREO, SEDE) VALUES (2,1,'ACTIVO','agora@correo.edu.co','POPAYAN');
+ INSERT INTO SEMILLERO (SEMILLERO_ID, GRUPO_ID, ESTADO, CORREO, SEDE) VALUES (3,1,'FORMULADO','semillero3@correo.edu.co','POPAYAN');
+ INSERT INTO SEMILLERO (SEMILLERO_ID, GRUPO_ID, ESTADO, CORREO, SEDE) VALUES (4,1,'ACTIVO','semillero4@correo.edu.co','POPAYAN');
+ INSERT INTO SEMILLERO (SEMILLERO_ID, GRUPO_ID, ESTADO, CORREO, SEDE) VALUES (5,1,'ACTIVO','agora5@correo.edu.co','POPAYAN');
+ INSERT INTO SEMILLERO (SEMILLERO_ID, GRUPO_ID, ESTADO, CORREO, SEDE) VALUES (6,9,'ACTIVO','agora6@correo.edu.co','POPAYAN');
+ INSERT INTO SEMILLERO (SEMILLERO_ID, GRUPO_ID, ESTADO, CORREO, SEDE) VALUES (7,1,'ACTIVO','agora7@correo.edu.co','POPAYAN');
+ INSERT INTO SEMILLERO (SEMILLERO_ID, GRUPO_ID, ESTADO, CORREO, SEDE) VALUES (8,1,'ACTIVO','agora8@correo.edu.co','POPAYAN');
+
 -- -- integrante semillero
--- INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(1,2,3,2, 'activo', '2023-09-04',NULL);
--- INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(2,2,4,1, 'activo', '2023-09-04',NULL);
--- INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(3,2,10,6, 'activo', '2023-09-04',NULL);
--- INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(4,2,6,6, 'activo', '2023-09-04',NULL);
--- INSERT INTO integrante_semillero(idIntegranteSemillero,semilleroId,usuarioId,rolId, estado, fechaIngreso, fechaRetiro)VALUES(5,3,2,2, 'activo', '2023-09-05',NULL);
+ INSERT INTO INTEGRANTE_SEMILLERO (ID_INTEGRANTE_SEMILLERO, SEMILLERO_ID, USUARIO_ID, ROL_ID, ESTADO, FECHA_INGRESO, FECHA_RETIRO) VALUES (1,2,3,2, 'ACTIVO', TO_DATE('2023-09-04', 'YYYY-MM-DD'),NULL);
+ INSERT INTO INTEGRANTE_SEMILLERO (ID_INTEGRANTE_SEMILLERO, SEMILLERO_ID, USUARIO_ID, ROL_ID, ESTADO, FECHA_INGRESO, FECHA_RETIRO) VALUES (2,2,4,1, 'ACTIVO', TO_DATE('2023-09-04', 'YYYY-MM-DD'),NULL);
+ INSERT INTO INTEGRANTE_SEMILLERO (ID_INTEGRANTE_SEMILLERO, SEMILLERO_ID, USUARIO_ID, ROL_ID, ESTADO, FECHA_INGRESO, FECHA_RETIRO) VALUES (3,2,10,6, 'ACTIVO', TO_DATE('2023-09-04', 'YYYY-MM-DD'),NULL);
+ INSERT INTO INTEGRANTE_SEMILLERO (ID_INTEGRANTE_SEMILLERO, SEMILLERO_ID, USUARIO_ID, ROL_ID, ESTADO, FECHA_INGRESO, FECHA_RETIRO) VALUES (4,2,6,6, 'ACTIVO', TO_DATE('2023-09-04', 'YYYY-MM-DD'),NULL);
+ INSERT INTO INTEGRANTE_SEMILLERO (ID_INTEGRANTE_SEMILLERO, SEMILLERO_ID, USUARIO_ID, ROL_ID, ESTADO, FECHA_INGRESO, FECHA_RETIRO) VALUES (5,3,2,2, 'ACTIVO', TO_DATE('2023-09-04', 'YYYY-MM-DD'),NULL);
 --
 -- --integrante grupo
--- INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(1,1,3,9,'ACTIVO','2023-09-07',NULL);
--- INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(2,1,4,1,'ACTIVO','2023-09-07',NULL);
--- INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(3,2,6,1,'ACTIVO','2023-09-07',NULL);
--- INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(4,1,7,1,'ACTIVO','2023-09-07',NULL);
--- INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(5,1,8,1,'ACTIVO','2023-09-07',NULL);
--- INSERT INTO integrante_grupo(id,rolGrupoId,usuarioId,grupoId,estado,fechaInicio,fechaFin) VALUES(6,3,2,1,'ACTIVO','2023-09-07',NULL);
---
--- --compromiso Semillero
--- INSERT INTO compromiso_semillero(id,nombre) VALUES(1, 'BOLETÍN DIVULGATIVO DE RESULTADOS DE INVESTIGACIÓN');
--- INSERT INTO compromiso_semillero(id,nombre) VALUES(2, 'CONSULTORÍAS CIENTÍFICO-TECNOLÓGICAS');
--- INSERT INTO compromiso_semillero(id,nombre) VALUES(3, 'DOCUMENTO DE TRABAJO (WORKING PAPER)');
---
---
---
---
+
+ INSERT INTO INTEGRANTE_GRUPO (ID, ROL_GRUPO_ID, USUARIO_ID, GRUPO_ID, ESTADO, FECHA_INICIO, FECHA_FIN) VALUES (1, 1, 3, 9, 'ACTIVO', TO_DATE('2023-09-07', 'YYYY-MM-DD'), NULL);
+ INSERT INTO INTEGRANTE_GRUPO (ID, ROL_GRUPO_ID, USUARIO_ID, GRUPO_ID, ESTADO, FECHA_INICIO, FECHA_FIN) VALUES (2,1,4,1,'ACTIVO',TO_DATE('2023-09-07', 'YYYY-MM-DD'),NULL);
+ INSERT INTO INTEGRANTE_GRUPO (ID, ROL_GRUPO_ID, USUARIO_ID, GRUPO_ID, ESTADO, FECHA_INICIO, FECHA_FIN) VALUES (3,2,6,1,'ACTIVO',TO_DATE('2023-09-07', 'YYYY-MM-DD'),NULL);
+ INSERT INTO INTEGRANTE_GRUPO (ID, ROL_GRUPO_ID, USUARIO_ID, GRUPO_ID, ESTADO, FECHA_INICIO, FECHA_FIN) VALUES (4,1,7,1,'ACTIVO',TO_DATE('2023-09-07', 'YYYY-MM-DD'),NULL);
+ INSERT INTO INTEGRANTE_GRUPO (ID, ROL_GRUPO_ID, USUARIO_ID, GRUPO_ID, ESTADO, FECHA_INICIO, FECHA_FIN) VALUES (5,1,8,1,'ACTIVO',TO_DATE('2023-09-07', 'YYYY-MM-DD'),NULL);
+ INSERT INTO INTEGRANTE_GRUPO (ID, ROL_GRUPO_ID, USUARIO_ID, GRUPO_ID, ESTADO, FECHA_INICIO, FECHA_FIN) VALUES (6,3,2,1,'ACTIVO',TO_DATE('2023-09-07', 'YYYY-MM-DD'),NULL);
+
+--compromiso Semillero
+ INSERT INTO COMPROMISO_SEMILLERO (ID, NOMBRE) VALUES(1, 'BOLETÍN DIVULGATIVO DE RESULTADOS DE INVESTIGACIÓN');
+ INSERT INTO COMPROMISO_SEMILLERO (ID, NOMBRE) VALUES(2, 'CONSULTORÍAS CIENTÍFICO-TECNOLÓGICAS');
+ INSERT INTO COMPROMISO_SEMILLERO (ID, NOMBRE) VALUES(3, 'DOCUMENTO DE TRABAJO (WORKING PAPER)');
+
 -- --plan de trabajo
--- INSERT INTO plan_trabajo(id,semilleroId,nombrePlan,anio, estado) VALUES(1,2, 'plan', 2023,'FINALIZADO');
--- INSERT INTO plan_trabajo(id,semilleroId,nombrePlan,anio, estado) VALUES(2,2, 'plan de trabajo', 2024, 'FORMULADO');
+ INSERT INTO PLAN_TRABAJO (ID, SEMILLERO_ID, NOMBRE_PLAN, ANIO, ESTADO) VALUES (1,2, 'plan', 2023,'FINALIZADO');
+ INSERT INTO PLAN_TRABAJO (ID, SEMILLERO_ID, NOMBRE_PLAN, ANIO, ESTADO) VALUES (2,2, 'plan de trabajo', 2024, 'FORMULADO');
 --
 -- --actividad plan de trabajo
--- INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId)VALUES(1,1,1,'obj','act','2023-03-08','2023-08-05',3);
--- INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId)VALUES(2,1,2,'obj','act','2023-03-08','2023-08-05',3);
--- INSERT INTO actividad_plan_trabajo(id,planTrabajoId,compromisoSemilleroId,objetivo,actividad,fechaInicio,fechaFin,responsableId)VALUES(3,2,3,'obj','act','2023-03-08','2023-08-05',3);
+ INSERT INTO ACTIVIDAD_PLAN_TRABAJO (ID, PLAN_TRABAJO_ID, COMPROMISO_SEMILLERO_ID, OBJETIVO, ACTIVIDAD, FECHA_INICIO, FECHA_FIN, RESPONSABLE_ID) VALUES(1,1,1,'obj','act',TO_DATE('2023-03-08', 'YYYY-MM-DD'),TO_DATE('2023-08-05', 'YYYY-MM-DD'),3);
+ INSERT INTO ACTIVIDAD_PLAN_TRABAJO (ID, PLAN_TRABAJO_ID, COMPROMISO_SEMILLERO_ID, OBJETIVO, ACTIVIDAD, FECHA_INICIO, FECHA_FIN, RESPONSABLE_ID) VALUES(2,1,2,'obj','act',TO_DATE('2023-03-08', 'YYYY-MM-DD'),TO_DATE('2023-08-05', 'YYYY-MM-DD'),3);
+ INSERT INTO ACTIVIDAD_PLAN_TRABAJO (ID, PLAN_TRABAJO_ID, COMPROMISO_SEMILLERO_ID, OBJETIVO, ACTIVIDAD, FECHA_INICIO, FECHA_FIN, RESPONSABLE_ID) VALUES(3,2,3,'obj','act',TO_DATE('2023-03-08', 'YYYY-MM-DD'),TO_DATE('2023-08-05', 'YYYY-MM-DD'),3);
 --
 -- --evidencia actividad
--- INSERT INTO evidencia_actividad(id,actividadId,evidencia) VALUES(1,1,'evidencia');
--- INSERT INTO evidencia_actividad(id,actividadId,evidencia) VALUES(2,2,'evidencia');
+ INSERT INTO EVIDENCIA_ACTIVIDAD (ID, ACTIVIDAD_ID, EVIDENCIA) VALUES(1,1,'evidencia');
+ INSERT INTO EVIDENCIA_ACTIVIDAD (ID, ACTIVIDAD_ID, EVIDENCIA) VALUES(2,2,'evidencia');
 --
 -- --linea de investigacion
--- INSERT INTO linea_investigacion(id,semilleroId,linea) VALUES(1,2,'calidad de procesos');
--- INSERT INTO linea_investigacion(id,semilleroId,linea) VALUES(2,2,'calidad de sotware');
+ INSERT INTO LINEA_INVESTIGACION (ID, SEMILLERO_ID, LINEA) VALUES (1,2,'calidad de procesos');
+ INSERT INTO LINEA_INVESTIGACION (ID, SEMILLERO_ID, LINEA) VALUES (2,2,'calidad de sotware');
 --
 -- --semillero programa
--- INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,1);
--- INSERT INTO semillero_programa(semilleroId,idPrograma) VALUES(2,2);
+ INSERT INTO SEMILLERO_PROGRAMA(ID,SEMILLERO_ID,ID_PROGRAMA) VALUES(1,2,1);
+ INSERT INTO SEMILLERO_PROGRAMA(ID,SEMILLERO_ID,ID_PROGRAMA) VALUES(2,2,2);
 --
 -- --observacion semillero
--- INSERT INTO observacion_semillero(id,semilleroId,funcionarioId,observacion,fecha) VALUES (1,2,1,'revisando el semillero se encuentra que no ha subido los documentos','2023-09-04');
---
---
---
---
---
---
+--INSERT INTO  OBSERVACION_SEMILLERO (ID, SEMILLERO_ID, FUNCIONARIO_ID, OBSERVACION, FECHA) VALUES (1,2,1,'revisando el semillero se encuentra que no ha subido los documentos',TO_DATE('2023-09-04', 'YYYY-MM-DD'));
+
+
+
+    
 -- -- COOPERACION
 INSERT INTO COOPERACION (ID, ESTADO, FECHA_INICIO, ORGANISMO_DE_INVESTIGACION_ID, PRINCIPAL, PROYECTO_ID) VALUES (1, 1, TO_DATE('2024-08-30', 'YYYY-MM-DD'), 2, 1, 1);
