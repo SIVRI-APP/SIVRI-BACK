@@ -56,7 +56,7 @@ INSERT INTO documento_convocatoria (ID, NOMBRE) VALUES (10, 'Acta de nacimiento 
 INSERT INTO convocatoria (FECHA_FIN, FECHA_INICIO, ID, NOMBRE, OFERENTE, DESCRIPCION, OBJETIVOS, ESTADO, TIPO_FINANCIACION) VALUES (TO_DATE('2024-12-31', 'YYYY-MM-DD'), TO_DATE('2024-09-01', 'YYYY-MM-DD'), 1, 'Convocatoria de Innovación Tecnológica', 'Ministerio de Energía y Minas', 'Convocatoria destinada a financiar proyectos de innovación tecnológica en el sector de las energías renovables.', 'Fomentar la investigación y desarrollo en tecnologías limpias y sostenibles.', 'ABIERTA', 'PROYECTOS_INTERNOS');
 
 -- -- CONVOCATORIA CHECKLIST
-INSERT INTO checklist (ID, CONVOCATORIA_ID, DOCUMENTO_CONVOCATORIA_ID, ETAPA_DOCUMENTO, RESPONSABLE_DOCUEMENTO, CANTIDAD, OBLIGATORIO, COMPLETADO) VALUES (1, 1, 1, 'PRE_EJECUCION', 'ORGANISMO_DE_INVESTIGACION', 1, 1, 0);
+INSERT INTO checklist (ID, CONVOCATORIA_ID, DOCUMENTO_CONVOCATORIA_ID, ETAPA_DOCUMENTO, RESPONSABLE_DOCUMENTO, CANTIDAD, OBLIGATORIO, COMPLETADO) VALUES (1, 1, 1, 'PRE_EJECUCION', 'ORGANISMO_DE_INVESTIGACION', 1, 1, 0);
 INSERT INTO checklist (ID, CONVOCATORIA_ID, DOCUMENTO_CONVOCATORIA_ID, ETAPA_DOCUMENTO, RESPONSABLE_DOCUMENTO, CANTIDAD, OBLIGATORIO, COMPLETADO) VALUES (2, 1, 2, 'PRE_EJECUCION', 'VRI', 1, 1, 0);
 INSERT INTO checklist (ID, CONVOCATORIA_ID, DOCUMENTO_CONVOCATORIA_ID, ETAPA_DOCUMENTO, RESPONSABLE_DOCUMENTO, CANTIDAD, OBLIGATORIO, COMPLETADO) VALUES (3, 1, 3, 'EJECUCION', 'ORGANISMO_DE_INVESTIGACION', 3, 1, 0);
 INSERT INTO checklist (ID, CONVOCATORIA_ID, DOCUMENTO_CONVOCATORIA_ID, ETAPA_DOCUMENTO, RESPONSABLE_DOCUMENTO, CANTIDAD, OBLIGATORIO, COMPLETADO) VALUES (4, 1, 4, 'POST_EJECUCION', 'ORGANISMO_DE_INVESTIGACION', 1, 1, 0);
@@ -111,7 +111,6 @@ INSERT INTO usuario_solicitud_conver (ID, USUA_SOLICITUD_OBSER_ID, AUTOR, MENSAJ
 -- -- |***** PROYECTO *****|
 
 -- -- PRODUCTO PROYECTO
-INSERT INTO producto_proyecto(ID, CATEGORIA, TIPO, DESCRIPCION) VALUES (1, 'GENERACION_DE_NUEVO_CONOCIMIENTO', 'ARTICULOS_IMPRESOS_A1_Q1', 'En fase de evaluación por pares. Entregable: Comunicación o pantallazo de la revista que evidencie la evaluación del documento- Publicado: Entregable: documento en su versión final publicado por la revista');
 INSERT INTO producto_proyecto (ID, CATEGORIA, TIPO, DESCRIPCION) VALUES (1, 'GENERACION_DE_NUEVO_CONOCIMIENTO', 'ARTICULOS_IMPRESOS_A1_Q1', 'En fase de evaluación por pares. Entregable: Comunicación o pantallazo de la revista que evidencie la evaluación del documento- Publicado: Entregable: documento en su versión final publicado por la revista');
 INSERT INTO producto_proyecto (ID, CATEGORIA, TIPO, DESCRIPCION) VALUES (2, 'GENERACION_DE_NUEVO_CONOCIMIENTO', 'ARTICULOS_IMPRESOS_A2_Q2', 'En fase de evaluación por pares. Entregable: Comunicación o pantallazo de la revista que evidencie la evaluación del documento- Publicado: Entregable: documento en su versión final publicado por la revista');
 INSERT INTO producto_proyecto (ID, CATEGORIA, TIPO, DESCRIPCION) VALUES (3, 'GENERACION_DE_NUEVO_CONOCIMIENTO', 'ARTICULOS_IMPRESOS_B_Q3', 'En fase de evaluación por pares. Entregable: Comunicación o pantallazo de la revista que evidencie la evaluación del documento- Publicado: Entregable: documento en su versión final publicado por la revista');
