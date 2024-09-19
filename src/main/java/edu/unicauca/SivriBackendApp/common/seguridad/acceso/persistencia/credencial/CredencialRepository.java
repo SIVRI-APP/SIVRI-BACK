@@ -23,10 +23,10 @@ public interface CredencialRepository extends JpaRepository<Credencial, Integer>
 
   @Query(value = "SELECT CONCAT('FUNCIONARIO:', rol_fun.nombre) AS authorities " +
           "FROM credencial cre " +
-          "INNER JOIN usuario usu ON cre.userId = usu.id  " +
-          "INNER JOIN funcionario fun ON fun.usuarioId = usu.id AND fun.estado = 1 " +
-          "INNER JOIN rol_funcionario rol_fun ON rol_fun.id = fun.rolId " +
-          "WHERE cre.email = :email "
+          "INNER JOIN usuario usu ON cre.USER_ID = usu.ID  " +
+          "INNER JOIN funcionario fun ON fun.USUARIO_ID = usu.ID AND fun.estado = 1 " +
+          "INNER JOIN rol_funcionario rol_fun ON rol_fun.ID = fun.ROL_ID " +
+          "WHERE cre.EMAIL = :email "
           , nativeQuery = true)
   List<IGetAuthorities> getAuthoritiesFuncionario (@Param("email") String email);
 
@@ -34,31 +34,31 @@ public interface CredencialRepository extends JpaRepository<Credencial, Integer>
           " CONCAT('PROYECTO:', rp.nombre) as authorities " +
           "from " +
           " credencial cre " +
-          "INNER JOIN usuario usu ON cre.userId = usu.id " +
-          "inner join integrante_proyecto ip on iP.usuarioId = usu.id  " +
-          "inner join rol_proyecto rp on rp.id = ip.rolId  " +
+          "INNER JOIN usuario usu ON cre.USER_ID = usu.id " +
+          "inner join integrante_proyecto ip on iP.USUARIO_ID = usu.id  " +
+          "inner join rol_proyecto rp on rp.id = ip.ROL_ID  " +
           "where cre.email = :email"
           , nativeQuery = true)
   List<IGetAuthorities> getAuthoritiesProyecto (@Param("email") String email);
 
   @Query(value = "select " +
-          " CONCAT('SEMILLERO:', rs.rolSemillero) as authorities " +
+          " CONCAT('SEMILLERO:', rs.ROL_SEMILLERO) as authorities " +
           "from " +
           " credencial cre " +
-          "INNER JOIN usuario usu ON cre.userId = usu.id " +
-          "inner join integrante_semillero is2 on is2.usuarioId = usu.id  " +
-          "inner join rol_semillero rs on rs.id = is2.rolId  " +
+          "INNER JOIN usuario usu ON cre.USER_ID = usu.id " +
+          "inner join integrante_semillero is2 on is2.USUARIO_ID = usu.id  " +
+          "inner join rol_semillero rs on rs.id = is2.ROL_ID  " +
           "where cre.email = :email"
           , nativeQuery = true)
   List<IGetAuthorities> getAuthoritiesSemillero (@Param("email") String email);
 
   @Query(value = "select " +
-          " CONCAT('GRUPO:', rg.rolGrupo) as authorities " +
+          " CONCAT('GRUPO:', rg.ROL_GRUPO) as authorities " +
           "from " +
           " credencial cre " +
-          "INNER JOIN usuario usu ON cre.userId = usu.id " +
-          "inner join integrante_grupo ig on ig.usuarioId = usu.id  " +
-          "inner join rol_grupo rg on rg.id = ig.rolGrupoId  " +
+          "INNER JOIN usuario usu ON cre.USER_ID = usu.id " +
+          "inner join integrante_grupo ig on ig.USUARIO_ID = usu.id  " +
+          "inner join rol_grupo rg on rg.id = ig.ROL_GRUPO_ID  " +
           "where cre.email = :email"
           , nativeQuery = true)
   List<IGetAuthorities> getAuthoritiesGrupo (@Param("email")String email);
