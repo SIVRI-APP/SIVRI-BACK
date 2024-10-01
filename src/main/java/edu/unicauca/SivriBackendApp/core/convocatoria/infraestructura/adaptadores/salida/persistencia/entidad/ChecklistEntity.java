@@ -22,11 +22,11 @@ public class ChecklistEntity {
     private long id;
 
     @ManyToOne()
-    @JoinColumn(name = "convocatoriaId")
+    @JoinColumn(name = "CONVOCATORIA_ID")
     private ConvocatoriaEntity convocatoria;
 
     @ManyToOne()
-    @JoinColumn(name = "documentoConvocatoriaId")
+    @JoinColumn(name = "DOCUMENTO_CONVOCATORIA_ID")
     private DocumentoConvocatoriaEntity documentoConvocatoria;
 
     @Enumerated(EnumType.STRING)

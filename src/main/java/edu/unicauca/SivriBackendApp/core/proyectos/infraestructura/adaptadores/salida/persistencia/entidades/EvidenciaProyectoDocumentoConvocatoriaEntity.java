@@ -16,11 +16,11 @@ public class EvidenciaProyectoDocumentoConvocatoriaEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "proyectoId")
+    @JoinColumn(name = "PROYECTO_ID")
     private ProyectoEntity proyecto;
 
     @ManyToOne()
-    @JoinColumn(name = "DocumentoConvocatoriaId")
+    @JoinColumn(name = "DOCUMENTO_CONVOCATORIA_ID")
     private DocumentoConvocatoriaEntity documentoConvocatoria;
 
     @Column(length = 256)

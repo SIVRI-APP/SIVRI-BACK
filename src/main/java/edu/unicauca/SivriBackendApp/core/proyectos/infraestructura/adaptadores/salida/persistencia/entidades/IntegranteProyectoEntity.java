@@ -29,15 +29,15 @@ public class  IntegranteProyectoEntity {
     private Boolean estado;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "usuarioId", nullable = false)
+    @JoinColumn(name = "USUARIO_ID", nullable = false)
     private UsuarioEntity usuario;
     
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "proyectoId", nullable = false)
+    @JoinColumn(name = "PROYECTO_ID", nullable = false)
     private ProyectoEntity proyecto;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "rolId", nullable = false)
+    @JoinColumn(name = "ROL_ID", nullable = false)
     private RolProyectoEntity rolProyecto;
 
     @Override

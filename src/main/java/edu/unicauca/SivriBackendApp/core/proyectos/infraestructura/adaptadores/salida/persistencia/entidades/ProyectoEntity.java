@@ -81,7 +81,7 @@ public class ProyectoEntity {
     private Set<CompromisoProyectoEntity> compromisos;
 
     @ManyToOne()
-    @JoinColumn(name = "convocatoriaId")
+    @JoinColumn(name = "CONVOCATORIA_ID")
     private ConvocatoriaEntity convocatoria;
 
 

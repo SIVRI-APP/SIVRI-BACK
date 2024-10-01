@@ -15,12 +15,12 @@ public class EnfoqueDiferencialListadoEntity {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "enfoqueDiferencialId")
+    @JoinColumn(name = "ENFOQUE_DIFERENCIAL_ID")
     @JsonManagedReference
     private EnfoqueDiferencialEntity enfoqueDiferencial;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "proyectoId")
+    @JoinColumn(name = "PROYECTO_ID")
     @JsonBackReference
     private ProyectoEntity proyecto;
 }
