@@ -16,7 +16,8 @@ import java.util.Set;
 public class DocumentoConvocatoriaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "documento_convocatoria_seq")
+    @SequenceGenerator(name = "documento_convocatoria_seq", sequenceName = "documento_convocatoria_seq", initialValue = 10, allocationSize = 1)
     private Long id;
 
     @Column(nullable = false, unique = true, length = 245)

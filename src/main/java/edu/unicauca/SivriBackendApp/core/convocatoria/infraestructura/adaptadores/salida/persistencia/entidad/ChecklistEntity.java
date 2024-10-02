@@ -18,7 +18,8 @@ import java.util.Objects;
 public class ChecklistEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "checklist_seq")
+    @SequenceGenerator(name = "checklist_seq", sequenceName = "checklist_seq", initialValue = 10, allocationSize = 1)
     private long id;
 
     @ManyToOne()

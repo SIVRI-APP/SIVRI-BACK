@@ -7,8 +7,10 @@ import lombok.Data;
 @Table(name = "programa")
 @Data
 public class ProgramaEntity {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "programa_seq")
+    @SequenceGenerator(name = "programa_seq", sequenceName = "programa_seq", initialValue = 10, allocationSize = 1)
     private Integer id;
 
     @Column(name = "nombre", length = 80, nullable = false)

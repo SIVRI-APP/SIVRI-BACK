@@ -15,7 +15,8 @@ import java.util.Objects;
 @Setter
 public class  IntegranteProyectoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "integrante_proyecto_seq")
+    @SequenceGenerator(name = "integrante_proyecto_seq", sequenceName = "integrante_proyecto_seq", initialValue = 10, allocationSize = 1)
     private Integer id;
 
     @Column(nullable = false)

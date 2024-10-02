@@ -11,8 +11,10 @@ import java.util.Set;
 @Table(name = "rol_proyecto")
 @Data
 public class RolProyectoEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rol_proyecto_seq")
+    @SequenceGenerator(name = "rol_proyecto_seq", sequenceName = "rol_proyecto_seq", initialValue = 10, allocationSize = 1)
     private Integer id;
 
     @Enumerated(EnumType.STRING)

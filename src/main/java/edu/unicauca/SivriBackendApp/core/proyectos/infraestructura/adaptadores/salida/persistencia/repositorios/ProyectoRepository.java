@@ -11,7 +11,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-import java.util.Set;
 
 
 @Repository
@@ -24,7 +23,7 @@ public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
             "FROM ProyectoEntity proyecto " +
             "WHERE proyecto.id = :proyectoId"
     )
-    Optional<ProyectoInformacionDetallada Proyeccion> obtenerProyectoInformacionDetallada1(@Param("proyectoId") long proyectoId);
+    Optional<ProyectoInformacionDetalladaProyeccion> obtenerProyectoInformacionDetallada1(@Param("proyectoId") long proyectoId);
 
     @Query(value = "SELECT DISTINCT p " +
             "FROM ProyectoEntity p " +

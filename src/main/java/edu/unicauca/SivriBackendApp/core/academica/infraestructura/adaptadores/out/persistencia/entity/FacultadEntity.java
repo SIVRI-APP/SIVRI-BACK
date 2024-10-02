@@ -1,10 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.entity;
 
-import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.out.persistencia.entity.GrupoEntity;
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.List;
 
 @Entity
 @Table(name = "facultad")
@@ -12,7 +9,8 @@ import java.util.List;
 public class FacultadEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "facultad_seq")
+    @SequenceGenerator(name = "facultad_seq", sequenceName = "facultad_seq", initialValue = 10, allocationSize = 1)
     private Integer idFacultad;
 
     @Column(name = "nombre", length = 80, nullable = false)
