@@ -21,25 +21,24 @@ public interface UsuarioSolicitudRepository extends JpaRepository<UsuarioSolicit
     boolean existsByCorreoOrTipoDocumentoAndNumeroDocumento(String correo, TipoDocumento tipoDocumento, String numeroDocumento);
 
     @Query(value = "SELECT " +
-            "  u.id, " +
-            "  u.correo, " +
-            "  u.tipoDocumento, " +
-            "  u.numeroDocumento, " +
-            "  u.nombre, " +
-            "  u.apellido, " +
-            "  u.tipoUsuario, " +
-            "  u.estado " +
-            "FROM " +
-            "  usuario_solicitud u " +
+            " u.id, " +
+            " u.correo, " +
+            " u.TIPO_DOCUMENTO , " +
+            " u.NUMERO_DOCUMENTO , " +
+            " u.nombre, " +
+            " u.apellido, " +
+            " u.TIPO_USUARIO , " +
+            " u.estado " +
+            "FROM usuario_solicitud u " +
             "WHERE " +
-            "  (LOWER(u.correo) LIKE COALESCE(LOWER(CONCAT('%', :correo, '%')), LOWER(u.correo)) OR :correo IS NULL) AND " +
-            "  (LOWER(u.tipoDocumento) LIKE COALESCE(LOWER(CONCAT('%', :tipoDocumento, '%')), LOWER(u.tipoDocumento)) OR :tipoDocumento IS NULL) AND " +
-            "  (LOWER(u.numeroDocumento) LIKE COALESCE(LOWER(CONCAT('%', :numeroDocumento, '%')), LOWER(u.numeroDocumento)) OR :numeroDocumento IS NULL) AND " +
-            "  (LOWER(u.nombre) LIKE COALESCE(LOWER(CONCAT('%', :nombre, '%')), LOWER(u.nombre)) OR :nombre IS NULL) AND " +
-            "  (LOWER(u.apellido) LIKE COALESCE(LOWER(CONCAT('%', :apellido, '%')), LOWER(u.apellido)) OR :apellido IS NULL) AND " +
-            "  (LOWER(u.tipoUsuario) LIKE COALESCE(LOWER(CONCAT('%', :tipoUsuario, '%')), LOWER(u.tipoUsuario)) OR :tipoUsuario IS NULL) AND " +
-            "  (LOWER(u.estado) LIKE COALESCE(LOWER(CONCAT('%', :estado, '%')), LOWER(u.estado)) OR :estado IS NULL) AND " +
-            "  (LOWER(u.creadoPorUsuarioId) LIKE COALESCE(LOWER(CONCAT('%', :creadoPorUsuarioId, '%')), LOWER(u.creadoPorUsuarioId)) OR :creadoPorUsuarioId IS NULL) "
+            " (:correo IS NULL OR LOWER(u.correo) LIKE LOWER('%' || :correo || '%')) " +
+            " AND (:tipoDocumento IS NULL OR LOWER(u.TIPO_DOCUMENTO) LIKE LOWER('%' || :tipoDocumento || '%')) " +
+            " AND (:numeroDocumento IS NULL OR LOWER(u.NUMERO_DOCUMENTO) LIKE LOWER('%' || :numeroDocumento|| '%')) " +
+            " AND (:nombre IS NULL OR LOWER(u.nombre) LIKE LOWER('%' || :nombre || '%')) " +
+            " AND (:apellido IS NULL OR LOWER(u.apellido) LIKE LOWER('%' || :apellido || '%')) " +
+            " AND (:tipoUsuario IS NULL OR LOWER(u.TIPO_USUARIO) LIKE LOWER('%' || :tipoUsuario|| '%')) " +
+            " AND (:estado IS NULL OR LOWER(u.estado) LIKE LOWER('%' || :estado|| '%')) " +
+            " AND (:creadoPorUsuarioId IS NULL OR LOWER(u.CREADO_POR_USUARIO_ID) LIKE LOWER('%' || :creadoPorUsuarioId|| '%')) "
             , nativeQuery = true)
     Page<UsuarioSolicitudListarConFiltroProyeccion> listarConFiltro(
             @Param("correo") String correo,
