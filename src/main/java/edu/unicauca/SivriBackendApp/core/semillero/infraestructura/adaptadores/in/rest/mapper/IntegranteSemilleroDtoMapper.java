@@ -16,20 +16,20 @@ public interface IntegranteSemilleroDtoMapper {
     @Mappings({
             @Mapping(source = "rolSemilleroId",target = "rolSemillero.id"),
             @Mapping(source = "usuarioId",target = "usuario.id"),
-            @Mapping(source = "semilleroId", target = "semillero.semilleroId")
+            @Mapping(source = "semilleroId", target = "semillero.semillero_Id")
     })
     IntegranteSemillero crear(final IntegranteSemilleroCrearDTO nuevoIntegranteSemillero);
     @Mappings({
             @Mapping(source = "rolSemilleroId",target = "rolSemillero.id"),
             @Mapping(source = "usuarioId", target = "usuario.id"),
-            @Mapping(source = "semilleroId", target = "semillero.semilleroId")
+            @Mapping(source = "semilleroId", target = "semillero.semillero_Id")
     })
     IntegranteSemillero crearMentor(final IntegranteSemilleroCrearMentorDto nuevoIntegranteSemillero);
 
     @Mapping(source = "rolSemilleroId",target = "rolSemillero.id")
     IntegranteSemillero actualizar(final IntegranteSemilleroActualizarDTO nuevoIntegrante);
     @Mappings({
-            @Mapping(source = "semillero.id",target = "semillero.semilleroId"),
+            @Mapping(source = "semillero.id",target = "semillero.semillero_Id"),
             @Mapping(source = "usuario", target = "usuario")
 
     })

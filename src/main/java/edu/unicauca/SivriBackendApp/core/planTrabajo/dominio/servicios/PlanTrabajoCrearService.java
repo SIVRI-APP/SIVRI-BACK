@@ -27,8 +27,10 @@ public class PlanTrabajoCrearService implements PlanTrabajoCrearCU {
 
     @Override
     public Respuesta<Boolean> crear( PlanTrabajo nuevoPlan) {
-        boolean existe= planTrabajoObtenerCU.existePorIdSemilleroyAnio(nuevoPlan.getSemillero().getSemilleroId(),nuevoPlan.getAnio()).getData();
-        Semillero semillero= semilleroObtenerCU.obtenerSemilleroPorId(nuevoPlan.getSemillero().getSemilleroId()).getData();
+        System.out.println("nuevo plan "+nuevoPlan);
+        boolean existe= planTrabajoObtenerCU.existePorIdSemilleroyAnio(nuevoPlan.getSemillero().getSemillero_Id(),nuevoPlan.getAnio()).getData();
+        System.out.println("existe:"+existe);
+        Semillero semillero= semilleroObtenerCU.obtenerSemilleroPorId(nuevoPlan.getSemillero().getSemillero_Id()).getData();
         nuevoPlan.setSemillero(semillero);
         Boolean respuesta= planTrabajoCrearREPO.crear(nuevoPlan);
         if (!respuesta){

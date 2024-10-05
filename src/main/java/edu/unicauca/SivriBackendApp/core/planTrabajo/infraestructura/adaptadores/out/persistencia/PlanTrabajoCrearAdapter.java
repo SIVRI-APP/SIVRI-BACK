@@ -19,7 +19,9 @@ public class PlanTrabajoCrearAdapter implements PlanTrabajoCrearREPO {
 
     @Override
     public Boolean crear(PlanTrabajo nuevoPlan) {
+        System.out.println("adapter nuevo plan "+nuevoPlan);
         PlanTrabajoEntity plan= planTrabajoRepository.save(planTrabajoMapper.obtenerEntity(nuevoPlan));
+        System.out.println("adapter entity plan "+plan);
         return true;
     }
 }

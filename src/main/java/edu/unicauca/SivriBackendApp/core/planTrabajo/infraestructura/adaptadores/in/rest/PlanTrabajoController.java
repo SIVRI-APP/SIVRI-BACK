@@ -103,6 +103,7 @@ public class PlanTrabajoController {
             "'SEMILLERO:MENTOR' )"
     )
     public ResponseEntity<Respuesta> crear(@Valid @RequestBody PlanTrabajoCrearDTO nuevoPlan){
+        System.out.println("dto nuevo plan"+nuevoPlan);
         Respuesta respuesta = planTrabajoCrearCU.crear(planTrabajoDtoMapper.crear(nuevoPlan));
         return ResponseEntity.ok().body(respuesta);
 

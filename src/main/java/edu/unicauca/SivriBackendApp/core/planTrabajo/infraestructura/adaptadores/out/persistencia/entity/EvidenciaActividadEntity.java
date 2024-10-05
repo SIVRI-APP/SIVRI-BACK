@@ -8,7 +8,9 @@ import lombok.Data;
 @Data
 public class EvidenciaActividadEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "evidencia_actividad_seq")
+    @SequenceGenerator(name = "evidencia_actividad_seq",sequenceName = "evidenciaActividad_sequence", initialValue = 3, allocationSize = 1)
+
     private Integer id;
     @Column(length = 145)
     private String evidencia;

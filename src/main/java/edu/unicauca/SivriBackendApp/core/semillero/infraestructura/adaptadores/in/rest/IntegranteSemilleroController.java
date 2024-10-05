@@ -14,6 +14,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.i
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.respuesta.SemilleroObtenerDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.mapper.IntegranteSemilleroDtoMapper;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
@@ -26,18 +27,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("integranteSemillero")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@AllArgsConstructor
 public class IntegranteSemilleroController {
      private final IntegranteSemilleroObtenerCU integranteSemilleroObtenerCU;
      private final IntegranteSemilleroCrearCU integranteSemilleroCrearCU;
      private final IntegranteSemilleroActualizarCU integranteSemilleroActualizarCU;
      private final IntegranteSemilleroDtoMapper integranteSemilleroDtoMapper;
 
-     public IntegranteSemilleroController(IntegranteSemilleroObtenerCU integranteSemilleroObtenerCU, IntegranteSemilleroCrearCU integranteSemilleroCrearCU, IntegranteSemilleroActualizarCU integranteSemilleroActualizarCU, IntegranteSemilleroDtoMapper integranteSemilleroDtoMapper) {
-          this.integranteSemilleroObtenerCU = integranteSemilleroObtenerCU;
-          this.integranteSemilleroCrearCU = integranteSemilleroCrearCU;
-          this.integranteSemilleroActualizarCU = integranteSemilleroActualizarCU;
-          this.integranteSemilleroDtoMapper = integranteSemilleroDtoMapper;
-     }
      @GetMapping("paginado")
      @PreAuthorize("hasAnyAuthority(" +
              "'FUNCIONARIO:SEMILLEROS')")

@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class Semillero extends OrganismoDeInvestigacion {
-    private Integer semilleroId;
+    private Integer semillero_Id;
     private SemilleroEstado estado;
     private String correo;
     private String sede;

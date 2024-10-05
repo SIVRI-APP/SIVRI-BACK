@@ -13,7 +13,8 @@ import java.time.LocalDate;
 @Data
 public class ActividadPlanTrabajoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "actividad_plan_trabajo_seq")
+    @SequenceGenerator(name = "actividad_plan_trabajo_seq", sequenceName = "actividadPlanTrabajo_sequence",initialValue = 4,allocationSize = 1)
     private Integer id;
     @Column(length = 1045)
     private String objetivo;

@@ -14,12 +14,14 @@ import java.util.List;
 @Repository
 public interface ISemilleroProgramaRepository extends JpaRepository<SemilleroProgramaEntity,Long> {
     public List<SemilleroProgramaEntity> findBySemilleroId(int semilleroId);
+    //query actualizada oracle ok
     @Query(value = "SELECT sp.id,p.nombre " +
             "FROM semillero_programa sp " +
-            "INNER JOIN programa p ON sp.idPrograma=p.id " +
-            "WHERE sp.semilleroId=(:semilleroId);",nativeQuery = true)
+            "INNER JOIN programa p ON sp.id_Programa=p.id " +
+            "WHERE sp.semillero_Id=(:semilleroId)",nativeQuery = true)
     Page<ListarProgramas> obtenerProgramasxSemilleroId(
             @Param("semilleroId") Integer semilleroId,
             @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable);
+
 
 }

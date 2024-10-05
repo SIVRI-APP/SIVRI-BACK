@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class LineaInvestigacionCrearDTO {
     //@NotNull(message = "el nombre de la linea no puede ser nulo.")
-    private Integer semilleroId;
+    private Integer semillero_Id;
     @NotEmpty(message = "el nombre de la linea no puede ser nulo.")
     @NotBlank(message = "nombre invalido")
     private String linea;

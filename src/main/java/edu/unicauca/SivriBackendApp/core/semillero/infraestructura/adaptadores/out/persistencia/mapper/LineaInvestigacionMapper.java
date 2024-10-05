@@ -7,8 +7,8 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface LineaInvestigacionMapper {
-    @Mapping(source = "semillero.id",target = "semilleroId")
+    @Mapping(source = "semillero.id",target = "semillero_Id")
     LineaInvestigacion obtenerModelo(final LineaInvestigacionEntity lineaInvestigacionEntity);
-    @Mapping(source = "semilleroId",target = "semillero.id")
+    @Mapping(source = "semillero_Id",target = "semillero.id")
     LineaInvestigacionEntity obtenerEntity(final LineaInvestigacion lineaInvestigacion);
 }

@@ -37,6 +37,7 @@ public class SemilleroProgramaCrearService implements SemilleroProgramaCrearCU {
         objSemilleroPrograma.setSemillero(semilleroObtenido);
         objSemilleroPrograma.setPrograma(programaObtenido);
         Boolean respuesta=semilleroProgramaCrearREPO.crear(objSemilleroPrograma);
+        System.out.println("respuesta "+respuesta);
         if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.creacion.objeto", List.of("Semillero Programa", "IdSemillero","IdPrograma", String.valueOf(semilleroId),String.valueOf(programaId)));
         }

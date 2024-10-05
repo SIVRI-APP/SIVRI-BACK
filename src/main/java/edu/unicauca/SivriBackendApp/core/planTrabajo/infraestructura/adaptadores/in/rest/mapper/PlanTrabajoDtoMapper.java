@@ -16,8 +16,9 @@ public interface PlanTrabajoDtoMapper {
   //  @Mapping(source = "semilleroId",target = "semillero.semilleroId")
 
     @Mappings({@Mapping(source = "anio",target = "anio"),
-               @Mapping(source = "idSemillero", target = "semillero.semilleroId"),
-            @Mapping(source = "estado",target = "estado")
+               @Mapping(source = "id_Semillero", target = "semillero.semillero_Id"),
+            @Mapping(source = "estado",target = "estado"),
+            @Mapping(source = "nombre_Plan", target = "nombre_Plan")
     })
     PlanTrabajo crear(final PlanTrabajoCrearDTO nuevoPlan);
     @Mapping(source = "anio",target = "anio")

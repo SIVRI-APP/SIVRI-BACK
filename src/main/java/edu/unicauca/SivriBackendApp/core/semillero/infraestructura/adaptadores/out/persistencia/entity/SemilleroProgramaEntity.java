@@ -10,13 +10,14 @@ import lombok.Data;
 @Data
 public class SemilleroProgramaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "semillero_programa_seq")
+    @SequenceGenerator(name = "semillero_programa_seq",sequenceName = "semillero_programa_sequence", initialValue = 3, allocationSize = 1)
     private long id;
     @ManyToOne(optional = false)
-    @JoinColumn(name = "semilleroId",referencedColumnName = "id")
+    @JoinColumn(name = "semillero_Id",referencedColumnName = "id")
     private SemilleroEntity semillero;
     @ManyToOne(optional = false)
-    @JoinColumn(name = "idPrograma", referencedColumnName = "id")
+    @JoinColumn(name = "id_Programa", referencedColumnName = "id")
     private ProgramaEntity programa;
 
 }

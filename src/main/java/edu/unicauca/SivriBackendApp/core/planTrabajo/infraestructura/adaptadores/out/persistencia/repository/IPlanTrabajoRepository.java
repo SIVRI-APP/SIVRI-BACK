@@ -17,9 +17,9 @@ import java.util.Optional;
 
 @Repository
 public interface IPlanTrabajoRepository extends JpaRepository<PlanTrabajoEntity,Integer> {
-    @Query(value = "SELECT COUNT(*) > 0  AS existe_registro " +
+    @Query(value = "SELECT COUNT(*) AS existe_registro " +
             "FROM plan_trabajo pt " +
-            "WHERE pt.anio = (:anio) and pt.semilleroId=(:idSemillero);",nativeQuery = true)
+            "WHERE pt.anio = (:anio) and pt.semillero_Id=(:idSemillero)",nativeQuery = true)
     public Integer existePorIdsemilleroyAnio(Integer idSemillero,Integer anio);
     public List<PlanTrabajoEntity> findBySemilleroId(int semilleroId);
 
@@ -41,11 +41,11 @@ public interface IPlanTrabajoRepository extends JpaRepository<PlanTrabajoEntity,
             @Param("fechaFin") LocalDate fechaFin,
             @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable
     );
-    @Query(value = "SELECT pt.id,pt.nombrePlan,pt.anio,pt.estado " +
+    @Query(value = "SELECT pt.id,pt.nombre_Plan,pt.anio,pt.estado " +
             "FROM plan_trabajo pt " +
-            "WHERE pt.semilleroId=(:idSemillero) " +
+            "WHERE pt.semillero_Id=(:idSemillero) " +
             "AND (pt.anio = :anio OR :anio IS NULL) " +
-            "AND (LOWER(pt.estado) = COALESCE(LOWER(:estado),LOWER(pt.estado)) OR :estado IS NULL);",nativeQuery = true)
+            "AND (LOWER(pt.estado) = COALESCE(LOWER(:estado),LOWER(pt.estado)) OR :estado IS NULL)",nativeQuery = true)
     public Page<List<ListarPlanTrabajo>> listarPlanTrabajoxFiltro(
             @Param("anio") Integer anio,
             @Param("idSemillero") Integer idSemillero,

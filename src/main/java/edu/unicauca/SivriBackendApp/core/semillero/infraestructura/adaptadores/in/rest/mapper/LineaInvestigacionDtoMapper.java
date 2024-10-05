@@ -10,7 +10,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface LineaInvestigacionDtoMapper {
     LineaInvestigacion actualizarLinea(final LineaInvestigacionActualizarDTO nuevaLInea);
-    @Mapping(source = "semilleroId",target = "semilleroId")
+    @Mapping(source = "semillero_Id",target = "semillero_Id")
     LineaInvestigacion asociarLineaASemillero(final LineaInvestigacionCrearDTO lineaInvestigacionCrearDTO);
     LineaInvestigacionObtenerDTO obtenerLineasInvestigacion(final LineaInvestigacion obtenerModelo);
 }

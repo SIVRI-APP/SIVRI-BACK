@@ -57,7 +57,7 @@ public class SemilleroCrearService implements SemilleroCrearCU {
         //obtengo la informacion del mentor
         Respuesta<UsuarioInformacionDetalladaProyeccion> mentorInfo= usuarioObtenerCU.obtenerUsuarioInformacionDetallada(mentorId);
         //enviar el correo notificando al mentor
-        semilleroObtenerCU.notificacionCorreoMentorSemillero(semilleroCreado.getSemilleroId(),semilleroCreado.getNombre(),mentorId);
+        semilleroObtenerCU.notificacionCorreoMentorSemillero(semilleroCreado.getSemillero_Id(),semilleroCreado.getNombre(),mentorId);
         /*if (!respuesta){
             throw new ReglaDeNegocioException("bad.error.creacionSemilleroIntegrante.objeto", List.of("Semillero", "Id", String.valueOf(semillero.getId())*//*,"Mentor ","Id",String.valueOf(objIntegrante.getId()*//*));
         }*/

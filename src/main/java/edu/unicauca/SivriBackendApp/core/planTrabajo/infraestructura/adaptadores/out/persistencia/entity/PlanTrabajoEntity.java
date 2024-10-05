@@ -8,22 +8,23 @@ import lombok.Data;
 
 @Entity
 @Table(name = "plan_trabajo", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"semilleroId", "anio"})
+        @UniqueConstraint(columnNames = {"semillero_Id", "anio"})
 })
 @Data
 public class PlanTrabajoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "plan_trabajo_seq")
+    @SequenceGenerator(name = "plan_trabajo_seq",sequenceName = "PlanTrabajo_sequence", initialValue = 3, allocationSize = 1)
     private Integer id;
     @Column(length = 45)
-    private String nombrePlan;
+    private String nombre_Plan;
     @Column(length = 10,nullable = false)
     @Enumerated(EnumType.STRING)
     private EstadoPlanTrabajo estado;
     //relacion *a1 semillero
     @ManyToOne(optional = false)
     @JsonManagedReference
-    @JoinColumn(name = "semilleroId")
+    @JoinColumn(name = "semillero_Id")
     private SemilleroEntity semillero;
     private Integer anio;
     //relacion 1a* actividadPlanTrabajo
@@ -36,7 +37,7 @@ public class PlanTrabajoEntity {
     public String toString() {
         return "PlanTrabajoEntity{" +
                 "id=" + id +
-                ", nombrePlan='" + nombrePlan + '\'' +
+                ", nombrePlan='" + nombre_Plan + '\'' +
                 ", estado=" + estado +
                 ", semillero=" + semillero +
                 ", anio=" + anio +

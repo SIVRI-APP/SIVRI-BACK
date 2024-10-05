@@ -21,9 +21,9 @@ public  class SemilleroActualizarService implements SemilleroActualizarCU {
 
     @Override
     public Respuesta<Boolean> actualizarPorApoyo(Semillero nuevoSemillero) {
-        semilleroObtenerCU.existePorId(nuevoSemillero.getSemilleroId());
+        semilleroObtenerCU.existePorId(nuevoSemillero.getSemillero_Id());
         String nombreLLega=nuevoSemillero.getNombre();
-        Semillero objSemilleroActualizar = semilleroObtenerCU.obtenerSemilleroPorId(nuevoSemillero.getSemilleroId()).getData();
+        Semillero objSemilleroActualizar = semilleroObtenerCU.obtenerSemilleroPorId(nuevoSemillero.getSemillero_Id()).getData();
         String nombreBd=objSemilleroActualizar.getNombre();
         if (!Objects.equals(nombreLLega, nombreBd)){
             semilleroObtenerCU.existePorNombre(nuevoSemillero.getNombre());
@@ -51,16 +51,16 @@ public  class SemilleroActualizarService implements SemilleroActualizarCU {
         objSemilleroActualizar.setEstado(nuevoEstadoSemillero.getEstado());
         Boolean respuesta=semilleroActualizarREPO.actualizarEstadoSemillero(objSemilleroActualizar);
         if (!respuesta){
-            throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Semillero", "Id", String.valueOf(objSemilleroActualizar.getSemilleroId())));
+            throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Semillero", "Id", String.valueOf(objSemilleroActualizar.getSemillero_Id())));
         }
         return new RespuestaHandler<>(200, "success.actualizacion.objeto", List.of("Estado Semillero"), "", true).getRespuesta();
     }
 
     @Override
     public Respuesta<Boolean> actualizarPorMentor(Semillero nuevoSemillero) {
-        semilleroObtenerCU.existePorId(nuevoSemillero.getSemilleroId());
+        semilleroObtenerCU.existePorId(nuevoSemillero.getSemillero_Id());
         String nombreLLega=nuevoSemillero.getNombre();
-        Semillero objSemilleroActualizar = semilleroObtenerCU.obtenerSemilleroPorId(nuevoSemillero.getSemilleroId()).getData();
+        Semillero objSemilleroActualizar = semilleroObtenerCU.obtenerSemilleroPorId(nuevoSemillero.getSemillero_Id()).getData();
         String nombreBd=objSemilleroActualizar.getNombre();
         if (!Objects.equals(nombreLLega, nombreBd)){
             semilleroObtenerCU.existePorNombre(nuevoSemillero.getNombre());

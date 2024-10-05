@@ -12,6 +12,7 @@ import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.in.rest.mapper.ActividadPlanTrabajoDtoMapper;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,17 +22,17 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+
 @RequestMapping("actividadesPlanTrabajo")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@AllArgsConstructor
+
 public class ActividadPlanTrabajoController {
     private final ActividadPlanTrabajoObtenerCU actividadPlanTrabajoObtenerCU;
     private final ActividadPlanTrabajoCrearCU actividadPlanTrabajoCrearCU;
     private final ActividadPlanTrabajoActualizarCU actividadPlanTrabajoActualizarCU;
     private final ActividadPlanTrabajoEliminarCU actividadPlanTrabajoEliminarCU;
     private final ActividadPlanTrabajoDtoMapper actividadPlanTrabajoDtoMapper;
-
-
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyAuthority(" +

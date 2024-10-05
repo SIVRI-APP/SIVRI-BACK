@@ -13,10 +13,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface ILineaInvestigacionRepository extends JpaRepository<LineaInvestigacionEntity,Integer> {
-    public List<LineaInvestigacionEntity> findBySemilleroId(int semilleroId);
+    public List<LineaInvestigacionEntity> findBySemillero_Id(int semilleroId);
 
      @Query(value = "select * from linea_investigacion li " +
-            "where li.semilleroId=(:semilleroId);",nativeQuery = true)
+             "          where li.semillero_Id=(:semilleroId)",nativeQuery = true)
     public Page<List<ListarLineasInvestigacion>> obtenerLineaxSemilleroId(@Param("semilleroId") int semilleroId,
                                                                           @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable);
 }

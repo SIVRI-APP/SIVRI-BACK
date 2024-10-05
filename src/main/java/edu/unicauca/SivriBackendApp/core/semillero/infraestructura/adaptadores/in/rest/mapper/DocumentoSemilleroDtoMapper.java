@@ -13,7 +13,7 @@ import org.mapstruct.Mapping;
 public interface DocumentoSemilleroDtoMapper {
     DocumentoSemilleroObtenerDTO obtenerDocumentoSemillero(final DocumentoSemillero obtenerModelo);
     DocumentoSemillero actualizarDocumento(final DocumentoSemilleroActualizarDTO documentonuevo);
-    @Mapping(source = "idSemillero",target = "semillero.semilleroId")
+    @Mapping(source = "idSemillero",target = "semillero.semillero_Id")
     DocumentoSemillero obtenerDocumentoxSubir(final DocumentoSemilleroSubirDTO documentoSemilleroSUbirDto);
     DocumentoSemilleroDatos obtenerDatosDocumentos(final DocumentoSemilleroSubirDocumentoDTO documentosDto);
 

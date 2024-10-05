@@ -41,7 +41,7 @@ public class LineaInvestigacionObtenerAdapter implements LineaInvestigacionObten
 
     @Override
     public List<LineaInvestigacion> obtenertotListadoLineasInvestigacion(int idSemillero) {
-        return lineaInvestigacionRepository.findBySemilleroId(idSemillero).stream().map(lineaInvestigacionMapper::obtenerModelo).collect(Collectors.toList());
+        return lineaInvestigacionRepository.findBySemillero_Id(idSemillero).stream().map(lineaInvestigacionMapper::obtenerModelo).collect(Collectors.toList());
     }
 
     @Override

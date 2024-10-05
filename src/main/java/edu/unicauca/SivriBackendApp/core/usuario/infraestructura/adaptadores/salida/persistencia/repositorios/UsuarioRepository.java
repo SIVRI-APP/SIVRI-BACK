@@ -73,25 +73,25 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
             @Param("usuarioId") long usuarioId);
 
     @Query(value = "select " +
-            " u.id, " +
-            " u.numeroDocumento, " +
-            " u.tipoDocumento, " +
-            " u.nombre, " +
-            " u.apellido, " +
-            " u.correo, " +
-            " u.telefono, " +
-            " u.cvLac, " +
-            " u.sexo, " +
-            " u.tipoUsuario, " +
-            " dep.nombre as departamentoNombre, " +
-            " pro.nombre as programaNombre " +
-            "from " +
-            " usuario u " +
-            "left join departamento dep on dep.id = u.departamentoId  " +
-            "left join programa pro on pro.id = u.programaId  " +
-            "where " +
-            " u.numeroDocumento = :usuarioNumDoc AND " +
-            " u.tipoDocumento = :tipoDocumento"
+            "             u.id, " +
+            "             u.numero_Documento, " +
+            "             u.tipo_Documento, " +
+            "             u.nombre, " +
+            "             u.apellido, " +
+            "             u.correo, " +
+            "             u.telefono, " +
+            "             u.cv_Lac, " +
+            "             u.sexo, " +
+            "             u.tipo_Usuario, " +
+            "             dep.nombre as departamentoNombre, " +
+            "             pro.nombre as programaNombre " +
+            "            from " +
+            "             usuario u " +
+            "            left join departamento dep on dep.id = u.departamento_Id  " +
+            "            left join programa pro on pro.id = u.programa_Id  " +
+            "            where " +
+            "             u.numero_Documento = :usuarioNumDoc AND " +
+            "             u.tipo_Documento = :tipoDocumento"
             , nativeQuery = true)
     Optional<UsuarioInformacionDetalladaProyeccion> obtenerUsuarioInformacionDetalladaPorDocumento(
             @Param("usuarioNumDoc") long usuarioNumDoc,

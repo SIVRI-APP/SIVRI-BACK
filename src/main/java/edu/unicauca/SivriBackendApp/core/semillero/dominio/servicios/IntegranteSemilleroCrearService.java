@@ -29,8 +29,8 @@ public class IntegranteSemilleroCrearService implements IntegranteSemilleroCrear
     @Override
     public Respuesta<Boolean> crear(IntegranteSemillero nuevosIntegranteSemillero) {
 
-        nuevosIntegranteSemillero.getSemillero().setId(nuevosIntegranteSemillero.getSemillero().getSemilleroId());
-        semilleroObtenerCU.existePorId(nuevosIntegranteSemillero.getSemillero().getSemilleroId());
+        nuevosIntegranteSemillero.getSemillero().setId(nuevosIntegranteSemillero.getSemillero().getSemillero_Id());
+        semilleroObtenerCU.existePorId(nuevosIntegranteSemillero.getSemillero().getSemillero_Id());
         rolesSemilleroObtenerCU.existePorId(nuevosIntegranteSemillero.getRolSemillero().getId());
         nuevosIntegranteSemillero.setEstado(EstadoIntegranteSemillero.ACTIVO);
         nuevosIntegranteSemillero.setFechaIngreso(LocalDate.now());

@@ -8,11 +8,11 @@ import lombok.Data;
 
 @Data
 public class PlanTrabajoCrearDTO {
-    private Integer idSemillero;
+    private Integer id_Semillero;
     @NotNull(message = "El nombre del plan de trabajo no puede ser Nulo")
     @NotEmpty(message = "El nombre del plan de trabajo no puede ser Nulo")
     @Size(min = 4,max = 45,message = "el  nombre del plan de trabajo debe estar entre 4 y 45 caracteres")
-    private String nombrePlan;
+    private String nombre_Plan;
     @NotNull(message = "El año del plan de trabajo no puede ser nulo.")
     private Integer anio;
     private EstadoPlanTrabajo estado;

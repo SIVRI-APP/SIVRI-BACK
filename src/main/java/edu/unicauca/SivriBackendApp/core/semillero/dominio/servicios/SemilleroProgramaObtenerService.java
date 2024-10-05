@@ -7,6 +7,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.Semillero
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.out.SemilleroProgramaObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroPrograma;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarProgramas;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +17,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@AllArgsConstructor
 public class SemilleroProgramaObtenerService implements SemilleroProgramaObtenerCU {
     private final SemilleroProgramaObtenerREPO semilleroProgramaObtenerREPO;
-
-    public SemilleroProgramaObtenerService(SemilleroProgramaObtenerREPO semilleroProgramaObtenerREPO) {
-        this.semilleroProgramaObtenerREPO = semilleroProgramaObtenerREPO;
-    }
 
     @Override
     public Respuesta<Boolean> existePorId(long id) {
@@ -55,5 +53,7 @@ public class SemilleroProgramaObtenerService implements SemilleroProgramaObtener
 
         return new RespuestaHandler<>(200, "sucess.operacion.exitosa", "", respuestaBd).getRespuesta();
     }
+
+
 
 }

@@ -9,7 +9,7 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring",uses = {})
 public interface SemilleroMapper {
     @Mappings({
-        @Mapping(source = "id",target = "semilleroId"),
+        @Mapping(source = "id",target = "semillero_Id"),
         @Mapping(source = "grupo.id",target = "grupoId"),
         //@Mapping(source = "correo",target = "correo")
       //  @Mapping(source = "integrantes",target = "integrantes")

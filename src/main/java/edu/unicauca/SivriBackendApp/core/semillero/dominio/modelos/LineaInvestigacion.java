@@ -6,5 +6,5 @@ import lombok.Data;
 public class LineaInvestigacion {
     private Integer id;
     private String linea;
-    private Integer semilleroId;
+    private Integer semillero_Id;
 }

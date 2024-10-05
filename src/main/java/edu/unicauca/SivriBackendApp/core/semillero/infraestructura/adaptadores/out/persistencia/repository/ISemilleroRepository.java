@@ -57,15 +57,18 @@ public interface ISemilleroRepository extends JpaRepository<SemilleroEntity, Int
             @Param("estado") String estado,
             @PageableDefault(size = 10,page = 0,sort = "id")Pageable pageable);
     // CONSULTA LOS SEMILLEROS DE UN MENTOR
-    @Query(value = "SELECT s.semilleroId,oi.nombre,s.estado " +
-            "            FROM semillero s left JOIN organismo_de_investigacion oi " +
-            "            ON s.semilleroId=oi.id " +
-            "            inner join integrante_semillero ins on ins.semilleroId=s.semilleroId " +
-            "            WHERE " +
-            "               (LOWER(oi.nombre) LIKE %:nombre% OR LOWER(oi.nombre) = COALESCE(LOWER(:nombre),LOWER(oi.nombre) ) OR :nombre IS NULL) " +
-            "               AND (LOWER(s.estado) = COALESCE(LOWER(:estado),LOWER(s.estado)) OR :estado IS NULL) " +
-            "               AND ((s.semilleroId) like (:semilleroId) or (s.semilleroId)= coalesce((:semilleroId),(s.semilleroId)) or (:semilleroId) IS NULL) " +
-            "               AND ins.usuarioId = (:usuarioId) and ins.rolId=2;",nativeQuery = true)
+
+    //ACTUALIZACION ORACLE OK
+    @Query(value = "SELECT s.SEMILLERO_ID, oi.nombre, s.estado \n" +
+            "               FROM semillero s \n" +
+            "               LEFT JOIN organismo_de_investigacion oi ON s.SEMILLERO_ID = oi.id \n" +
+            "               INNER JOIN integrante_semillero ins ON ins.SEMILLERO_ID = s.SEMILLERO_ID \n" +
+            "               WHERE \n" +
+            "               (LOWER(oi.nombre) LIKE '%' || LOWER(:nombre) || '%' OR LOWER(oi.nombre) = COALESCE(LOWER(:nombre), LOWER(oi.nombre)) OR :nombre IS NULL) \n" +
+            "               AND (LOWER(s.estado) = COALESCE(LOWER(:estado), LOWER(s.estado)) OR :estado IS NULL) \n" +
+            "               AND (s.SEMILLERO_ID LIKE COALESCE(:semilleroId, s.SEMILLERO_ID) OR (:semilleroId IS NULL)) \n" +
+            "               AND ins.USUARIO_ID = :usuarioId \n" +
+            "               AND ins.ROL_ID = 2",nativeQuery = true)
     Page<List<ListarSemillerosConFiltroxMentor>> listarSemillerosConFiltroxMentor(
             @Param("semilleroId") Integer semilleroId,
             @Param("usuarioId") Long usuarioId,

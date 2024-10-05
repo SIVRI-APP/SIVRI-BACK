@@ -48,6 +48,8 @@ public class SemilleroProgramaController {
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR')")
     public ResponseEntity<Respuesta> crear(@RequestParam(value = "idSemillero") int idSemillero,@Valid @RequestParam("programaId") int idPrograma){
+        System.out.println("semillero id controller "+idSemillero);
+        System.out.println("programa id controller "+idPrograma);
         Respuesta respuesta =semilleroProgramaCrearCU.crear(idSemillero,idPrograma);
         return ResponseEntity.ok().body(respuesta);
     }

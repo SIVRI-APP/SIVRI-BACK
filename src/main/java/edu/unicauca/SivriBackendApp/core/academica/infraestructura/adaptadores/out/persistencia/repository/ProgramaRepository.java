@@ -10,12 +10,12 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ProgramaRepository extends JpaRepository<ProgramaEntity, Integer> {
-    @Query(value = "SELECT pr.id,pr.nombre FROM programa pr\n" +
-            "WHERE pr.departamentoId=(SELECT d.id FROM semillero s\n" +
-            "INNER JOIN grupo g on s.grupoId=g.grupoId\n" +
-            "INNER JOIN departamento d on d.id=g.departamentoId\n" +
-            "WHERE s.semilleroId=(:semilleroId)\n" +
-            ");\n", nativeQuery = true)
+    //oracle ok
+    @Query(value = "SELECT pr.id,pr.nombre FROM programa pr " +
+            "            WHERE pr.departamento_Id=(SELECT d.id FROM semillero s " +
+            "            INNER JOIN grupo g on s.grupo_Id=g.grupo_Id " +
+            "            INNER JOIN departamento d on d.id=g.departamento_Id " +
+            "            WHERE s.semillero_Id=(:semilleroId))", nativeQuery = true)
     List<ListarProgramas> listarProgramaxDepartamento(
             @Param("semilleroId") Integer semilleroId
     );

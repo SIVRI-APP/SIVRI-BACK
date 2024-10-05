@@ -9,9 +9,10 @@ import java.util.List;
 
 public interface IGrupoDisciplinaRepository extends JpaRepository<GrupoDisciplinaEntity, Long> {
     public List<GrupoDisciplinaEntity> findByGrupoId(int grupoId);
-    @Query(value = "select gd.id,gd.grupoId,d.id as idDisciplina,d.disciplina " +
-            "from grupo_disciplina gd " +
-            "inner join disciplina d on d.id=gd.disciplinaId " +
-            "where gd.grupoId=(:grupoId);",nativeQuery = true)
+    //query actualizada oracle ok
+    @Query(value = "select gd.id,gd.grupo_Id,d.id as idDisciplina,d.disciplina \n" +
+            "from grupo_disciplina gd \n" +
+            "inner join disciplina d on d.id=gd.disciplina_Id \n" +
+            "where gd.grupo_Id=(:grupoId)",nativeQuery = true)
     List<ListarDisciplinasPorGrupoId> obtenerDisciplinasxGrupoId(int grupoId);
 }

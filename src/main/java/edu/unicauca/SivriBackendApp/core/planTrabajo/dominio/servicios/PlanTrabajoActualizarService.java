@@ -27,7 +27,7 @@ public class PlanTrabajoActualizarService implements PlanTrabajoActualizarCU {
     public Respuesta<Boolean> actualizar(int idPlan, PlanTrabajo nuevosDatosPlan) {
         try {
             PlanTrabajo objPlanActualizar= planTrabajoObtenerCU.obtenerPorId(idPlan).getData();
-            objPlanActualizar.setNombrePlan(nuevosDatosPlan.getNombrePlan());
+            objPlanActualizar.setNombre_Plan(nuevosDatosPlan.getNombre_Plan());
             objPlanActualizar.setEstado(nuevosDatosPlan.getEstado());
             objPlanActualizar.setAnio(nuevosDatosPlan.getAnio());
             boolean respuesta = planTrabajoActualizarREPO.actualizar(objPlanActualizar);

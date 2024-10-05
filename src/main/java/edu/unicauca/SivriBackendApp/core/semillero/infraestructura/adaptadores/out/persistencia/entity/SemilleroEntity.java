@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "semillero")
 @Data
 //relacion de herencia
-@PrimaryKeyJoinColumn(name = "semilleroId")
+@PrimaryKeyJoinColumn(name = "semillero_Id")
 public class SemilleroEntity extends OrganismoDeInvestigacionEntity {
 
     @Column(nullable = false,length = 10)

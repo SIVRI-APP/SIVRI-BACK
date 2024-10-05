@@ -4,7 +4,7 @@ import edu.unicauca.SivriBackendApp.core.planTrabajo.dominio.modelos.EstadoPlanT
 
 public interface ListarPlanTrabajo {
     Integer getId();
-    String getNombrePlan();
+    String getNombre_Plan();
     EstadoPlanTrabajo getEstado();
     Integer getAnio();
 

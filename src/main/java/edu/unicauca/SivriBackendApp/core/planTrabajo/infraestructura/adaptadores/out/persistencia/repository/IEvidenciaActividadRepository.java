@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface IEvidenciaActividadRepository extends JpaRepository<EvidenciaActividadEntity, Integer> {
-    @Query(value = "SELECT COALESCE((SELECT ea.id FROM evidencia_actividad ea WHERE ea.actividadId = :id), 0) AS id;",nativeQuery = true)
+    @Query(value = "SELECT COALESCE((SELECT ea.id FROM evidencia_actividad ea WHERE ea.actividad_Id = :id), 0) AS id FROM dual",nativeQuery = true)
     public Integer existexActividadId(@Param("id") int id);
 
 }
