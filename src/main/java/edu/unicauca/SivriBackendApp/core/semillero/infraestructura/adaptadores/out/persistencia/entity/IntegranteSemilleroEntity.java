@@ -18,7 +18,8 @@ import java.time.LocalDate;
 public class IntegranteSemilleroEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "integrante_semillero_seq")
+    @SequenceGenerator(name = "integrante_semillero_seq", sequenceName = "integrante_semillero_sequence", initialValue = 6,allocationSize = 1)
     @Column(name = "idIntegranteSemillero")
     private Integer id;
 

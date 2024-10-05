@@ -14,6 +14,7 @@ import java.util.List;
 public class DocumentoSemilleroEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+
     private Integer id;
     @Column(length = 85)
     @Enumerated(EnumType.STRING)

@@ -26,13 +26,13 @@ public interface IGrupoRepository extends JpaRepository<GrupoEntity,Integer> {
             @Param("idDirector") int idDirector,
             @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable
     );
-
-    @Query(value = "SELECT ig.grupoId,oi.nombre,ig.usuarioId " +
-            "FROM integrante_grupo ig " +
-            "   INNER JOIN grupo g ON ig.grupoId=g.grupoId " +
-            "   INNER JOIN organismo_de_investigacion oi ON oi.id=g.grupoId " +
-            "WHERE " +
-            "   ig.rolGrupoId=1 AND ig.usuarioId=(:idDirector);",nativeQuery = true)
+    //query ok
+    @Query(value = "SELECT ig.grupo_Id,oi.nombre,ig.usuario_Id " +
+            "            FROM integrante_grupo ig " +
+            "               INNER JOIN grupo g ON ig.grupo_Id=g.grupo_Id " +
+            "               INNER JOIN organismo_de_investigacion oi ON oi.id=g.grupo_Id " +
+            "            WHERE " +
+            "               ig.rol_Grupo_Id=1 AND ig.usuario_Id=(:idDirector)",nativeQuery = true)
     List<ListarGruposPorIdDirector> listarGruposPorIdDirector(
             @Param("idDirector") Long idDirector
     );

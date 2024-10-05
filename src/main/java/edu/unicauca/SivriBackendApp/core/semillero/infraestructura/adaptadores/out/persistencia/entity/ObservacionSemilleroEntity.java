@@ -12,7 +12,8 @@ import java.time.LocalDate;
 @Data
 public class ObservacionSemilleroEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "observacion_semillero_seq")
+    @SequenceGenerator(name = "observacion_semillero_seq",sequenceName = "observacionSemillero_sequence", initialValue = 1, allocationSize = 1)
     private Integer id;
     @Column(length = 1445)
     private String observacion;

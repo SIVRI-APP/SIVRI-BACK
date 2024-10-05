@@ -54,27 +54,28 @@ public interface IIntegranteSemilleroRepository extends JpaRepository<Integrante
             /*@Param("nombrePrograma") String nombrePrograma,*/
             @PageableDefault(size = 10,page = 0,sort = "id") Pageable pageable);
 
+    //query ok
     @Query(value = "SELECT  " +
-            "    u.numeroDocumento, " +
-            "    CONCAT(u.nombre, ' ', u.apellido) AS nombres, " +
-            "    s.semilleroId, " +
-            "    odi.nombre AS nombreSemillero, " +
-            "    rs.rolSemillero, " +
-            "    is2.estado, " +
-            "    u.programaId " +
-            "FROM " +
-            "    integrante_semillero AS is2 " +
-            "    INNER JOIN rol_semillero AS rs ON rs.id = is2.rolId " +
-            "    INNER JOIN semillero AS s ON s.semilleroId = is2.semilleroId " +
-            "    INNER JOIN organismo_de_investigacion AS odi ON odi.id = s.semilleroId " +
-            "    INNER JOIN usuario AS u ON u.id = is2.usuarioId " +
-            "WHERE " +
-            "    (LOWER(u.numeroDocumento) LIKE CONCAT('%', LOWER(:numeroDocumento), '%') OR :numeroDocumento IS NULL OR :numeroDocumento = '') " +
-            "    AND (LOWER(CONCAT(u.nombre, ' ', u.apellido)) LIKE CONCAT('%', LOWER(:nombres), '%') OR :nombres IS NULL OR :nombres = '') " +
-            "    AND (s.semilleroId LIKE CONCAT('%', :semilleroId, '%') OR :semilleroId IS NULL OR :semilleroId = '') " +
-            "    AND (LOWER(odi.nombre) LIKE CONCAT('%', LOWER(:nombreSemillero), '%') OR :nombreSemillero IS NULL OR :nombreSemillero = '') " +
-            "    AND (LOWER(rs.rolSemillero) = LOWER(:rolSemillero) OR :rolSemillero IS NULL OR :rolSemillero = '') " +
-            "    AND (LOWER(is2.estado) = LOWER(:estado) OR :estado IS NULL OR :estado = '');",nativeQuery = true)
+            "                u.numero_Documento, " +
+            "                u.nombre|| ' '|| u.apellido AS nombres, " +
+            "                s.semillero_Id, " +
+            "                odi.nombre AS nombreSemillero, " +
+            "                rs.rol_Semillero, " +
+            "                is2.estado, " +
+            "                u.programa_Id " +
+            "            FROM " +
+            "                integrante_semillero is2 " +
+            "                INNER JOIN rol_semillero rs ON rs.id = is2.rol_Id " +
+            "                INNER JOIN semillero s ON s.semillero_Id = is2.semillero_Id " +
+            "                INNER JOIN organismo_de_investigacion odi ON odi.id = s.semillero_Id " +
+            "                INNER JOIN usuario u ON u.id = is2.usuario_Id " +
+            "            WHERE " +
+            "                (LOWER(u.numero_Documento) LIKE '%'|| LOWER(:numeroDocumento)||'%') OR (:numeroDocumento IS NULL) OR (:numeroDocumento = '') " +
+            "                AND (LOWER(u.nombre|| ' '|| u.apellido) LIKE '%'|| LOWER(:nombres)|| '%' OR :nombres IS NULL OR :nombres = '') " +
+            "                AND (s.semillero_Id LIKE '%'|| :semilleroId|| '%' OR :semilleroId IS NULL OR :semilleroId = '') " +
+            "                AND (LOWER(odi.nombre) LIKE '%'|| LOWER(:nombreSemillero)|| '%' OR :nombreSemillero IS NULL OR :nombreSemillero = '') " +
+            "                AND (LOWER(rs.rol_Semillero) = LOWER(:rolSemillero) OR :rolSemillero IS NULL OR :rolSemillero = '') " +
+            "                AND (LOWER(is2.estado) = LOWER(:estado) OR :estado IS NULL OR :estado = '')",nativeQuery = true)
     Page<List<ListarTodosIntegrantesConFiltro>> listarTodosIntegranteSemilleroConFiltro(
             @Param("numeroDocumento") String numeroDocumento,
             @Param("nombres") String nombres,

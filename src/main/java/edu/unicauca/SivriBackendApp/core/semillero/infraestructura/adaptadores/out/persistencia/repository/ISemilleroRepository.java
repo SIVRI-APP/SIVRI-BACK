@@ -30,20 +30,20 @@ public interface ISemilleroRepository extends JpaRepository<SemilleroEntity, Int
             "where usuarioId=(:idDirectorGrupo) and rolGrupoId=1;", nativeQuery = true)
     public List<SemilleroEntity> listarxIdDirectorGrupo(long idDirectorGrupo);
 
-
-    @Query(value = "select\n" +
-            "\ts.semilleroId,\n" +
-            "\toi.nombre,\n" +
-            "\ts.correo,\n" +
-            "\toi.fechaCreacion,\n" +
-            "\ts.estado\n" +
-            "from\n" +
-            "\tsemillero s\n" +
-            "left join organismo_de_investigacion oi on s.semilleroId = oi.id\n" +
-            "where\n" +
-            "\t(:nombre is null or LOWER(oi.nombre) like lower(CONCAT('%', :nombre, '%'))) and\n" +
-            "\t(:correo is null or LOWER(s.correo) like lower(CONCAT('%', :correo, '%'))) and\n" +
-            "\t(:estado is null or LOWER(s.estado) like lower(CONCAT('%', :estado, '%')));",nativeQuery = true)
+    //query ok
+    @Query(value = "select " +
+            "            s.semillero_Id, " +
+            "            oi.nombre, " +
+            "            s.correo, " +
+            "            oi.fecha_Creacion, " +
+            "            s.estado " +
+            "            from " +
+            "            semillero s " +
+            "            left join organismo_de_investigacion oi on s.semillero_Id = oi.id " +
+            "            where " +
+            "            (:nombre is null or LOWER(oi.nombre) like lower('%'|| :nombre|| '%')) and " +
+            "            (:correo is null or LOWER(s.correo) like lower('%'|| :correo|| '%')) and " +
+            "            (:estado is null or LOWER(s.estado) like lower('%'|| :estado|| '%'))",nativeQuery = true)
     /*@Query(value = "SELECT s.semilleroId, oi.nombre, s.correo, oi.fechaCreacion, s.estado \n" +
             "FROM semillero s \n" +
             "LEFT JOIN organismo_de_investigacion oi ON s.semilleroId = oi.id \n" +
@@ -94,16 +94,16 @@ public interface ISemilleroRepository extends JpaRepository<SemilleroEntity, Int
             @Param("idMentor") int idMentor,
             @PageableDefault(size = 10,page = 0,sort = "id")Pageable pageable);
 
-    @Query(value = "select s.semilleroId,oi.nombre,s.estado,ig.usuarioId " +
-            " from semillero as s " +
-            "      inner join organismo_de_investigacion oi on oi.id=s.semilleroId " +
-            "      inner join grupo g on g.grupoId=s.grupoId " +
-            "      inner join integrante_grupo ig on g.grupoId=ig.grupoId " +
-            "      where " +
-            "      (LOWER(oi.nombre) LIKE %:nombre% OR LOWER(oi.nombre) = COALESCE(LOWER(:nombre),LOWER(oi.nombre) ) OR :nombre IS NULL) " +
-            "      AND (LOWER(s.estado) = COALESCE(LOWER(:estado),LOWER(s.estado)) OR :estado IS NULL) " +
-            "      AND ((s.semilleroId) like (:semilleroId) or (s.semilleroId)= coalesce((:semilleroId),(s.semilleroId)) or (:semilleroId) IS NULL) " +
-            "      AND ig.rolGrupoId=1 and ig.usuarioId=(:idDirector);",nativeQuery = true)
+    @Query(value = "select s.semillero_Id,oi.nombre,s.estado,ig.usuario_Id " +
+            "             from semillero s " +
+            "                  inner join organismo_de_investigacion oi on oi.id=s.semillero_Id " +
+            "                  inner join grupo g on g.grupo_Id=s.grupo_Id " +
+            "                  inner join integrante_grupo ig on g.grupo_Id=ig.grupo_Id " +
+            "                  where " +
+            "                  (LOWER(oi.nombre) LIKE '%':nombre'%' OR LOWER(oi.nombre) = COALESCE(LOWER(:nombre),LOWER(oi.nombre) ) OR :nombre IS NULL) " +
+            "                  AND (LOWER(s.estado) = COALESCE(LOWER(:estado),LOWER(s.estado)) OR :estado IS NULL) " +
+            "                  AND ((s.semillero_Id) like (:semilleroId) or (s.semillero_Id)= coalesce((:semilleroId),(s.semillero_Id)) or (:semilleroId) IS NULL) " +
+            "                  AND ig.rol_Grupo_Id=1 and ig.usuario_Id=(:idDirector)",nativeQuery = true)
     Page<List<ListarSemilleroPorIdMentor>> listarxFiltroSemilleroPorIdDirector(
             @Param("idDirector") Long idDirector,
             @Param("semilleroId") Integer semilleroId,
