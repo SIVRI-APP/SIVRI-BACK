@@ -17,8 +17,10 @@ import java.util.Set;
 @Getter
 @Setter
 public class ProyectoEntity {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "proyecto_seq")
+    @SequenceGenerator(name = "proyecto_seq", sequenceName = "proyecto_seq", initialValue = 10, allocationSize = 1)
     private Long id;
 
     @Column(length = 256, nullable = false)
@@ -81,7 +83,7 @@ public class ProyectoEntity {
     private Set<CompromisoProyectoEntity> compromisos;
 
     @ManyToOne()
-    @JoinColumn(name = "convocatoriaId")
+    @JoinColumn(name = "CONVOCATORIA_ID")
     private ConvocatoriaEntity convocatoria;
 
 

@@ -12,7 +12,8 @@ import lombok.Setter;
 public class EvidenciaCompromisoEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "evidencia_compromiso_seq")
+    @SequenceGenerator(name = "evidencia_compromiso_seq", sequenceName = "evidencia_compromiso_seq", initialValue = 10, allocationSize = 1)
     private Long id;
 
     @Enumerated(EnumType.STRING)

@@ -15,7 +15,8 @@ import java.util.List;
 public class CompromisoProyectoEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "compromiso_proyecto_seq")
+    @SequenceGenerator(name = "compromiso_proyecto_seq", sequenceName = "compromiso_proyecto_seq", initialValue = 10, allocationSize = 1)
     private Long id;
 
     @ManyToOne(optional = false)

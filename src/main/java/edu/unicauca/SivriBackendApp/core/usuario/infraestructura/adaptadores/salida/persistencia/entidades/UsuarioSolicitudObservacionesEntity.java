@@ -21,7 +21,8 @@ public class UsuarioSolicitudObservacionesEntity {
 
     /** Identificador único de la observacion asociada a la solicitud de usuario */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_solicitud_obser_seq")
+    @SequenceGenerator(name = "usuario_solicitud_obser_seq", sequenceName = "usuario_solicitud_obser_seq", initialValue = 10, allocationSize = 1)
     private Long id;
 
     /** Solicitud de usuario a la que está asociada la observacion. Es un campo obligatorio */

@@ -12,15 +12,16 @@ import java.util.Objects;
 @Data
 public class EvidenciaProyectoDocumentoConvocatoriaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "evidencia_proyec_docu_conv_seq")
+    @SequenceGenerator(name = "evidencia_proyec_docu_conv_seq", sequenceName = "evidencia_proyec_docu_conv_seq", initialValue = 10, allocationSize = 1)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "proyectoId")
+    @JoinColumn(name = "PROYECTO_ID")
     private ProyectoEntity proyecto;
 
     @ManyToOne()
-    @JoinColumn(name = "DocumentoConvocatoriaId")
+    @JoinColumn(name = "DOCUMENTO_CONVOCATORIA_ID")
     private DocumentoConvocatoriaEntity documentoConvocatoria;
 
     @Column(length = 256)

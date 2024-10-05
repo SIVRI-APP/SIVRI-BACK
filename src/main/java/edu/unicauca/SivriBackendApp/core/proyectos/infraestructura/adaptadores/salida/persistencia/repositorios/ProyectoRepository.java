@@ -11,7 +11,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-import java.util.Set;
 
 
 @Repository
@@ -55,29 +54,28 @@ public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
     Optional<ProyectoCompromisosProyeccion> obtenerProyectoInformacionDetalladaCompromisos(@Param("proyectoId") long proyectoId);
 
 
-    @Query(value = "select " +
-            " p.id, " +
-            " p.nombre, " +
-            " p.estado, " +
-            " p.fechaInicio, " +
-            " p.fechaFin, " +
-            " c.tipoFinanciacion, " +
-            " org.nombre as 'organismoNombre' " +
-            "from " +
-            " proyecto p " +
-            "left join convocatoria c on p.convocatoriaId = c.id " +
-            "left join cooperacion cop on cop.proyectoId = p.id " +
-            "left join organismo_de_investigacion org on org.id = cop.organismoDeInvestigacionId " +
-            "left join integrante_proyecto ip on ip.proyectoId = p.id " +
-            "where " +
-            " (:id is null or LOWER(p.id) like LOWER(CONCAT('%', :id, '%')))   " +
-            "    and (:nombre is null or LOWER(p.nombre) like LOWER(CONCAT('%', :nombre, '%'))) " +
-            "    and (:estado is null or LOWER(p.estado) like LOWER(CONCAT('%', :estado, '%'))) " +
-            "    and (:fechaInicio is null or LOWER(p.fechaInicio) like LOWER(CONCAT('%', :fechaInicio, '%'))) " +
-            "    and (:fechaFin is null or LOWER(p.fechaFin) like LOWER(CONCAT('%', :fechaFin, '%'))) " +
-            "    and (:organismoDeInvestigacionId is null or LOWER(org.id) like LOWER(CONCAT('%', :organismoDeInvestigacionId, '%'))) " +
-            "    and (:tipoFinanciacion is null or LOWER(c.tipoFinanciacion) like LOWER(CONCAT('%', :tipoFinanciacion, '%'))) " +
-            "    and (:usuarioAutenticadoId is null or LOWER(ip.usuarioId) like LOWER(CONCAT('%', :usuarioAutenticadoId, '%')))"
+    @Query(value = "SELECT " +
+            "    p.id, " +
+            "    p.nombre, " +
+            "    p.estado, " +
+            "    p.FECHA_INICIO, " +
+            "    p.FECHA_FIN, " +
+            "    c.TIPO_FINANCIACION, " +
+            "    org.nombre AS \"organismoNombre\" " +
+            "FROM proyecto p " +
+            "LEFT JOIN convocatoria c ON p.CONVOCATORIA_ID = c.id " +
+            "LEFT JOIN cooperacion cop ON cop.PROYECTO_ID = p.id " +
+            "LEFT JOIN organismo_de_investigacion org ON org.id = cop.ORGANISMO_DE_INVESTIGACION_ID  " +
+            "LEFT JOIN integrante_proyecto ip ON ip.PROYECTO_ID = p.id " +
+            "WHERE " +
+            "    (:id IS NULL OR LOWER(p.id) LIKE LOWER('%' || :id || '%')) " +
+            "    AND (:nombre IS NULL OR LOWER(p.nombre) LIKE LOWER('%' || :nombre || '%')) " +
+            "    AND (:estado IS NULL OR LOWER(p.estado) LIKE LOWER('%' || :estado || '%')) " +
+            "    AND (:fechaInicio IS NULL OR p.FECHA_INICIO = :fechaInicio) " +
+            "    AND (:fechaFin IS NULL OR p.FECHA_FIN = :fechaFin) " +
+            "    AND (:organismoDeInvestigacionId IS NULL OR org.id = :organismoDeInvestigacionId) " +
+            "    AND (:tipoFinanciacion IS NULL OR LOWER(c.TIPO_FINANCIACION) LIKE LOWER('%' || :tipoFinanciacion || '%')) " +
+            "    AND (:usuarioAutenticadoId IS NULL OR ip.USUARIO_ID = :usuarioAutenticadoId)"
             , nativeQuery = true)
     Page<ProyectoListarConFiltroProyeccion> listarConFiltro(
             @Param("id") String id,

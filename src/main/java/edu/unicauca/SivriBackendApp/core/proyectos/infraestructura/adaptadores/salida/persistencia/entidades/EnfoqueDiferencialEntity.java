@@ -12,7 +12,8 @@ import java.util.Set;
 public class EnfoqueDiferencialEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "enfoque_diferencial_seq")
+    @SequenceGenerator(name = "enfoque_diferencial_seq", sequenceName = "enfoque_diferencial_seq", initialValue = 10, allocationSize = 1)
     private Integer id;
 
     @Column(length = 45, nullable = false)

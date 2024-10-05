@@ -18,15 +18,16 @@ import java.util.Objects;
 public class ChecklistEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "checklist_seq")
+    @SequenceGenerator(name = "checklist_seq", sequenceName = "checklist_seq", initialValue = 10, allocationSize = 1)
     private long id;
 
     @ManyToOne()
-    @JoinColumn(name = "convocatoriaId")
+    @JoinColumn(name = "CONVOCATORIA_ID")
     private ConvocatoriaEntity convocatoria;
 
     @ManyToOne()
-    @JoinColumn(name = "documentoConvocatoriaId")
+    @JoinColumn(name = "DOCUMENTO_CONVOCATORIA_ID")
     private DocumentoConvocatoriaEntity documentoConvocatoria;
 
     @Enumerated(EnumType.STRING)

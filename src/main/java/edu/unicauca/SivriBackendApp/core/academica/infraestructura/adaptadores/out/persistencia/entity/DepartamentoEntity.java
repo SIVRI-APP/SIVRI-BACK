@@ -15,7 +15,8 @@ public class DepartamentoEntity {
      * Identificador único del departamento.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "departamento_seq")
+    @SequenceGenerator(name = "departamento_seq", sequenceName = "departamento_seq", initialValue = 10, allocationSize = 1)
     private Integer id;
 
     /**

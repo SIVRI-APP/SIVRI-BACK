@@ -12,8 +12,10 @@ import java.time.LocalDate;
 @Table(name = "cooperacion")
 @Data
 public class CooperacionEntity {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cooperacion_seq")
+    @SequenceGenerator(name = "cooperacion_seq", sequenceName = "cooperacion_seq", initialValue = 10, allocationSize = 1)
     private Long id;
 
     private Boolean principal;

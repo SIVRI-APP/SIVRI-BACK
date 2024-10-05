@@ -26,19 +26,18 @@ public interface ConvocatoriaRepository extends JpaRepository<ConvocatoriaEntity
     )
     Optional<ConvocatoriaInformacionDetalladaProyeccion> obtenerConvocatoriaInformacionDetallada(@Param("convocatoriaId") long solicitudUsuarioId);
 
-    @Query(value = "select " +
+    @Query(value = "SELECT " +
             " c.id, " +
             " c.nombre, " +
             " c.estado, " +
-            " c.tipoFinanciacion " +
-            "from " +
-            " convocatoria c  " +
-            "where  " +
-            " (:id IS NULL OR LOWER(c.id) LIKE LOWER(CONCAT('%', :id, '%'))) AND " +
-            " (:nombre IS NULL OR LOWER(c.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))) AND " +
-            " (:estado IS NULL OR LOWER(c.estado) LIKE LOWER(CONCAT('%', :estado, '%'))) AND " +
-            " (:tipoFinanciacion IS NULL OR LOWER(c.tipoFinanciacion) LIKE LOWER(CONCAT('%', :tipoFinanciacion, '%'))) "
-            , nativeQuery = true)
+            " c.TIPO_FINANCIACION " +
+            "FROM convocatoria c  " +
+            "WHERE " +
+            " (:id IS NULL OR LOWER(c.id) LIKE LOWER('%' || :id || '%')) AND " +
+            " (:nombre IS NULL OR LOWER(c.nombre) LIKE LOWER('%' || :nombre || '%')) AND " +
+            " (:estado IS NULL OR LOWER(c.estado) LIKE LOWER('%' || :estado || '%')) AND " +
+            " (:tipoFinanciacion IS NULL OR LOWER(c.TIPO_FINANCIACION) LIKE LOWER('%' || :tipoFinanciacion || '%'))",
+            nativeQuery = true)
     Page<ConvocatoriaListarConFiltroProyeccion> listarConFiltro(
             @Param("id") String id,
             @Param("nombre") String nombre,

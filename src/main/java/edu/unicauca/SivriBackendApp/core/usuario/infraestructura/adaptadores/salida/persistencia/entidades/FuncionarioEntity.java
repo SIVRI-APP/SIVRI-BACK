@@ -21,7 +21,8 @@ public class FuncionarioEntity {
 
     /** Identificador único del funcionario */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "funcionario_seq")
+    @SequenceGenerator(name = "funcionario_seq", sequenceName = "funcionario_seq", initialValue = 10, allocationSize = 1)
     private Long id;
 
     /** Usuario asociado al funcionario */

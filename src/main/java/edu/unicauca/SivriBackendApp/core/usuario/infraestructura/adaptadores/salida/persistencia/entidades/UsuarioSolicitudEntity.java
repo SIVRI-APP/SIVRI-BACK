@@ -25,7 +25,8 @@ public class UsuarioSolicitudEntity {
 
     /** Identificador único de la solicitud de usuario */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_solicitud_seq")
+    @SequenceGenerator(name = "usuario_solicitud_seq", sequenceName = "usuario_solicitud_seq", initialValue = 10, allocationSize = 1)
     private Long id;
 
     /** Identifica al usuario que creo la solicitud */

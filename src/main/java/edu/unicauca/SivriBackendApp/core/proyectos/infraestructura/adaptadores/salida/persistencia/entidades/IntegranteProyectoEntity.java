@@ -15,7 +15,8 @@ import java.util.Objects;
 @Setter
 public class  IntegranteProyectoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "integrante_proyecto_seq")
+    @SequenceGenerator(name = "integrante_proyecto_seq", sequenceName = "integrante_proyecto_seq", initialValue = 10, allocationSize = 1)
     private Integer id;
 
     @Column(nullable = false)
@@ -29,15 +30,15 @@ public class  IntegranteProyectoEntity {
     private Boolean estado;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "usuarioId", nullable = false)
+    @JoinColumn(name = "USUARIO_ID", nullable = false)
     private UsuarioEntity usuario;
     
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "proyectoId", nullable = false)
+    @JoinColumn(name = "PROYECTO_ID", nullable = false)
     private ProyectoEntity proyecto;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "rolId", nullable = false)
+    @JoinColumn(name = "ROL_ID", nullable = false)
     private RolProyectoEntity rolProyecto;
 
     @Override

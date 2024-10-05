@@ -36,14 +36,14 @@ public class RegistroUsuarioDTO {
     @Size(min = 5, max = 100, message = "El teléfono del usuario debe contener mínimo 5 y máximo 45 caracteres")
     private String telefono;
 
+    @Size(max = 1000, message = "La nota no puede exceder los 1000 caracteres")
+    private String nota;
+
     private String cvLac;
 
     private Integer programaId;
 
-    @Size(max = 1000, message = "La nota no puede exceder los 1000 caracteres")
-    private String nota;
-
-    private String organismoDeInvestigacion;
+    private Integer departamentoId;
 
     private Integer organismoDeInvestigacionId;
 

@@ -17,9 +17,9 @@ public interface ProyectoInformacionDetalladaProyeccion {
     String getJustificacion();
     String getEnfoqueMetodologico();
     String getAspectosEticosLegales();
-    String getConfidencialidadDeInformacion();
+    String getConfidencialidad();
     String getEfectosAdversos();
-    String getImpactosResultadosEsperados();
+    String getImpacResulEsperados();
     String getConsideraciones();
     boolean isEliminadoLogico();
 
