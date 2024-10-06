@@ -120,7 +120,6 @@ public class EvidenciaActividadService implements EvidenciaActividadCU {
             }else {
                 //crea el registro
                 Path path = Paths.get("src/main/resources/evidenciaActividad/" + newFileName);
-                System.out.println("path: " + path);
                 Files.write(path, bytes);
                 newEvidencia.setActividadId(actividadId);
                 newEvidencia.setEvidencia(path.toString());

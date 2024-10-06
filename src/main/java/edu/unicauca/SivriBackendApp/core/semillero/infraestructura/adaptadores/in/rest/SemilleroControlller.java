@@ -13,6 +13,7 @@ import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.i
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.DTO.respuesta.SemilleroObtenerDTO;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.in.rest.mapper.SemilleroDtoMapper;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("semilleros")
 @CrossOrigin(origins = "htt://localhost:4200/")
 public class SemilleroControlller {
@@ -32,12 +34,6 @@ public class SemilleroControlller {
     private final SemilleroActualizarCU semilleroActualizarCU;
     private final SemilleroDtoMapper semilleroDtoMapper;
 
-    public SemilleroControlller(SemilleroObtenerCU semilleroObtenerCU, SemilleroCrearCU semilleroCrearCU, SemilleroActualizarCU semilleroActualizarCU, SemilleroDtoMapper semilleroDtoMapper) {
-        this.semilleroObtenerCU = semilleroObtenerCU;
-        this.semilleroCrearCU = semilleroCrearCU;
-        this.semilleroActualizarCU = semilleroActualizarCU;
-        this.semilleroDtoMapper = semilleroDtoMapper;
-    }
     @GetMapping("/obtenerSemillero")
     @PreAuthorize("hasAnyAuthority(" +
             "'FUNCIONARIO:SEMILLEROS'," +

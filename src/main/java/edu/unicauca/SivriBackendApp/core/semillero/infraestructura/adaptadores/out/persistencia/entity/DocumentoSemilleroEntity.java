@@ -13,8 +13,8 @@ import java.util.List;
 @Data
 public class DocumentoSemilleroEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "documento_semillero_seq")
+    @SequenceGenerator(name = "documento_semillero_seq", sequenceName = "documento_semillero_sequence", initialValue = 1, allocationSize = 1)
     private Integer id;
     @Column(length = 85)
     @Enumerated(EnumType.STRING)
