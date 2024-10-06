@@ -10,6 +10,7 @@ import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.in.rest.DTO.petición.PlanTrabajoCrearDTO;
 import edu.unicauca.SivriBackendApp.core.planTrabajo.infraestructura.adaptadores.in.rest.mapper.PlanTrabajoDtoMapper;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -20,17 +21,13 @@ import java.util.List;
 @RestController
 @RequestMapping("planesTrabajo")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@AllArgsConstructor
 public class PlanTrabajoController {
     private final PlanTrabajoObtenerCU planTrabajoObtenerCU;
     private final PlanTrabajoCrearCU planTrabajoCrearCU;
     private final PlanTrabajoActualizarCU planTrabajoActualizarCU;
     private final PlanTrabajoDtoMapper planTrabajoDtoMapper;
-    public PlanTrabajoController(PlanTrabajoObtenerCU planTrabajoObtenerCU, PlanTrabajoCrearCU planTrabajoCrearCU, PlanTrabajoActualizarCU planTrabajoActualizarCU, PlanTrabajoDtoMapper planTrabajoDtoMapper) {
-        this.planTrabajoObtenerCU = planTrabajoObtenerCU;
-        this.planTrabajoCrearCU = planTrabajoCrearCU;
-        this.planTrabajoActualizarCU = planTrabajoActualizarCU;
-        this.planTrabajoDtoMapper = planTrabajoDtoMapper;
-    }
+
     @GetMapping("/obtenerPlanxId")
     @PreAuthorize("hasAnyAuthority(" +
             "'FUNCIONARIO:SEMILLEROS' )"
@@ -103,7 +100,7 @@ public class PlanTrabajoController {
             "'SEMILLERO:MENTOR' )"
     )
     public ResponseEntity<Respuesta> crear(@Valid @RequestBody PlanTrabajoCrearDTO nuevoPlan){
-        System.out.println("dto nuevo plan"+nuevoPlan);
+
         Respuesta respuesta = planTrabajoCrearCU.crear(planTrabajoDtoMapper.crear(nuevoPlan));
         return ResponseEntity.ok().body(respuesta);
 

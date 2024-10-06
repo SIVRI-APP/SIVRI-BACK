@@ -11,7 +11,8 @@ import java.util.List;
 @Data
 public class AreaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "area_seq")
+    @SequenceGenerator(name = "area_seq", sequenceName = "area_seq", initialValue = 1, allocationSize = 1)
     private Integer idArea;
     @Column(length = 50, nullable = false)
     private String area;

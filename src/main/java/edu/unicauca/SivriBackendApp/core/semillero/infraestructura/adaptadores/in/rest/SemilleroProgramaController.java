@@ -40,7 +40,6 @@ public class SemilleroProgramaController {
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
     ){
-        System.out.println("parametros del controller id semillero "+idSemillero+" pageno "+pageNo+" pagesize "+pageSize);
         Respuesta respuesta =semilleroProgramaObtenerCU.obtenerListadoProgramasPorSemilleroId(pageNo,pageSize,idSemillero);
         return ResponseEntity.ok().body(respuesta);
     }

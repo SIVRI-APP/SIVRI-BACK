@@ -8,6 +8,7 @@ import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.in.GrupoDiscipl
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.GrupoDisciplina;
 import edu.unicauca.SivriBackendApp.core.grupo.infraestructura.adaptadores.in.rest.mapper.GrupoDisciplinaDtoMapper;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("gruposDisciplinas")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@AllArgsConstructor
 public class GrupoDisciplinaController {
 
     private final GrupoDisciplinaObtenerCU grupoDisciplinaObtenerCU;
@@ -25,13 +27,6 @@ public class GrupoDisciplinaController {
     private final GrupoDisciplinaEliminarCU grupoDisciplinaEliminarCU;
     private final GrupoDisciplinaDtoMapper grupoDisciplinaDtoMapper;
 
-    public GrupoDisciplinaController(GrupoDisciplinaObtenerCU grupoDisciplinaObtenerCU, GrupoDisciplinaCrearCU grupoDisciplinaCrearCU, GrupoDisciplinaActualizarCU grupoDisciplinaActualizarCU, GrupoDisciplinaEliminarCU grupoDisciplinaEliminarCU, GrupoDisciplinaDtoMapper grupoDisciplinaDtoMapper) {
-        this.grupoDisciplinaObtenerCU = grupoDisciplinaObtenerCU;
-        this.grupoDisciplinaCrearCU = grupoDisciplinaCrearCU;
-        this.grupoDisciplinaActualizarCU = grupoDisciplinaActualizarCU;
-        this.grupoDisciplinaEliminarCU = grupoDisciplinaEliminarCU;
-        this.grupoDisciplinaDtoMapper = grupoDisciplinaDtoMapper;
-    }
     @GetMapping("/{id}")
     public ResponseEntity<Respuesta> obtenerGrupoDisciplinaPorId(@PathVariable(value = "id") long id){
         Respuesta respuesta =grupoDisciplinaObtenerCU.obtenerPorId(id);
@@ -50,7 +45,8 @@ public class GrupoDisciplinaController {
     @GetMapping("/listarDisciplinasxGrupoId")
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR', " +
-            "'GRUPO:DIRECTOR')")
+            "'GRUPO:DIRECTOR'" +
+            "'FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> obtenerDisciplinasxGrupoId(
             @RequestParam(value = "idGrupo",required = true) int idGrupo
     ){

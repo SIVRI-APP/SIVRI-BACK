@@ -14,7 +14,8 @@ import java.time.LocalDate;
 @Data
 public class IntegranteGrupoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "integrante_grupo_seq")
+    @SequenceGenerator(name = "integrante_grupo_seq", sequenceName = "integrante_grupo_seq", initialValue = 7, allocationSize = 1)
     private Integer id;
     @Column(length = 9,nullable = false)
     @Enumerated(EnumType.STRING)

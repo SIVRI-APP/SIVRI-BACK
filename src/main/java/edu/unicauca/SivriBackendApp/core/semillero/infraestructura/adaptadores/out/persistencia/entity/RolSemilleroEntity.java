@@ -9,7 +9,8 @@ import lombok.Data;
 
 public class RolSemilleroEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rol_semillero_seq")
+    @SequenceGenerator(name = "rol_semillero_seq", sequenceName = "rol_semillero_sequence", initialValue = 7, allocationSize = 1)
     private Integer id;
     @Column(length = 45)
     private String rolSemillero;

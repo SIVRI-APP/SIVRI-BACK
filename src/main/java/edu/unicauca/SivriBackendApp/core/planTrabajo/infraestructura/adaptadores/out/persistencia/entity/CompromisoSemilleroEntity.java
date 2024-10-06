@@ -8,7 +8,8 @@ import lombok.Data;
 @Data
 public class CompromisoSemilleroEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "compromiso_semillero_seq")
+    @SequenceGenerator(name = "compromiso_semillero_seq", sequenceName = "compromiso_semillero_sequence", initialValue = 4, allocationSize = 1)
     private Integer id;
     @Column(length = 200)
     private String nombre;
