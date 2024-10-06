@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class SemilleroActualizarPorMentorDTO {
     @NotNull(message = "el id del semillero es obligatorio")
-    private Integer semilleroId;
+    private Integer semillero_Id;
     @NotNull(message = "el nombre no puede ser nulo.")
     @NotEmpty(message = "el nombre no puede ser nulo.")
     @Size(min = 5,max = 200,message = "el nombre del semillero debe estar entre 5 y 200 caracteres.")
