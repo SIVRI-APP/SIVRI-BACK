@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface IntegranteRepository extends JpaRepository<IntegranteProyectoEntity, Long> {
+public interface  IntegranteRepository extends JpaRepository<IntegranteProyectoEntity, Long> {
 
     List<IntegranteProyectoEntity> findAllByUsuarioIdAndProyectoIdAndRolProyectoId(Long usuarioId, Long proyectoId, Integer rolProyectoId);
 
