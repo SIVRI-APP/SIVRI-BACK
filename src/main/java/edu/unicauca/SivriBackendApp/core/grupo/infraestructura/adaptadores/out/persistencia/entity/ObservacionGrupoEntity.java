@@ -15,7 +15,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ObservacionGrupoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "observacion_grupo_seq")
+    @SequenceGenerator(name = "observacion_grupo_seq", sequenceName = "observacion_grupo_seq", initialValue = 1, allocationSize = 1)
     private Integer idObservacion;
     @Column(length = 1445)
     private String observacion;

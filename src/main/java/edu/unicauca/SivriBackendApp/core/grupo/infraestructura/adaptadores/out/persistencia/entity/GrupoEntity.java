@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "grupo")
 //relacion de herencia
-@PrimaryKeyJoinColumn(name = "grupoId")
+@PrimaryKeyJoinColumn(name = "grupo_Id")
 @Data
 public class GrupoEntity extends OrganismoDeInvestigacionEntity {
 

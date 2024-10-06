@@ -8,7 +8,8 @@ import lombok.Data;
 @Data
 public class RolGrupoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rol_grupo_seq")
+    @SequenceGenerator(name = "rol_grupo_seq", sequenceName = "rol_grupo_seq", initialValue = 11, allocationSize = 1)
     private Integer id;
     @Column(length = 45)
     private String rolGrupo;

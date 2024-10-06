@@ -12,7 +12,8 @@ import java.util.List;
 @Data
 public class SubAreaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sub_area_seq")
+    @SequenceGenerator(name = "sub_area_seq", sequenceName = "sub_area_seq", initialValue = 1, allocationSize = 1)
     private Integer idSubArea;
     @Column(length = 60,nullable = false)
     private String subArea;

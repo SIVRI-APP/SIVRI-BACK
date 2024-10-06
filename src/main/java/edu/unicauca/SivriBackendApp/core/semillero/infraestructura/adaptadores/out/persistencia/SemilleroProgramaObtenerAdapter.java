@@ -35,7 +35,6 @@ public class SemilleroProgramaObtenerAdapter implements SemilleroProgramaObtener
 
     @Override
     public Page<ListarProgramas> obtenerListadoProgramasPorSemilleroId(Pageable pageable, int idSemillero) {
-        System.out.println("parametros adapter: "+idSemillero+" "+pageable);
         return semilleroProgramaRepository.obtenerProgramasxSemilleroId(idSemillero,pageable);
         }
 
