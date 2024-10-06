@@ -23,22 +23,21 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
     boolean existsByCorreoOrTipoDocumentoAndNumeroDocumento(String correo, TipoDocumento tipoDocumento, String numeroDocumento);
 
     @Query(value = "SELECT " +
-            "  u.id, " +
-            "  u.correo, " +
-            "  u.tipoDocumento, " +
-            "  u.numeroDocumento, " +
-            "  u.nombre, " +
-            "  u.apellido, " +
-            "  u.tipoUsuario " +
-            "FROM " +
-            "  usuario u " +
+            "    u.id, " +
+            "    u.correo, " +
+            "    u.tipo_documento, " +
+            "    u.numero_documento, " +
+            "    u.nombre, " +
+            "    u.apellido, " +
+            "    u.tipo_usuario " +
+            "FROM usuario u " +
             "WHERE " +
-            "  (LOWER(u.correo) LIKE COALESCE(LOWER(CONCAT('%', :correo, '%')), LOWER(u.correo)) OR :correo IS NULL) AND " +
-            "  (LOWER(u.tipoDocumento) LIKE COALESCE(LOWER(CONCAT('%', :tipoDocumento, '%')), LOWER(u.tipoDocumento)) OR :tipoDocumento IS NULL) AND " +
-            "  (LOWER(u.numeroDocumento) LIKE COALESCE(LOWER(CONCAT('%', :numeroDocumento, '%')), LOWER(u.numeroDocumento)) OR :numeroDocumento IS NULL) AND " +
-            "  (LOWER(u.nombre) LIKE COALESCE(LOWER(CONCAT('%', :nombre, '%')), LOWER(u.nombre)) OR :nombre IS NULL) AND " +
-            "  (LOWER(u.apellido) LIKE COALESCE(LOWER(CONCAT('%', :apellido, '%')), LOWER(u.apellido)) OR :apellido IS NULL) AND " +
-            "  (LOWER(u.tipoUsuario) LIKE COALESCE(LOWER(CONCAT('%', :tipoUsuario, '%')), LOWER(u.tipoUsuario)) OR :tipoUsuario IS NULL)  "
+            "    (:correo IS NULL OR LOWER(u.correo) LIKE LOWER('%' || :correo || '%')) AND " +
+            "    (:tipoDocumento IS NULL OR LOWER(u.tipo_documento) LIKE LOWER('%' || :tipoDocumento || '%')) AND " +
+            "    (:numeroDocumento IS NULL OR LOWER(u.numero_documento) LIKE LOWER('%' || :numeroDocumento || '%')) AND " +
+            "    (:nombre IS NULL OR LOWER(u.nombre) LIKE LOWER('%' || :nombre || '%')) AND " +
+            "    (:apellido IS NULL OR LOWER(u.apellido) LIKE LOWER('%' || :apellido || '%')) AND " +
+            "    (:tipoUsuario IS NULL OR LOWER(u.tipo_usuario) LIKE LOWER('%' || :tipoUsuario || '%'))"
             , nativeQuery = true)
     Page<UsuarioListarConFiltroProyeccion> listarConFiltro(
             @Param("correo") String correo,
@@ -49,49 +48,50 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
             @Param("tipoUsuario") String tipoUsuario,
             @PageableDefault(size = 10, page = 0, sort = "id") Pageable pageable);
 
+
     @Query(value = "select " +
-            " u.id, " +
-            " u.numeroDocumento, " +
-            " u.tipoDocumento, " +
-            " u.nombre, " +
-            " u.apellido, " +
-            " u.correo, " +
-            " u.telefono, " +
-            " u.cvLac, " +
-            " u.sexo, " +
-            " u.tipoUsuario, " +
-            " dep.nombre as departamentoNombre, " +
-            " pro.nombre as programaNombre " +
-            "from " +
-            " usuario u " +
-            "left join departamento dep on dep.id = u.departamentoId  " +
-            "left join programa pro on pro.id = u.programaId  " +
-            "where " +
-            " u.id = :usuarioId"
+            "  u.id,  " +
+            "  u.NUMERO_DOCUMENTO ,  " +
+            "  u.TIPO_DOCUMENTO ,  " +
+            "  u.nombre,  " +
+            "  u.apellido,  " +
+            "  u.correo,  " +
+            "  u.telefono,  " +
+            "  u.CV_LAC ,  " +
+            "  u.sexo,  " +
+            "  u.TIPO_USUARIO ,  " +
+            "  dep.nombre as departamentoNombre,  " +
+            "  pro.nombre as programaNombre  " +
+            "from  " +
+            " usuario u  " +
+            " left join departamento dep on dep.id = u.DEPARTAMENTO_ID   " +
+            " left join programa pro on pro.id = u.PROGRAMA_ID   " +
+            "where  " +
+            "  u.id = :usuarioId"
             , nativeQuery = true)
     Optional<UsuarioInformacionDetalladaProyeccion> obtenerUsuarioInformacionDetallada(
             @Param("usuarioId") long usuarioId);
 
     @Query(value = "select " +
-            "             u.id, " +
-            "             u.numero_Documento, " +
-            "             u.tipo_Documento, " +
-            "             u.nombre, " +
-            "             u.apellido, " +
-            "             u.correo, " +
-            "             u.telefono, " +
-            "             u.cv_Lac, " +
-            "             u.sexo, " +
-            "             u.tipo_Usuario, " +
-            "             dep.nombre as departamentoNombre, " +
-            "             pro.nombre as programaNombre " +
-            "            from " +
-            "             usuario u " +
-            "            left join departamento dep on dep.id = u.departamento_Id  " +
-            "            left join programa pro on pro.id = u.programa_Id  " +
-            "            where " +
-            "             u.numero_Documento = :usuarioNumDoc AND " +
-            "             u.tipo_Documento = :tipoDocumento"
+            " u.id,  " +
+            " u.numero_Documento,  " +
+            " u.tipo_Documento,  " +
+            " u.nombre,  " +
+            " u.apellido,  " +
+            " u.correo,  " +
+            " u.telefono,  " +
+            " u.cv_Lac,  " +
+            " u.sexo,  " +
+            " u.tipo_Usuario,  " +
+            " dep.nombre as departamentoNombre,  " +
+            " pro.nombre as programaNombre  " +
+            "from  " +
+            " usuario u  " +
+            " left join departamento dep on dep.id = u.departamento_Id   " +
+            " left join programa pro on pro.id = u.programa_Id   " +
+            "where  " +
+            "  u.numero_Documento = :usuarioNumDoc AND  " +
+            "  u.tipo_Documento = :tipoDocumento"
             , nativeQuery = true)
     Optional<UsuarioInformacionDetalladaProyeccion> obtenerUsuarioInformacionDetalladaPorDocumento(
             @Param("usuarioNumDoc") long usuarioNumDoc,
