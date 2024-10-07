@@ -1,7 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.out;
 
 
-import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Programa;
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Programa;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarProgramas;
 
 import java.util.List;

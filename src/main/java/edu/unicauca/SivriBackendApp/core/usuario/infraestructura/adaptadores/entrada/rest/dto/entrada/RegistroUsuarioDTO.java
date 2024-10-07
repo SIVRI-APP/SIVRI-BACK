@@ -45,6 +45,8 @@ public class RegistroUsuarioDTO {
 
     private Integer departamentoId;
 
+    private String tipoOrganismo;
+
     private Integer organismoDeInvestigacionId;
 
     private Integer rolId;

@@ -5,6 +5,7 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificacionDeUsuario;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
+import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarOrganismosParaAsociarProyectoProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoObtenerCU;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
@@ -36,6 +37,23 @@ public class ProyectoObtenerService implements ProyectoObtenerCU {
      * Servicio
      */
     private final ServicioDeIdentificacionDeUsuario servicioDeIdentificacionDeUsuario;
+
+    @Override
+    public Respuesta<Page<ListarOrganismosParaAsociarProyectoProyeccion>> listarSimpleConFiltro(int pageNo, int pageSize, Integer id, String nombre) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+
+        Page<ListarOrganismosParaAsociarProyectoProyeccion> respuesta;
+
+        // Si es funcionario filtramos todos los registros
+        if (servicioDeIdentificacionDeUsuario.esFuncionario()){
+            respuesta = proyectoObtenerREPO.listarSimpleConFiltro(pageable, id, nombre, null);
+
+        }else{ // Si no es funcionario filtramos solo a los que el usuario pertenece
+            respuesta = proyectoObtenerREPO.listarSimpleConFiltro(pageable, id, nombre, servicioDeIdentificacionDeUsuario.obtenerUsuario().getId());
+        }
+
+        return new RespuestaHandler<>(200, "ok", "", respuesta).getRespuesta();
+    }
 
     @Override
     public Respuesta<ProyectoDetalladoDTO> obtenerProyectoInformacionDetallada(long proyectoId) {

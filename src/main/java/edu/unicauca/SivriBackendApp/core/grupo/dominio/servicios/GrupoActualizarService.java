@@ -4,7 +4,7 @@ import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.in.FacultadObtenerCU;
-import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Facultad;
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Facultad;
 import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.in.GrupoActualizarCU;
 import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.in.GrupoObtenerCU;
 import edu.unicauca.SivriBackendApp.core.grupo.aplicación.ports.out.GrupoActualizarREPO;
@@ -54,8 +54,8 @@ public class GrupoActualizarService implements GrupoActualizarCU {
         objGrupoActualizar.setRealizaciones(nuevosDatos.getRealizaciones());
         objGrupoActualizar.setPerspectivas(nuevosDatos.getPerspectivas());
 
-        facultadObtenerCU.existePorId(nuevosDatos.getFacultad().getIdFacultad());
-        Facultad facultad=facultadObtenerCU.obtenerPorId(nuevosDatos.getFacultad().getIdFacultad()).getData();
+        facultadObtenerCU.existePorId(nuevosDatos.getFacultad().getId());
+        Facultad facultad=facultadObtenerCU.obtenerPorId(nuevosDatos.getFacultad().getId()).getData();
         objGrupoActualizar.setFacultad(facultad);
         //objGrupoActualizar.getFacultad().setIdFacultad(nuevosDatos.getFacultad().getIdFacultad());
 
@@ -73,7 +73,7 @@ public class GrupoActualizarService implements GrupoActualizarCU {
         GrupoEstado estado=objGrupoActualizar.getEstado();
         if (estado==GrupoEstado.FORMULADO){
             //ACTUALIZA TODOS LOS CAMPOS DE GRUPO MENOS NOMBRE, FECHA CREACION Y ESTADO
-            facultadObtenerCU.existePorId(nuevosDatos.getFacultad().getIdFacultad());
+            facultadObtenerCU.existePorId(nuevosDatos.getFacultad().getId());
             objGrupoActualizar.setFacultad(nuevosDatos.getFacultad());
             objGrupoActualizar.setDireccion(nuevosDatos.getDireccion());
             objGrupoActualizar.setTelefono(nuevosDatos.getTelefono());

@@ -9,6 +9,9 @@ import edu.unicauca.SivriBackendApp.common.seguridad.acceso.dto.CreateCredential
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.persistencia.credencial.Credencial;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.CredentialService;
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificacionDeUsuario;
+import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.IntegranteCrearCU;
+import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoObtenerCU;
+import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.RolObtenerCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.entrada.UsuarioSolicitudCrearCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.*;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
@@ -43,6 +46,9 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
     private final ServicioDeIdentificacionDeUsuario servicioDeIdentificacionDeUsuario;
     private final CredentialService credentialService;
     private final SendMessageService sendMessageService;
+    private final IntegranteCrearCU integranteCrearCU;
+    private final ProyectoObtenerCU proyectoObtenerCU;
+    private final RolObtenerCU rolObtenerCU;
 
     /** Puertos de Salida */
     private final UsuarioSolicitudObtenerREPO usuarioSolicitudObtenerREPO;
@@ -110,8 +116,15 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
                         .apellido(solicitudUsuario.getApellido())
                         .telefono(solicitudUsuario.getTelefono())
                         .cvLac(solicitudUsuario.getCvLac())
+                        .programa(solicitudUsuario.getPrograma()) // Programa al que pertenece la solicitud
+                        .departamento(solicitudUsuario.getDepartamento()) // Departamento asociado
                         .build()
         );
+
+        // Se crea el Rol en el organismo
+        if (solicitudUsuario.getTipoOrganismo().equals("PROYECTO")){
+            integranteCrearCU.crear(nuevoUsuario, proyectoObtenerCU.obtenerProyecto(solicitudUsuario.getOrganismoDeInvestigacionId()).getData(), rolObtenerCU.obtenerRolPorId(solicitudUsuario.getRolId()).getData());
+        }
 
         // Si es Docente o Administrativo se crean credenciales
         if (nuevoUsuario.getTipoUsuario().equals(TipoUsuario.DOCENTE) || nuevoUsuario.getTipoUsuario().equals(TipoUsuario.ADMINISTRATIVO)) {

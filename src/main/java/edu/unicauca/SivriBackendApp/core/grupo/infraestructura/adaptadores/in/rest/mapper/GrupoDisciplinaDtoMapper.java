@@ -10,7 +10,7 @@ import org.mapstruct.Mappings;
 public interface GrupoDisciplinaDtoMapper {
     @Mappings({
             @Mapping(source = "grupo.id",target = "grupo.grupoId"),
-            @Mapping(source = "grupo.facultad.idFacultad",target = "grupo.facultad.id")
+            @Mapping(source = "grupo.facultad.id",target = "grupo.facultad.id")
 
     })
     GrupoDisciplinaDTO obtenerDisciplinasPorGrupoId(final GrupoDisciplina objModelo);

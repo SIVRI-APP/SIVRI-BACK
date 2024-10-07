@@ -6,7 +6,7 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.in.ProgramaObtenerCU;
 import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.out.ProgramaObtenerREPO;
-import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Programa;
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Programa;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarProgramas;
 import org.springframework.stereotype.Component;
 

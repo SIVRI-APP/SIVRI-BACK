@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.sa
 import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.UsuarioCrearREPO;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.UsuarioInfraMapper;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.UsuarioInfraSimpleMapper;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -19,13 +20,13 @@ public class UsuarioCrearAdapter implements UsuarioCrearREPO {
     private final UsuarioRepository usuarioRepository;
 
     /** Mapper */
-    private final UsuarioInfraMapper usuarioInfraMapper;
+    private final UsuarioInfraSimpleMapper usuarioInfraSimpleMapper;
 
     /**
      * @see UsuarioCrearREPO#crearUsuario(Usuario)
      */
     @Override
     public Usuario crearUsuario(Usuario usuario) {
-        return usuarioInfraMapper.toModel(usuarioRepository.save(usuarioInfraMapper.toEntity(usuario)));
+        return usuarioInfraSimpleMapper.toModel(usuarioRepository.save(usuarioInfraSimpleMapper.toEntity(usuario)));
     }
 }

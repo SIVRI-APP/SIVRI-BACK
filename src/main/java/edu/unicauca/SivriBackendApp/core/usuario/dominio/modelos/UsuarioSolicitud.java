@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos;
 
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Departamento;
 import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Programa;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.Sexo;
@@ -22,15 +23,6 @@ public class UsuarioSolicitud {
 
     /** Identificador único de la solicitud de usuario */
     private Long id;
-
-    /** Identifica al usuario que creo la solicitud */
-    private Usuario creadoPor;
-
-    /** Identificador del programa al que pertenece la solicitud de usuario */
-    private Programa programa;
-
-    /** Observaciones de la Solicitud */
-    private UsuarioSolicitudObservaciones observaciones;
 
     /** Correo electrónico de la solicitud de usuario. Es un campo obligatorio, único y tiene una longitud máxima de 60 caracteres */
     private String correo;
@@ -65,7 +57,18 @@ public class UsuarioSolicitud {
     /** Nota asociada a la solicitud de usuario. Tiene una longitud máxima de 1000 caracteres */
     private String nota;
 
-    private String organismoDeInvestigacion;
+    /** Identifica al usuario que creo la solicitud */
+    private Usuario creadoPor;
+
+    /** Observaciones de la Solicitud */
+    private UsuarioSolicitudObservaciones observaciones;
+
+    /** Identificador del programa al que pertenece la solicitud de usuario */
+    private Programa programa;
+
+    private Departamento departamento;
+
+    private String tipoOrganismo;
 
     private Integer organismoDeInvestigacionId;
 

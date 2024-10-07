@@ -5,6 +5,7 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.UsuarioSolicitu
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.UsuarioSolicitudEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.UsuarioSolicitudInfraMapper;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.UsuarioSolicitudInfraSimpleMapper;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioSolicitudRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,14 +22,14 @@ public class UsuarioSolicitudCrearAdapter implements UsuarioSolicitudCrearREPO {
     private final UsuarioSolicitudRepository usuarioSolicitudRepository;
 
     /** Mapper */
-    private final UsuarioSolicitudInfraMapper usuarioSolicitudInfraMapper;
+    private final UsuarioSolicitudInfraSimpleMapper usuarioSolicitudInfraSimpleMapper;
 
     /**
      * @see UsuarioSolicitudCrearREPO#crearSolicitudUsuario(UsuarioSolicitud)
      */
     @Override
     public UsuarioSolicitud crearSolicitudUsuario(UsuarioSolicitud usuario) {
-        return usuarioSolicitudInfraMapper.toModel(usuarioSolicitudRepository.save(usuarioSolicitudInfraMapper.toEntity(usuario)));
+        return usuarioSolicitudInfraSimpleMapper.toModel(usuarioSolicitudRepository.save(usuarioSolicitudInfraSimpleMapper.toEntity(usuario)));
     }
 
     @Override

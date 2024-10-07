@@ -52,20 +52,20 @@ public interface OrganismoRepository extends JpaRepository<OrganismoDeInvestigac
     )
     Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarConFiltroIntegrantesDocenteGrupo(@Param("grupoId") long grupoId);
 
-    @Query(value = "select " +
+    @Query(value = "select DISTINCT " +
             " org.id, " +
             " org.nombre " +
-            "from " +
-            " organismo_de_investigacion org " +
-            "left join semillero sem on sem.semilleroId = org.id " +
-            "left join integrante_semillero ints on ints.semilleroId = sem.semilleroId " +
-            "left join usuario usu on usu.id = ints.usuarioId " +
+            "from organismo_de_investigacion org " +
+            "left join semillero sem on sem.semillero_id = org.id " +
+            "left join integrante_semillero ints on ints.semillero_id = sem.semillero_id " +
+            "left join usuario usu on usu.id = ints.usuario_id " +
             "where " +
-            " (:id is null or LOWER(org.id) like LOWER(CONCAT('%', :id, '%')))   " +
-            "    and (:nombre is null or LOWER(org.nombre) like LOWER(CONCAT('%', :nombre, '%'))) " +
-            "    and (:usuarioAutenticadoId is null or LOWER(usu.id) like LOWER(CONCAT('%', :usuarioAutenticadoId, '%'))) " +
+        "        (:id is null or LOWER(org.id) like LOWER('%' || :id || '%')) " +
+            "    and (:nombre is null or LOWER(org.nombre) like LOWER('%' || :nombre || '%')) " +
+            "    and (:usuarioAutenticadoId is null or LOWER(usu.id) like LOWER('%' || :usuarioAutenticadoId || '%')) " +
             "    and sem.estado = 'ACTIVO' " +
-            "    or sem.estado = 'ACTIVO_PENDIENTE_ACTUALIZACION'"
+            "    or sem.estado = 'ACTIVO_PENDIENTE_ACTUALIZACION' " +
+            "ORDER BY org.ID "
             , nativeQuery = true)
     Page<ListarOrganismosParaAsociarProyectoProyeccion> listarConFiltroSemillero(
             @Param("id") Integer id,
@@ -74,19 +74,19 @@ public interface OrganismoRepository extends JpaRepository<OrganismoDeInvestigac
             @PageableDefault(sort = "id") Pageable pageable
     );
 
-    @Query(value = "select " +
+    @Query(value = "select DISTINCT " +
             " org.id, " +
             " org.nombre " +
-            "from " +
-            " organismo_de_investigacion org " +
-            "left join grupo g on g.grupoId = org.id " +
-            "left join integrante_grupo intg on intg.grupoId = g.grupoId " +
-            "left join usuario usu on usu.id = intg.usuarioId " +
+            "from organismo_de_investigacion org " +
+            "left join grupo g on g.grupo_id = org.id " +
+            "left join integrante_grupo intg on intg.grupo_id = g.grupo_id " +
+            "left join usuario usu on usu.id = intg.usuario_id " +
             "where " +
-            " (:id is null or LOWER(org.id) like LOWER(CONCAT('%', :id, '%')))   " +
-            "    and (:nombre is null or LOWER(org.nombre) like LOWER(CONCAT('%', :nombre, '%'))) " +
-            "    and (:usuarioAutenticadoId is null or LOWER(usu.id) like LOWER(CONCAT('%', :usuarioAutenticadoId, '%'))) " +
-            "    and g.estado = 'ACTIVO'"
+            "    (:id is null or LOWER(org.id) like LOWER('%' || :id || '%')) " +
+            "    and (:nombre is null or LOWER(org.nombre) like LOWER('%' || :nombre || '%')) " +
+            "    and (:usuarioAutenticadoId is null or LOWER(usu.id) like LOWER(('%' || :usuarioAutenticadoId || '%'))) " +
+            "    and g.estado = 'ACTIVO' " +
+            "ORDER BY org.ID "
             , nativeQuery = true)
     Page<ListarOrganismosParaAsociarProyectoProyeccion> listarConFiltroGrupo(
             @Param("id") Integer id,
@@ -99,10 +99,10 @@ public interface OrganismoRepository extends JpaRepository<OrganismoDeInvestigac
             " count(org.id) " +
             "from " +
             " organismo_de_investigacion org " +
-            "left join semillero sem on sem.semilleroId = org.id " +
+            "left join semillero sem on sem.semillero_id = org.id " +
             "where " +
-            " org.id = sem.semilleroId " +
-            " and sem.semilleroId = :id"
+            " org.id = sem.semillero_id " +
+            " and sem.semillero_id = :id"
             , nativeQuery = true
     )
     Integer isSemillero(@Param("id") Integer id);
@@ -111,10 +111,10 @@ public interface OrganismoRepository extends JpaRepository<OrganismoDeInvestigac
             " count(org.id) " +
             "from " +
             " organismo_de_investigacion org " +
-            "left join grupo g on g.grupoId = org.id " +
+            "left join grupo g on g.grupo_id = org.id " +
             "where " +
-            " org.id = g.grupoId  " +
-            " and g.grupoId = :id"
+            " org.id = g.grupo_id  " +
+            " and g.grupo_id = :id"
             , nativeQuery = true
     )
     Integer isGrupo (@Param("id") Integer id);

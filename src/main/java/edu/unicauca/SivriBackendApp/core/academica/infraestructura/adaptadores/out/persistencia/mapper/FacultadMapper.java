@@ -1,6 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.mapper;
 
-import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Facultad;
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Facultad;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.entity.FacultadEntity;
 import org.mapstruct.Mapper;
 

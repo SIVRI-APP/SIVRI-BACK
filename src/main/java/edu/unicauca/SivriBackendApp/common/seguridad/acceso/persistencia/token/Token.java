@@ -18,7 +18,8 @@ public class Token {
 
   /** Identificador único del token */
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "token_seq")
+  @SequenceGenerator(name = "token_seq", sequenceName = "token_seq", initialValue = 10, allocationSize = 1)
   private Integer id;
 
   /** Relación muchos a uno con la entidad Credential */

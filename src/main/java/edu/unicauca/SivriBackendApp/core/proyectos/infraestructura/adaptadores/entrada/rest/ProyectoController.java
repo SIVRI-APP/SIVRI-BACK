@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.
 import edu.unicauca.SivriBackendApp.common.file.StorageService;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
+import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarOrganismosParaAsociarProyectoProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoCrearCU;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoObtenerCU;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
@@ -120,6 +121,16 @@ public class ProyectoController {
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
+            "'PROYECTO:CO_INVESTIGADOR', " +
+            "'PROYECTO:ASESOR', " +
+            "'PROYECTO:ESTUDIANTE_DOCTORADO', " +
+            "'PROYECTO:ESTUDIANTE_ESPECIALIZACION', " +
+            "'PROYECTO:ESTUDIANTE_MAESTRIA', " +
+            "'PROYECTO:ESTUDIANTE_POSTDOCTORADO', " +
+            "'PROYECTO:ESTUDIANTE_PREGRADO', " +
+            "'PROYECTO:INVESTIGADOR_EXTERNO', " +
+            "'PROYECTO:JOVEN_INVESTIGADOR', " +
+            "'PROYECTO:PERSONAL_TECNICO', " +
             "'PROYECTO:DIRECTOR')")
     public ResponseEntity<Respuesta<ProyectoDetalladoDTO>> obtenerProyectoInformacionDetallada(@Valid @RequestParam @PositiveOrZero(message = "El Id deL proyecto debe ser positivo") long proyectoId){
         Respuesta<ProyectoDetalladoDTO> respuesta = proyectoObtenerCU.obtenerProyectoInformacionDetallada(proyectoId);
@@ -132,6 +143,16 @@ public class ProyectoController {
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
+            "'PROYECTO:CO_INVESTIGADOR', " +
+            "'PROYECTO:ASESOR', " +
+            "'PROYECTO:ESTUDIANTE_DOCTORADO', " +
+            "'PROYECTO:ESTUDIANTE_ESPECIALIZACION', " +
+            "'PROYECTO:ESTUDIANTE_MAESTRIA', " +
+            "'PROYECTO:ESTUDIANTE_POSTDOCTORADO', " +
+            "'PROYECTO:ESTUDIANTE_PREGRADO', " +
+            "'PROYECTO:INVESTIGADOR_EXTERNO', " +
+            "'PROYECTO:JOVEN_INVESTIGADOR', " +
+            "'PROYECTO:PERSONAL_TECNICO', " +
             "'PROYECTO:DIRECTOR')")
     public ResponseEntity<Respuesta<Page<ProyectoListarConFiltroProyeccion>>> listarTodoConFiltro(
             @RequestParam(required = false) String id,
@@ -193,4 +214,27 @@ public class ProyectoController {
                 .header(HttpHeaders.CONTENT_TYPE, contentType)
                 .body(file);
     }
+
+    @GetMapping("listarSimpleConFiltro")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:VICERRECTOR',  " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
+            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
+            "'PROYECTO:DIRECTOR')")
+    public ResponseEntity<Respuesta<Page<ListarOrganismosParaAsociarProyectoProyeccion>>> listarSimpleConFiltro(
+            @RequestParam(required = false) Integer id,
+            @RequestParam(required = false) String nombre,
+            @RequestParam @Min(value = 0, message = "El valor de pageNo debe ser positivo") int pageNo,
+            @RequestParam @Min(value = 0, message = "El valor de pageSize debe ser positivo") int pageSize
+    ) {
+        Respuesta<Page<ListarOrganismosParaAsociarProyectoProyeccion>> respuesta = proyectoObtenerCU.listarSimpleConFiltro(
+                pageNo,
+                pageSize,
+                id,
+                nombre
+        );
+        return ResponseEntity.ok().body(respuesta);
+    }
+
 }

@@ -5,7 +5,7 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.in.FacultadObtenerCU;
 import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.out.FacultadObtenerREPO;
-import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Facultad;
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Facultad;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -56,7 +56,18 @@ public class ConvocatoriaController {
             "'FUNCIONARIO:VICERRECTOR',  " +
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-            "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
+            "'FUNCIONARIO:PROYECTOS_EXTERNOS', " +
+            "'PROYECTO:CO_INVESTIGADOR', " +
+            "'PROYECTO:ASESOR', " +
+            "'PROYECTO:ESTUDIANTE_DOCTORADO', " +
+            "'PROYECTO:ESTUDIANTE_ESPECIALIZACION', " +
+            "'PROYECTO:ESTUDIANTE_MAESTRIA', " +
+            "'PROYECTO:ESTUDIANTE_POSTDOCTORADO', " +
+            "'PROYECTO:ESTUDIANTE_PREGRADO', " +
+            "'PROYECTO:INVESTIGADOR_EXTERNO', " +
+            "'PROYECTO:JOVEN_INVESTIGADOR', " +
+            "'PROYECTO:PERSONAL_TECNICO', " +
+            "'PROYECTO:DIRECTOR')")
     public ResponseEntity<Respuesta<ConvocatoriaInformacionDetalladaProyeccion>> obtenerInformacionDetallada(@Valid @RequestParam @PositiveOrZero(message = "El Id de la convocatoria debe ser positivo") long convocatoriaId){
         Respuesta<ConvocatoriaInformacionDetalladaProyeccion> respuesta = convocatoriaObtenerCU.obtenerConvocatoriaInformacionDetallada(convocatoriaId);
         return ResponseEntity.ok().body(respuesta);

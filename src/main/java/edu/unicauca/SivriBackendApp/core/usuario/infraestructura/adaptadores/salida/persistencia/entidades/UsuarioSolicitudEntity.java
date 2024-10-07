@@ -1,6 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades;
 
 
+import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.entity.DepartamentoEntity;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.entity.ProgramaEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.EstadoSolicitudUsuario;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.Sexo;
@@ -38,6 +39,10 @@ public class UsuarioSolicitudEntity {
     @ManyToOne()
     @JoinColumn(name = "programaId")
     private ProgramaEntity programa;
+
+    @ManyToOne()
+    @JoinColumn(name = "departamentoId")
+    private DepartamentoEntity departamento;
 
     /** Observaciones de la Solicitud */
     @OneToOne(mappedBy = "solicitudUsuario", cascade = CascadeType.REMOVE)
@@ -91,7 +96,7 @@ public class UsuarioSolicitudEntity {
     @Column(length = 1000)
     private String nota;
 
-    private String organismoDeInvestigacion;
+    private String tipoOrganismo;
 
     private Integer organismoDeInvestigacionId;
 

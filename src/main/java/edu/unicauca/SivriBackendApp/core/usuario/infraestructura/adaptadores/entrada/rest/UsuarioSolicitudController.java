@@ -49,7 +49,7 @@ public class UsuarioSolicitudController {
             "'FUNCIONARIO:USUARIOS')"
     )
     public ResponseEntity<Respuesta<Boolean>> crearSolicitudUsuario(@Valid @RequestBody RegistroUsuarioDTO registro) {
-        Respuesta<Boolean> respuesta = usuarioSolicitudCrearCU.crearSolicitudUsuario(usuarioSolicitudRestMapper.registrarUsuario(registro));
+        Respuesta<Boolean> respuesta = usuarioSolicitudCrearCU.crearSolicitudUsuario(usuarioSolicitudRestMapper.crearSolicitudUsuario(registro));
 
         return ResponseEntity.ok().body(respuesta);
     }

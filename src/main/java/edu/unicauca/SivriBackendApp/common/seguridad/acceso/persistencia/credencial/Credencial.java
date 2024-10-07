@@ -26,7 +26,8 @@ public class Credencial implements UserDetails {
 
   /** Identificador único de la credencial */
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "credencial_seq")
+  @SequenceGenerator(name = "credencial_seq", sequenceName = "credencial_seq", initialValue = 10, allocationSize = 1)
   private Integer id;
 
   /**

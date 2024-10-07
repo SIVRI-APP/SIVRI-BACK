@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios;
 
+import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarOrganismosParaAsociarProyectoProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.*;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
 import org.springframework.data.domain.Page;
@@ -85,6 +86,25 @@ public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
             @Param("fechaFin") String fechaFin,
             @Param("organismoDeInvestigacionId") Integer organismoDeInvestigacionId,
             @Param("tipoFinanciacion") String tipoFinanciacion,
+            @Param("usuarioAutenticadoId") Long usuarioAutenticadoId,
+            @PageableDefault(sort = "id") Pageable pageable
+    );
+
+    @Query(value = "select DISTINCT  " +
+            " p.id,   " +
+            " p.nombre " +
+            "from PROYECTO p " +
+            "left join INTEGRANTE_PROYECTO intg on intg.PROYECTO_ID = p.ID  " +
+            "left join usuario usu on usu.id = intg.usuario_id   " +
+            "where   " +
+            "    (:id is null or LOWER(p.id) like LOWER('%' || :id || '%'))   " +
+            " and (:nombre is null or LOWER(p.nombre) like LOWER('%' || :nombre || '%'))   " +
+            " and (:usuarioAutenticadoId is null or LOWER(usu.id) like LOWER(('%' || :usuarioAutenticadoId || '%')))   " +
+            "ORDER BY p.ID "
+            , nativeQuery = true)
+    Page<ListarOrganismosParaAsociarProyectoProyeccion> listarSimpleConFiltro(
+            @Param("id") Integer id,
+            @Param("nombre") String nombre,
             @Param("usuarioAutenticadoId") Long usuarioAutenticadoId,
             @PageableDefault(sort = "id") Pageable pageable
     );

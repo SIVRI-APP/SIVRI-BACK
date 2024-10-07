@@ -1,6 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida;
 
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
+import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarOrganismosParaAsociarProyectoProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.ProyectoDetalladoDTO;
@@ -12,6 +13,8 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 public interface ProyectoObtenerREPO {
+
+    Page<ListarOrganismosParaAsociarProyectoProyeccion> listarSimpleConFiltro(Pageable page, Integer id, String nombre, Long usuarioAutenticadoId);
 
     Optional<ProyectoDetalladoDTO> obtenerProyectoInformacionDetallada (long proyectoId);
 

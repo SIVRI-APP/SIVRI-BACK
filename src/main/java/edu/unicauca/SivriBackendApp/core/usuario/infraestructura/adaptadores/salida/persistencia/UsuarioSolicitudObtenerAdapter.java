@@ -8,7 +8,7 @@ import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuar
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudInformacionDetalladaProyeccion;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.proyecciones.UsuarioSolicitudListarConFiltroProyeccion;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.UsuarioSolicitudEntity;
-import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.UsuarioSolicitudInfraMapper;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.UsuarioSolicitudInfraSimpleMapper;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioSolicitudObservacionesRepository;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioSolicitudRepository;
 import lombok.AllArgsConstructor;
@@ -36,7 +36,7 @@ public class UsuarioSolicitudObtenerAdapter implements UsuarioSolicitudObtenerRE
     /**
      * Mapper
      */
-    private final UsuarioSolicitudInfraMapper usuarioSolicitudInfraMapper;
+    private final UsuarioSolicitudInfraSimpleMapper usuarioSolicitudInfraMapper;
 
 
     /**
@@ -71,7 +71,7 @@ public class UsuarioSolicitudObtenerAdapter implements UsuarioSolicitudObtenerRE
         Optional<UsuarioSolicitudEntity> respuestaBD = usuarioSolicitudRepository.findById(solicitudUsuarioId);
 
         if (respuestaBD.isPresent()){
-            respuesta = Optional.of(usuarioSolicitudInfraMapper.toModel(respuestaBD.get()));
+            respuesta = Optional.of(usuarioSolicitudInfraMapper.toModelCompleto(respuestaBD.get()));
         }
 
         return respuesta;

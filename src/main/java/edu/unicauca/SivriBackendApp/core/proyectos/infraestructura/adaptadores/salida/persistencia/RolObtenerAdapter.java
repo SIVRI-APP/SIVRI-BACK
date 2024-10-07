@@ -3,12 +3,14 @@ package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.RolObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.RolProyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.RolProyectoEnum;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.RolProyectoListarProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.RolProyectoEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.mapper.RolInfraMapper;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios.RolRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -34,5 +36,10 @@ public class RolObtenerAdapter implements RolObtenerREPO {
 
         return rolEntity.map(rolInfraMapper::fromEntityToModel);
 
+    }
+
+    @Override
+    public List<RolProyectoListarProyeccion> retornarRoles() {
+        return rolRepository.retornarRoles();
     }
 }

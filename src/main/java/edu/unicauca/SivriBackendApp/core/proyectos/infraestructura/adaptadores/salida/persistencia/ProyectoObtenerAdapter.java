@@ -1,6 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia;
 
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
+import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarOrganismosParaAsociarProyectoProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Optional;
-import java.util.Set;
 
 @Component
 @AllArgsConstructor
@@ -23,6 +23,11 @@ public class ProyectoObtenerAdapter implements ProyectoObtenerREPO {
 
     private final ProyectoRepository proyectoRepository;
     private final ProyectoInfraMapperStruct proyectoInfraMapperStruct;
+
+    @Override
+    public Page<ListarOrganismosParaAsociarProyectoProyeccion> listarSimpleConFiltro(Pageable page, Integer id, String nombre, Long usuarioAutenticadoId) {
+        return proyectoRepository.listarSimpleConFiltro(id, nombre, usuarioAutenticadoId, page);
+    }
 
     @Override
     public Optional<ProyectoDetalladoDTO> obtenerProyectoInformacionDetallada(long proyectoId) {

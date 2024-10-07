@@ -4,7 +4,7 @@ import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.in.ProgramaObtenerCU;
-import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Programa;
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Programa;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.SemilleroPrograma;
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.SemilleroProgramaActualizarCU;
 import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.SemilleroProgramaObtenerCU;

@@ -2,7 +2,7 @@ package edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.in.ProgramaObtenerCU;
-import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Programa;
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Programa;
 import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.proyecciones.ListarProgramas;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

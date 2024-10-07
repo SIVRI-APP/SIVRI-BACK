@@ -1,7 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia;
 
 import edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.out.ProgramaObtenerREPO;
-import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Programa;
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Programa;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.entity.ProgramaEntity;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.mapper.ProgramaMapper;
 import edu.unicauca.SivriBackendApp.core.academica.infraestructura.adaptadores.out.persistencia.repository.ProgramaRepository;

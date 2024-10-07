@@ -7,6 +7,7 @@ import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.sal
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.entidades.UsuarioEntity;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.FuncionarioInfraMapper;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.UsuarioInfraMapper;
+import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.mapper.UsuarioInfraSimpleMapper;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.FuncionarioRepository;
 import edu.unicauca.SivriBackendApp.core.usuario.infraestructura.adaptadores.salida.persistencia.repositorios.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class ServicioDeIdentificacionDeUsuario {
 
     private final UsuarioRepository usuarioRepository;
     private final FuncionarioRepository funcionarioRepository;
-    private final UsuarioInfraMapper usuarioInfraMapper;
+    private final UsuarioInfraSimpleMapper usuarioInfraSimpleMapper;
     private final FuncionarioInfraMapper funcionarioInfraMapper;
 
     public UsuarioEntity obtenerUsuarioEntity(){
@@ -40,7 +41,7 @@ public class ServicioDeIdentificacionDeUsuario {
     }
 
     public Usuario obtenerUsuario(){
-        return usuarioInfraMapper.toModel(obtenerUsuarioEntity());
+        return usuarioInfraSimpleMapper.toModel(obtenerUsuarioEntity());
     }
 
     public FuncionarioEntity obtenerFuncionario(){

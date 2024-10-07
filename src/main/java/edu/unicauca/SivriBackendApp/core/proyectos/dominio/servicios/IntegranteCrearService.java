@@ -21,6 +21,7 @@ public class IntegranteCrearService implements IntegranteCrearCU {
 
     @Override
     public void crear(Usuario usuario, Proyecto proyecto, RolProyecto rol) {
+
         // Validaciones
         integranteValidator.crearIntegrante(usuario, proyecto, rol);
 

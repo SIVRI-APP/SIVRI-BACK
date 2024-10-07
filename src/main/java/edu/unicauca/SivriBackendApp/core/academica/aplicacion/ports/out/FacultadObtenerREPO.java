@@ -1,7 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.academica.aplicacion.ports.out;
 
 
-import edu.unicauca.SivriBackendApp.core.academica.dominio.modelos.Facultad;
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Facultad;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos;
 
+import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Departamento;
 import edu.unicauca.SivriBackendApp.core.academica.dominio.modelo.Programa;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.Sexo;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoDocumento;
@@ -16,6 +17,7 @@ import java.util.Objects;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Usuario {
 
     /** Identificador único de la solicitud de usuario */
@@ -48,9 +50,9 @@ public class Usuario {
     /** Enlace al Curriculum Vitae de la solicitud de usuario. Tiene una longitud máxima de 150 caracteres */
     private String cvLac;
 
-    private int departamentoId;
+    private Programa programa;
 
-    private int programaId;
+    private Departamento departamento;
 
     @Override
     public boolean equals(Object o) {
