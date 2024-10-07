@@ -54,6 +54,16 @@ public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
     )
     Optional<ProyectoCompromisosProyeccion> obtenerProyectoInformacionDetalladaCompromisos(@Param("proyectoId") long proyectoId);
 
+    @Query(value = "SELECT org.id, org.NOMBRE " +
+            "FROM PROYECTO p " +
+            "INNER JOIN COOPERACION cop ON COP.ID = p.ID  " +
+            "INNER JOIN ORGANISMO_DE_INVESTIGACION org ON org.ID = cop.ORGANISMO_DE_INVESTIGACION_ID  " +
+            "WHERE cop.PRINCIPAL = 1 AND p.ID = :proyectoId"
+            , nativeQuery = true)
+    Optional<ProyectoOrganismoProyeccion> obtenerProyectoInformacionDetalladaOrganismoPrincipal(
+            @Param("proyectoId") long proyectoId
+    );
+
 
     @Query(value = "SELECT " +
             "    p.id, " +

@@ -24,12 +24,7 @@ public class OrganismoController {
     private final OrganismoObtenerCU organismoObtenerCU;
 
     @GetMapping("listarTodoConFiltro")
-    @PreAuthorize("hasAnyAuthority(" +
-            "'FUNCIONARIO:VICERRECTOR',  " +
-            "'FUNCIONARIO:SUPER_ADMIN', " +
-            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-            "'PROYECTO:DIRECTOR')")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Respuesta<Page<ListarOrganismosParaAsociarProyectoProyeccion>>> listarTodoConFiltro(
             @RequestParam String tipoOrganismo,
             @RequestParam(required = false) Integer id,
@@ -48,12 +43,7 @@ public class OrganismoController {
     }
 
     @GetMapping("listarIntegrantesDocenteOrganismo")
-    @PreAuthorize("hasAnyAuthority(" +
-            "'FUNCIONARIO:VICERRECTOR',  " +
-            "'FUNCIONARIO:SUPER_ADMIN', " +
-            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-            "'PROYECTO:DIRECTOR')")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Respuesta<Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion>>> listarIntegrantesDocenteOrganismo(
             @RequestParam Integer organismoId
     ) {
@@ -63,12 +53,7 @@ public class OrganismoController {
     }
 
     @GetMapping("listarIntegrantesOrganismo")
-    @PreAuthorize("hasAnyAuthority(" +
-            "'FUNCIONARIO:VICERRECTOR',  " +
-            "'FUNCIONARIO:SUPER_ADMIN', " +
-            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-            "'PROYECTO:DIRECTOR')")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Respuesta<Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion>>> listarIntegrantesOrganismo(
             @RequestParam Integer organismoId
     ) {

@@ -118,4 +118,6 @@ public interface OrganismoRepository extends JpaRepository<OrganismoDeInvestigac
             , nativeQuery = true
     )
     Integer isGrupo (@Param("id") Integer id);
+
+    Optional<OrganismoDeInvestigacionEntity> findById(Integer id);
 }

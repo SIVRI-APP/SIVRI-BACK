@@ -74,12 +74,7 @@ public class ConvocatoriaController {
     }
 
     @GetMapping("listarTodoConFiltro")
-    @PreAuthorize("hasAnyAuthority(" +
-            "'PROYECTO:DIRECTOR',  " +
-            "'FUNCIONARIO:VICERRECTOR',  " +
-            "'FUNCIONARIO:SUPER_ADMIN', " +
-            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-            "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Respuesta<Page<ConvocatoriaListarConFiltroProyeccion>>> listarTodoConFiltro(
             @RequestParam(required = false) String id,
             @RequestParam(required = false) String nombre,

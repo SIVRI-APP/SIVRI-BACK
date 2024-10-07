@@ -176,7 +176,13 @@ public class UsuarioSolicitudController {
      * @return {@link Respuesta}
      */
     @PostMapping("enviarParaRevision")
-    @PreAuthorize("hasAnyAuthority('FUNCIONARIO:SUPER_ADMIN', 'FUNCIONARIO:USUARIOS')")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:USUARIOS', " +
+            "'SEMILLERO:MENTOR', " +
+            "'GRUPO:DIRECTOR', " +
+            "'PROYECTO:DIRECTOR')"
+    )
     public ResponseEntity<Respuesta<Boolean>> enviarParaRevision(
             @Valid @RequestBody EnviarParaRevisionDTO enviarParaRevisionDTO)
     {

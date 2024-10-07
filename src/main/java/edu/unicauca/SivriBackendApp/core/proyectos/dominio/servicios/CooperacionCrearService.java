@@ -29,7 +29,7 @@ public class CooperacionCrearService implements CooperacionCrearCU {
         cooperacion.setPrincipal(isPrincipal);
         cooperacion.setFechaInicio(LocalDate.now());
         cooperacion.setEstado(true);
-        // todo miguel setear organismo cuando yurani de el servicio
+        cooperacion.setOrganismoDeInvestigacion(organismoDeInvestigacion);
 
         cooperacionCrearREPO.crear(cooperacion);
     }

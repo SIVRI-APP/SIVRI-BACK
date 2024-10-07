@@ -37,7 +37,7 @@ public class ProyectoObtenerAdapter implements ProyectoObtenerREPO {
         ProyectoEvidenciasDocumentosProyeccion proyectoEvidenciasDocumentosConvocatoria = proyectoRepository.obtenerProyectoInformacionDetallada3(proyectoId).orElse(null);
         ProyectoIntegrantesProyeccion proyectoIntegrantes = proyectoRepository.obtenerProyectoInformacionDetalladaIntegrantes(proyectoId).orElse(null);
         ProyectoCompromisosProyeccion proyectoCompormisos = proyectoRepository.obtenerProyectoInformacionDetalladaCompromisos(proyectoId).orElse(null);
-
+        ProyectoOrganismoProyeccion proyectoOrganismo = proyectoRepository.obtenerProyectoInformacionDetalladaOrganismoPrincipal(proyectoId).orElse(null);
 
 
         ProyectoDetalladoDTO resultado = new ProyectoDetalladoDTO();
@@ -46,6 +46,7 @@ public class ProyectoObtenerAdapter implements ProyectoObtenerREPO {
         resultado.setEvidenciasDocumentosProyecto(proyectoEvidenciasDocumentosConvocatoria);
         resultado.setIntegrantesProyecto(proyectoIntegrantes);
         resultado.setCompromisosProyecto(proyectoCompormisos);
+        resultado.setOrganismoPrincipal(proyectoOrganismo);
 
         return Optional.of(resultado);
     }

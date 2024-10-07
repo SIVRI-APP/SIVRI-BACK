@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.aplicacion.puertos.salida;
 
+import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.OrganismoDeInvestigacion;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarOrganismosParaAsociarProyectoProyeccion;
 import org.springframework.data.domain.Page;
@@ -14,4 +15,6 @@ public interface OrganismoObtenerREPO {
     Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarIntegrantesDocenteOrganismo(Integer organismoId);
 
     Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarIntegrantesOrganismo(Integer organismoId);
+
+    Optional<OrganismoDeInvestigacion> findById(Integer id);
 }

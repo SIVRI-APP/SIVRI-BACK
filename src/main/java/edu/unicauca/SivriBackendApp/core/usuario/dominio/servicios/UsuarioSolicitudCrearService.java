@@ -12,6 +12,13 @@ import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeId
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.IntegranteCrearCU;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoObtenerCU;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.RolObtenerCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.IntegranteSemilleroCrearCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.RolesSemilleroObtenerCU;
+import edu.unicauca.SivriBackendApp.core.semillero.aplicacion.ports.in.SemilleroObtenerCU;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.EstadoIntegranteSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.IntegranteSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.RolSemillero;
+import edu.unicauca.SivriBackendApp.core.semillero.dominio.modelos.Semillero;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.entrada.UsuarioSolicitudCrearCU;
 import edu.unicauca.SivriBackendApp.core.usuario.aplicacion.puertos.salida.*;
 import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.Usuario;
@@ -31,6 +38,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 
 /**
@@ -49,6 +57,9 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
     private final IntegranteCrearCU integranteCrearCU;
     private final ProyectoObtenerCU proyectoObtenerCU;
     private final RolObtenerCU rolObtenerCU;
+    private final IntegranteSemilleroCrearCU integranteSemilleroCrearCU;
+    private final RolesSemilleroObtenerCU rolesSemilleroObtenerCU;
+    private final SemilleroObtenerCU semilleroObtenerCU;
 
     /** Puertos de Salida */
     private final UsuarioSolicitudObtenerREPO usuarioSolicitudObtenerREPO;
@@ -123,7 +134,23 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
 
         // Se crea el Rol en el organismo
         if (solicitudUsuario.getTipoOrganismo().equals("PROYECTO")){
+
             integranteCrearCU.crear(nuevoUsuario, proyectoObtenerCU.obtenerProyecto(solicitudUsuario.getOrganismoDeInvestigacionId()).getData(), rolObtenerCU.obtenerRolPorId(solicitudUsuario.getRolId()).getData());
+
+        }else if (solicitudUsuario.getTipoOrganismo().equals("SEMILLERO")){
+            IntegranteSemillero nuevoIntegranteSemillero = new IntegranteSemillero();
+
+            nuevoIntegranteSemillero.setEstado(EstadoIntegranteSemillero.ACTIVO);
+            nuevoIntegranteSemillero.setFechaIngreso(LocalDate.now());
+            nuevoIntegranteSemillero.setUsuario(nuevoUsuario);
+            // Rol Semillero
+            Respuesta<RolSemillero> rol = rolesSemilleroObtenerCU.obtenerRolSemilleroPorId(solicitudUsuario.getRolId());
+            nuevoIntegranteSemillero.setRolSemillero(rol.getData());
+            // Semillero
+            Respuesta<Semillero> semillero = semilleroObtenerCU.obtenerSemilleroPorId(solicitudUsuario.getOrganismoDeInvestigacionId());
+            nuevoIntegranteSemillero.setSemillero(semillero.getData());
+
+            integranteSemilleroCrearCU.crear(nuevoIntegranteSemillero);
         }
 
         // Si es Docente o Administrativo se crean credenciales
@@ -164,6 +191,7 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
         }else{
             // Si ya hay una observacion lo demás son mensajes parte de una conversacion
             Usuario usuarioAutenticado = servicioDeIdentificacionDeUsuario.obtenerUsuario();
+
             // Obtenemos la Observacion de la Solicitud
             UsuarioSolicitudObservaciones observacion = solicitud.getObservaciones();
 
@@ -215,6 +243,7 @@ public class UsuarioSolicitudCrearService implements UsuarioSolicitudCrearCU {
                     .autor(usuarioAutenticado.getNombre() + " " + usuarioAutenticado.getApellido())
                     .build()
             );
+            usuarioSolicitudCrearREPO.cambiarEstado(usuarioSolicitud.getId(), EstadoSolicitudUsuario.REVISION_VRI);
         }else{
             // Si no simplemente cambiamos el estado de la solicitud
             usuarioSolicitudCrearREPO.cambiarEstado(usuarioSolicitud.getId(), EstadoSolicitudUsuario.REVISION_VRI);

@@ -181,10 +181,10 @@ INSERT INTO proyecto (ID, NOMBRE, ESTADO, FECHA_INICIO, FECHA_FIN, PLANTEAMIENTO
 INSERT INTO proyecto (ID, NOMBRE, ESTADO, FECHA_INICIO, FECHA_FIN, PLANTEAMIENTO, OBJETIVO_GENERAL, OBJETIVOS_ESPECIFICOS, JUSTIFICACION, ENFOQUE_METODOLOGICO, ASPECTOS_ETICOS_LEGALES, CONFIDENCIALIDAD, EFECTOS_ADVERSOS, IMPAC_RESUL_ESPERADOS, CONSIDERACIONES, ELIMINADO_LOGICO) VALUES (11, 'Desarrollo de Vacunas contra Enfermedades Tropicales', 'APROBADO', TO_DATE('2024-10-01', 'YYYY-MM-DD'), TO_DATE('2026-10-01', 'YYYY-MM-DD'), 'Desarrollar y probar vacunas efectivas contra enfermedades tropicales', 'Reducir la incidencia de enfermedades tropicales en comunidades vulnerables', 'Realizar ensayos clínicos, evaluar la efectividad de las vacunas', 'Las enfermedades tropicales son un problema de salud pública urgente', 'Investigación en laboratorio, pruebas en campo', 'Cumplimiento de normativas internacionales de ensayos clínicos', 'Confidencialidad de datos de pacientes', 'Efectos secundarios potenciales de las vacunas', 'Desarrollo de vacunas seguras y eficaces', 'Consideración de la logística de distribución en áreas remotas', 0);
 
 -- -- EVIDENCIA PROYECTO DOC CONVOCATORIA
-INSERT INTO evidencia_proyec_docu_conv (DOCUMENTO_CONVOCATORIA_ID, ID, PROYECTO_ID, NOMBRE) VALUES ('1', 1, '1', 'escudo-departamento-del-cauca.jpg');
+-- INSERT INTO evidencia_proyec_docu_conv (DOCUMENTO_CONVOCATORIA_ID, ID, PROYECTO_ID, NOMBRE) VALUES ('1', 1, '1', 'escudo-departamento-del-cauca.jpg');
 
 -- -- INTEGRANTE PROYECTO
-INSERT INTO integrante_proyecto (ID, ESTADO, FECHA_INICIO, ROL_ID, PROYECTO_ID, USUARIO_ID) VALUES(1, 1, TO_DATE('2024-08-30', 'YYYY-MM-DD'), 1, 1, 7);
+-- INSERT INTO integrante_proyecto (ID, ESTADO, FECHA_INICIO, ROL_ID, PROYECTO_ID, USUARIO_ID) VALUES(1, 1, TO_DATE('2024-08-30', 'YYYY-MM-DD'), 1, 1, 7);
 
 -- -- ENFOQUE DIFERENCIAL
 INSERT INTO enfoque_diferencial (ID, NOMBRE) VALUES (1, 'Comunidad Afro');

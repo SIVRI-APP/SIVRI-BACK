@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "organismo_de_investigacion")
 @Data
+@NoArgsConstructor
 public abstract class OrganismoDeInvestigacionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "organismo_de_investigacion_seq")

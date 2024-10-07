@@ -54,7 +54,9 @@ public class ProyectoController {
             "'FUNCIONARIO:VICERRECTOR',  " +
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-            "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
+            "'FUNCIONARIO:PROYECTOS_EXTERNOS', " +
+            "'SEMILLERO:MENTOR', " +
+            "'GRUPO:DIRECTOR')")
     public ResponseEntity<Respuesta<Boolean>> crearProyecto(@Valid @RequestBody CrearProyectoDTO proyecto){
         Respuesta<Boolean> respuesta = proyectoCrearCU.crearProyecto(proyecto);
         return ResponseEntity.ok().body(respuesta);
@@ -116,44 +118,14 @@ public class ProyectoController {
     }
 
     @GetMapping("obtenerInformacionDetallada")
-    @PreAuthorize("hasAnyAuthority(" +
-            "'FUNCIONARIO:VICERRECTOR',  " +
-            "'FUNCIONARIO:SUPER_ADMIN', " +
-            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-            "'PROYECTO:CO_INVESTIGADOR', " +
-            "'PROYECTO:ASESOR', " +
-            "'PROYECTO:ESTUDIANTE_DOCTORADO', " +
-            "'PROYECTO:ESTUDIANTE_ESPECIALIZACION', " +
-            "'PROYECTO:ESTUDIANTE_MAESTRIA', " +
-            "'PROYECTO:ESTUDIANTE_POSTDOCTORADO', " +
-            "'PROYECTO:ESTUDIANTE_PREGRADO', " +
-            "'PROYECTO:INVESTIGADOR_EXTERNO', " +
-            "'PROYECTO:JOVEN_INVESTIGADOR', " +
-            "'PROYECTO:PERSONAL_TECNICO', " +
-            "'PROYECTO:DIRECTOR')")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Respuesta<ProyectoDetalladoDTO>> obtenerProyectoInformacionDetallada(@Valid @RequestParam @PositiveOrZero(message = "El Id deL proyecto debe ser positivo") long proyectoId){
         Respuesta<ProyectoDetalladoDTO> respuesta = proyectoObtenerCU.obtenerProyectoInformacionDetallada(proyectoId);
         return ResponseEntity.ok().body(respuesta);
     }
 
     @GetMapping("listarTodoConFiltro")
-    @PreAuthorize("hasAnyAuthority(" +
-            "'FUNCIONARIO:VICERRECTOR',  " +
-            "'FUNCIONARIO:SUPER_ADMIN', " +
-            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
-            "'PROYECTO:CO_INVESTIGADOR', " +
-            "'PROYECTO:ASESOR', " +
-            "'PROYECTO:ESTUDIANTE_DOCTORADO', " +
-            "'PROYECTO:ESTUDIANTE_ESPECIALIZACION', " +
-            "'PROYECTO:ESTUDIANTE_MAESTRIA', " +
-            "'PROYECTO:ESTUDIANTE_POSTDOCTORADO', " +
-            "'PROYECTO:ESTUDIANTE_PREGRADO', " +
-            "'PROYECTO:INVESTIGADOR_EXTERNO', " +
-            "'PROYECTO:JOVEN_INVESTIGADOR', " +
-            "'PROYECTO:PERSONAL_TECNICO', " +
-            "'PROYECTO:DIRECTOR')")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Respuesta<Page<ProyectoListarConFiltroProyeccion>>> listarTodoConFiltro(
             @RequestParam(required = false) String id,
             @RequestParam(required = false) String nombre,

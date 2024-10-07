@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoCrearREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
+import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.mapper.ProyectoInfraMapper;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.mapper.ProyectoInfraMapperStruct;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios.ProyectoRepository;
 import jakarta.transaction.Transactional;
@@ -16,12 +17,12 @@ import java.util.Optional;
 public class ProyectoCrearAdapter implements ProyectoCrearREPO {
 
     private final ProyectoRepository proyectoRepository;
-    private final ProyectoInfraMapperStruct proyectoInfraMapperStruct;
+    private final ProyectoInfraMapper proyectoInfraMapper;
 
     @Transactional
     @Override
     public Proyecto crearProyecto(Proyecto proyecto) {
-        return proyectoInfraMapperStruct.toDto(proyectoRepository.save(proyectoInfraMapperStruct.toEntity(proyecto)));
+        return proyectoInfraMapper.toDtoSimple(proyectoRepository.save(proyectoInfraMapper.toEntityCrearProyecto(proyecto)));
     }
 
     @Override

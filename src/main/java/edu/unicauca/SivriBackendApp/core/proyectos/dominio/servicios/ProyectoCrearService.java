@@ -1,10 +1,12 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.dominio.servicios;
 
+import edu.unicauca.SivriBackendApp.common.exception.ReglaDeNegocioException;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.convocatoria.aplicacion.puertos.entrada.ConvocatoriaObtenerCU;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.Convocatoria;
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.OrganismoDeInvestigacion;
+import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.aplicacion.puertos.salida.OrganismoObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.*;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoCrearREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoObtenerREPO;
@@ -25,6 +27,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -42,6 +45,7 @@ public class ProyectoCrearService implements ProyectoCrearCU {
      */
     private final ProyectoCrearREPO proyectoCrearREPO;
     private final ProyectoObtenerREPO proyectoObtenerREPO;
+    private final OrganismoObtenerREPO organismoObtenerREPO;
 
     /**
      * Utils
@@ -75,11 +79,13 @@ public class ProyectoCrearService implements ProyectoCrearCU {
 
         Proyecto pro = proyectoObtenerCU.obtenerProyecto(proyectoCreado.getId()).getData();
 
-        // Todo miguel Obtener Organismo de Investigacion
-        OrganismoDeInvestigacion organismoDeInvestigacion = new OrganismoDeInvestigacion();
+        Optional<OrganismoDeInvestigacion> organismoDeInvestigacion = organismoObtenerREPO.findById(proyecto.getOrganismoDeInvestigacionId());
+        if (organismoDeInvestigacion.isEmpty()) {
+            throw new ReglaDeNegocioException("bad.noSeEncontroOrganismo", List.of(String.valueOf(proyecto.getOrganismoDeInvestigacionId())));
+        }
 
         // Crear Cooperación
-        cooperacionCrearCU.crearCooperacion(pro, organismoDeInvestigacion, true);
+        cooperacionCrearCU.crearCooperacion(pro, organismoDeInvestigacion.get(), true);
 
         // Obtener Rol Director de Proyecto
         RolProyecto rol = rolObtenerCU.obtenerRolPorId(1).getData();
@@ -121,8 +127,6 @@ public class ProyectoCrearService implements ProyectoCrearCU {
 
     @Override
     public Respuesta<Boolean> guardarProyecto(GuardarProyectoDTO proyecto) {
-        System.out.println(proyecto);
-
         // Validaciones
         ProyectoEntity oldProyecto = proyectoValidators.validarGuardarProyecto(proyecto);
 

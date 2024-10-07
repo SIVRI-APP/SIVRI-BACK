@@ -2,6 +2,7 @@ package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.
 
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Cooperacion;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.CooperacionEntity;
+import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.OrganismoDeInvestigacionEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,8 +20,10 @@ public class CooperacionInfraMapper {
         entity.setEstado(model.getEstado());
         entity.setPrincipal(model.getPrincipal());
         entity.setProyecto(proyectoInfraMapper.fromModelToEntityUsingIdOnly(model.getProyecto().getId()));
-        // todo miguel cuando integre con Yurani
-//        entity.setOrganismoDeInvestigacion();
+        // Organismo
+        OrganismoDeInvestigacionEntity organismoDeInvestigacionEntity = new OrganismoDeInvestigacionEntity() {};
+        organismoDeInvestigacionEntity.setId(model.getOrganismoDeInvestigacion().getId());
+        entity.setOrganismoDeInvestigacion(organismoDeInvestigacionEntity);
         return entity;
     }
 }

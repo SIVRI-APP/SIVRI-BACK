@@ -9,6 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProyectoDetalladoDTO {
 
+    private ProyectoOrganismoProyeccion organismoPrincipal;
     private ProyectoInformacionDetalladaProyeccion informacionDetalladaProyecto;
     private ProyectoConvocatoriaProyeccion convocatoriaProyecto;
     private ProyectoEvidenciasDocumentosProyeccion evidenciasDocumentosProyecto;

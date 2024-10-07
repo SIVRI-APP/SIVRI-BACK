@@ -28,15 +28,14 @@ public class CooperacionValidator {
             }
         }
 
-        // Todo descomentar cuando Yurani integre lo de Organismos
-//        boolean organismoYaCoopera = cooperaciones.stream()
-//                .anyMatch(cooperacionEntity ->
-//                        cooperacionEntity.getOrganismoDeInvestigacion().getId().equals(organismoDeInvestigacion.getId())
-//                );
-//
-//        if (organismoYaCoopera){
-//            throw new ReglaDeNegocioException("bad.OrganismoYaCoopera", List.of(organismoDeInvestigacion.getNombre()));
-//        }
+        boolean organismoYaCoopera = cooperaciones.stream()
+                .anyMatch(cooperacionEntity ->
+                        cooperacionEntity.getOrganismoDeInvestigacion().getId().equals(organismoDeInvestigacion.getId())
+                );
+
+        if (organismoYaCoopera){
+            throw new ReglaDeNegocioException("bad.OrganismoYaCoopera", List.of(organismoDeInvestigacion.getNombre()));
+        }
 
     }
 }

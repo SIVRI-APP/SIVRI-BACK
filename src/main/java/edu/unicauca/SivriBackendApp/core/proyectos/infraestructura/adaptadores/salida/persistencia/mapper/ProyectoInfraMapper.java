@@ -44,4 +44,21 @@ public class ProyectoInfraMapper {
 //        private Convocatoria convocatoria;
         return model;
     }
+
+    public ProyectoEntity toEntityCrearProyecto(Proyecto proyecto) {
+        ProyectoEntity entity = new ProyectoEntity();
+
+        entity.setEliminadoLogico(false);
+        entity.setEstado(proyecto.getEstado());
+        entity.setNombre(proyecto.getNombre());
+
+        return entity;
+    }
+
+    public Proyecto toDtoSimple(ProyectoEntity save) {
+        Proyecto proyecto = new Proyecto();
+        proyecto.setId(save.getId());
+
+        return proyecto;
+    }
 }
