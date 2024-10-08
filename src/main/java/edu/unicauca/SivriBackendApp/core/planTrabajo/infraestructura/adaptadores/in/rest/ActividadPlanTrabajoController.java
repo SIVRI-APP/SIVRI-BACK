@@ -37,7 +37,7 @@ public class ActividadPlanTrabajoController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyAuthority(" +
             "'FUNCIONARIO:SEMILLEROS', " +
-            "'SEMILLERO:MENTOR')")
+            "'SEMILLERO:MENTOR','GRUPO:DIRECTOR')")
     public ResponseEntity<Respuesta> obtenerActividadPlanTrabajoPorId(@PathVariable(value = "id") int id){
         Respuesta respuesta = actividadPlanTrabajoObtenerCU.obtenerPorId(id);
         respuesta.setData(actividadPlanTrabajoDtoMapper.obtenerActividadPlanTrabajo((ActividadPlanTrabajo) respuesta.getData()));
@@ -87,7 +87,7 @@ public class ActividadPlanTrabajoController {
     }
     @GetMapping("/listarActividadesConFiltro/{idPlan}")
     @PreAuthorize("hasAnyAuthority(" +
-            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS' )"
+            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS','GRUPO:DIRECTOR' )"
     )
     public ResponseEntity<Respuesta<Page<List<ListarActividadesConFiltro>>>> listarActividadesxidPlanSemilleroConFIltro(
             @PathVariable(value = "idPlan") Integer idPlan,

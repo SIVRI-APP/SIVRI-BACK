@@ -17,7 +17,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "semillero_Id")
 public class SemilleroEntity extends OrganismoDeInvestigacionEntity {
 
-    @Column(nullable = false,length = 10)
+    @Column(nullable = false,length = 30)
     @Enumerated(EnumType.STRING)
     private SemilleroEstado estado;
 

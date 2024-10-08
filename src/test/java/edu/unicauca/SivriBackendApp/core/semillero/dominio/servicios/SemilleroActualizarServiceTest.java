@@ -43,7 +43,7 @@ public class SemilleroActualizarServiceTest {
         MockitoAnnotations.openMocks(this);
         when(resourceBundle.getString(anyString())).thenReturn("Mensaje simulado");
         nuevoSemillero = new Semillero();
-        nuevoSemillero.setSemilleroId(12);
+        nuevoSemillero.setSemillero_Id(12);
         nuevoSemillero.setNombre("Semillero de Investigación prueba");
         nuevoSemillero.setCorreo("nuevo@unicauca.edu.co");
         nuevoSemillero.setObjetivo("Nuevo objetivo");
@@ -52,15 +52,15 @@ public class SemilleroActualizarServiceTest {
         nuevoSemillero.setSede("Nueva sede");
 
         semilleroExistente = new Semillero();
-        semilleroExistente.setSemilleroId(3);
+        semilleroExistente.setSemillero_Id(3);
         semilleroExistente.setNombre("Semillero Existente");
     }
 
     @Test
     public void testActualizarPorMentorExito() {
         // Configurar mocks
-        when(semilleroObtenerCU.existePorId(nuevoSemillero.getSemilleroId())).thenReturn(new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta());
-        when(semilleroObtenerCU.obtenerSemilleroPorId(nuevoSemillero.getSemilleroId())).thenReturn(new RespuestaHandler<>(200, "sucess.operacion.exitosa","Exitoso", semilleroExistente).getRespuesta());
+        when(semilleroObtenerCU.existePorId(nuevoSemillero.getSemillero_Id())).thenReturn(new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta());
+        when(semilleroObtenerCU.obtenerSemilleroPorId(nuevoSemillero.getSemillero_Id())).thenReturn(new RespuestaHandler<>(200, "sucess.operacion.exitosa","Exitoso", semilleroExistente).getRespuesta());
         when(semilleroActualizarREPO.actualizarPorMentor(semilleroExistente)).thenReturn(true);
 
         // Ejecutar el método a probar
@@ -73,8 +73,8 @@ public class SemilleroActualizarServiceTest {
         assertEquals("Semillero Actualizad@ Exitosamente", respuesta.getUserMessage());
 
         // Verificar interacciones con los mocks
-        verify(semilleroObtenerCU).existePorId(nuevoSemillero.getSemilleroId());
-        verify(semilleroObtenerCU).obtenerSemilleroPorId(nuevoSemillero.getSemilleroId());
+        verify(semilleroObtenerCU).existePorId(nuevoSemillero.getSemillero_Id());
+        verify(semilleroObtenerCU).obtenerSemilleroPorId(nuevoSemillero.getSemillero_Id());
         verify(semilleroActualizarREPO).actualizarPorMentor(semilleroExistente);
     }
 
@@ -84,8 +84,8 @@ public class SemilleroActualizarServiceTest {
     @Test
     public void testActualizarPorMentorFallo() {
         // Configurar mocks
-        when(semilleroObtenerCU.existePorId(nuevoSemillero.getSemilleroId())).thenReturn(new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta());
-        when(semilleroObtenerCU.obtenerSemilleroPorId(nuevoSemillero.getSemilleroId())).thenReturn(new RespuestaHandler<>(200, "sucess.operacion.exitosa","Exitoso", semilleroExistente).getRespuesta());
+        when(semilleroObtenerCU.existePorId(nuevoSemillero.getSemillero_Id())).thenReturn(new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta());
+        when(semilleroObtenerCU.obtenerSemilleroPorId(nuevoSemillero.getSemillero_Id())).thenReturn(new RespuestaHandler<>(200, "sucess.operacion.exitosa","Exitoso", semilleroExistente).getRespuesta());
         when(semilleroActualizarREPO.actualizarPorMentor(semilleroExistente)).thenReturn(false);
 
         // Ejecutar el método y verificar que se lanza la excepción esperada
@@ -99,16 +99,16 @@ public class SemilleroActualizarServiceTest {
         assertEquals(expectedMessage, exception.getMessage());
 
         // Verificar interacciones con los mocks
-        verify(semilleroObtenerCU).existePorId(nuevoSemillero.getSemilleroId());
-        verify(semilleroObtenerCU).obtenerSemilleroPorId(nuevoSemillero.getSemilleroId());
+        verify(semilleroObtenerCU).existePorId(nuevoSemillero.getSemillero_Id());
+        verify(semilleroObtenerCU).obtenerSemilleroPorId(nuevoSemillero.getSemillero_Id());
         verify(semilleroActualizarREPO).actualizarPorMentor(semilleroExistente);
     }
 
     @Test
     public void testActualizarPorMentorCambioNombre() {
         // Configurar mocks
-        when(semilleroObtenerCU.existePorId(nuevoSemillero.getSemilleroId())).thenReturn(new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta());
-        when(semilleroObtenerCU.obtenerSemilleroPorId(nuevoSemillero.getSemilleroId())).thenReturn(new RespuestaHandler<>(200, "sucess.operacion.exitosa","Exitoso", semilleroExistente).getRespuesta());
+        when(semilleroObtenerCU.existePorId(nuevoSemillero.getSemillero_Id())).thenReturn(new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta());
+        when(semilleroObtenerCU.obtenerSemilleroPorId(nuevoSemillero.getSemillero_Id())).thenReturn(new RespuestaHandler<>(200, "sucess.operacion.exitosa","Exitoso", semilleroExistente).getRespuesta());
         when(semilleroObtenerCU.existePorNombre(nuevoSemillero.getNombre())).thenReturn(new RespuestaHandler<>(200, "sucess.operacion.exitosa", "",true).getRespuesta());
         when(semilleroActualizarREPO.actualizarPorMentor(semilleroExistente)).thenReturn(true);
 
@@ -122,8 +122,8 @@ public class SemilleroActualizarServiceTest {
         assertEquals("Semillero Actualizad@ Exitosamente", respuesta.getUserMessage());
 
         // Verificar interacciones con los mocks
-        verify(semilleroObtenerCU).existePorId(nuevoSemillero.getSemilleroId());
-        verify(semilleroObtenerCU).obtenerSemilleroPorId(nuevoSemillero.getSemilleroId());
+        verify(semilleroObtenerCU).existePorId(nuevoSemillero.getSemillero_Id());
+        verify(semilleroObtenerCU).obtenerSemilleroPorId(nuevoSemillero.getSemillero_Id());
         verify(semilleroObtenerCU).existePorNombre(nuevoSemillero.getNombre());
         verify(semilleroActualizarREPO).actualizarPorMentor(semilleroExistente);
     }

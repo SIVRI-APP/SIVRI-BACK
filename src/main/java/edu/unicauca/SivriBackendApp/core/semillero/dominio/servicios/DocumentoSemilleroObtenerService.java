@@ -52,8 +52,8 @@ public class DocumentoSemilleroObtenerService implements DocumentoSemilleroObten
 
     @Override
     public Respuesta<DocumentoSemilleroProyeccion> obtenerDocumentoxDocumentoActivo(Integer semilleroId, TipoDocumentoSemillero tipo) {
-        Optional<DocumentoSemilleroProyeccion> respuesta=documentoSemilleroObtenerREPO.obtenerDocumentoSemilleroxDocumentoActivo(semilleroId,tipo);
 
+        Optional<DocumentoSemilleroProyeccion> respuesta=documentoSemilleroObtenerREPO.obtenerDocumentoSemilleroxDocumentoActivo(semilleroId,tipo);
         if (respuesta.isEmpty()){
             throw new ReglaDeNegocioException("bad.no.se.encontro.documento.semillero",List.of("Documento semillero","ID",String.valueOf(semilleroId)));
         }
