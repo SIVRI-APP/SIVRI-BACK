@@ -11,5 +11,7 @@ public interface RolObtenerREPO {
 
     Optional<RolProyecto> obtenerProyectoPorId (long proyectoId);
     Optional<RolProyecto> obtenerRolPorEnum (RolProyectoEnum proyectoId);
+    List<RolProyecto> findAll();
     List<RolProyectoListarProyeccion> retornarRoles ();
+    boolean tieneDirector(long proyectoId);
 }

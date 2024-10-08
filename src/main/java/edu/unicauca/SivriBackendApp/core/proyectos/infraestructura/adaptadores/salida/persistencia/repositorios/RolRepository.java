@@ -17,4 +17,15 @@ public interface RolRepository extends JpaRepository<RolProyectoEntity, Long> {
             "FROM RolProyectoEntity rol "
     )
     List<RolProyectoListarProyeccion> retornarRoles();
+
+    List<RolProyectoEntity> findAll();
+
+    @Query(value = "SELECT COUNT(p.ID)  " +
+            "FROM PROYECTO p " +
+            "INNER JOIN INTEGRANTE_PROYECTO ip ON ip.PROYECTO_ID = p.ID " +
+            "INNER JOIN ROL_PROYECTO rp ON ip.ROL_ID = rp.ID " +
+            "WHERE rp.NOMBRE = 'DIRECTOR' AND p.ID = :proyectoId"
+    , nativeQuery = true)
+    int tieneDirector(long proyectoId);
+
 }

@@ -15,6 +15,20 @@ import java.util.Optional;
 
 @Repository
 public interface OrganismoRepository extends JpaRepository<OrganismoDeInvestigacionEntity, Integer>{
+    @Query("SELECT semillero " +
+            "FROM SemilleroEntity semillero " +
+            "WHERE semillero.id = :semilleroId"
+    )
+    Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> obtenerSemilleroSimple(@Param("semilleroId") long semilleroId);
+
+    @Query("SELECT grupo " +
+            "FROM GrupoEntity grupo " +
+            "LEFT JOIN FETCH grupo.integrantes integrantes " +
+            "LEFT JOIN FETCH integrantes.rolGrupo rol " +
+            "LEFT JOIN FETCH integrantes.usuario usuario " +
+            "WHERE grupo.id = :grupoId and usuario.tipoUsuario = 'DOCENTE'"
+    )
+    Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> obtenerGrupoSimple(@Param("grupoId") long grupoId);
 
     @Query("SELECT semillero " +
             "FROM SemilleroEntity semillero " +
@@ -39,9 +53,23 @@ public interface OrganismoRepository extends JpaRepository<OrganismoDeInvestigac
             "LEFT JOIN FETCH semillero.integrantes integrantes " +
             "LEFT JOIN FETCH integrantes.rolSemillero rol " +
             "LEFT JOIN FETCH integrantes.usuario usuario " +
-            "WHERE semillero.id = :semilleroId"
+            "LEFT JOIN FETCH OrganismoDeInvestigacionEntity org on org.id = semillero.id " +
+            "LEFT JOIN FETCH CooperacionEntity cop on cop.organismoDeInvestigacion.id = org.id " +
+            "LEFT JOIN FETCH ProyectoEntity p on p.id = cop.proyecto.id " +
+            "WHERE semillero.id = :semilleroId " +
+            "AND p.id = :proyectoId " +
+            "AND cop.principal = true " +
+            "AND usuario.tipoUsuario != 'ADMINISTRATIVO' " +
+            "AND NOT EXISTS ( " +
+            "    SELECT 1 " +
+            "    FROM IntegranteProyectoEntity ip " +
+            "    WHERE ip.usuario.id = usuario.id " +
+            "      AND ip.proyecto.id = p.id ) "
     )
-    Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarConFiltroIntegrantesSemillero(@Param("semilleroId") long semilleroId);
+    Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarConFiltroIntegrantesSemillero(
+            @Param("semilleroId") long semilleroId,
+            @Param("proyectoId") long proyectoId
+    );
 
     @Query("SELECT grupo " +
             "FROM GrupoEntity grupo " +

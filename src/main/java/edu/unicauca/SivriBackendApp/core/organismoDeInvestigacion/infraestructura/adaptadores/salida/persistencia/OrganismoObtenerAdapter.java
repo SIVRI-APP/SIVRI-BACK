@@ -33,25 +33,32 @@ public class OrganismoObtenerAdapter implements OrganismoObtenerREPO {
 
     @Override
     public Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarIntegrantesDocenteOrganismo(Integer organismoId) {
+        Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> respuesta;
 
         if (organismoRepository.isGrupo(organismoId) > 0){
-            System.out.println("Es Grupo");
-            return organismoRepository.listarConFiltroIntegrantesDocenteGrupo(organismoId);
+            respuesta = organismoRepository.listarConFiltroIntegrantesDocenteGrupo(organismoId);
+            if (respuesta.isEmpty()){
+                return organismoRepository.obtenerGrupoSimple(organismoId);
+            }
 
         }else  {
-            System.out.println("Es Semillero");
-            return organismoRepository.listarConFiltroIntegrantesDocenteSemillero(organismoId);
+            respuesta = organismoRepository.listarConFiltroIntegrantesDocenteSemillero(organismoId);
+            if (respuesta.isEmpty()){
+                return organismoRepository.obtenerSemilleroSimple(organismoId);
+            }
         }
+
+        return respuesta;
     }
 
     @Override
-    public Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarIntegrantesOrganismo(Integer organismoId) {
+    public Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarIntegrantesOrganismo(Integer organismoId, long proyectoId) {
 
         if (organismoRepository.isGrupo(organismoId) > 0){
             return organismoRepository.listarConFiltroIntegrantesGrupo(organismoId);
 
         }else  {
-            return organismoRepository.listarConFiltroIntegrantesSemillero(organismoId);
+            return organismoRepository.listarConFiltroIntegrantesSemillero(organismoId, proyectoId);
         }
     }
 

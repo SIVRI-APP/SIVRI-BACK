@@ -17,5 +17,5 @@ public interface ProyectoCrearCU {
 
     Respuesta<Boolean> asociarConvocatoria(long proyectoId, long convocatoriaId);
 
-    Respuesta<Boolean> agregarIntegrante(Long proyectoId, Long usuarioId, RolProyectoEnum rolId);
+    Respuesta<Boolean> agregarIntegrante(Long proyectoId, Long usuarioId, int rolId);
 }

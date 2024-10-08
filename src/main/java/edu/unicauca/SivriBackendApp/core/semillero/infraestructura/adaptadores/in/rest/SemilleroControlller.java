@@ -141,6 +141,7 @@ public class SemilleroControlller {
     }
     @GetMapping("/listarSemilleroConFiltro")
     @PreAuthorize("hasAnyAuthority(" +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> listarSemilleroConFiltro(
 

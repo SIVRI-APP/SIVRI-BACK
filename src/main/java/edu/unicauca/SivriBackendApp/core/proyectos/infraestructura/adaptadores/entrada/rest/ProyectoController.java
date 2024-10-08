@@ -96,7 +96,7 @@ public class ProyectoController {
     public ResponseEntity<Respuesta<Boolean>> agregarIntegrante(
             @Valid @RequestParam @Positive(message = "Proyecto Id no valido") Long proyectoId,
             @Valid @RequestParam @Positive(message = "Usuario Id no valido")Long usuarioId,
-            @Valid @RequestParam @Positive(message = "Rol Id no valido") RolProyectoEnum rolId
+            @Valid @RequestParam @Positive(message = "Rol Id no valido") int rolId
     ){
         Respuesta<Boolean> respuesta = proyectoCrearCU.agregarIntegrante(proyectoId, usuarioId, rolId);
         return ResponseEntity.ok().body(respuesta);

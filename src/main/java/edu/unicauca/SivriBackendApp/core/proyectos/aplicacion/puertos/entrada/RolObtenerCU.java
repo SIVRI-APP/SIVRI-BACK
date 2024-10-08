@@ -12,5 +12,6 @@ public interface RolObtenerCU {
 
     Respuesta<RolProyecto> obtenerRolPorId(int rolId);
     Respuesta<RolProyecto> obtenerRolPorEnum(RolProyectoEnum rolId);
-    Respuesta<List<RolProyectoListarProyeccion>> retornarRoles (TipoUsuario tipoUsuario);
+    Respuesta<List<RolProyectoListarProyeccion>> retornarRoles (TipoUsuario tipoUsuario, long proyectoId);
+    Respuesta<List<RolProyecto>> obtenesRolesParaAsignarRolProyecto (long usuarioId, long proyectoId);
 }

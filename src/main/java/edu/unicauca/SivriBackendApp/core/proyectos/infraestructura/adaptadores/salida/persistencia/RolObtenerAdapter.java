@@ -39,7 +39,18 @@ public class RolObtenerAdapter implements RolObtenerREPO {
     }
 
     @Override
+    public List<RolProyecto> findAll() {
+        return rolInfraMapper.fromEntityListToModelList(rolRepository.findAll());
+    }
+
+    @Override
     public List<RolProyectoListarProyeccion> retornarRoles() {
         return rolRepository.retornarRoles();
     }
+
+    @Override
+    public boolean tieneDirector(long proyectoId) {
+        return rolRepository.tieneDirector(proyectoId) >= 1;
+    }
+
 }

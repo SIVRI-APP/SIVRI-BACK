@@ -51,6 +51,7 @@ public class UsuarioSolicitudInfraSimpleMapper {
         if (entity.getCreadoPor() != null) {
             Usuario creadoPor = new Usuario();
             creadoPor.setId(entity.getCreadoPor().getId());
+            creadoPor.setCorreo(entity.getCreadoPor().getCorreo());
             model.setCreadoPor(creadoPor);
         }
 
@@ -69,6 +70,8 @@ public class UsuarioSolicitudInfraSimpleMapper {
         if (entity.getObservaciones() != null) {
             UsuarioSolicitudObservaciones observaciones = new UsuarioSolicitudObservaciones();
             observaciones.setId(entity.getObservaciones().getId());
+            observaciones.setResuelta(entity.getObservaciones().getResuelta());
+
             model.setObservaciones(observaciones);
         }
 

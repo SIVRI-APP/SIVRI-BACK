@@ -3,6 +3,7 @@ package edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -16,4 +17,8 @@ public class ProyectoDetalladoDTO {
     private ProyectoIntegrantesProyeccion integrantesProyecto;
     private ProyectoCompromisosProyeccion compromisosProyecto;
 
+    @Override
+    public String toString() {
+        return "| Proyecto |" + informacionDetalladaProyecto.getNombre() + " | Organismo | " + organismoPrincipal.getNombre();
+    }
 }

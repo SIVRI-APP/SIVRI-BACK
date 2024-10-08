@@ -5,6 +5,9 @@ import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.s
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @AllArgsConstructor
 public class RolInfraMapper {
@@ -15,6 +18,19 @@ public class RolInfraMapper {
         model.setNombre(entity.getNombre());
 
         return model;
+    }
+
+    public List<RolProyecto> fromEntityListToModelList (List<RolProyectoEntity> entities){
+        List<RolProyecto> models = new ArrayList<>();
+
+        if (entities != null && !entities.isEmpty()) {
+            for(RolProyectoEntity entity : entities){
+                RolProyecto model = fromEntityToModel(entity);
+                models.add(model);
+            }
+        }
+
+        return models;
     }
 
     public RolProyectoEntity fromModelToEntityUsingIdOnly(Integer modelId){

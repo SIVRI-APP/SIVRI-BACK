@@ -55,9 +55,10 @@ public class OrganismoController {
     @GetMapping("listarIntegrantesOrganismo")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Respuesta<Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion>>> listarIntegrantesOrganismo(
-            @RequestParam Integer organismoId
+            @RequestParam Integer organismoId,
+            @RequestParam long proyectoId
     ) {
-        Respuesta<Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion>> respuesta = organismoObtenerCU.listarIntegrantesDocenteOrganismo(organismoId);
+        Respuesta<Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion>> respuesta = organismoObtenerCU.listarIntegrantesOrganismo(organismoId, proyectoId);
 
         return ResponseEntity.ok().body(respuesta);
     }

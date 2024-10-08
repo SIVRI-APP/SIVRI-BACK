@@ -14,7 +14,7 @@ public interface OrganismoObtenerREPO {
 
     Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarIntegrantesDocenteOrganismo(Integer organismoId);
 
-    Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarIntegrantesOrganismo(Integer organismoId);
+    Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> listarIntegrantesOrganismo(Integer organismoId, long proyectoId);
 
     Optional<OrganismoDeInvestigacion> findById(Integer id);
 }

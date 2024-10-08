@@ -97,7 +97,7 @@ public class ProyectoCrearService implements ProyectoCrearCU {
     }
 
     @Override
-    public Respuesta<Boolean> agregarIntegrante(Long proyectoId, Long usuarioId, RolProyectoEnum rolId) {
+    public Respuesta<Boolean> agregarIntegrante(Long proyectoId, Long usuarioId, int rolId) {
 
         // Obtener Proyecto
         Proyecto proyecto = proyectoObtenerCU.obtenerProyecto(proyectoId).getData();
@@ -106,7 +106,7 @@ public class ProyectoCrearService implements ProyectoCrearCU {
         Usuario usuario = usuarioObtenerCU.obtenerUsuario(usuarioId).getData();
 
         // Obtener Rol
-        RolProyecto rol = rolObtenerCU.obtenerRolPorEnum(rolId).getData();
+        RolProyecto rol = rolObtenerCU.obtenerRolPorId(rolId).getData();
 
         // Crear Integrante Proyecto
         integranteCrearCU.crear(usuario, proyecto, rol);

@@ -165,6 +165,7 @@ public class UsuarioSolicitudController {
     public ResponseEntity<Respuesta<Boolean>> resolverObservacion(
             @RequestParam Long observacionId)
     {
+        System.out.println(observacionId);
         Respuesta<Boolean> respuesta = usuarioSolicitudObservacionCrearCU.resolverObservacion(observacionId);
         return ResponseEntity.ok().body(respuesta);
     }

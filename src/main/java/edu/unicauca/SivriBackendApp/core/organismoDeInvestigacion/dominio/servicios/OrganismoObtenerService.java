@@ -57,11 +57,9 @@ public class OrganismoObtenerService implements OrganismoObtenerCU {
     }
 
     @Override
-    public Respuesta<Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion>> listarIntegrantesOrganismo(Integer organismoId) {
+    public Respuesta<Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion>> listarIntegrantesOrganismo(Integer organismoId, long proyectoId) {
 
-        Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> respuesta;
-
-        respuesta = organismoObtenerREPO.listarIntegrantesDocenteOrganismo(organismoId);
+        Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> respuesta = organismoObtenerREPO.listarIntegrantesOrganismo(organismoId, proyectoId);
 
         return new RespuestaHandler<>(200, "ok", "", respuesta).getRespuesta();
     }
