@@ -60,7 +60,7 @@ public class SemilleroProgramaController {
     }
     @DeleteMapping("/eliminarSemilleroPrograma/{id}")
     @PreAuthorize("hasAnyAuthority(" +
-            "'SEMILLERO:MENTOR')")
+            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta<Boolean>> eliminarProgramaSemillero(@PathVariable(value = "id") int idSemilleroPrograma){
         Respuesta<Boolean> respuesta =semilleroProgramaEliminarCU.eliminacionSemilleroProgramaFisico(idSemilleroPrograma);
         return ResponseEntity.ok().body(respuesta);

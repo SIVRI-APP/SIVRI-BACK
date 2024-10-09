@@ -52,7 +52,7 @@ public class IntegranteGrupoController {
     @GetMapping("integrantesMentoresPorGrupoId")
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR', " +
-            "'GRUPO:DIRECTOR')")
+            "'GRUPO:DIRECTOR','FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> obtenerIntegrantesMentoresGrupoPorIdGrupo(
             @RequestParam(value = "idGrupo",required = true) int idGrupo
     ){

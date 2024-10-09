@@ -27,7 +27,7 @@ public class CompromisoSemilleroController {
 
     @GetMapping("/obtenerCompromisos")
     @PreAuthorize("hasAnyAuthority(" +
-            "'SEMILLERO:MENTOR','GRUPO:DIRECTOR' )"
+            "'SEMILLERO:MENTOR','GRUPO:DIRECTOR','FUNCIONARIO:SEMILLEROS' )"
     )
     public ResponseEntity<Respuesta> obtenerCompromisos(){
         Respuesta respuesta =compromisoSemilleroObtenerCU.obtenerListadoCompromisos();

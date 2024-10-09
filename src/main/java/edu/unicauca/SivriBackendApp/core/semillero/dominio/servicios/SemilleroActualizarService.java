@@ -71,9 +71,7 @@ public  class SemilleroActualizarService implements SemilleroActualizarCU {
         objSemilleroActualizar.setMision(nuevoSemillero.getMision());
         objSemilleroActualizar.setVision(nuevoSemillero.getVision());
         objSemilleroActualizar.setSede(nuevoSemillero.getSede());
-
         Boolean respuesta = semilleroActualizarREPO.actualizarPorMentor(objSemilleroActualizar);
-
         if (!respuesta) {
             throw new ReglaDeNegocioException("bad.error.actualizacion.objeto", List.of("Semillero", "Id", String.valueOf(nuevoSemillero.getId())));
         }
