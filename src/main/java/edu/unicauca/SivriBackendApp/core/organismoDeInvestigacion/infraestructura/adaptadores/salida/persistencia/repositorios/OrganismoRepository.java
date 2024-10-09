@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.infraestructura.adaptadores.salida.persistencia.repositorios;
 
+import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarRolesOrganismoProyeccion;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarOrganismosParaAsociarProyectoProyeccion;
 import edu.unicauca.SivriBackendApp.core.semillero.infraestructura.adaptadores.out.persistencia.entity.OrganismoDeInvestigacionEntity;
@@ -11,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -148,4 +150,13 @@ public interface OrganismoRepository extends JpaRepository<OrganismoDeInvestigac
     Integer isGrupo (@Param("id") Integer id);
 
     Optional<OrganismoDeInvestigacionEntity> findById(Integer id);
+
+    @Query(value = "select rol.id, rol.rol_semillero as nombre from rol_semillero rol ", nativeQuery = true)
+    List<ListarRolesOrganismoProyeccion> obtenerRolesDeUnSemillero();
+
+    @Query(value = "select count(int.usuario_id) " +
+            "from integrante_semillero int " +
+            "where int.rol_id = 2 and int.semillero_id = :semilleroId ",
+    nativeQuery = true)
+    int semilleroTieneMentor(@Param("semilleroId") Integer semilleroId);
 }

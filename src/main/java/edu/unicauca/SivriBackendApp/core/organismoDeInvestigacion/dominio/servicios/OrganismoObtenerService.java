@@ -5,14 +5,17 @@ import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHa
 import edu.unicauca.SivriBackendApp.common.seguridad.acceso.service.ServicioDeIdentificacionDeUsuario;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.aplicacion.puertos.entrada.OrganismoObtenerCU;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.aplicacion.puertos.salida.OrganismoObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarRolesOrganismoProyeccion;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarOrganismosParaAsociarProyectoProyeccion;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -60,6 +63,24 @@ public class OrganismoObtenerService implements OrganismoObtenerCU {
     public Respuesta<Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion>> listarIntegrantesOrganismo(Integer organismoId, long proyectoId) {
 
         Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion> respuesta = organismoObtenerREPO.listarIntegrantesOrganismo(organismoId, proyectoId);
+
+        return new RespuestaHandler<>(200, "ok", "", respuesta).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<List<ListarRolesOrganismoProyeccion>> obtenerRolesDeUnOrganismo(Integer organismoId, TipoUsuario tipoUsuario) {
+        List<ListarRolesOrganismoProyeccion> respuesta;
+
+        if (organismoObtenerREPO.isGrupo(organismoId) >= 1){
+            respuesta = null;
+        }else{
+            respuesta = organismoObtenerREPO.obtenerRolesDeUnSemillero();
+
+            if (organismoObtenerREPO.semilleroTieneMentor(organismoId)){
+                // Eliminar Rol Mentor
+                respuesta.removeIf(elemento -> elemento.getId() == 2);
+            }
+        }
 
         return new RespuestaHandler<>(200, "ok", "", respuesta).getRespuesta();
     }

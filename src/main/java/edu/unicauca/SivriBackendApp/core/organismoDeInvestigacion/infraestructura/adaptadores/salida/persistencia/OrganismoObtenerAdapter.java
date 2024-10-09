@@ -2,6 +2,7 @@ package edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.infraestructu
 
 import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.OrganismoDeInvestigacion;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.aplicacion.puertos.salida.OrganismoObtenerREPO;
+import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarRolesOrganismoProyeccion;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarOrganismosParaAsociarProyectoProyeccion;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.infraestructura.adaptadores.salida.persistencia.mappers.OrganismoInfraMapper;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -71,5 +73,20 @@ public class OrganismoObtenerAdapter implements OrganismoObtenerREPO {
 
         }
         return Optional.of(organismoInfraMapper.toModelSoloPorId(org.get()));
+    }
+
+    @Override
+    public List<ListarRolesOrganismoProyeccion> obtenerRolesDeUnSemillero() {
+        return organismoRepository.obtenerRolesDeUnSemillero();
+    }
+
+    @Override
+    public boolean semilleroTieneMentor(Integer semilleroId) {
+        return organismoRepository.semilleroTieneMentor(semilleroId) >= 1;
+    }
+
+    @Override
+    public Integer isGrupo(Integer organismoId) {
+        return organismoRepository.isGrupo(organismoId);
     }
 }

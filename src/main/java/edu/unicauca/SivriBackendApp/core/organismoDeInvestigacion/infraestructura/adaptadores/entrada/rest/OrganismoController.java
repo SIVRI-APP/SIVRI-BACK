@@ -2,8 +2,10 @@ package edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.infraestructu
 
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.aplicacion.puertos.entrada.OrganismoObtenerCU;
+import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarRolesOrganismoProyeccion;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarOrganismosParaAsociarProyectoProyeccion;
+import edu.unicauca.SivriBackendApp.core.usuario.dominio.modelos.enums.TipoUsuario;
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -59,6 +62,17 @@ public class OrganismoController {
             @RequestParam long proyectoId
     ) {
         Respuesta<Optional<ObtenerIntegrantesOrganismoParaAsociarDirProyectoProyeccion>> respuesta = organismoObtenerCU.listarIntegrantesOrganismo(organismoId, proyectoId);
+
+        return ResponseEntity.ok().body(respuesta);
+    }
+
+    @GetMapping("obtenerRolesDeUnOrganismo")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Respuesta<List<ListarRolesOrganismoProyeccion>>> obtenerRolesDeUnOrganismo(
+            @RequestParam Integer organismoId,
+            @RequestParam TipoUsuario tipoUsuario
+    ) {
+        Respuesta<List<ListarRolesOrganismoProyeccion>> respuesta = organismoObtenerCU.obtenerRolesDeUnOrganismo(organismoId, tipoUsuario);
 
         return ResponseEntity.ok().body(respuesta);
     }
