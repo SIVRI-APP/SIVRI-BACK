@@ -25,7 +25,9 @@ public class ProgramaController {
        return ResponseEntity.ok().body(respuesta);
     }
 
-    @GetMapping("")
+    @GetMapping("/obtenerProgramas")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS','GRUPO:DIRECTOR')")
     public ResponseEntity<Respuesta<List<Programa>>> obtenerListadoProgramas(){
         Respuesta<List<Programa>> respuesta =programaObtenerCU.obtenerProgramas();
         return ResponseEntity.ok().body(respuesta);

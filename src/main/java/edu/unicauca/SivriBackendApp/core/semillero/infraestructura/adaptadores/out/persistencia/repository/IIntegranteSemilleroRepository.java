@@ -20,18 +20,18 @@ public interface IIntegranteSemilleroRepository extends JpaRepository<Integrante
    //TODO falta el programa que no sta includo en el usuario
     //QUERY ORACLE OK
    @Query(value = "SELECT ins.id_Integrante_Semillero, " +
-           "                  u.numero_Documento, " +
-           "                  u.nombre || ' ' || u.apellido AS nombreCompleto, " +
-           "                  rs.rol_Semillero, " +
-           "                  ins.estado, " +
-           "                  ins.fecha_Ingreso " +
-           "           FROM INTEGRANTE_SEMILLERO ins " +
-           "           INNER JOIN usuario u ON u.id = ins.usuario_Id " +
-           "           INNER JOIN rol_semillero rs ON rs.id = ins.rol_Id " +
-           "           WHERE ins.semillero_Id = (:semilleroId) " +
-           "           AND (LOWER(u.numero_Documento) LIKE '%' || LOWER(:numeroDocumento) || '%' OR :numeroDocumento IS NULL OR :numeroDocumento = '') " +
-           "           AND (LOWER(rs.id) LIKE '%' || LOWER(:rolSemillero) || '%' OR :rolSemillero IS NULL OR :rolSemillero = '') " +
-           "           AND (LOWER(ins.estado) LIKE '%' || LOWER(:estado) || '%' OR :estado IS NULL OR :estado = '')",nativeQuery = true)
+           "                             u.numero_Documento, " +
+           "                             u.nombre || ' ' || u.apellido AS nombreCompleto, " +
+           "                             rs.rol_Semillero, " +
+           "                             ins.estado, " +
+           "                             ins.fecha_Ingreso " +
+           "                      FROM INTEGRANTE_SEMILLERO ins " +
+           "                      INNER JOIN usuario u ON u.id = ins.usuario_Id " +
+           "                      INNER JOIN rol_semillero rs ON rs.id = ins.rol_Id " +
+           "                      WHERE ins.semillero_Id = (:semilleroId) " +
+           "                      AND (LOWER(u.numero_Documento) LIKE '%' || LOWER(:numeroDocumento) || '%' OR :numeroDocumento IS NULL OR :numeroDocumento = '') " +
+           "                      AND (LOWER(rs.id) LIKE  LOWER(:rolSemillero) OR :rolSemillero IS NULL OR :rolSemillero = '') " +
+           "                      AND (LOWER(ins.estado) LIKE LOWER(:estado) OR :estado IS NULL OR :estado = '')",nativeQuery = true)
    Page<List<ListarIntegrantesSemilleroxIdSemillero>> obtenerIntegrantesSemilleroPorIdSemillero(
            @Param("semilleroId") int semilleroId,
            @Param("numeroDocumento") String numeroDocumento,
