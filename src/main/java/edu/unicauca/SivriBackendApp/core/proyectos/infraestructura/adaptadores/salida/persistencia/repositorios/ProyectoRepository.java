@@ -6,6 +6,7 @@ import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.s
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
@@ -19,6 +20,15 @@ public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
 
     Boolean existsByNombre(String nombre);
 
+    @Modifying
+    @Query(value = "UPDATE proyecto " +
+            "set convocatoria_id = :convocatoriaId  " +
+            "where id = :proyectoId"
+    , nativeQuery = true)
+    int asociarConvocatoria(
+            @Param("proyectoId") Long proyectoId,
+            @Param("convocatoriaId") Long convocatoriaId
+    );
 
     @Query("SELECT DISTINCT proyecto " +
             "FROM ProyectoEntity proyecto " +

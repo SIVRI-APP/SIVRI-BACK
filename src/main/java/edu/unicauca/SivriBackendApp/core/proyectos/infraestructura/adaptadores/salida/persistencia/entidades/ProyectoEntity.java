@@ -29,10 +29,8 @@ public class ProyectoEntity {
     @Enumerated(EnumType.STRING)
     private EstadoProyecto estado;
 
-    @FutureOrPresent
     private LocalDate fechaInicio;
 
-    @FutureOrPresent(message = "Fecha de Inicio Debe ser una fecha en el presente o en l futuro Entity")
     private LocalDate fechaFin;
 
     @Column(length = 256)
@@ -67,6 +65,10 @@ public class ProyectoEntity {
 
     private boolean eliminadoLogico;
 
+    @ManyToOne()
+    @JoinColumn(name = "CONVOCATORIA_ID")
+    private ConvocatoriaEntity convocatoria;
+
     @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE)
     private List<LineaDeInvestigacionProyectoEntity> lineasDeInvestigacion;
 
@@ -81,11 +83,6 @@ public class ProyectoEntity {
 
     @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE)
     private Set<CompromisoProyectoEntity> compromisos;
-
-    @ManyToOne()
-    @JoinColumn(name = "CONVOCATORIA_ID")
-    private ConvocatoriaEntity convocatoria;
-
 
     @Override
     public boolean equals(Object o) {

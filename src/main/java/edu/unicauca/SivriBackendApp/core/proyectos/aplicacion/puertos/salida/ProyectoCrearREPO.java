@@ -9,5 +9,7 @@ public interface ProyectoCrearREPO {
 
     boolean formalizarProyecto(Proyecto proyecto);
 
+    boolean asociarConvocatoria(long proyectoId, long convocatoriaId);
+
     boolean guardarProyecto(ProyectoEntity proyecto);
 }

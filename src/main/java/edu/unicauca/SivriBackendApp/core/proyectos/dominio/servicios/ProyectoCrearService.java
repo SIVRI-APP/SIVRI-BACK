@@ -133,8 +133,6 @@ public class ProyectoCrearService implements ProyectoCrearCU {
         // Guardar Información general
         crearProyectoUtils.guardarProyecto(oldProyecto, proyecto);
 
-
-
         return new RespuestaHandler<>(200, "ok.guardarCambiosProyecto", List.of(proyecto.getInformacionGeneral().getNombre()), "", true).getRespuesta();
     }
 
@@ -151,7 +149,7 @@ public class ProyectoCrearService implements ProyectoCrearCU {
         Proyecto proyecto = proyectoObtenerCU.obtenerProyecto(proyectoId).getData();
         proyecto.setConvocatoria(convocatoria);
 
-        proyectoCrearREPO.crearProyecto(proyecto);
+        proyectoCrearREPO.asociarConvocatoria(proyectoId, convocatoriaId);
 
         return new RespuestaHandler<>(200, "ok.asociar.proyecto.convocatoria", List.of(proyecto.getNombre(), convocatoria.getNombre()), "", true).getRespuesta();
     }

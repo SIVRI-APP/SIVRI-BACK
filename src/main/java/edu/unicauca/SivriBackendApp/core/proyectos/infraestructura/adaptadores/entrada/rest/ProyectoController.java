@@ -2,6 +2,7 @@ package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.
 
 import edu.unicauca.SivriBackendApp.common.file.StorageService;
 import edu.unicauca.SivriBackendApp.common.respuestaGenerica.Respuesta;
+import edu.unicauca.SivriBackendApp.common.respuestaGenerica.handler.RespuestaHandler;
 import edu.unicauca.SivriBackendApp.core.convocatoria.dominio.modelos.enums.TipoFinanciacion;
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarOrganismosParaAsociarProyectoProyeccion;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.ProyectoCrearCU;
@@ -31,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/proyecto")
@@ -82,7 +84,9 @@ public class ProyectoController {
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
             "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
     public ResponseEntity<Respuesta<Boolean>> guardarProyecto(@Valid @RequestBody GuardarProyectoDTO proyectoDto){
+
         Respuesta<Boolean> respuesta = proyectoCrearCU.guardarProyecto(proyectoDto);
+
         return ResponseEntity.ok().body(respuesta);
     }
 

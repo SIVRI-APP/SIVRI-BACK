@@ -50,9 +50,23 @@ public class ProyectoCrearAdapter implements ProyectoCrearREPO {
         return true;
     }
 
+    @Transactional
+    @Override
+    public boolean asociarConvocatoria(long proyectoId, long convocatoriaId) {
+        System.out.println(proyectoId);
+        System.out.println(convocatoriaId);
+        int respuesta = proyectoRepository.asociarConvocatoria(proyectoId, convocatoriaId);
+
+        if (respuesta < 1){
+            return false;
+        }
+
+        return true;
+    }
+
     @Override
     public boolean guardarProyecto(ProyectoEntity proyecto) {
-        proyectoRepository.save(proyecto);
+        proyectoInfraMapper.toDtoSimple(proyectoRepository.save(proyecto));
 
         return true;
     }

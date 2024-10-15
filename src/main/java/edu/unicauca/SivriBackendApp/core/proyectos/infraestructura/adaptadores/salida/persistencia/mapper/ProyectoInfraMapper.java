@@ -1,5 +1,6 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.mapper;
 
+import edu.unicauca.SivriBackendApp.core.convocatoria.infraestructura.adaptadores.salida.persistencia.entidad.ConvocatoriaEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
 import org.springframework.stereotype.Component;
@@ -54,6 +55,40 @@ public class ProyectoInfraMapper {
 
         return entity;
     }
+
+    public ProyectoEntity toEntityAsociarConvocatoria(Proyecto proyecto) {
+        ProyectoEntity entity = new ProyectoEntity();
+
+        // Mapear los valores básicos
+        entity.setId(proyecto.getId());
+        entity.setEliminadoLogico(false); // Valor predeterminado
+        entity.setEstado(proyecto.getEstado());
+        entity.setNombre(proyecto.getNombre());
+
+//         Mapear los valores adicionales
+        entity.setFechaInicio(proyecto.getFechaInicio());
+        entity.setFechaFin(proyecto.getFechaFin());
+        entity.setPlanteamiento(proyecto.getPlanteamiento());
+        entity.setObjetivoGeneral(proyecto.getObjetivoGeneral());
+        entity.setObjetivosEspecificos(proyecto.getObjetivosEspecificos());
+        entity.setJustificacion(proyecto.getJustificacion());
+        entity.setEnfoqueMetodologico(proyecto.getEnfoqueMetodologico());
+        entity.setAspectosEticosLegales(proyecto.getAspectosEticosLegales());
+        entity.setConfidencialidad(proyecto.getConfidencialidadDeInformacion());
+        entity.setEfectosAdversos(proyecto.getEfectosAdversos());
+        entity.setImpacResulEsperados(proyecto.getImpactosResultadosEsperados());
+        entity.setConsideraciones(proyecto.getConsideraciones());
+
+        // Mapear la convocatoria (si aplica)
+        if (proyecto.getConvocatoria() != null) {
+            ConvocatoriaEntity convocatoriaEntity = new ConvocatoriaEntity();
+            convocatoriaEntity.setId(proyecto.getConvocatoria().getId());
+            entity.setConvocatoria(convocatoriaEntity);
+        }
+
+        return entity;
+    }
+
 
     public Proyecto toDtoSimple(ProyectoEntity save) {
         Proyecto proyecto = new Proyecto();
