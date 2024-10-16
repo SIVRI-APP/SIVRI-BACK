@@ -30,6 +30,7 @@ public class CompromisoController {
 
     @GetMapping("prepararAgregarCompromiso")
     @PreAuthorize("hasAnyAuthority(" +
+            "'PROYECTO:DIRECTOR',  " +
             "'FUNCIONARIO:VICERRECTOR',  " +
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
@@ -41,6 +42,7 @@ public class CompromisoController {
 
     @PostMapping("agregarCompromiso")
     @PreAuthorize("hasAnyAuthority(" +
+            "'PROYECTO:DIRECTOR',  " +
             "'FUNCIONARIO:VICERRECTOR',  " +
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +

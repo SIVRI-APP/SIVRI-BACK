@@ -1,6 +1,7 @@
 package edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios;
 
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.dominio.modelos.proyecciones.ListarOrganismosParaAsociarProyectoProyeccion;
+import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.*;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,13 @@ import java.util.Optional;
 public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
 
     Boolean existsByNombre(String nombre);
+
+
+    @Modifying
+    @Query("UPDATE ProyectoEntity p SET p.estado = :estado WHERE p.id = :id")
+    int updateProyectoEstado(@Param("id") Long id,
+                   @Param("estado") EstadoProyecto estado);
+
 
     @Modifying
     @Query(value = "UPDATE proyecto " +

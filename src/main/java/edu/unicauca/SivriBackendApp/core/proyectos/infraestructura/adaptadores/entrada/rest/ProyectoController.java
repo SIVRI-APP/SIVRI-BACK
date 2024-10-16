@@ -213,4 +213,21 @@ public class ProyectoController {
         return ResponseEntity.ok().body(respuesta);
     }
 
+    @PostMapping("cambiarEstado")
+    @PreAuthorize("hasAnyAuthority(" +
+            "'PROYECTO:DIRECTOR',  " +
+            "'FUNCIONARIO:VICERRECTOR',  " +
+            "'FUNCIONARIO:SUPER_ADMIN', " +
+            "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
+            "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
+    public ResponseEntity<Respuesta<Boolean>> cambiarEstado(
+            @RequestParam(required = false) Long proyectoId,
+            @RequestParam(required = false) EstadoProyecto estado
+    ){
+
+        Respuesta<Boolean> respuesta = proyectoCrearCU.cambiarEstado(proyectoId, estado);
+
+        return ResponseEntity.ok().body(respuesta);
+    }
+
 }

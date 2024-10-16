@@ -9,13 +9,10 @@ import edu.unicauca.SivriBackendApp.core.grupo.dominio.modelos.OrganismoDeInvest
 import edu.unicauca.SivriBackendApp.core.organismoDeInvestigacion.aplicacion.puertos.salida.OrganismoObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.*;
 import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoCrearREPO;
-import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.salida.ProyectoObtenerREPO;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.Proyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.RolProyecto;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoProyecto;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.RolProyectoEnum;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.servicios.utils.CrearProyectoUtils;
-import edu.unicauca.SivriBackendApp.core.proyectos.dominio.servicios.validadores.IntegranteValidator;
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.servicios.validadores.ProyectoValidators;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.CrearProyectoDTO;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.entrada.rest.dto.entrada.GuardarProyectoDTO;
@@ -37,14 +34,12 @@ public class ProyectoCrearService implements ProyectoCrearCU {
      * Validadores
      */
     private final ProyectoValidators proyectoValidators;
-    private final IntegranteValidator integranteValidator;
 
 
     /**
      * Adaptadores
      */
     private final ProyectoCrearREPO proyectoCrearREPO;
-    private final ProyectoObtenerREPO proyectoObtenerREPO;
     private final OrganismoObtenerREPO organismoObtenerREPO;
 
     /**
@@ -112,6 +107,24 @@ public class ProyectoCrearService implements ProyectoCrearCU {
         integranteCrearCU.crear(usuario, proyecto, rol);
 
         return new RespuestaHandler<>(200, "ok.asociarIntegranteProyecto", List.of(usuario.getNombre(), proyecto.getNombre(), rol.getNombre().toString()), "", true).getRespuesta();
+    }
+
+    @Override
+    public Respuesta<Boolean> cambiarEstado(Long proyectoId, EstadoProyecto estado) {
+
+        if (estado.equals(EstadoProyecto.REVISION_VRI)) {
+            proyectoValidators.validarCambioEstadoRevisionVRI(proyectoId);
+        }
+
+        if (estado.equals(EstadoProyecto.FORMULADO_OBSERVACIONES)) {
+            proyectoValidators.validarCambioEstadoFormuladoObser(proyectoId);
+        }
+
+        if (estado.equals(EstadoProyecto.APROBADO)) {
+            proyectoValidators.validarCambioEstadoAprobado(proyectoId);
+        }
+
+        return new RespuestaHandler<>(200, "ok.estadoActualizado", List.of(estado.name()), "", true).getRespuesta();
     }
 
     @Override
