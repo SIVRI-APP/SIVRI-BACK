@@ -74,8 +74,10 @@ public class ProyectoValidators {
         }
 
         // La fecha Inicio debe ser antes de la fecha Fin
-        if (proyecto.getInformacionGeneral().getFechaInicio().isAfter(proyecto.getInformacionGeneral().getFechaFin())){
-            throw new ReglaDeNegocioException("bad.fechaFinAntesFechaInicio");
+        if(proyecto.getInformacionGeneral().getFechaInicio() != null && proyecto.getInformacionGeneral().getFechaFin() != null ){
+            if (proyecto.getInformacionGeneral().getFechaInicio().isAfter(proyecto.getInformacionGeneral().getFechaFin())){
+                throw new ReglaDeNegocioException("bad.fechaFinAntesFechaInicio");
+            }
         }
 
         // Lo modifica únicamente un miembro del Proyecto

@@ -83,7 +83,7 @@ public interface ProyectoRepository extends JpaRepository<ProyectoEntity, Long>{
     );
 
 
-    @Query(value = "SELECT " +
+    @Query(value = "SELECT DISTINCT" +
             "    p.id, " +
             "    p.nombre, " +
             "    p.estado, " +
