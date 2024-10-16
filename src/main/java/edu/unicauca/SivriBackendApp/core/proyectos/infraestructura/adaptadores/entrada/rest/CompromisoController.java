@@ -45,7 +45,7 @@ public class CompromisoController {
             "'FUNCIONARIO:SUPER_ADMIN', " +
             "'FUNCIONARIO:PROYECTOS_INTERNOS', " +
             "'FUNCIONARIO:PROYECTOS_EXTERNOS')")
-    public ResponseEntity<Respuesta<Boolean>> prepararAgregarCompromiso(
+    public ResponseEntity<Respuesta<Boolean>> agregarCompromiso(
             @Valid @RequestParam @Positive(message = "Proyecto Id no valido") Long proyectoId,
             @Valid @RequestParam @Positive(message = "Integrante Id no valido") Long integranteId,
             @Valid @RequestParam @Positive(message = "Producto Id no valido") Integer productoId

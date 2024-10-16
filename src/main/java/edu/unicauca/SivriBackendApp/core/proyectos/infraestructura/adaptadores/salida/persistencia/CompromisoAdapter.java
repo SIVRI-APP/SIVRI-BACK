@@ -6,10 +6,7 @@ import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.proyecciones.
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.CompromisoProyectoEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.EvidenciaCompromisoEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.mapper.ProyectoInfraMapper;
-import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios.CompromisoProyectoRepository;
-import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios.IntegranteRepository;
-import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios.ProductoProyectoRepository;
-import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios.ProyectoRepository;
+import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.repositorios.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +19,7 @@ public class CompromisoAdapter implements CompromisoREPO {
     private final CompromisoProyectoRepository compromisoProyectoRepository;
     private final IntegranteRepository integranteRepository;
     private final ProyectoInfraMapper proyectoInfraMapper;
+    private final EvidenciaCompromisoProyectoRepository evidenciaCompromisoProyectoRepository;
 
     @Override
     public PrepararAgregarCompromisoDTO prepararAgregarCompromiso(long proyectoId) {
@@ -45,7 +43,6 @@ public class CompromisoAdapter implements CompromisoREPO {
 
     @Override
     public EvidenciaCompromisoEntity agregarEvidenciaCompromiso(EvidenciaCompromisoEntity evidenciaCompromiso) {
-//        todo compromiso
-        return null;
+        return evidenciaCompromisoProyectoRepository.save(evidenciaCompromiso);
     }
 }

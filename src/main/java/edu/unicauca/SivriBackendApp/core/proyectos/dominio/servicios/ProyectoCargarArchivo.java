@@ -9,6 +9,7 @@ import edu.unicauca.SivriBackendApp.core.proyectos.aplicacion.puertos.entrada.Pr
 import edu.unicauca.SivriBackendApp.core.proyectos.dominio.modelos.enums.EstadoCompromisoProyectoEnum;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.CompromisoAdapter;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.EvidenciaProyectoDocumentoConvocatoriaAdapter;
+import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.CompromisoProyectoEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.EvidenciaCompromisoEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.EvidenciaProyectoDocumentoConvocatoriaEntity;
 import edu.unicauca.SivriBackendApp.core.proyectos.infraestructura.adaptadores.salida.persistencia.entidades.ProyectoEntity;
@@ -60,9 +61,12 @@ public class ProyectoCargarArchivo {
     public Respuesta<EvidenciaCompromisoEntity> cargarDocumentoCompromiso(String nombre, String organismoId, String documentoConvocatoriaId) {
 
         EvidenciaCompromisoEntity evidencia = new EvidenciaCompromisoEntity();
-        evidencia.setCompromisoProyecto(null);
-        evidencia.setRutaAlmacenamiento(null);
+        evidencia.setRutaAlmacenamiento(nombre);
         evidencia.setEstado(EstadoCompromisoProyectoEnum.REVISION_VRI);
+
+        CompromisoProyectoEntity tmp = new CompromisoProyectoEntity();
+        tmp.setId(Long.valueOf(documentoConvocatoriaId));
+        evidencia.setCompromisoProyecto(tmp);
 
         return new RespuestaHandler<>(200, "ok", "", compromisoAdapter.agregarEvidenciaCompromiso(evidencia)).getRespuesta();
     }
