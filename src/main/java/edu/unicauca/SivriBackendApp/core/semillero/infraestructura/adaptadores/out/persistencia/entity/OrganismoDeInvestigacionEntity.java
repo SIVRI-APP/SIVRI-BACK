@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public abstract class OrganismoDeInvestigacionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "organismo_de_investigacion_seq")
-    @SequenceGenerator(name = "organismo_de_investigacion_seq",sequenceName = "organismo_de_investigacion_sequence", initialValue = 10, allocationSize = 1)
+    @SequenceGenerator(name = "organismo_de_investigacion_seq",sequenceName = "organismo_de_investigacion_sequence", initialValue = 7, allocationSize = 1)
     private Integer id;
 
     @Column(nullable=false, length = 200,unique = true)
