@@ -15,6 +15,6 @@ public interface DocumentoSemilleroProyeccion {
     String getObservacion();
     EstadoDocumentoSemillero getEstado();
     LocalDate getFechaRegistro();
-    Boolean getDocumentoActivo();
-    Integer getSemilleroId();
+    Integer getDocumentoActivo();
+    Integer getSemillero_Id();
 }

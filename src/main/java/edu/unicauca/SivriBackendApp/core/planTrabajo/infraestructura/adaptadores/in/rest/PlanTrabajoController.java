@@ -76,7 +76,7 @@ public class PlanTrabajoController {
     }
     @GetMapping("/listarPlanes")
     @PreAuthorize("hasAnyAuthority(" +
-            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS' )"
+            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS','GRUPO:DIRECTOR' )"
     )
     public ResponseEntity<Respuesta> listarPlanTrabajoxfiltro(
             @RequestParam(required = false) Integer anio,

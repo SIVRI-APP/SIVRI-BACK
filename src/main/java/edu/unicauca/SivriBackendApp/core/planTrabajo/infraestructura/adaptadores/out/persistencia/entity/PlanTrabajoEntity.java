@@ -17,7 +17,7 @@ public class PlanTrabajoEntity {
     @SequenceGenerator(name = "plan_trabajo_seq",sequenceName = "PlanTrabajo_sequence", initialValue = 3, allocationSize = 1)
     private Integer id;
     @Column(length = 45)
-    private String nombre_Plan;
+    private String nombrePlan;
     @Column(length = 10,nullable = false)
     @Enumerated(EnumType.STRING)
     private EstadoPlanTrabajo estado;
@@ -37,7 +37,7 @@ public class PlanTrabajoEntity {
     public String toString() {
         return "PlanTrabajoEntity{" +
                 "id=" + id +
-                ", nombrePlan='" + nombre_Plan + '\'' +
+                ", nombrePlan='" + nombrePlan + '\'' +
                 ", estado=" + estado +
                 ", semillero=" + semillero +
                 ", anio=" + anio +

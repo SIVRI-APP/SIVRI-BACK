@@ -44,7 +44,7 @@ public class LineaInvestigacionController {
     }
     @PatchMapping("/actualizarLinea/{id}")
     @PreAuthorize("hasAnyAuthority(" +
-            "'SEMILLERO:MENTOR')")
+            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> actualizarLinea(
             @PathVariable(value = "id") int idLinea,
             @Valid @RequestBody LineaInvestigacionActualizarDTO lineaInvestigacionActualizarDTO){
@@ -53,7 +53,7 @@ public class LineaInvestigacionController {
     }
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyAuthority(" +
-            "'SEMILLERO:MENTOR')")
+            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> obtenerLineasInvestigacionPorId(@PathVariable(value = "id") int id){
         Respuesta respuesta = lineaInvestigacionObtenerCU.obtenerPorId(id);
         respuesta.setData(lineaInvestigacionDtoMapper.obtenerLineasInvestigacion((LineaInvestigacion) respuesta.getData()));
@@ -88,7 +88,7 @@ public class LineaInvestigacionController {
     }
     @DeleteMapping("/eliminarLinea/{id}")
     @PreAuthorize("hasAnyAuthority(" +
-            "'SEMILLERO:MENTOR')")
+            "'SEMILLERO:MENTOR','FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> eliminarLinea(@PathVariable(value = "id") int idLinea){
         Respuesta respuesta = lineaInvestigacionEliminarCU.eliminadoFisico(idLinea);
         return ResponseEntity.ok().body(respuesta);

@@ -10,17 +10,23 @@ import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
 public interface PlanTrabajoDtoMapper {
+    @Mappings({
+            @Mapping(source = "semillero.id",target = "semilleroId"),
+            @Mapping(source = "nombrePlan",target = "nombrePlan")
+    })
 
-    @Mapping(source = "semillero.id",target = "semilleroId")
     PlanTrabajoObtenerDTO obtenerPlanTrabajo(final PlanTrabajo planTrabajoModel);
   //  @Mapping(source = "semilleroId",target = "semillero.semilleroId")
 
     @Mappings({@Mapping(source = "anio",target = "anio"),
                @Mapping(source = "id_Semillero", target = "semillero.semillero_Id"),
             @Mapping(source = "estado",target = "estado"),
-            @Mapping(source = "nombre_Plan", target = "nombre_Plan")
+            @Mapping(source = "nombre_Plan", target = "nombrePlan")
     })
     PlanTrabajo crear(final PlanTrabajoCrearDTO nuevoPlan);
-    @Mapping(source = "anio",target = "anio")
+    @Mappings({
+            @Mapping(source = "anio",target = "anio"),
+            @Mapping(source = "nombrePlan", target = "nombrePlan")
+    })
     PlanTrabajo actualizar(final PlanTrabajoActualizarDTO nuevoPlan);
 }

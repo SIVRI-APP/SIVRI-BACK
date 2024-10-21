@@ -63,7 +63,7 @@ public class IntegranteSemilleroController {
      @GetMapping("/obtenerxId")
      @PreAuthorize("hasAnyAuthority(" +
              "'FUNCIONARIO:SEMILLEROS', " +
-             "'SEMILLERO:MENTOR')")
+             "'SEMILLERO:MENTOR','GRUPO:DIRECTOR')")
      public ResponseEntity<Respuesta> obtenerIntegranteSemilleroPorId(
              @RequestParam(value = "idIntegrante") int id
      ){

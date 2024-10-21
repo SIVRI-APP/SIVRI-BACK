@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class PlanTrabajo {
     private Integer id;
-    private String nombre_Plan;
+    private String nombrePlan;
     private EstadoPlanTrabajo estado;
     private Semillero semillero;
     private Integer anio;

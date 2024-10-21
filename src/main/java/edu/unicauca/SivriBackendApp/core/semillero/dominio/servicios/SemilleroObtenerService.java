@@ -124,9 +124,9 @@ public class SemilleroObtenerService implements SemilleroObtenerCU {
         Long usuarioId=servicioDeIdentificacionDeUsuario.obtenerUsuario().getId();
 
         Page<List<ListarSemilleroPorIdMentor>> respuestaBd=semilleroObtenerREPO.obtenerSemillerosConFiltroxIdDirector(pageable,semilleroId,usuarioId,nombre,estado);
-        if (respuestaBd.isEmpty()){
+        /*if (respuestaBd.isEmpty()){
             throw new ReglaDeNegocioException("bad.no.se.encontraron.registros.semilleros.mentor");
-        }
+        }*/
         return new RespuestaHandler<>(200,"sucess.operacion.exitosa","Exitoso",respuestaBd).getRespuesta();
     }
 

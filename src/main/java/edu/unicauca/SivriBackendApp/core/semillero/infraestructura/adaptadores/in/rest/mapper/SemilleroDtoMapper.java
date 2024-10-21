@@ -19,7 +19,7 @@ public interface SemilleroDtoMapper {
    //@Mapping(source = "grupoId",target = "grupo.id")
     List<SemilleroObtenerDTO> dtoObtenerSemilleros(final List<Semillero> semilleros);
     Semillero crear(final SemilleroCrearDTO nuevoSemillero);
-
+    @Mapping(source = "semillero_Id",target = "semillero_Id")
     Semillero actualizarPorApoyo(final SemilleroActualizarPorApoyoDTO actualizarSemilleroPorApoyoDTO);
     Semillero actualizarEstadoSemillero(final SemilleroActualizarEstadoDTO actualizarEstadoSemilleroDTO);
     Semillero actualizarPorMentor(final SemilleroActualizarPorMentorDTO actualizarSemilleroPoMentor);

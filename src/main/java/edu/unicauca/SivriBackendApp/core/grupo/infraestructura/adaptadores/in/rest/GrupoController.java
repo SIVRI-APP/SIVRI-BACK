@@ -36,7 +36,7 @@ public class GrupoController {
     @GetMapping("/obtenerxid")
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR', " +
-            "'GRUPO:DIRECTOR'" +
+            "'GRUPO:DIRECTOR'," +
             "'FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> obtenerPorId(@RequestParam(value = "idgrupo",required = true) int id){
         System.out.println("grupo id controller "+id);

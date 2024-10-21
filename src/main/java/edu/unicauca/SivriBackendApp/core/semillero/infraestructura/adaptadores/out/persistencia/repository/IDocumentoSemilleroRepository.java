@@ -17,13 +17,16 @@ import java.util.Optional;
 @Repository
 public interface IDocumentoSemilleroRepository extends JpaRepository<DocumentoSemilleroEntity, Integer> {
    // public Optional<DocumentoSemillero> findByFechaRegistroAndTipo(LocalDate fechaRegistro, TipoDocumentoSemillero tipo);
-    @Query(value = "SELECT COALESCE ((SELECT ds.id FROM documento_semillero ds WHERE ds.semilleroId =:idSemillero AND ds.tipo =:tipo " +
-            "ORDER BY ABS(DATEDIFF(NOW(), ds.fechaRegistro)) " +
-            "LIMIT 1),0) as id;",nativeQuery = true)
+ //query ok
+ @Query(value = "SELECT COALESCE ((SELECT ds.ID FROM documento_semillero ds WHERE ds.semillero_Id =:idSemillero AND ds.tipo =:tipo " +
+            "            ORDER BY ds.fecha_Registro DESC FETCH FIRST 1 ROWS ONLY),0) as id FROM dual",nativeQuery = true)
     public Integer existeDocumentoxIdSemillero(@Param("idSemillero") Integer idSemillero,@Param("tipo") String tipo);
     @Query(value = "SELECT * FROM documento_semillero ds WHERE ds.semilleroId =:idSemillero AND ds.tipo =:tipo and ds.documentoActivo='1' ORDER by abs(DATEDIFF(NOW(), ds.fechaRegistro));",nativeQuery = true)
     public Optional<DocumentoSemilleroEntity> obtenerIdDocumento(@Param("idSemillero") Integer idSemillero,@Param("tipo") String tipo);
-    @Query(value = "SELECT * FROM documento_semillero ds WHERE ds.semilleroId =:idSemillero AND ds.tipo =:tipo and ds.documentoActivo='1' ORDER by abs(DATEDIFF(NOW(), ds.fechaRegistro));",nativeQuery = true)
+    @Query(value = "SELECT * FROM documento_semillero ds " +
+            "WHERE ds.semillero_Id =:idSemillero " +
+            "AND ds.tipo =:tipo AND ds.documento_Activo='1' " +
+            "ORDER by ds.fecha_Registro DESC",nativeQuery = true)
     public Optional<DocumentoSemilleroProyeccion> obtenerDocumentoxDocumentoActivo(@Param("idSemillero") Integer idSemillero,@Param("tipo") String tipo);
     DocumentoSemilleroEntity findBySemilleroAndFechaRegistroAndTipo(Semillero semillero, LocalDate fechaRegistro, TipoDocumentoSemillero tipo);
     Boolean existsBySemilleroIdAndTipo(Integer semilleroId, TipoDocumentoSemillero tipo);

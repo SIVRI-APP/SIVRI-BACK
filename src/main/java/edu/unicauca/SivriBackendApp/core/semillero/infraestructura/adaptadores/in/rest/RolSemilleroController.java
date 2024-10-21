@@ -31,7 +31,7 @@ public class RolSemilleroController {
     @GetMapping("obtenerRoles")
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR', " +
-            "'FUNCIONARIO:SEMILLEROS')")
+            "'FUNCIONARIO:SEMILLEROS','GRUPO:DIRECTOR')")
     public ResponseEntity<Respuesta> obtenerRolesSemillero(){
         Respuesta<List<RolSemillero>> respuestaCU=rolesSemilleroObtenerCU.obtenerRolesSemillero();
 

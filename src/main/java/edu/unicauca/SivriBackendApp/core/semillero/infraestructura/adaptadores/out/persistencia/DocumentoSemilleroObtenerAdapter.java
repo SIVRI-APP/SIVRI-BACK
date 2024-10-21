@@ -39,7 +39,8 @@ public class DocumentoSemilleroObtenerAdapter implements DocumentoSemilleroObten
 
     @Override
     public Optional<DocumentoSemilleroProyeccion> obtenerDocumentoSemilleroxDocumentoActivo(Integer semilleroId, TipoDocumentoSemillero tipo) {
-        return documentoSemilleroRepository.obtenerDocumentoxDocumentoActivo(semilleroId,tipo.toString());
+        Optional<DocumentoSemilleroProyeccion> respuestaJpa= documentoSemilleroRepository.obtenerDocumentoxDocumentoActivo(semilleroId,tipo.toString());
+         return respuestaJpa;
     }
 
     @Override

@@ -45,7 +45,7 @@ public class GrupoDisciplinaController {
     @GetMapping("/listarDisciplinasxGrupoId")
     @PreAuthorize("hasAnyAuthority(" +
             "'SEMILLERO:MENTOR', " +
-            "'GRUPO:DIRECTOR'" +
+            "'GRUPO:DIRECTOR'," +
             "'FUNCIONARIO:SEMILLEROS')")
     public ResponseEntity<Respuesta> obtenerDisciplinasxGrupoId(
             @RequestParam(value = "idGrupo",required = true) int idGrupo

@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface PlanTrabajoMapper {
-
+    @Mapping(source = "nombrePlan",target = "nombrePlan")
     PlanTrabajo obtenerModelo(final PlanTrabajoEntity planTrabajoEntity);
     @Mapping(source = "anio",target = "anio")
     PlanTrabajoEntity obtenerEntity(final PlanTrabajo planTrabajo);

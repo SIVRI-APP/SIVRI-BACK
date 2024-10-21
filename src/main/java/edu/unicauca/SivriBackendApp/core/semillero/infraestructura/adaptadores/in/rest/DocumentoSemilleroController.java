@@ -68,7 +68,6 @@ public class DocumentoSemilleroController {
     public ResponseEntity<Respuesta> actualizarDocumentoSemillero(
             @PathVariable(value = "id") int idDocumento,
             @Valid @RequestBody DocumentoSemilleroActualizarDTO documentoSemilleroActualizarDTO
-
             ){
         Respuesta respuesta= documentoSemilleroActualizarCU.actualizar(idDocumento,documentoSemilleroDtoMapper.actualizarDocumento(documentoSemilleroActualizarDTO));
         return ResponseEntity.ok().body(respuesta);
